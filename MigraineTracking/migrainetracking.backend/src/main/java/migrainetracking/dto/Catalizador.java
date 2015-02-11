@@ -11,4 +11,6 @@ package migrainetracking.dto;
  */
 public class Catalizador {
     
+    private String tipo;
+    
 }

@@ -11,4 +11,8 @@ package migrainetracking.dto;
  */
 public class Doctor {
     
+    private String nombre;
+    
+    
+    
 }

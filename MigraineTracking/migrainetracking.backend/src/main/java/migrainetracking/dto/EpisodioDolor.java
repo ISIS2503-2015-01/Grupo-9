@@ -5,10 +5,16 @@
  */
 package migrainetracking.dto;
 
+import java.util.Date;
+
 /**
  *
  * @author estudiante
  */
 public class EpisodioDolor {
+    
+    private String hora;
+    
+    private Date fecha;
     
 }
