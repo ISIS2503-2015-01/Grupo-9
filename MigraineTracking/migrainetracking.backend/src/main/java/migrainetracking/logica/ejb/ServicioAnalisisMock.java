@@ -5,16 +5,27 @@
  */
 package migrainetracking.logica.ejb;
 
+
+import java.util.List;
 import javax.ejb.Stateless;
+import migrainetracking.dto.Catalizador;
+import migrainetracking.dto.EpisodioDolor;
 import migrainetracking.logica.interfaces.ServicioAnalisisMockLocal;
+import migrainetracking.logica.interfaces.ServicioAnalisisMockRemote;
 
 /**
  *
  * @author estudiante
  */
 @Stateless
-public class ServicioAnalisisMock implements ServicioAnalisisMockLocal {
+public class ServicioAnalisisMock implements ServicioAnalisisMockLocal,ServicioAnalisisMockRemote {
+
+    
+    //---------------------------------------------------------------------------
+    // Metodos
+    //---------------------------------------------------------------------------
+   
 
     // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    // "Insert Code > Add Business Method") 
 }

@@ -7,13 +7,13 @@ package migrainetracking.logica.ejb;
 
 import javax.ejb.Stateless;
 import migrainetracking.logica.interfaces.ServicioRevisionEpisodiosMockLocal;
-
+import migrainetracking.logica.interfaces.ServicioRevisionEpisodiosMockRemote;
 /**
  *
  * @author estudiante
  */
 @Stateless
-public class ServicioRevisionEpisodiosMock implements ServicioRevisionEpisodiosMockLocal {
+public class ServicioRevisionEpisodiosMock implements ServicioRevisionEpisodiosMockLocal,ServicioRevisionEpisodiosMockRemote {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
