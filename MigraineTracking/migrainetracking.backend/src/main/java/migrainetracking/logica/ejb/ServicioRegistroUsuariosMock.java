@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import migrainetracking.dto.Paciente;
-import migrainetracking.logica.interfaces.ServicioPersistenciaMockLocal;
+import migrainetracking.logica.interfaces.ServicioRegistroUsuariosMockLocal;
 import migrainetracking.logica.interfaces.ServicioRegistroUsuariosMockRemote;
 import migrainetracking.logica.interfaces.ServiciosCRUDMockLocal;
 import migrainetracking.persistencia.mock.ServicioPersistenciaMock;

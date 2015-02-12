@@ -18,7 +18,7 @@ import migrainetracking.dto.EpisodioDolor;
 public interface ServicioAnalisisMockLocal {
     /**
      * Devuelve una lista de catalizadores posibles, asociados con un episodio de dolor.
-     * @return 
+     * @return la lista de los catalizadores  
      */
     public List<Catalizador> getCatalizadores(EpisodioDolor episodio);
 

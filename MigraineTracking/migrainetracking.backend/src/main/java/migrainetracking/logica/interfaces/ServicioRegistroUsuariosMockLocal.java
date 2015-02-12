@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 
-package migrainetracking.logica.ejb;
+package migrainetracking.logica.interfaces;
 
 import javax.ejb.Local;
+import migrainetracking.logica.interfaces.ServiciosCRUDMockLocal;
 
 /**
  *
  * @author Personal
  */
 @Local
-public interface ServicioRegistroUsuariosMockLocal {
+public interface ServicioRegistroUsuariosMockLocal extends  ServiciosCRUDMockLocal{
     
 }
