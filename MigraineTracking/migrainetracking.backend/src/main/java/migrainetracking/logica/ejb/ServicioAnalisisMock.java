@@ -7,12 +7,13 @@ package migrainetracking.logica.ejb;
 
 
 import java.util.List;
+import java.util.*;
 import javax.ejb.Stateless;
 import migrainetracking.dto.Catalizador;
 import migrainetracking.dto.EpisodioDolor;
 import migrainetracking.logica.interfaces.ServicioAnalisisMockLocal;
 import migrainetracking.logica.interfaces.ServicioAnalisisMockRemote;
-import migrainetracking.logica.interfaces.ServicioPersistenciaMockLocal;
+import migrainetracking.logica.interfaces.ServiciosCRUDMockLocal;
 import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
 
 /**
@@ -28,9 +29,14 @@ public class ServicioAnalisisMock implements ServicioAnalisisMockLocal,ServicioA
     //---------------------------------------------------------------------------
     
     /**
-     * 
+     * Interface con referencia al servicio de persistencia en el sistema
      */
-    private ServicioPersistenciaMockLocal persistencia;
+    private ServiciosCRUDMockLocal persistencia;
+    
+    /**
+     *Lista de catalizadores en el sistema para poder hacer el analisis
+     */
+    private ArrayList<Catalizador> catalizadores;
     
     //-----------------------------------------------------------
     // Constructor
@@ -39,6 +45,7 @@ public class ServicioAnalisisMock implements ServicioAnalisisMockLocal,ServicioA
     public ServicioAnalisisMock()
     {
         persistencia = new ServicioPersistenciaMock();
+        catalizadores = new ArrayList<Catalizador>();
     }
     
     //---------------------------------------------------------------------------
@@ -47,6 +54,6 @@ public class ServicioAnalisisMock implements ServicioAnalisisMockLocal,ServicioA
 
     @Override
     public List<Catalizador> getCatalizadores(EpisodioDolor episodio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return catalizadores;
     }
 }

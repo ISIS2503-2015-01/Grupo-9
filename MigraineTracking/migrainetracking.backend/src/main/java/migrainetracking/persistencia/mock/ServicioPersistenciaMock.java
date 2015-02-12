@@ -7,14 +7,14 @@ package migrainetracking.persistencia.mock;
 
 import java.util.List;
 import migrainetracking.excepciones.OperacionInvalidaException;
-import migrainetracking.logica.interfaces.ServicioPersistenciaMockRemote;
-import migrainetracking.logica.interfaces.ServicioPersistenciaMockLocal;
+import migrainetracking.logica.interfaces.ServiciosCRUDMockRemote;
+import migrainetracking.logica.interfaces.ServiciosCRUDMockLocal;
 
 /**
  *
  * @author estudiante
  */
-public class ServicioPersistenciaMock implements ServicioPersistenciaMockRemote, ServicioPersistenciaMockLocal {
+public class ServicioPersistenciaMock implements ServiciosCRUDMockRemote, ServiciosCRUDMockLocal {
     
     public ServicioPersistenciaMock()
     {
@@ -22,28 +22,22 @@ public class ServicioPersistenciaMock implements ServicioPersistenciaMockRemote,
     }
 
     @Override
-    public void create(Object obj) throws OperacionInvalidaException {
+    public Long create(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Object obj) {
+    public Long delete(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Object obj) throws OperacionInvalidaException {
+    public Long update(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List findAll(Class c) {
+    public List<Object> getAll(Class clase) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public Object findById(Class c, Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

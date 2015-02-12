@@ -45,9 +45,5 @@ public interface ServiciosCRUDMockRemote {
      */
     public List<Object> getAll(Class clase);
     
-    
-    
-    
-    
 }
 

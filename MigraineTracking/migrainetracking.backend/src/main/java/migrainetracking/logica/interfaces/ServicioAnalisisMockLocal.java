@@ -5,7 +5,10 @@
  */
 package migrainetracking.logica.interfaces;
 
+import java.util.List;
 import javax.ejb.Local;
+import migrainetracking.dto.Catalizador;
+import migrainetracking.dto.EpisodioDolor;
 
 /**
  *
@@ -13,5 +16,10 @@ import javax.ejb.Local;
  */
 @Local
 public interface ServicioAnalisisMockLocal {
-    
+    /**
+     * Devuelve una lista de catalizadores posibles, asociados con un episodio de dolor.
+     * @return 
+     */
+    public List<Catalizador> getCatalizadores(EpisodioDolor episodio);
+
 }
