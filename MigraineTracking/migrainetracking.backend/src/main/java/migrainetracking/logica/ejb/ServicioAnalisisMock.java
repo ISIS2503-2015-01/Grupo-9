@@ -12,6 +12,8 @@ import migrainetracking.dto.Catalizador;
 import migrainetracking.dto.EpisodioDolor;
 import migrainetracking.logica.interfaces.ServicioAnalisisMockLocal;
 import migrainetracking.logica.interfaces.ServicioAnalisisMockRemote;
+import migrainetracking.logica.interfaces.ServicioPersistenciaMockLocal;
+import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
 
 /**
  *
@@ -22,10 +24,29 @@ public class ServicioAnalisisMock implements ServicioAnalisisMockLocal,ServicioA
 
     
     //---------------------------------------------------------------------------
+    // Atributos
+    //---------------------------------------------------------------------------
+    
+    /**
+     * 
+     */
+    private ServicioPersistenciaMockLocal persistencia;
+    
+    //-----------------------------------------------------------
+    // Constructor
+    //-----------------------------------------------------------
+    
+    public ServicioAnalisisMock()
+    {
+        persistencia = new ServicioPersistenciaMock();
+    }
+    
+    //---------------------------------------------------------------------------
     // Metodos
     //---------------------------------------------------------------------------
-   
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method") 
+    @Override
+    public List<Catalizador> getCatalizadores(EpisodioDolor episodio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
