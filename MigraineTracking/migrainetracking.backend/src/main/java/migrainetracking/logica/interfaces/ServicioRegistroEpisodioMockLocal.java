@@ -12,6 +12,6 @@ import javax.ejb.Local;
  * @author estudiante
  */
 @Local
-public interface SevicioRegistroEpisodioMockLocal {
+public interface ServicioRegistroEpisodioMockLocal {
     
 }
