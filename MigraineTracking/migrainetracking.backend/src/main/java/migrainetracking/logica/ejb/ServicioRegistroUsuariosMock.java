@@ -39,6 +39,10 @@ public class ServicioRegistroUsuariosMock implements ServicioRegistroUsuariosMoc
     //---------------------------------------------------------------------------
     // Constructor
     //---------------------------------------------------------------------------
+    
+    /**
+     * Metodo Constructor de la clase
+     */
     public ServicioRegistroUsuariosMock()
     {
         persistencia = new ServicioPersistenciaMock();

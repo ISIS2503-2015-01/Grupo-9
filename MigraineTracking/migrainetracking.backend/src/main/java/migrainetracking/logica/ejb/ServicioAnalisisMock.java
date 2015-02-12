@@ -42,6 +42,9 @@ public class ServicioAnalisisMock implements ServicioAnalisisMockLocal,ServicioA
     // Constructor
     //-----------------------------------------------------------
     
+    /**
+     * Metodo Constructor de la clase
+     */
     public ServicioAnalisisMock()
     {
         persistencia = new ServicioPersistenciaMock();
