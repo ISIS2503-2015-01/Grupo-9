@@ -15,15 +15,14 @@ import java.util.List;
  */
 public class EpisodioDolor {
     
-    private String hora;
-    
     private Date fecha;
     
     private String localizacion;
     
-    private String intensidad;
+    private int intensidadDolor;
     
-    private int nivelDolor;
+    // Aproximado de las horas diarias promdedio que el paciente durmio en los ultimos 3 dias previos. .
+    private int horasDeSueño;
     
     private List<Sintoma> sintomas; 
     
@@ -31,33 +30,23 @@ public class EpisodioDolor {
     
     private List<Medicamento> medicamentosActuales;
     
-    
-
     public EpisodioDolor() {
         sintomas = new ArrayList<Sintoma>();
         catalizadores = new ArrayList<Catalizador>();
         medicamentosActuales = new ArrayList<Medicamento>();
     }
 
-    public EpisodioDolor(String hora, Date fecha, String localizacion, String intensidad, int nivelDolor, List<Sintoma> sintomas, List<Catalizador> catalizadores, List<Medicamento> medicamentosActuales) {
-        this.hora = hora;
+    public EpisodioDolor( Date fecha, String localizacion, List<Sintoma> sintomas,int horasDeSueño, int intensidadDolor, List<Catalizador> catalizadores, List<Medicamento> medicamentosActuales) {
         this.fecha = fecha;
-        this.localizacion = localizacion;
-        this.intensidad = intensidad;
-        this.nivelDolor = nivelDolor;
+        this.localizacion = this.localizacion; 
+        this.intensidadDolor = intensidadDolor;
+        this.horasDeSueño = horasDeSueño;
         this.sintomas = sintomas;
         this.catalizadores = catalizadores;
         this.medicamentosActuales = medicamentosActuales;
     }
 
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
-
+   
     public Date getFecha() {
         return fecha;
     }
@@ -66,30 +55,16 @@ public class EpisodioDolor {
         this.fecha = fecha;
     }
 
-    public String getLocalizacion() {
-        return localizacion;
+    public int getIntensidadDolor() {
+        return intensidadDolor;
     }
 
-    public void setLocalizacion(String localizacion) {
-        this.localizacion = localizacion;
+    public void setIntensidadDolor(int intensidadDolor) {
+        this.intensidadDolor = intensidadDolor;
     }
 
-    public String getIntensidad() {
-        return intensidad;
-    }
-
-    public void setIntensidad(String intensidad) {
-        this.intensidad = intensidad;
-    }
-
-    public int getNivelDolor() {
-        return nivelDolor;
-    }
-
-    public void setNivelDolor(int nivelDolor) {
-        this.nivelDolor = nivelDolor;
-    }
-
+    
+    
     public List<Sintoma> getSintomas() {
         return sintomas;
     }
@@ -112,6 +87,22 @@ public class EpisodioDolor {
 
     public void setMedicamentosActuales(List<Medicamento> medicamentosActuales) {
         this.medicamentosActuales = medicamentosActuales;
+    }
+
+    public String getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(String localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public int getHorasDeSueño() {
+        return horasDeSueño;
+    }
+
+    public void setHorasDeSueño(int horasDeSueño) {
+        this.horasDeSueño = horasDeSueño;
     }
     
     

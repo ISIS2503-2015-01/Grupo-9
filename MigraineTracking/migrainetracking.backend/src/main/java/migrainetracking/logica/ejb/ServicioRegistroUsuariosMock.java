@@ -6,35 +6,29 @@
 
 package migrainetracking.logica.ejb;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import javax.ejb.Stateless;
 import migrainetracking.dto.Paciente;
-import migrainetracking.logica.interfaces.ServicioRegistroUsuariosMockLocal;
 import migrainetracking.logica.interfaces.ServicioRegistroUsuariosMockRemote;
-import migrainetracking.logica.interfaces.ServiciosCRUDMockLocal;
-import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
+
 
 /**
- *
- * @author Personal
+ * Este bean se encarga de los servicios de registro, ya sean CRUD o de otras consultas,
+ * que se realizan sobre los usuarios (i.e Doctor y Paciente)
  */
 @Stateless
-public class ServicioRegistroUsuariosMock implements ServicioRegistroUsuariosMockLocal,ServicioRegistroUsuariosMockRemote  {
+public class ServicioRegistroUsuariosMock implements ServicioRegistroUsuariosMockRemote  {
+
+    //---------------------------------------------------------------------------
+    // Constantes
+    //---------------------------------------------------------------------------
 
     //---------------------------------------------------------------------------
     // Atributos
     //---------------------------------------------------------------------------
     
-    /**
-     * Interface con referencia al servicio de persistencia en el sistema
-     */
-    private ServiciosCRUDMockLocal persistencia;
     
-    /**
-     * Lista de pacientes Registrados  
-     */
-    private ArrayList<Paciente> pacientes;
     
     //---------------------------------------------------------------------------
     // Constructor
@@ -45,31 +39,10 @@ public class ServicioRegistroUsuariosMock implements ServicioRegistroUsuariosMoc
      */
     public ServicioRegistroUsuariosMock()
     {
-        persistencia = new ServicioPersistenciaMock();
-        pacientes = new ArrayList<Paciente>();
+       
     }
     
     //---------------------------------------------------------------------------
     // Metodos
     //---------------------------------------------------------------------------
-
-    @Override
-    public Long create(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Long delete(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Long update(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Object> getAll(Class clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

@@ -21,6 +21,6 @@ public interface ServicioAnalisisMockRemote {
      * Devuelve una lista de catalizadores posibles, asociados con un episodio de dolor.
      * @return la lista de los catalizadores
      */
-    public List<Catalizador> getCatalizadores(EpisodioDolor episodio);
+    public List<Catalizador> getPosiblesCatalizadores(EpisodioDolor episodio) ;
     
 }

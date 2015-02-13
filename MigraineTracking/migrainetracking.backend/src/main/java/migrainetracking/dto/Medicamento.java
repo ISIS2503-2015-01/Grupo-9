@@ -5,6 +5,8 @@
  */
 package migrainetracking.dto;
 
+import java.util.Date;
+
 /**
  *
  * @author estudiante
@@ -18,6 +20,9 @@ public class Medicamento {
     private int intervaloHoras;
     
     private int miligramos;
+    
+    // Es null si no fue recetado por un medico.
+    private Date fechaRecetado;
 
     public Medicamento(String nombre, int cantidadVecesAlDia, int intervaloHoras, int miligramos) {
         this.nombre = nombre;

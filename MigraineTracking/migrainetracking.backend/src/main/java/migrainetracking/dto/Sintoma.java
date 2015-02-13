@@ -15,12 +15,10 @@ public class Sintoma {
     
     private String nombre;
     
-    private int intensidad;
-
     public Sintoma(String localizacion, String nombre, int intensidad) {
         this.localizacion = localizacion;
         this.nombre = nombre;
-        this.intensidad = intensidad;
+       
     }
 
     public Sintoma() {
@@ -41,15 +39,5 @@ public class Sintoma {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public int getIntensidad() {
-        return intensidad;
-    }
-
-    public void setIntensidad(int intensidad) {
-        this.intensidad = intensidad;
-    }
-    
-    
     
 }

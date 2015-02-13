@@ -11,52 +11,19 @@ import java.util.*;
 import javax.ejb.Stateless;
 import migrainetracking.dto.Catalizador;
 import migrainetracking.dto.EpisodioDolor;
-import migrainetracking.logica.interfaces.ServicioAnalisisMockLocal;
+
 import migrainetracking.logica.interfaces.ServicioAnalisisMockRemote;
-import migrainetracking.logica.interfaces.ServiciosCRUDMockLocal;
-import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
+
 
 /**
  *
- * @author estudiante
+ * Este bean se va a encargar de la logica relacionada con el analisis de las 
+ * reglas y catalizadores propuestos por los doctores, con el fin de sugerirle 
+ * al paciente que comidas/habitos/ debe evitar.
+ * 
  */
 @Stateless
-public class ServicioAnalisisMock implements ServicioAnalisisMockLocal,ServicioAnalisisMockRemote {
-
+public class ServicioAnalisisMock implements ServicioAnalisisMockRemote {
     
-    //---------------------------------------------------------------------------
-    // Atributos
-    //---------------------------------------------------------------------------
     
-    /**
-     * Interface con referencia al servicio de persistencia en el sistema
-     */
-    private ServiciosCRUDMockLocal persistencia;
-    
-    /**
-     *Lista de catalizadores en el sistema para poder hacer el analisis
-     */
-    private ArrayList<Catalizador> catalizadores;
-    
-    //-----------------------------------------------------------
-    // Constructor
-    //-----------------------------------------------------------
-    
-    /**
-     * Metodo Constructor de la clase
-     */
-    public ServicioAnalisisMock()
-    {
-        persistencia = new ServicioPersistenciaMock();
-        catalizadores = new ArrayList<Catalizador>();
-    }
-    
-    //---------------------------------------------------------------------------
-    // Metodos
-    //---------------------------------------------------------------------------
-
-    @Override
-    public List<Catalizador> getCatalizadores(EpisodioDolor episodio) {
-        return catalizadores;
-    }
 }

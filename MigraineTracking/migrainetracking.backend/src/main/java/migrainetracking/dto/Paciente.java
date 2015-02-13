@@ -30,11 +30,11 @@ public class Paciente {
      */
     private List<Medicamento> medicamentosDiarios;
     
-    private List<Habito> habitos;
+    private List<Catalizador> habitos; // Estos deben ser de tipo habito...
     
     private List<EpisodioDolor> episodios;
 
-    public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento, int peso, int estatura, List<Medicamento> medicamentosDiarios, List<Habito> habitos, List<EpisodioDolor> episodios) {
+    public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento, int peso, int estatura, List<Medicamento> medicamentosDiarios, List<Catalizador> habitos, List<EpisodioDolor> episodios) {
         this.nombre = nombre;
         this.noIdentificacion = noIdentificacion;
         this.fechaNacimiento = fechaNacimiento;
@@ -47,7 +47,7 @@ public class Paciente {
 
            
     public Paciente() {
-        habitos = new ArrayList<Habito>();
+        habitos = new ArrayList<Catalizador>();
         medicamentosDiarios = new ArrayList<Medicamento>();
         episodios = new ArrayList<EpisodioDolor>();
     }
@@ -102,11 +102,11 @@ public class Paciente {
         this.medicamentosDiarios = medicamentosDiarios;
     }
 
-    public List<Habito> getHabitos() {
+    public List<Catalizador> getHabitos() {
         return habitos;
     }
 
-    public void setHabitos(List<Habito> habitos) {
+    public void setHabitos(List<Catalizador> habitos) {
         this.habitos = habitos;
     }
 

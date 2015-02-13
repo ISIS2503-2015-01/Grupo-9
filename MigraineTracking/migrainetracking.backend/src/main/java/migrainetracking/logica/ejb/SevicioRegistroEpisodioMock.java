@@ -7,7 +7,7 @@ package migrainetracking.logica.ejb;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import migrainetracking.logica.interfaces.ServicioRegistroEpisodioMockLocal;
+
 import migrainetracking.logica.interfaces.ServicioRegistroEpisodioMockRemote;
 import migrainetracking.logica.interfaces.ServiciosCRUDMockLocal;
 import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
@@ -17,7 +17,7 @@ import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
  * @author estudiante
  */
 @Stateless
-public class SevicioRegistroEpisodioMock implements ServicioRegistroEpisodioMockLocal,ServicioRegistroEpisodioMockRemote {
+public class SevicioRegistroEpisodioMock implements ServicioRegistroEpisodioMockRemote {
 
     //---------------------------------------------------------------------------
     // Atributos
