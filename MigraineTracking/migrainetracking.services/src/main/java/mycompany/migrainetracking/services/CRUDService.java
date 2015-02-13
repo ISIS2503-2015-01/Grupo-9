@@ -22,7 +22,7 @@ import javax.ws.rs.Produces;
  */
 
 // Servicio que ofrece las funcionalidades crud sobre un conjunto de comoponenetes de la app.
-@Path("crud")
+@Path("/crud")
 public class CRUDService {
 
     @Context

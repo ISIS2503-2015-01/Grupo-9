@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
  *
  * @author Personal
  */
-@Path("registroepisodios")
+@Path("/registroepisodios")
 public class RegistroEpisodioService {
 
     @Context
