@@ -32,6 +32,6 @@ public interface IServicioAnalisisMockRemote {
      * @return La lista de episodios
      * @throws NoExisteException si el paciente con el numero de identificacion no existe
      */
-    public List<EpisodioDolor> getEpisodiosPaciente(String noIdPaciente) throws NoExisteException;
+    public List<EpisodioDolor> getEpisodiosPaciente(Long noIdPaciente) throws NoExisteException;
     
 }
