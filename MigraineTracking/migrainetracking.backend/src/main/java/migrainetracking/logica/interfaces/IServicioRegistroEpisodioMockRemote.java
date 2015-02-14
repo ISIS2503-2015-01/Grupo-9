@@ -17,7 +17,7 @@ import migrainetracking.excepciones.OperacionInvalidaException;
  * @author Personal
  */
 @Remote
-public interface IServicioRegistroEpisodioMockRemote extends IServiciosCRUDMockRemote{
+public interface IServicioRegistroEpisodioMockRemote {
     
      /**
      * Registra un nuevo episodioDeDolor
@@ -59,6 +59,6 @@ public interface IServicioRegistroEpisodioMockRemote extends IServiciosCRUDMockR
      * @param  noIdPaciente el numero de identificacion de un paciente
      * @return la lista de episodios
      */
-    public List<EpisodioDolor> getEpisodiosPorPaciente(int noIdPaciente);
+    public List<EpisodioDolor> getEpisodiosPorPaciente(Long noIdPaciente);
     
 }
