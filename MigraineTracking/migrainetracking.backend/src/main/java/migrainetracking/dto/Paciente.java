@@ -13,13 +13,11 @@ import java.util.List;
  *
  * @author estudiante
  */
-public class Paciente {
+public class Paciente extends Usuario{
     
-    private String nombre;
-    
-    private int noIdentificacion;
-    
-    private Date fechaNacimiento;
+    //-----------------------------------------------------
+    // Atributos
+    //-----------------------------------------------------
     
     private int peso;
     
@@ -34,10 +32,12 @@ public class Paciente {
     
     private List<EpisodioDolor> episodios;
 
+    //-----------------------------------------------------
+    // Constructores
+    //-----------------------------------------------------
+    
     public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento, int peso, int estatura, List<Medicamento> medicamentosDiarios, List<Catalizador> habitos, List<EpisodioDolor> episodios) {
-        this.nombre = nombre;
-        this.noIdentificacion = noIdentificacion;
-        this.fechaNacimiento = fechaNacimiento;
+        super(nombre, noIdentificacion, fechaNacimiento);
         this.peso = peso;
         this.estatura = estatura;
         this.medicamentosDiarios = medicamentosDiarios;
@@ -46,37 +46,16 @@ public class Paciente {
     }
 
            
-    public Paciente() {
+    public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento) {
+        super(nombre, noIdentificacion, fechaNacimiento);
         habitos = new ArrayList<Catalizador>();
         medicamentosDiarios = new ArrayList<Medicamento>();
         episodios = new ArrayList<EpisodioDolor>();
     }
 
-    
-    
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getNoIdentificacion() {
-        return noIdentificacion;
-    }
-
-    public void setNoIdentificacion(int noIdentificacion) {
-        this.noIdentificacion = noIdentificacion;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
+    //-----------------------------------------------------
+    // Metodos
+    //-----------------------------------------------------
 
     public int getPeso() {
         return peso;

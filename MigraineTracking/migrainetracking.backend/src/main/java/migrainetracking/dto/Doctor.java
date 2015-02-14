@@ -6,23 +6,18 @@
 package migrainetracking.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  *
  * @author estudiante
  */
-public class Doctor {
+public class Doctor extends Usuario{
     
-    /**
-     * El nombre del doctor
-     */
-    private String nombre;
-    
-    /**
-     * El número de identificación del doctor
-     */
-    private int noIdentificacion;
+    //-----------------------------------------------------
+    // Atributos
+    //-----------------------------------------------------
     
     /**
      * La lista de pacientes
@@ -39,35 +34,27 @@ public class Doctor {
      */
     private String especialidad;
 
-    public Doctor() {
+    //-----------------------------------------------------
+    // Constructores
+    //-----------------------------------------------------
+    
+    public Doctor(String nombre, int noIdentificacion, Date fechaNacimiento) {
+        super(nombre, noIdentificacion, fechaNacimiento);
         pacientes = new ArrayList<Paciente>();
         colegas = new ArrayList<Doctor>();
     }
 
-    public Doctor(String nombre, int noIdentificacion, List<Paciente> pacientes, List<Doctor> colegas, String especialidad) {
-        this.nombre = nombre;
-        this.noIdentificacion = noIdentificacion;
+    public Doctor(String nombre, int noIdentificacion, Date fechaNacimiento, List<Paciente> pacientes, List<Doctor> colegas, String especialidad) {
+        super(nombre, noIdentificacion, fechaNacimiento);
         this.pacientes = pacientes;
         this.colegas = colegas;
         this.especialidad = especialidad;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getNoIdentificacion() {
-        return noIdentificacion;
-    }
-
-    public void setNoIdentificacion(int noIdentificacion) {
-        this.noIdentificacion = noIdentificacion;
-    }
-
+    //-----------------------------------------------------
+    // Metodos
+    //-----------------------------------------------------
+    
     public List<Paciente> getPacientes() {
         return pacientes;
     }
