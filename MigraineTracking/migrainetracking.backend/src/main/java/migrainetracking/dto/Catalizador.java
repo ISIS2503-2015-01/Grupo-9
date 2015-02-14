@@ -1,6 +1,5 @@
 package migrainetracking.dto;
 
-import java.util.Date;
 
 /**
  *
@@ -8,66 +7,103 @@ import java.util.Date;
  */
 public class Catalizador {
     
-    private String tipo; // { alimento,actividad fisica,bebida,habito }
+    //-----------------------------------------------------
+    // Atributos
+    //-----------------------------------------------------
     
+    /**
+     * El id del catalizador
+     */
+    private int id;
+    
+    /**
+     * El tipo del catalizador
+     * Puede ser un alimento, actividad fisica, bebida, o habito
+     */
+    private String tipo; 
+    
+    /**
+     * Especificacion adicional del doctor
+     */
     private String especificacion;
-    
-    private Date ultimaFecha;
-    
-    private String ultimaHora;
     
     /**
      * La cantidad de veces que se ha hecho o ingerido el catalizador
      */
     private int frecuencia;
 
+     //-----------------------------------------------------
+    // Constructores
+    //-----------------------------------------------------
+    
+    /**
+     * Constructor de la clase(sin argumentos)
+     */
     public Catalizador() {
     }
 
-    public Catalizador(String tipo, String especificacion, Date ultimaFecha, String ultimaHora, int frecuencia) {
+    /**
+     * Constructor de la clase(con argumentos)
+     * @param id
+     * @param tipo
+     * @param especificacion
+     * @param frecuencia 
+     */
+    public Catalizador(int id, String tipo, String especificacion, int frecuencia) {
         this.tipo = tipo;
         this.especificacion = especificacion;
-        this.ultimaFecha = ultimaFecha;
-        this.ultimaHora = ultimaHora;
         this.frecuencia = frecuencia;
+        this.id = id;
     }
+    
+     //-----------------------------------------------------
+    // Metodos
+    //-----------------------------------------------------
 
+    /**
+     * Devuelve el tipo del catalizador
+     * @return el tipo
+     */
     public String getTipo() {
         return tipo;
     }
-
+    
+    /**
+     * Modifica el tipo del catalizador
+     * @param tipo puede ser actividad fisica, habito, bebida, alimento
+     */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * Devuelve la especificacion del catalizador
+     * @return la especificacion
+     */
     public String getEspecificacion() {
         return especificacion;
     }
 
+    /**
+     * Modifica la especificacion del catalizador
+     * @param especificacion Comentarios que tenga que agregar el doctor
+     */
     public void setEspecificacion(String especificacion) {
         this.especificacion = especificacion;
     }
 
-    public Date getUltimaFecha() {
-        return ultimaFecha;
-    }
-
-    public void setUltimaFecha(Date ultimaFecha) {
-        this.ultimaFecha = ultimaFecha;
-    }
-
-    public String getUltimaHora() {
-        return ultimaHora;
-    }
-
-    public void setUltimaHora(String ultimaHora) {
-        this.ultimaHora = ultimaHora;
-    }
-
+    /**
+     * Devuelve la frecuencia del catalizador
+     * @return la frecuencia
+     */
     public int getFrecuencia() {
         return frecuencia;
     }
-
+    
+    /**
+     * Modifica la frecuencia del catalizador
+     * @param frecuencia un numero de 1 a 10 
+     */
     public void setFrecuencia(int frecuencia) {
         this.frecuencia = frecuencia;
     }
