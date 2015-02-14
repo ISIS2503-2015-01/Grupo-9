@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class EpisodioDolor {
     
+    private int id;
+    
     private Date fecha;
     
     private String localizacion;

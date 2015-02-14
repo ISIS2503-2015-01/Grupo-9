@@ -13,13 +13,13 @@ import migrainetracking.dto.Doctor;
 import migrainetracking.dto.Medicamento;
 import migrainetracking.dto.Regla;
 import migrainetracking.dto.Sintoma;
-import migrainetracking.logica.interfaces.ServiciosCRUDMockRemote;
+import migrainetracking.logica.interfaces.IServiciosCRUDMockRemote;
 
 /**
  *
  * Este bean se encarga de implementar los servicios CRUD de: Catalizador,Regla,Sintoma,Medicamento.
  */
 @Stateless
-public class ServiciosCRUDMock implements ServiciosCRUDMockRemote {
+public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
     
 }

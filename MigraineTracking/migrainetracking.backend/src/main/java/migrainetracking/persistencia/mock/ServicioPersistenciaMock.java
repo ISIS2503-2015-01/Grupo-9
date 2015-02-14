@@ -7,14 +7,14 @@ package migrainetracking.persistencia.mock;
 
 import java.util.List;
 import migrainetracking.excepciones.OperacionInvalidaException;
-import migrainetracking.logica.interfaces.ServiciosCRUDMockRemote;
-import migrainetracking.logica.interfaces.ServiciosCRUDMockLocal;
+import migrainetracking.logica.interfaces.IServiciosCRUDMockRemote;
+import migrainetracking.logica.interfaces.IServiciosCRUDMockLocal;
 
 /**
  *
  * @author estudiante
  */
-public class ServicioPersistenciaMock implements ServiciosCRUDMockRemote, ServiciosCRUDMockLocal {
+public class ServicioPersistenciaMock implements IServiciosCRUDMockRemote, IServiciosCRUDMockLocal {
     
     public ServicioPersistenciaMock()
     {

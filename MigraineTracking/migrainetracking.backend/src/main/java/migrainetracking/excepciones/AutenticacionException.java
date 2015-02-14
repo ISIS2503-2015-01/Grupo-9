@@ -14,7 +14,6 @@ package migrainetracking.excepciones;
 
 /**
  * Clase de excepción en caso de existir un error de autenticación
- * @author Juan Sebastian Urrego
  */
 public class AutenticacionException extends Exception
 {

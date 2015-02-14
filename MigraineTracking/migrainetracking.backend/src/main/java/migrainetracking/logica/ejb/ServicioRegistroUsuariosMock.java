@@ -10,7 +10,7 @@ package migrainetracking.logica.ejb;
 import java.util.List;
 import javax.ejb.Stateless;
 import migrainetracking.dto.Paciente;
-import migrainetracking.logica.interfaces.ServicioRegistroUsuariosMockRemote;
+import migrainetracking.logica.interfaces.IServicioRegistroUsuariosMockRemote;
 
 
 /**
@@ -18,7 +18,7 @@ import migrainetracking.logica.interfaces.ServicioRegistroUsuariosMockRemote;
  * que se realizan sobre los usuarios (i.e Doctor y Paciente)
  */
 @Stateless
-public class ServicioRegistroUsuariosMock implements ServicioRegistroUsuariosMockRemote  {
+public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMockRemote  {
 
     //---------------------------------------------------------------------------
     // Constantes

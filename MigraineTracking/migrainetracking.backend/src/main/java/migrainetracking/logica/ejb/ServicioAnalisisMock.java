@@ -12,7 +12,7 @@ import javax.ejb.Stateless;
 import migrainetracking.dto.Catalizador;
 import migrainetracking.dto.EpisodioDolor;
 
-import migrainetracking.logica.interfaces.ServicioAnalisisMockRemote;
+import migrainetracking.logica.interfaces.IServicioAnalisisMockRemote;
 
 
 /**
@@ -23,7 +23,7 @@ import migrainetracking.logica.interfaces.ServicioAnalisisMockRemote;
  * 
  */
 @Stateless
-public class ServicioAnalisisMock implements ServicioAnalisisMockRemote {
+public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
     
     
 }

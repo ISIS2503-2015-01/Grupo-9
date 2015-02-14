@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
-import migrainetracking.logica.interfaces.ServicioRevisionEpisodiosMockRemote;
-import migrainetracking.logica.interfaces.ServiciosCRUDMockLocal;
+import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
+import migrainetracking.logica.interfaces.IServiciosCRUDMockLocal;
 import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
 /**
  *
  * @author estudiante
  */
 @Stateless
-public class ServicioRevisionEpisodiosMock implements ServicioRevisionEpisodiosMockRemote {
+public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodiosMockRemote {
 
     //---------------------------------------------------------------------------
     // Atributos

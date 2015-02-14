@@ -8,8 +8,8 @@ package migrainetracking.logica.ejb;
 import java.util.List;
 import javax.ejb.Stateless;
 
-import migrainetracking.logica.interfaces.ServicioRegistroEpisodioMockRemote;
-import migrainetracking.logica.interfaces.ServiciosCRUDMockLocal;
+import migrainetracking.logica.interfaces.IServicioRegistroEpisodioMockRemote;
+import migrainetracking.logica.interfaces.IServiciosCRUDMockLocal;
 import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
 
 /**
@@ -17,7 +17,7 @@ import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
  * @author estudiante
  */
 @Stateless
-public class SevicioRegistroEpisodioMock implements ServicioRegistroEpisodioMockRemote {
+public class SevicioRegistroEpisodioMock implements IServicioRegistroEpisodioMockRemote {
 
     //---------------------------------------------------------------------------
     // Atributos
@@ -26,7 +26,7 @@ public class SevicioRegistroEpisodioMock implements ServicioRegistroEpisodioMock
     /**
      * Interface con referencia al servicio de persistencia en el sistema
      */
-    private ServiciosCRUDMockLocal persistencia;
+    private IServiciosCRUDMockLocal persistencia;
     
     
     //---------------------------------------------------------------------------
