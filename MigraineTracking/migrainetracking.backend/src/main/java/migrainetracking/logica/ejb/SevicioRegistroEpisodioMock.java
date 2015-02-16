@@ -7,10 +7,15 @@ package migrainetracking.logica.ejb;
 
 import java.util.List;
 import javax.ejb.Stateless;
-
+import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.dto.Paciente;
+import migrainetracking.excepciones.NoExisteException;
+import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.interfaces.IServicioRegistroEpisodioMockRemote;
-import migrainetracking.logica.interfaces.IServiciosCRUDMockLocal;
-import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
+import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
+import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
+import migrainetracking.persistencia.mock.ServicioPersistenciaEpisodioDolor;
+import migrainetracking.persistencia.mock.ServicioPersistenciaPaciente;
 
 /**
  *
@@ -22,46 +27,64 @@ public class SevicioRegistroEpisodioMock implements IServicioRegistroEpisodioMoc
     //---------------------------------------------------------------------------
     // Atributos
     //---------------------------------------------------------------------------
-    
-    /**
-     * Interface con referencia al servicio de persistencia en el sistema
-     */
-    private IServiciosCRUDMockLocal persistencia;
-    
-    
+    IServicioPersistenciaEpisodioDolor persistencia;
+
     //---------------------------------------------------------------------------
     // Constructor
     //---------------------------------------------------------------------------
-    
-    /**
-     * Metodo Constructor de la clase
-     */
-    public SevicioRegistroEpisodioMock()
-    {
-        persistencia = new ServicioPersistenciaMock();
+    public SevicioRegistroEpisodioMock() {
+        persistencia = ServicioPersistenciaEpisodioDolor.getInstance();
     }
-    
+
     //---------------------------------------------------------------------------
     // Metodos
     //---------------------------------------------------------------------------
-
     @Override
-    public Long create(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Long registrarEpisodio(EpisodioDolor nuevo, int noIdPaciente) throws OperacionInvalidaException {
+        persistencia.create(nuevo);
+        IServicioPersistenciaPaciente pacPersServ = ServicioPersistenciaPaciente.getInstance();
+        Long respId = pacPersServ.agregarEpsiodio(nuevo, noIdPaciente);
+        if (respId == null) {
+            throw new OperacionInvalidaException("No existe el paciente a quien se le quiere registrar el episodio.");
+        }
+        return respId;
     }
 
     @Override
-    public Long delete(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Long eliminarEpisodio(int idEpisodio, int noIdPaciente) throws OperacionInvalidaException, NoExisteException {
+        EpisodioDolor ep = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, (long) idEpisodio);
+        try {
+            persistencia.delete(ep);
+        } catch (OperacionInvalidaException e) {
+            throw new NoExisteException(e.getMessage());
+        }
+        
+        IServicioPersistenciaPaciente pacPersServ = ServicioPersistenciaPaciente.getInstance();
+        Long respId = pacPersServ.eliminarEpisodio(ep, noIdPaciente);
+        if (respId == null) {
+            throw new OperacionInvalidaException("No existe el paciente a quien se le quiere registrar el episodio.");
+        }
+        return respId;
     }
 
     @Override
-    public Long update(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Long editarEpisodio(EpisodioDolor editado, int noIdPaciente) {
+        IServicioPersistenciaPaciente pacPersServ = ServicioPersistenciaPaciente.getInstance();
+        Long respId = pacPersServ.actualizarEpsiodio(editado, noIdPaciente);
+        assert respId==null : "No se cumplo la pre condicion.";
+        return respId;
     }
 
     @Override
-    public List<Object> getAll(Class clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<EpisodioDolor> getEpisodios() {
+        IServicioPersistenciaPaciente pacPersServ = ServicioPersistenciaPaciente.getInstance();
+        return pacPersServ.findAll(EpisodioDolor.class);
     }
+
+    @Override
+    public List<EpisodioDolor> getEpisodiosPorPaciente(int noIdPaciente) {
+        IServicioPersistenciaPaciente pacPersServ = ServicioPersistenciaPaciente.getInstance();
+        return pacPersServ.getEpisodiosByPaciente(noIdPaciente);
+    }
+
 }
