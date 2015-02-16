@@ -6,7 +6,7 @@
 package migrainetracking.logica.ejb;
 
 import java.util.List;
-import migrainetracking.logica.interfaces.IServicioPersistenciaMockLocal;
+import migrainetracking.logica.interfaces.IServicioPersistenciaMockRemote;
 import javax.ejb.Stateless;
 import migrainetracking.excepciones.OperacionInvalidaException;
 
@@ -15,7 +15,7 @@ import migrainetracking.excepciones.OperacionInvalidaException;
  * @author estudiante
  */
 @Stateless
-public class ServicioPersistenciaMock implements IServicioPersistenciaMockLocal {
+public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote {
 
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
