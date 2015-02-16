@@ -13,12 +13,26 @@ import java.util.List;
  *
  * @author estudiante
  */
-public class Doctor extends Usuario{
+public class Doctor {
     
+    
+   
     //-----------------------------------------------------
     // Atributos
     //-----------------------------------------------------
     
+    private String nombre;
+    
+    /**
+     * El número de identificación del doctor
+     */
+    private int noIdentificacion;
+    
+    /**
+     * Fecha de Nacimiento del Usuario
+     */
+    private Date fechaNacimiento;
+
     /**
      * La lista de pacientes
      */
@@ -39,6 +53,7 @@ public class Doctor extends Usuario{
     // Constructores
     //-----------------------------------------------------
     
+    public Doctor(){}
     /**
      * Constructor de la clase
      * (sin argumentos de la clase doctor, pero con argumentos de la super clase Usuarios)
@@ -47,7 +62,7 @@ public class Doctor extends Usuario{
      * @param fechaNacimiento 
      */
     public Doctor(String nombre, int noIdentificacion, Date fechaNacimiento) {
-        super(nombre, noIdentificacion, fechaNacimiento);
+        //super(nombre, noIdentificacion, fechaNacimiento);
         pacientes = new ArrayList<Paciente>();
         colegas = new ArrayList<Doctor>();
     }
@@ -62,15 +77,45 @@ public class Doctor extends Usuario{
      * @param especialidad 
      */
     public Doctor(String nombre, int noIdentificacion, Date fechaNacimiento, List<Paciente> pacientes, List<Doctor> colegas, String especialidad) {
-        super(nombre, noIdentificacion, fechaNacimiento);
+        //super(nombre, noIdentificacion, fechaNacimiento);
         this.pacientes = pacientes;
         this.colegas = colegas;
         this.especialidad = especialidad;
+        
     }
 
     //-----------------------------------------------------
     // Metodos
     //-----------------------------------------------------
+   
+     public String getNombre() {
+        return nombre;
+    }
+
+   
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    
+    public int getNoIdentificacion() {
+        return noIdentificacion;
+    }
+
+    
+    public void setNoIdentificacion(int noIdentificacion) {
+        this.noIdentificacion = noIdentificacion;
+    }
+
+  
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
     
     /**
      * Retorna la lista de pacientes asociados al doctor
@@ -118,5 +163,22 @@ public class Doctor extends Usuario{
      */
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
-    }  
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Doctor other = (Doctor) obj;
+        if (this.noIdentificacion != other.noIdentificacion) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

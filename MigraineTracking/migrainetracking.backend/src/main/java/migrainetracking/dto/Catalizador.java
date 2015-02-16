@@ -14,7 +14,7 @@ public class Catalizador {
     /**
      * El id del catalizador
      */
-    private int id;
+    private Long id;
     
     /**
      * El tipo del catalizador
@@ -49,7 +49,7 @@ public class Catalizador {
      * @param especificacion
      * @param frecuencia 
      */
-    public Catalizador(int id, String tipo, String especificacion, int frecuencia) {
+    public Catalizador(Long id, String tipo, String especificacion, int frecuencia) {
         this.tipo = tipo;
         this.especificacion = especificacion;
         this.frecuencia = frecuencia;
@@ -60,6 +60,13 @@ public class Catalizador {
     // Metodos
     //-----------------------------------------------------
 
+    public Long getId(){
+        return this.id;
+    }
+    
+    public void setId(Long id){
+        this.id = id;
+    }
     /**
      * Devuelve el tipo del catalizador
      * @return el tipo

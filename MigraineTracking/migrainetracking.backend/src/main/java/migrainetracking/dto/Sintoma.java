@@ -23,7 +23,7 @@ public class Sintoma {
 
     public Sintoma() {
     }
-
+    
     public String getLocalizacion() {
         return localizacion;
     }

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class EpisodioDolor {
     
-    private int id;
+    private Long id;
     
     private Date fecha;
     
@@ -40,7 +40,7 @@ public class EpisodioDolor {
 
     public EpisodioDolor( Date fecha, String localizacion, List<Sintoma> sintomas,int horasDeSueño, int intensidadDolor, List<Catalizador> catalizadores, List<Medicamento> medicamentosActuales) {
         this.fecha = fecha;
-        this.localizacion = this.localizacion; 
+        this.localizacion = localizacion; 
         this.intensidadDolor = intensidadDolor;
         this.horasDeSueño = horasDeSueño;
         this.sintomas = sintomas;
@@ -48,7 +48,14 @@ public class EpisodioDolor {
         this.medicamentosActuales = medicamentosActuales;
     }
 
-   
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public Date getFecha() {
         return fecha;
     }

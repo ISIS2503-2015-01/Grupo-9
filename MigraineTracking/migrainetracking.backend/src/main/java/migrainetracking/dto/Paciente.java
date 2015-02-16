@@ -13,11 +13,25 @@ import java.util.List;
  *
  * @author estudiante
  */
-public class Paciente extends Usuario{
+public class Paciente {
     
+   
     //-----------------------------------------------------
     // Atributos
     //-----------------------------------------------------
+    
+    private String nombre;
+    
+    /**
+     * El número de identificación del doctor
+     */
+    private int noIdentificacion;
+    
+    /**
+     * Fecha de Nacimiento del Usuario
+     */
+    private Date fechaNacimiento;
+
     
     private int peso;
     
@@ -35,9 +49,10 @@ public class Paciente extends Usuario{
     //-----------------------------------------------------
     // Constructores
     //-----------------------------------------------------
+    public Paciente(){}
     
     public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento, int peso, int estatura, List<Medicamento> medicamentosDiarios, List<Catalizador> habitos, List<EpisodioDolor> episodios) {
-        super(nombre, noIdentificacion, fechaNacimiento);
+        //super(nombre, noIdentificacion, fechaNacimiento);
         this.peso = peso;
         this.estatura = estatura;
         this.medicamentosDiarios = medicamentosDiarios;
@@ -47,7 +62,7 @@ public class Paciente extends Usuario{
 
            
     public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento) {
-        super(nombre, noIdentificacion, fechaNacimiento);
+        //super(nombre, noIdentificacion, fechaNacimiento);
         habitos = new ArrayList<Catalizador>();
         medicamentosDiarios = new ArrayList<Medicamento>();
         episodios = new ArrayList<EpisodioDolor>();
@@ -57,6 +72,35 @@ public class Paciente extends Usuario{
     // Metodos
     //-----------------------------------------------------
 
+     public String getNombre() {
+        return nombre;
+    }
+
+   
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    
+    public int getNoIdentificacion() {
+        return noIdentificacion;
+    }
+
+    
+    public void setNoIdentificacion(int noIdentificacion) {
+        this.noIdentificacion = noIdentificacion;
+    }
+
+  
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
     public int getPeso() {
         return peso;
     }
@@ -95,6 +139,21 @@ public class Paciente extends Usuario{
 
     public void setEpisodios(List<EpisodioDolor> episodios) {
         this.episodios = episodios;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Paciente other = (Paciente) obj;
+        if (this.noIdentificacion != other.noIdentificacion) {
+            return false;
+        }
+        return true;
     }
     
     
