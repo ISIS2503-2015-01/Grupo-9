@@ -11,6 +11,7 @@ import java.util.*;
 import javax.ejb.Stateless;
 import migrainetracking.dto.Catalizador;
 import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.excepciones.NoExisteException;
 
 import migrainetracking.logica.interfaces.IServicioAnalisisMockRemote;
 
@@ -24,6 +25,16 @@ import migrainetracking.logica.interfaces.IServicioAnalisisMockRemote;
  */
 @Stateless
 public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
+
+    @Override
+    public List<Catalizador> getCatalizadores(EpisodioDolor episodio) throws NoExisteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<EpisodioDolor> getEpisodiosPaciente(Long noIdPaciente) throws NoExisteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

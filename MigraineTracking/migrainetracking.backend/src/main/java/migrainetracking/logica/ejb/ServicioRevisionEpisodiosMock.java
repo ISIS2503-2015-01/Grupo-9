@@ -49,7 +49,6 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -66,6 +65,11 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
 
     @Override
     public List<Medicamento> getMedicamentosDelEpisodio(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
