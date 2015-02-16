@@ -8,7 +8,6 @@ package migrainetracking.logica.interfaces;
 
 import java.util.List;
 import javax.ejb.Remote;
-import migrainetracking.dto.Usuario;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 
@@ -17,25 +16,33 @@ import migrainetracking.excepciones.OperacionInvalidaException;
  * @author Personal
  */
 @Remote
-public interface IServicioRegistroUsuariosMockRemote extends IServiciosCRUDMockRemote{
+public interface IServicioRegistroUsuariosMockRemote {
     /**
      * Crea un nuevo usuario
      * @param nuevo El usuario nuevo
      * @throws OperacionInvalidaException Excepcion en caso de error operacional
      */
-    public void crearUsuario(Usuario nuevo) throws OperacionInvalidaException;
+    public Long crearUsuario(Object nuevo) throws OperacionInvalidaException;
     
     /**
      * Crea elimina un usuario con un numero de identificacion
-     * @param noIdentificacion El numero de identicacion 
      * @throws OperacionInvalidaException Excepcion en caso de error operacional
-     * @throws NoExisteException en caso de que no exista un paciente con ese noIdentificacion asociado
+     * @throws NoExisteException en caso de que no exista el paciente que se quiere eliminar.
      */
-    public void eliminarUsuario( int noIdentificacion ) throws OperacionInvalidaException, NoExisteException;
+    public Long eliminarUsuario( Object viejo ) throws OperacionInvalidaException, NoExisteException;
+    
+    /**
+     * <b>pre:</b> El usuario que se va a actualizar ya existe
+     * @param actualizar
+     * @return 
+     */
+    public Long actualizarUsuario( Object actualizar );
     
     /**
      * Devuelve la lista de usuarios de todo el sistema
-     * @return la lista de usuarios
+     * @param c Clase del Usuario que se quiere retener los datos.
+     * @return la lista de usuarios.
+     *         null en caso de que la clase introducida no sea de tipo Paciente o Doctor.
      */
-    public List<Usuario> getUsuarios();
+    public List getUsuarios(Class c);
 }

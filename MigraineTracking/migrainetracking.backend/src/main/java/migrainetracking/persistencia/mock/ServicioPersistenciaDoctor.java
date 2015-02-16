@@ -3,56 +3,132 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package migrainetracking.persistencia.mock;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import migrainetracking.dto.Catalizador;
 import migrainetracking.dto.Doctor;
+import migrainetracking.dto.Paciente;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaDoctor;
+import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
+import migrainetracking.utils.Utils;
+import org.fluttercode.datafactory.impl.DataFactory;
 
 /**
  *
  * @author Personal
  */
-public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor{
+public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
+
     //----------------------------------------------------------------------
     // Atributos
     //----------------------------------------------------------------------
-    private List<Doctor> doctores;
+    public static ServicioPersistenciaDoctor instancia;
     
+    private List<Doctor> doctores;
+
     //----------------------------------------------------------------------
     // Constructores
     //----------------------------------------------------------------------
-    
+    public ServicioPersistenciaDoctor() {
+        if (doctores == null) {
+            doctores = new ArrayList<Doctor>();
+            
+            int numData = 8;
+            int j = 0;
+            for (int i = 0; i < numData ; i++) {
+                DataFactory df = new DataFactory();
+                String nomb = df.getFirstName() +" "+ df.getLastName() ;
+                int ced = df.getNumberBetween(80000000, 110000000);
+                Date fechNac = df.getBirthDate();
+                Doctor temp = new Doctor();
+                temp.setNombre(nomb);
+                temp.setNoIdentificacion(ced);
+                temp.setFechaNacimiento(fechNac);
+                List<Paciente> pacientes = ServicioPersistenciaPaciente.getInstance().getPacientes();
+                try{
+                    temp.setPacientes(pacientes.subList(j,j+2));
+                }
+                catch(IndexOutOfBoundsException e){
+                    // No hay pacientes en el sistema...
+                }
+                this.doctores.add(temp);
+                j+=2;
+            }
+        }
+
+    }
+
+     public static ServicioPersistenciaDoctor getInstance(){
+        if(instancia == null){
+            return new ServicioPersistenciaDoctor();
+        }else
+            return instancia;
+    }
+     
     //----------------------------------------------------------------------
     // Metodos
     //----------------------------------------------------------------------
-
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Doctor newDoc = (Doctor) obj;
+        if (findById(Doctor.class, newDoc.getNoIdentificacion()) == null) {
+            doctores.add(newDoc);
+            Utils.printf("New doctor(" + newDoc.getNombre() + ") was added");
+        } else {
+            throw new OperacionInvalidaException("El doctor que quiere agregar ya existe en el sistema");
+        }
     }
 
     @Override
     public void update(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Doctor toEdit = (Doctor) obj;
+        for (int i = 0; i < doctores.size(); i++) {
+            Doctor tempDoc = doctores.get(i);
+            if (toEdit.equals(tempDoc)) {
+                doctores.set(i, toEdit);
+                Utils.printf("Doctor(" + tempDoc.getNombre() + ")was UPDATED");
+                break;
+            }
+        }
     }
 
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Doctor oldDoc = (Doctor) obj;
+        if (findById(Doctor.class, oldDoc.getNoIdentificacion()) != null) {
+            doctores.remove(oldDoc);
+            Utils.printf("Doctor(" + oldDoc.getNombre() + ")was deleted");
+        } else {
+            throw new OperacionInvalidaException("El doctor que quiere eliminar no existe en el sistema");
+        }
     }
 
     @Override
     public List findAll(Class c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.doctores;
     }
 
     @Override
-    public Object findById(Class c, Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    // El id en este caso es la cedula del doctor.
+    public Doctor findById(Class c, Object id) {
+        int noId = Integer.parseInt(id.toString());
+        for (Doctor doctor : doctores) {
+            if (doctor.getNoIdentificacion() == noId) {
+                return doctor;
+            }
+        }
+        return null;
     }
+
     
+    
+    //------------------------------------------------------------------------
+    // Metodos auxiliares
+    //------------------------------------------------------------------------
 }

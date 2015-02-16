@@ -25,7 +25,7 @@ public interface IServicioRegistroEpisodioMockRemote {
      * @param noIdPaciente El numero de identificacion del Paciente al que se quiere asociar el episodio de dolor
      * @throws OperacionInvalidaException Excepcion en caso de error operacional
      */
-    public void registrarEpisodio( EpisodioDolor nuevo, int noIdPaciente ) throws OperacionInvalidaException;
+    public Long registrarEpisodio( EpisodioDolor nuevo, int noIdPaciente ) throws OperacionInvalidaException;
     
     /**
      * Elimina un episodio de dolor
@@ -35,17 +35,15 @@ public interface IServicioRegistroEpisodioMockRemote {
      * @throws NoExisteException en caso de que no exista el episodio con ese id 
      *         o un paciente con ese numero de identificacion
      */
-    public void eliminarEpisodio(int idEpisodio, int noIdPaciente) throws OperacionInvalidaException, NoExisteException;
+    public Long eliminarEpisodio(int idEpisodio, int noIdPaciente) throws OperacionInvalidaException, NoExisteException;
     
     /**
      * Edita un episodio de dolor
+     * <b>pre:</b> El episodio y el paciente que se van a actualizar ya existe
      * @param editado el episodio de dolor que se quiere editar
      * @param noIdPaciente el numero de identificacion del paciente
-     * @throws OperacionInvalidaException Excepcion en caso de error operacional
-     * @throws NoExisteException en caso de que no exista el episodio con ese id 
-     *         o un paciente con ese numero de identificacion
      */
-    public void editarEpisodio(EpisodioDolor editado, int noIdPaciente) throws NoExisteException,OperacionInvalidaException;
+    public Long editarEpisodio(EpisodioDolor editado, int noIdPaciente) ;
     
     /**
      * Devuelve todos los episodios del sistema
@@ -56,9 +54,10 @@ public interface IServicioRegistroEpisodioMockRemote {
     
     /**
      * Devuelve todos los episodios de un paciente
+     * <b>pre:</b> El paciente ya existe en el sistema.
      * @param  noIdPaciente el numero de identificacion de un paciente
      * @return la lista de episodios
      */
-    public List<EpisodioDolor> getEpisodiosPorPaciente(Long noIdPaciente);
+    public List<EpisodioDolor> getEpisodiosPorPaciente(int noIdPaciente);
     
 }

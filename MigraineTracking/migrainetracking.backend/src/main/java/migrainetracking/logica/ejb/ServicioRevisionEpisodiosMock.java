@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
+import migrainetracking.dto.Catalizador;
+import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.dto.Medicamento;
+import migrainetracking.dto.Sintoma;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
-import migrainetracking.logica.interfaces.IServiciosCRUDMockLocal;
-import migrainetracking.persistencia.mock.ServicioPersistenciaMock;
+
 /**
  *
  * @author estudiante
@@ -40,6 +43,31 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
     //---------------------------------------------------------------------------
     // Metodos
     //---------------------------------------------------------------------------
+
+    @Override
+    public List<EpisodioDolor> getEpisodiosById(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Sintoma> getSintomasDelEpisodio(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Catalizador> getCatalizadoresDelEpisodio(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Medicamento> getMedicamentosDelEpisodio(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
   
     
