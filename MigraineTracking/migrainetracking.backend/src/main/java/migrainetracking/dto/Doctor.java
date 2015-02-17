@@ -21,6 +21,9 @@ public class Doctor {
     // Atributos
     //-----------------------------------------------------
     
+    /**
+     * El nombre del doctor
+     */
     private String nombre;
     
     /**
@@ -92,31 +95,50 @@ public class Doctor {
     // Metodos
     //-----------------------------------------------------
    
-     public String getNombre() {
+    /**
+     * Metodo que retorna el nombre del doctor
+     * @return el nombre del doctor
+     */
+    public String getNombre() {
         return nombre;
     }
 
-   
+    /**
+     * Metodo que cambia el nombre del doctor por el nombre que se da como parametro
+     * @param nombre el nuevo nombre del doctor
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    
+    /**
+     * Metodo que retrona el numero de identificacion del doctor
+     * @return el numero de identificacion del doctor
+     */
     public int getNoIdentificacion() {
         return noIdentificacion;
     }
 
-    
+    /**
+     * Metodo que cambia el numero de identificacion del doctor por el numero que se da por parametro
+     * @param noIdentificacion 
+     */
     public void setNoIdentificacion(int noIdentificacion) {
         this.noIdentificacion = noIdentificacion;
     }
 
-  
+    /**
+     * Metodo que retorna la fecha de nacimiento del doctor
+     * @return la fecha de nacimiento del doctor
+     */
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    
+    /**
+     * Metodo que cambia la fecha de nacimiento del doctor por la fecha dada por parametro
+     * @param fechaNacimiento 
+     */
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
@@ -183,6 +205,4 @@ public class Doctor {
         }
         return true;
     }
-    
-    
 }

@@ -60,10 +60,18 @@ public class Catalizador {
     // Metodos
     //-----------------------------------------------------
 
+    /**
+     * Retorna el id del catalizador
+     * @return el id del catalizador
+     */
     public Long getId(){
         return this.id;
     }
     
+    /**
+     * Cambia el id del catalizador por el id dado como parametro
+     * @param id el nuevo id del catalizador
+     */
     public void setId(Long id){
         this.id = id;
     }
