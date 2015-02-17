@@ -38,36 +38,37 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
     public ServicioPersistenciaDoctor() {
         if (doctores == null) {
             doctores = new ArrayList<Doctor>();
+              /*Datos para prueba funcionalidad*/
+//            int numData = 8;
+//            int j = 0;
+//            for (int i = 0; i < numData ; i++) {
+//                DataFactory df = new DataFactory();
+//                String nomb = df.getFirstName() +" "+ df.getLastName() ;
+//                int ced = df.getNumberBetween(80000000, 110000000);
+//                Date fechNac = df.getBirthDate();
+//                Doctor temp = new Doctor(nomb, ced, fechNac);
+//                List<Paciente> pacientes = ServicioPersistenciaPaciente.getInstance().getPacientes();
+//                try{
+//                    temp.setPacientes(pacientes.subList(j,j+2));
+//                }
+//                catch(IndexOutOfBoundsException e){
+//                    // No hay pacientes en el sistema...
+//                }
+//                this.doctores.add(temp);
+//                j+=2;
+//            }
             
-            int numData = 8;
-            int j = 0;
-            for (int i = 0; i < numData ; i++) {
-                DataFactory df = new DataFactory();
-                String nomb = df.getFirstName() +" "+ df.getLastName() ;
-                int ced = df.getNumberBetween(80000000, 110000000);
-                Date fechNac = df.getBirthDate();
-                Doctor temp = new Doctor();
-                temp.setNombre(nomb);
-                temp.setNoIdentificacion(ced);
-                temp.setFechaNacimiento(fechNac);
-                List<Paciente> pacientes = ServicioPersistenciaPaciente.getInstance().getPacientes();
-                try{
-                    temp.setPacientes(pacientes.subList(j,j+2));
-                }
-                catch(IndexOutOfBoundsException e){
-                    // No hay pacientes en el sistema...
-                }
-                this.doctores.add(temp);
-                j+=2;
-            }
+            /*Datos para prueba de carga*/
+            
+        
         }
 
     }
 
      public static ServicioPersistenciaDoctor getInstance(){
-        if(instancia == null){
+        if(instancia == null || true){
             return new ServicioPersistenciaDoctor();
-        }else
+        }
             return instancia;
     }
      

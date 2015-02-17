@@ -42,23 +42,24 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     public ServicioPersistenciaPaciente() {
         if (this.pacientes == null) {
             this.pacientes = new ArrayList<Paciente>();
-            int numData = 20;
-            for (int i = 0; i < numData; i++) {
-                DataFactory df = new DataFactory();
-                String nomb = df.getFirstName() +" "+ df.getLastName() ;
-                int ced = df.getNumberBetween(80000000, 110000000);
-                Date fechNac = df.getBirthDate();
-                Paciente temp = new Paciente();
-                temp.setNombre(nomb);
-                temp.setNoIdentificacion(ced);
-                temp.setFechaNacimiento(fechNac);
-                this.pacientes.add(temp);
-            }
+            /* Datos pruebas funcionalidades*/
+//            int numData = 20;
+//            for (int i = 0; i < numData; i++) {
+//                DataFactory df = new DataFactory();
+//                String nomb = df.getFirstName() +" "+ df.getLastName() ;
+//                int ced = df.getNumberBetween(80000000, 110000000);
+//                Date fechNac = df.getBirthDate();
+//                Paciente temp = new Paciente(nomb, ced, fechNac);
+//                this.pacientes.add(temp);
+//            }
+            
+            /*Datos deterministicos prueba carga (A mano)*/
+            
         }
     }
 
     public static ServicioPersistenciaPaciente getInstance() {
-        if (instancia == null) {
+        if (instancia == null || true) {
             return new ServicioPersistenciaPaciente();
         } else {
             return instancia;
