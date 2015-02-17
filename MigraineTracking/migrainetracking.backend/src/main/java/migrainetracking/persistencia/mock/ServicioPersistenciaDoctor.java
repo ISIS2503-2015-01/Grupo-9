@@ -81,7 +81,7 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
             doctores.add(newDoc);
             Utils.printf("New doctor(" + newDoc.getNombre() + ") was added");
         } else {
-            throw new OperacionInvalidaException("El doctor que quiere agregar ya existe en el sistema");
+            throw new OperacionInvalidaException("El doctor, con ese id, ya existe en el sistema");
         }
     }
 

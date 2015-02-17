@@ -29,6 +29,7 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
     //---------------------------------------------------------------------------
     // Constantes
     //---------------------------------------------------------------------------
+    private static ServicioRegistroUsuariosMock instancia;
     //---------------------------------------------------------------------------
     // Atributos
     //---------------------------------------------------------------------------
@@ -45,7 +46,13 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
         this.persistenciaDoctor = ServicioPersistenciaDoctor.getInstance();
         this.persistenciaPaciente = ServicioPersistenciaPaciente.getInstance();
     }
-
+    
+    public static ServicioRegistroUsuariosMock getInstance(){
+        if(instancia==null){
+            instancia = new ServicioRegistroUsuariosMock();
+        }
+        return instancia;
+    }
     //---------------------------------------------------------------------------
     // Metodos
     //---------------------------------------------------------------------------
