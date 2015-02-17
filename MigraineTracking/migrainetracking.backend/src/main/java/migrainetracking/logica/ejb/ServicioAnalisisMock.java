@@ -7,14 +7,17 @@ package migrainetracking.logica.ejb;
 
 
 import java.util.List;
-import java.util.*;
 import javax.ejb.Stateless;
 import migrainetracking.dto.Catalizador;
 import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.dto.Paciente;
 import migrainetracking.excepciones.NoExisteException;
 
 import migrainetracking.logica.interfaces.IServicioAnalisisMockRemote;
-import migrainetracking.persistencia.interfaces.IServicioPersistenciaCatalizador;
+import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
+import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
+import migrainetracking.persistencia.mock.ServicioPersistenciaEpisodioDolor;
+import migrainetracking.persistencia.mock.ServicioPersistenciaPaciente;
 
 
 /**
@@ -39,11 +42,28 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
     /**
      * Persistencia para los catalizadores
      */
-    IServicioPersistenciaCatalizador persistencia;
+    IServicioPersistenciaEpisodioDolor persistencia;
     
     //-----------------------------------------------------
     // Constructor
     //-----------------------------------------------------
+    
+    /**
+     * Metodo constructor
+     */
+    public ServicioAnalisisMock()
+    {
+        persistencia = ServicioPersistenciaEpisodioDolor.getInstance();
+    }
+    
+    public static ServicioAnalisisMock getInstance()
+    {
+        if(instancia==null || true)
+        {
+            instancia = new ServicioAnalisisMock();
+        }
+        return instancia;
+    }
     
     //-----------------------------------------------------
     // Metodos
@@ -51,13 +71,25 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
     
     @Override
     public List<Catalizador> getCatalizadores(EpisodioDolor episodio) throws NoExisteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Object episo = persistencia.findById(EpisodioDolor.class, episodio);
+        EpisodioDolor ep = (EpisodioDolor) episo;
+        if(ep==null)
+        {
+           throw new NoExisteException ("El episodio del cual se quieren los catalizadores no existe");
+        }
+        return episodio.getCatalizadores();
     }
 
     @Override
     public List<EpisodioDolor> getEpisodiosPaciente(Long noIdPaciente) throws NoExisteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IServicioPersistenciaPaciente pac = ServicioPersistenciaPaciente.getInstance();
+        int noId = noIdPaciente.intValue();
+        Object p = pac.findById(Paciente.class, noId);
+        if(p==null)
+        {
+            throw new NoExisteException("El paciente del cual quiere obtener episodios no existe");
+        }
+        return pac.getEpisodiosByPaciente(noId);
     }
-    
-    
 }

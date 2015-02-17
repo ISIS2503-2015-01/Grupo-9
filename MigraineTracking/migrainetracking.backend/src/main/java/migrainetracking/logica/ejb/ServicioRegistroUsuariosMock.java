@@ -14,7 +14,6 @@ import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.interfaces.IServicioRegistroUsuariosMockRemote;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaDoctor;
-import migrainetracking.persistencia.interfaces.IServicioPersistenciaMockRemote;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.persistencia.mock.ServicioPersistenciaDoctor;
 import migrainetracking.persistencia.mock.ServicioPersistenciaPaciente;

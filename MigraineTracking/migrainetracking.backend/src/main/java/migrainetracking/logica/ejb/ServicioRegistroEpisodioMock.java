@@ -8,14 +8,12 @@ package migrainetracking.logica.ejb;
 import java.util.List;
 import javax.ejb.Stateless;
 import migrainetracking.dto.EpisodioDolor;
-import migrainetracking.dto.Paciente;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.interfaces.IServicioRegistroEpisodioMockRemote;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.persistencia.mock.ServicioPersistenciaEpisodioDolor;
-import migrainetracking.persistencia.mock.ServicioPersistenciaPaciente;
 
 /**
  *
