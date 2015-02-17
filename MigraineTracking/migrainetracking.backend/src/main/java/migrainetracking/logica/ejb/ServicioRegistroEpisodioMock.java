@@ -98,5 +98,4 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
         IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;;
         return pacPersServ.getEpisodiosByPaciente(noIdPaciente);
     }
-
 }

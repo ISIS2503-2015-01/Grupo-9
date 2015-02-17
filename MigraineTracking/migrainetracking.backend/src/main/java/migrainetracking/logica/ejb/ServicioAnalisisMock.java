@@ -14,6 +14,7 @@ import migrainetracking.dto.EpisodioDolor;
 import migrainetracking.excepciones.NoExisteException;
 
 import migrainetracking.logica.interfaces.IServicioAnalisisMockRemote;
+import migrainetracking.persistencia.interfaces.IServicioPersistenciaCatalizador;
 
 
 /**
@@ -26,6 +27,28 @@ import migrainetracking.logica.interfaces.IServicioAnalisisMockRemote;
 @Stateless
 public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
 
+    //-----------------------------------------------------
+    // Atributos
+    //-----------------------------------------------------
+    
+    /**
+     * Atributo para manejar la instanciacion de la clase
+     */
+    public static ServicioAnalisisMock instancia;
+    
+    /**
+     * Persistencia para los catalizadores
+     */
+    IServicioPersistenciaCatalizador persistencia;
+    
+    //-----------------------------------------------------
+    // Constructor
+    //-----------------------------------------------------
+    
+    //-----------------------------------------------------
+    // Metodos
+    //-----------------------------------------------------
+    
     @Override
     public List<Catalizador> getCatalizadores(EpisodioDolor episodio) throws NoExisteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
