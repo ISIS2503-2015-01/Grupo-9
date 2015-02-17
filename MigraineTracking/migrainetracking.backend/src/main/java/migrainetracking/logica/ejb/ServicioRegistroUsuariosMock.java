@@ -28,10 +28,19 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
     //---------------------------------------------------------------------------
     // Constantes
     //---------------------------------------------------------------------------
+    
+    /**
+     *Atributo para manejar la instancia de la clase 
+     */
     private static ServicioRegistroUsuariosMock instancia;
+    
     //---------------------------------------------------------------------------
     // Atributos
     //---------------------------------------------------------------------------
+    
+    /**
+     * 
+     */
     IServicioPersistenciaDoctor persistenciaDoctor;
     IServicioPersistenciaPaciente persistenciaPaciente;
 

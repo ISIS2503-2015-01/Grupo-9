@@ -40,12 +40,16 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
     //---------------------------------------------------------------------------
     
     /**
-     * 
+     *Metodo constructor 
      */
     public ServicioRegistroEpisodioMock() {
         persistencia = ServicioPersistenciaEpisodioDolor.getInstance();
     }
 
+    /**
+     * Metodo para manejar la instaciacion de la clase
+     * @return la instancia de la clase
+     */
     public static ServicioRegistroEpisodioMock getInstance(){
         if( instancia==null || true ){
             instancia = new ServicioRegistroEpisodioMock();
@@ -56,6 +60,14 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
     //---------------------------------------------------------------------------
     // Metodos
     //---------------------------------------------------------------------------
+    
+    /**
+     * Registra un nuevo episodio de dolor al paciente cuyo id se da por parametro
+     * @param nuevo el episodio de dolor que se va a agregar
+     * @param noIdPaciente el id del paciente al cual se le va a agregar el episodio de dolor
+     * @return el id del paciente al cual se le agrego el episodio
+     * @throws OperacionInvalidaException si no se puede registrar el episodio
+     */
     @Override
     public Long registrarEpisodio(EpisodioDolor nuevo, int noIdPaciente) throws OperacionInvalidaException {
         
@@ -69,6 +81,14 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
         return respId;
     }
 
+    /**
+     * Se elimina un episodio de dolor dado el id del paciente
+     * @param idEpisodio el id del episodio que se va a eliminar
+     * @param noIdPaciente el id del paciente al cual se le va a eliminar el episodio
+     * @return el id del paciente al cual se le elimino el episodio de dolor
+     * @throws OperacionInvalidaException si no se puede eliminar el episodio
+     * @throws NoExisteException si el paciente o el episodio no existen
+     */
     @Override
     public Long eliminarEpisodio(int idEpisodio, int noIdPaciente) throws OperacionInvalidaException, NoExisteException {
         EpisodioDolor ep = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, (long) idEpisodio);
@@ -86,6 +106,12 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
         return respId;
     }
 
+    /**
+     * Se edita un episodio de dolor dado como parametro al usuario cuyo id se da como parametro
+     * @param editado el episodio a editar
+     * @param noIdPaciente el id del paciente al cual se le va a editar el episodio
+     * @return el id del paciente al cual se le edito el episodio
+     */
     @Override
     public Long editarEpisodio(EpisodioDolor editado, int noIdPaciente) {
         IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;
@@ -95,12 +121,21 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
         return respId;
     }
 
+    /**
+     * Retorna los epidosios del sistema
+     * @return una lista con todos los episodios de dolor
+     */
     @Override
     public List<EpisodioDolor> getEpisodios() {
         IServicioPersistenciaEpisodioDolor epPUServ = ServicioPersistenciaEpisodioDolor.getInstance();
         return epPUServ.findAll(EpisodioDolor.class);
     }
 
+    /**
+     * Retorna los episodios de dolor de un paciente cuyo id es dado como parametro
+     * @param noIdPaciente el id del paciente del cual se quiere obtener los episodios
+     * @return los episodios del paciente cuyo id se dio como parametro
+     */
     @Override
     public List<EpisodioDolor> getEpisodiosPorPaciente(int noIdPaciente) {
         IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;;
