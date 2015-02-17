@@ -6,6 +6,7 @@
 
 package migrainetracking.persistencia.mock;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +36,7 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
     //----------------------------------------------------------------------
     public ServicioPersistenciaEpisodioDolor(){
         if(this.episodios==null){
+            episodios = new ArrayList<EpisodioDolor>();
             
             int numData = 30;
             String[] loc = {"Alrededor del ojo","Mitad derecha de la cabeza","Mitad izquierda de la cabeza","Frente del ojo","Mejilla","Nariz","Encias"};
