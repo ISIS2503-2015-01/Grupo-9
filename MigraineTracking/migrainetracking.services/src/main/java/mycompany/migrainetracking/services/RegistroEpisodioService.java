@@ -79,7 +79,7 @@ public class RegistroEpisodioService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEpisiodiosByPaciente(){
         JSONObject rta = new JSONObject();
-        
+        return null;
     }
     
     /**
