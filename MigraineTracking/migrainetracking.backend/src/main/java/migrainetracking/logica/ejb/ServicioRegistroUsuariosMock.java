@@ -39,9 +39,13 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
     //---------------------------------------------------------------------------
     
     /**
-     * 
+     *Atributo para persistir a los doctores 
      */
     IServicioPersistenciaDoctor persistenciaDoctor;
+    
+    /**
+     * Atributo para persisitir a los pacientes
+     */
     IServicioPersistenciaPaciente persistenciaPaciente;
 
     //---------------------------------------------------------------------------
@@ -55,6 +59,10 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
         this.persistenciaPaciente = ServicioPersistenciaPaciente.getInstance();
     }
     
+    /**
+     * Metodo que se encarga de retornar la instacia de la clase
+     * @return la instancia de la clase
+     */
     public static ServicioRegistroUsuariosMock getInstance(){
         if( instancia==null || true ){
             instancia = new ServicioRegistroUsuariosMock();
@@ -64,6 +72,13 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
     //---------------------------------------------------------------------------
     // Metodos
     //---------------------------------------------------------------------------
+    
+    /**
+     * Metodo que se encarga de crear un nuevo ususario (Paciente o Doctor)
+     * @param nuevo el nuevo usuario a crear
+     * @return el id del usuario que se creo
+     * @throws OperacionInvalidaException si no se puede crear el ususario
+     */
     @Override
     public Long crearUsuario(Object nuevo) throws OperacionInvalidaException {
         if (nuevo instanceof Doctor) {
@@ -77,6 +92,13 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
         }
     }
 
+    /**
+     * Metodo que se encarga de eliminar un usuario del sistema (Paciente o Doctor)
+     * @param viejo el usuario a eliminar
+     * @return el id del usuario que se elimino
+     * @throws OperacionInvalidaException si no se puede eliminar el usuario
+     * @throws NoExisteException si el usuario a ser eliminado no existe
+     */
     @Override
     public Long eliminarUsuario(Object viejo) throws OperacionInvalidaException, NoExisteException {
         if (viejo instanceof Doctor) {
@@ -90,6 +112,11 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
         }
     }
 
+    /**
+     * Metodo que se encarga de retornar a todos los usuarios de una clase dada por parametro
+     * @param c la clase de usuarios que se quiere
+     * @return la lista de los usuarios de la clase que se dio como parametro
+     */
     @Override
     public List getUsuarios(Class c) {
         if (c.equals(Doctor.class)) {
@@ -100,6 +127,11 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
         return null;
     }
 
+    /**
+     * Metodo que se encarga de actualizar un usuario
+     * @param actualizar el usuario a actualizar
+     * @return el id del usuario actualizado
+     */
     @Override
     public Long actualizarUsuario(Object actualizar) {
         if (actualizar instanceof Doctor) {

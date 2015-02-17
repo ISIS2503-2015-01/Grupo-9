@@ -71,8 +71,5 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
     @Override
     public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
-    
+    }    
 }
