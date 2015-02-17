@@ -24,6 +24,10 @@ import migrainetracking.persistencia.mock.ServicioPersistenciaPaciente;
 @Stateless
 public class SevicioRegistroEpisodioMock implements IServicioRegistroEpisodioMockRemote {
 
+    public static IServicioRegistroEpisodioMockRemote getInstance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     //---------------------------------------------------------------------------
     // Atributos
     //---------------------------------------------------------------------------

@@ -55,7 +55,7 @@ public class RegistroUsuariosService {
     }
 
     @POST
-    @Path("/create/Doctor")
+    @Path("create/Doctor")
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDoctor(Doctor doctorDTO) throws JSONException {
         JSONObject resp = new JSONObject();
@@ -147,7 +147,7 @@ public class RegistroUsuariosService {
     }
     
     @GET
-    @Path("/getAll/Doctores")
+    @Path("getAll/Doctores/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllDoctors(){
         List<Doctor> docs;

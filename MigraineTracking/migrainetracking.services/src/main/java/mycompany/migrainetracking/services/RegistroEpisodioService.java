@@ -23,7 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import migrainetracking.dto.EpisodioDolor;
 import migrainetracking.excepciones.OperacionInvalidaException;
-import migrainetracking.logica.ejb.ServicioRegistroEpisodioMock;
+import migrainetracking.logica.ejb.SevicioRegistroEpisodioMock;
 import migrainetracking.logica.ejb.ServicioRevisionEpisodiosMock;
 import migrainetracking.logica.interfaces.IServicioRegistroEpisodioMockRemote;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
@@ -49,7 +49,7 @@ public class RegistroEpisodioService {
      * Creates a new instance of RegistroEpisodioService
      */
     public RegistroEpisodioService() {
-        beanRegEps  = ServicioRegistroEpisodioMock.getInstance();
+        beanRegEps  = SevicioRegistroEpisodioMock.getInstance();
     }
 
     @POST
