@@ -62,7 +62,9 @@ public class Doctor {
      * @param fechaNacimiento 
      */
     public Doctor(String nombre, int noIdentificacion, Date fechaNacimiento) {
-        //super(nombre, noIdentificacion, fechaNacimiento);
+        this.nombre = nombre;
+        this.noIdentificacion=noIdentificacion;
+        this.fechaNacimiento=fechaNacimiento;
         pacientes = new ArrayList<Paciente>();
         colegas = new ArrayList<Doctor>();
     }
@@ -77,7 +79,9 @@ public class Doctor {
      * @param especialidad 
      */
     public Doctor(String nombre, int noIdentificacion, Date fechaNacimiento, List<Paciente> pacientes, List<Doctor> colegas, String especialidad) {
-        //super(nombre, noIdentificacion, fechaNacimiento);
+        this.nombre = nombre;
+        this.noIdentificacion=noIdentificacion;
+        this.fechaNacimiento=fechaNacimiento;
         this.pacientes = pacientes;
         this.colegas = colegas;
         this.especialidad = especialidad;

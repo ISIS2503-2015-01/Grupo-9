@@ -52,7 +52,9 @@ public class Paciente {
     public Paciente(){}
     
     public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento, int peso, int estatura, List<Medicamento> medicamentosDiarios, List<Catalizador> habitos, List<EpisodioDolor> episodios) {
-        //super(nombre, noIdentificacion, fechaNacimiento);
+       this.nombre = nombre;
+        this.noIdentificacion=noIdentificacion;
+        this.fechaNacimiento=fechaNacimiento;
         this.peso = peso;
         this.estatura = estatura;
         this.medicamentosDiarios = medicamentosDiarios;
@@ -62,7 +64,9 @@ public class Paciente {
 
            
     public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento) {
-        //super(nombre, noIdentificacion, fechaNacimiento);
+        this.nombre = nombre;
+        this.noIdentificacion=noIdentificacion;
+        this.fechaNacimiento=fechaNacimiento;
         habitos = new ArrayList<Catalizador>();
         medicamentosDiarios = new ArrayList<Medicamento>();
         episodios = new ArrayList<EpisodioDolor>();
