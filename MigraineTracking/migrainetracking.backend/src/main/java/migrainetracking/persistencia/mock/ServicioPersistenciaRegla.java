@@ -6,11 +6,13 @@
 
 package migrainetracking.persistencia.mock;
 
+import java.util.ArrayList;
 import java.util.List;
 import migrainetracking.dto.Catalizador;
 import migrainetracking.dto.Regla;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaRegla;
+import migrainetracking.utils.Utils;
 
 /**
  *
@@ -23,11 +25,39 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla{
     // Atributos
     //----------------------------------------------------------------------
     
+    /**
+     * Lista de reglas en el sistema
+     */
     private List<Regla> reglas;
+    
+    /**
+     * Atributo para manejar la instanciacion 
+     */
+    public static ServicioPersistenciaRegla instancia;
     
     //----------------------------------------------------------------------
     // Constructores
     //----------------------------------------------------------------------
+    
+    /**
+     * Metodo constructor de la clase
+     */
+    public ServicioPersistenciaRegla()
+    {
+        if(reglas==null)
+        {
+            reglas = new ArrayList<Regla>();
+        }
+    }
+    
+    public static ServicioPersistenciaRegla getInstance()
+    {
+        if(instancia==null)
+        {
+            instancia = new ServicioPersistenciaRegla();
+        }
+        return instancia;
+    }
     
     //----------------------------------------------------------------------
     // Metodos
@@ -35,22 +65,24 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla{
 
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Regla nueva = (Regla) obj;
+        reglas.add(nueva);
+        Utils.printf("Se ha agregado la nueva regla");
     }
 
     @Override
     public void update(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        reglas.remove(obj);
     }
 
     @Override
     public List findAll(Class c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return reglas;
     }
 
     @Override

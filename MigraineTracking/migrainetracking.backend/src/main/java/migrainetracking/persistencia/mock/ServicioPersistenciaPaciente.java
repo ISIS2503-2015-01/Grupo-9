@@ -26,7 +26,14 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     // Atributos
     //----------------------------------------------------------------------
 
+    /**
+     * Atruto para manejar la instanciacion de la clase
+     */
     private static ServicioPersistenciaPaciente instancia;
+    
+    /**
+     * Lista de pacientes en el sistema
+     */
     private List<Paciente> pacientes;
 
     //----------------------------------------------------------------------
