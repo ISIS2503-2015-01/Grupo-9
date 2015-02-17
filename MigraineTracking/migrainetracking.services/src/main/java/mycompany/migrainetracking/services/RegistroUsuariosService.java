@@ -51,7 +51,7 @@ public class RegistroUsuariosService {
      * Creates a new instance of RegistroUsuariosService
      */
     public RegistroUsuariosService() {
-        userRegService = new ServicioRegistroUsuariosMock();
+        userRegService = ServicioRegistroUsuariosMock.getInstance();//new ServicioRegistroUsuariosMock();
     }
 
     @POST
@@ -147,7 +147,7 @@ public class RegistroUsuariosService {
     }
     
     @GET
-    @Path("getAll/Doctores")
+    @Path("/getAll/Doctores")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllDoctors(){
         List<Doctor> docs;
@@ -160,7 +160,7 @@ public class RegistroUsuariosService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPacients(){
         List<Paciente> pacs;
-        pacs = userRegService.getUsuarios(Doctor.class);
+        pacs = userRegService.getUsuarios(Paciente.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacs).build();
     }
     

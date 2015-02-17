@@ -23,7 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import migrainetracking.dto.EpisodioDolor;
 import migrainetracking.excepciones.OperacionInvalidaException;
-import migrainetracking.logica.ejb.SevicioRegistroEpisodioMock;
+import migrainetracking.logica.ejb.ServicioRegistroEpisodioMock;
 import migrainetracking.logica.ejb.ServicioRevisionEpisodiosMock;
 import migrainetracking.logica.interfaces.IServicioRegistroEpisodioMockRemote;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
@@ -49,7 +49,7 @@ public class RegistroEpisodioService {
      * Creates a new instance of RegistroEpisodioService
      */
     public RegistroEpisodioService() {
-        beanRegEps  = SevicioRegistroEpisodioMock.getInstance();
+        beanRegEps  = ServicioRegistroEpisodioMock.getInstance();
     }
 
     @POST
@@ -75,11 +75,12 @@ public class RegistroEpisodioService {
     }
     
     @GET
-    @Path("/getEpisodiosByPaciente/{id}")
+    @Path("/getEpisodios/pacid={id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEpisiodiosByPaciente(){
+    public Response getEpisiodiosByPaciente(@PathParam("id") int noIdPaciente){
         JSONObject rta = new JSONObject();
-        return null;
+        List<EpisodioDolor> eps = beanRegEps.getEpisodiosPorPaciente(noIdPaciente);
+        return Response.status(200).header("Acces-Control-Allow-Origin", "").entity(eps).build();
     }
     
     /**
