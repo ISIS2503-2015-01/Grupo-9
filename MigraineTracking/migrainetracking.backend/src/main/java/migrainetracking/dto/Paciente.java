@@ -65,42 +65,28 @@ public class Paciente {
     //-----------------------------------------------------
     
     /**
-     * Metodo constructor sin argumentos
-     */
-    public Paciente(){}
-    
-    /**
      * Metodo constructor con argumentos
      * @param nombre El nombre del paciente
      * @param noIdentificacion el numero de identificacion del paciente
      * @param fechaNacimiento la fecha de nacimiento del paciente
      * @param peso el peso del paciente
      * @param estatura la estatura del paciente
-     * @param medicamentosDiarios los medicamentos que actualmente esta tomando el paciente
-     * @param habitos los habitos del paciente (Los catalizadores)
-     * @param episodios Los episodios de dolor que ha tendido el paciente 
      */
-    public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento, int peso, int estatura, List<Medicamento> medicamentosDiarios, List<Catalizador> habitos, List<EpisodioDolor> episodios) {
+    public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento, int peso, int estatura) {
        this.nombre = nombre;
         this.noIdentificacion=noIdentificacion;
         this.fechaNacimiento=fechaNacimiento;
         this.peso = peso;
         this.estatura = estatura;
-        this.medicamentosDiarios = medicamentosDiarios;
-        this.habitos = habitos;
-        this.episodios = episodios;
+        habitos = new ArrayList<Catalizador>();
+        medicamentosDiarios = new ArrayList<Medicamento>();
+        episodios = new ArrayList<EpisodioDolor>();
     }
 
     /**
-     * Metodo constructor con los datos relacionados al usuario
-     * @param nombre El nombre del paciente
-     * @param noIdentificacion el numero de identificaicon del paciente
-     * @param fechaNacimiento la fecha de nacimiento del paciente
+     * Metodo constructor con los datos relacionados al usuarios sin argumentos
      */
-    public Paciente(String nombre, int noIdentificacion, Date fechaNacimiento) {
-        this.nombre = nombre;
-        this.noIdentificacion=noIdentificacion;
-        this.fechaNacimiento=fechaNacimiento;
+    public Paciente() {
         habitos = new ArrayList<Catalizador>();
         medicamentosDiarios = new ArrayList<Medicamento>();
         episodios = new ArrayList<EpisodioDolor>();

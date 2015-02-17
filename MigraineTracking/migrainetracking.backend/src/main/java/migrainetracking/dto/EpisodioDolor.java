@@ -76,20 +76,17 @@ public class EpisodioDolor {
      * Metodo constructor con parametros
      * @param fecha la fecha en la que ocurre el episodio de dolor
      * @param localizacion la localizacion del episodio de dolor
-     * @param sintomas los sintomas relacionados con el episodio de dolor
      * @param horasDeSueño las horas de sueno que se tienen durante el espisodio de sueno
      * @param intensidadDolor la intensidad del dolor del episodio
-     * @param catalizadores los catalizadores asociados con el episodio
-     * @param medicamentosActuales los medicamentos que actualmente esta tomando el paciente
      */
-    public EpisodioDolor( Date fecha, String localizacion, List<Sintoma> sintomas,int horasDeSueño, int intensidadDolor, List<Catalizador> catalizadores, List<Medicamento> medicamentosActuales) {
+    public EpisodioDolor( Date fecha, String localizacion, int horasDeSueño, int intensidadDolor) {
         this.fecha = fecha;
         this.localizacion = localizacion; 
         this.intensidadDolor = intensidadDolor;
         this.horasDeSueño = horasDeSueño;
-        this.sintomas = sintomas;
-        this.catalizadores = catalizadores;
-        this.medicamentosActuales = medicamentosActuales;
+        sintomas = new ArrayList<Sintoma>();
+        catalizadores = new ArrayList<Catalizador>();
+        medicamentosActuales = new ArrayList<Medicamento>();
     }
 
     //-----------------------------------------------

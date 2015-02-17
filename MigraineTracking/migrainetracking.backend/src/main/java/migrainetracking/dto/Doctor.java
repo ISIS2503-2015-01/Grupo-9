@@ -56,18 +56,11 @@ public class Doctor {
     // Constructores
     //-----------------------------------------------------
     
-    public Doctor(){}
     /**
-     * Constructor de la clase
-     * (sin argumentos de la clase doctor, pero con argumentos de la super clase Usuarios)
-     * @param nombre
-     * @param noIdentificacion
-     * @param fechaNacimiento 
+     * Constructor de la clase (con argumentos)
+     * Se inicializan las listas de pacientes y de colegas
      */
-    public Doctor(String nombre, int noIdentificacion, Date fechaNacimiento) {
-        this.nombre = nombre;
-        this.noIdentificacion=noIdentificacion;
-        this.fechaNacimiento=fechaNacimiento;
+    public Doctor() {
         pacientes = new ArrayList<Paciente>();
         colegas = new ArrayList<Doctor>();
     }
@@ -81,13 +74,13 @@ public class Doctor {
      * @param colegas
      * @param especialidad 
      */
-    public Doctor(String nombre, int noIdentificacion, Date fechaNacimiento, List<Paciente> pacientes, List<Doctor> colegas, String especialidad) {
+    public Doctor(String nombre, int noIdentificacion, Date fechaNacimiento, String especialidad) {
         this.nombre = nombre;
         this.noIdentificacion=noIdentificacion;
         this.fechaNacimiento=fechaNacimiento;
-        this.pacientes = pacientes;
-        this.colegas = colegas;
         this.especialidad = especialidad;
+        pacientes = new ArrayList<Paciente>();
+        colegas = new ArrayList<Doctor>();
         
     }
 

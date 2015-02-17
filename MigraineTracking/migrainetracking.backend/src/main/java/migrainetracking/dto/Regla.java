@@ -20,6 +20,11 @@ public class Regla {
     //-----------------------------------------------------
     
     /**
+     * Id de la regla
+     */
+    private int id;
+    
+    /**
      * La intesidad minima requerida para que la regla sea valida
      */
     private int intensidadDolorMin;
@@ -48,6 +53,21 @@ public class Regla {
      */
     public Regla(){ 
         evitables = new ArrayList<Catalizador>();
+    }
+    
+    /**
+     * Metodo constructor con argumentos
+     * @param intensidadDolorMin la intensidad minima de dolor
+     * @param intensidadDolorMax la intensidad maxima de dolor
+     * @param localizacionDolor la localizacion del dolor
+     * @param evitables la lista de catalizadores
+     */
+    public Regla(int intensidadDolorMin, int intensidadDolorMax, String localizacionDolor, List<Catalizador> evitables)
+    {
+        this.intensidadDolorMin = intensidadDolorMin;
+        this.intensidadDolorMax = intensidadDolorMax;
+        this.localizacionDolor = localizacionDolor;
+        this.evitables = evitables;
     }
 
     //-----------------------------------------------------
@@ -117,4 +137,22 @@ public class Regla {
     public void setEvitables(List<Catalizador> evitables) {
         this.evitables = evitables;
     }  
+    
+    /**
+     * Metodo que retorna el id de la regla
+     * @return el id de la regla
+     */
+    public int getId()
+    {
+        return id;
+    }
+    
+    /**
+     * Metodo que se encarga de modificar el id y lo cambia por el que se da como parametro
+     * @param id el nuevo id de la regla
+     */
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 }

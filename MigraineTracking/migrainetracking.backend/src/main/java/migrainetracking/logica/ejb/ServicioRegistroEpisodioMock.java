@@ -21,17 +21,27 @@ import migrainetracking.persistencia.mock.ServicioPersistenciaEpisodioDolor;
  */
 @Stateless
 public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMockRemote {
-
-    private static ServicioRegistroEpisodioMock instancia;
     
     //---------------------------------------------------------------------------
     // Atributos
     //---------------------------------------------------------------------------
+    
+    /**
+     * Atributo para manejar la persistencia
+     */
     IServicioPersistenciaEpisodioDolor persistencia;
 
+    /**
+     * Atributo para manejar la instaciacion
+     */
+    private static ServicioRegistroEpisodioMock instancia;
     //---------------------------------------------------------------------------
     // Constructor
     //---------------------------------------------------------------------------
+    
+    /**
+     * 
+     */
     public ServicioRegistroEpisodioMock() {
         persistencia = ServicioPersistenciaEpisodioDolor.getInstance();
     }

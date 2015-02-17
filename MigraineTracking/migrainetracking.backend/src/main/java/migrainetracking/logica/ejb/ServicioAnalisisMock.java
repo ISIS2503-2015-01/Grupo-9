@@ -56,6 +56,10 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
         persistencia = ServicioPersistenciaEpisodioDolor.getInstance();
     }
     
+    /**
+     * Metodo para obtener la instancia de la clase
+     * @return la instancia de la clase
+     */
     public static ServicioAnalisisMock getInstance()
     {
         if(instancia==null || true)
@@ -69,6 +73,12 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
     // Metodos
     //-----------------------------------------------------
     
+    /**
+     * Metodo para obtener los catalizadores dado un episodio
+     * @param episodio el episodio del cual se quiere obtener los catalizadores
+     * @return los catalizadores del episodio
+     * @throws NoExisteException si el episodio no existe
+     */
     @Override
     public List<Catalizador> getCatalizadores(EpisodioDolor episodio) throws NoExisteException {
         
@@ -81,6 +91,12 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
         return episodio.getCatalizadores();
     }
 
+    /**
+     * Metodo para obtener los episodios de un paciente dado su id
+     * @param noIdPaciente el id del paciente el cual se quiere obtener los episodios
+     * @return los episodios del paciente, cuyo id se dio como parametro
+     * @throws NoExisteException si el paciente con el id dado como parametro no existe
+     */
     @Override
     public List<EpisodioDolor> getEpisodiosPaciente(Long noIdPaciente) throws NoExisteException {
         IServicioPersistenciaPaciente pac = ServicioPersistenciaPaciente.getInstance();
