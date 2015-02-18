@@ -13,7 +13,16 @@ import migrainetracking.dto.Doctor;
 import migrainetracking.dto.Medicamento;
 import migrainetracking.dto.Regla;
 import migrainetracking.dto.Sintoma;
+import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.interfaces.IServiciosCRUDMockRemote;
+import migrainetracking.persistencia.interfaces.IServicioPersistenciaCatalizador;
+import migrainetracking.persistencia.interfaces.IServicioPersistenciaMedicamento;
+import migrainetracking.persistencia.interfaces.IServicioPersistenciaRegla;
+import migrainetracking.persistencia.interfaces.IServicioPersistenciaSintoma;
+import migrainetracking.persistencia.mock.ServicioPersistenciaCatalizador;
+import migrainetracking.persistencia.mock.ServicioPersistenciaMedicamento;
+import migrainetracking.persistencia.mock.ServicioPersistenciaRegla;
+import migrainetracking.persistencia.mock.ServicioPersistenciaSintoma;
 
 /**
  *
@@ -22,14 +31,98 @@ import migrainetracking.logica.interfaces.IServiciosCRUDMockRemote;
 @Stateless
 public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
 
+    //---------------------------------------------------------------------------
+    // Atributos
+    //---------------------------------------------------------------------------
+    
+    /**
+     * Atributo para manejar la instanciaciona
+     */
+    public static ServiciosCRUDMock instancia;
+    
+    /**
+     * Atributo para manejar la persistencia de los catalizadores
+     */
+    IServicioPersistenciaCatalizador persistenciaCatalizadores;
+    
+    /**
+     * Atributo para manejar la persistencia de los sintomas
+     */
+    IServicioPersistenciaSintoma persistenciaSintomas;
+    
+    /**
+     * Atributo para manejar la persistncia de las reglas
+     */
+    IServicioPersistenciaRegla persistenciaReglas;
+    
+    /**
+     * Atributo para manejar la persistencia de los medicamentos
+     */
+    IServicioPersistenciaMedicamento persistenciaMedicamentos;
+    
+    //---------------------------------------------------------------------------
+    // COnstructor
+    //---------------------------------------------------------------------------
+    
+    /**
+     * Metodo constructor de la clase
+     */
+    public ServiciosCRUDMock()
+    {
+        this.persistenciaCatalizadores = ServicioPersistenciaCatalizador.getInstance();
+        this.persistenciaSintomas = ServicioPersistenciaSintoma.getInstance();
+        this.persistenciaReglas = ServicioPersistenciaRegla.getInstance();
+        this.persistenciaMedicamentos = ServicioPersistenciaMedicamento.getInstance();
+    }
+    
+    /**
+     * Metodo que se encarga de retornar la instanciacion de la clase
+     * @return la instanciacion de la clase
+     */
+    public static ServiciosCRUDMock getInstance()
+    {
+        boolean pruebaCarga = false;
+        if( instancia==null || pruebaCarga ){
+            instancia = new ServiciosCRUDMock();
+        }
+        return instancia;
+    }
+    
+    //---------------------------------------------------------------------------
+    // Metodos
+    //---------------------------------------------------------------------------
+    
+    
     /**
      * Se encarga de crear los objetos que recibe como parametro
      * @param o el objeto a crear
      * @return el id del objeto creado
+     * @throws OperacionInvalidaException si no se puede crear el objeto
      */
     @Override
-    public Long create(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Long create(Object o) throws OperacionInvalidaException {
+        if(o instanceof Catalizador)
+        {
+            this.persistenciaCatalizadores.create(o);
+            return ((Catalizador)o).getId();
+        }
+        else if(o instanceof Medicamento)
+        {
+            this.persistenciaMedicamentos.create(o);
+            return ((Medicamento)o).getId();
+        }
+        else if(o instanceof Regla)
+        {
+            this.persistenciaReglas.create(o);
+            return (long) ((Regla)o).getId();
+        }
+        else if(o instanceof Sintoma)
+        {
+            this.persistenciaSintomas.create(o);
+            return ((Sintoma)o).getId();
+        }
+        else
+            return (long) -1;
     }
 
     /**
@@ -38,8 +131,29 @@ public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
      * @return el id del objeto que se elimino
      */
     @Override
-    public Long delete(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Long delete(Object o) throws OperacionInvalidaException {
+        if(o instanceof Catalizador)
+        {
+            this.persistenciaCatalizadores.delete(o);
+            return ((Catalizador)o).getId();
+        }
+        else if(o instanceof Medicamento)
+        {
+            this.persistenciaMedicamentos.delete(o);
+            return ((Medicamento)o).getId();
+        }
+        else if(o instanceof Regla)
+        {
+            this.persistenciaReglas.delete(o);
+            return (long) ((Regla)o).getId();
+        }
+        else if(o instanceof Sintoma)
+        {
+            this.persistenciaSintomas.delete(o);
+            return ((Sintoma)o).getId();
+        }
+        else
+            return (long) -1;
     }
 
     /**
@@ -49,7 +163,28 @@ public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
      */
     @Override
     public Long update(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(o instanceof Catalizador)
+        {
+            this.persistenciaCatalizadores.update(o);
+            return ((Catalizador)o).getId();
+        }
+        else if(o instanceof Medicamento)
+        {
+            this.persistenciaMedicamentos.update(o);
+            return ((Medicamento)o).getId();
+        }
+        else if(o instanceof Regla)
+        {
+            this.persistenciaReglas.update(o);
+            return (long) ((Regla)o).getId();
+        }
+        else if(o instanceof Sintoma)
+        {
+            this.persistenciaSintomas.update(o);
+            return ((Sintoma)o).getId();
+        }
+        else
+            return (long) -1;
     }
 
     /**
@@ -59,6 +194,23 @@ public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
      */
     @Override
     public List<Object> getAll(Class clase) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(Catalizador.class.equals(clase))
+        {
+            return persistenciaCatalizadores.findAll(Catalizador.class);
+        }
+        else if(Medicamento.class.equals(clase))
+        {
+            return persistenciaMedicamentos.findAll(Medicamento.class);
+        }
+        else if(Regla.class.equals(clase))
+        {
+            return persistenciaReglas.findAll(Regla.class);
+        }
+        else if(Sintoma.class.equals(clase))
+        {
+            return persistenciaSintomas.findAll(Sintoma.class);
+        }
+        else
+            return null;
     }
 }
