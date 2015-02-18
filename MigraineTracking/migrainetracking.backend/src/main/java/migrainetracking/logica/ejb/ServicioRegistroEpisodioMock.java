@@ -51,7 +51,8 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
      * @return la instancia de la clase
      */
     public static ServicioRegistroEpisodioMock getInstance(){
-        if( instancia==null || true ){
+        boolean pruebaCarga = false;
+        if( instancia==null || pruebaCarga ){
             instancia = new ServicioRegistroEpisodioMock();
         }
         return instancia;

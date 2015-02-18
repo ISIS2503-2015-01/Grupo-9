@@ -64,7 +64,8 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
      * @return la instancia de la clase
      */
     public static ServicioRegistroUsuariosMock getInstance(){
-        if( instancia==null || true ){
+        boolean pruebaCarga = false;
+        if( instancia==null || pruebaCarga ){
             instancia = new ServicioRegistroUsuariosMock();
         }
         return instancia;

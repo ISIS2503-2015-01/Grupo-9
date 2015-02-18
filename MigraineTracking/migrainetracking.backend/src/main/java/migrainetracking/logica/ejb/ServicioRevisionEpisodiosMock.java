@@ -18,7 +18,6 @@ import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.persistencia.mock.ServicioPersistenciaEpisodioDolor;
-import migrainetracking.persistencia.mock.ServicioPersistenciaPaciente;
 
 /**
  *
@@ -53,14 +52,14 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
        this.persistencia = ServicioPersistenciaEpisodioDolor.getInstance();
     }
     
+
     /**
-     * Metodo para retornar la instancia de la clase
-     * @return la instancia de la clase
+     *
+     * @return
      */
-    public static ServicioRevisionEpisodiosMock getInstance()
-    {
-        if(instancia==null)
-        {
+    public static ServicioRevisionEpisodiosMock getInstance(){
+        boolean pruebaCarga = false;
+        if(instancia == null || pruebaCarga){
             instancia = new ServicioRevisionEpisodiosMock();
         }
         return instancia;
@@ -77,8 +76,8 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      */
     @Override
     public List<EpisodioDolor> getEpisodiosById(Long id) {
-        IServicioPersistenciaPaciente pac = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente;
-        return pac.getEpisodiosByPaciente(id.intValue());
+        IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;
+        return pacPersServ.getEpisodiosByPaciente( id.intValue() );
     }
 
     /**
@@ -124,16 +123,5 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
         EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, id);
         return e.getMedicamentosActuales();
     }
-
-    /**
-     * Retorna los episodios que se generaron entre las fechas dadas como parametro del paciente cuyo id se dio como parametro
-     * @param fecha_in la fecha de inicio 
-     * @param fecha_fin la fecha de fin
-     * @param id el id del paciente
-     * @return los episodios que se generarion entre las fechas establecidas del paciente cuyo id se dio por parametro
-     */
-    @Override
-    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
+     
 }
