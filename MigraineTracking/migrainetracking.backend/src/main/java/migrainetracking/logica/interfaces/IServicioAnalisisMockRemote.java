@@ -20,17 +20,9 @@ import migrainetracking.excepciones.NoExisteException;
 public interface IServicioAnalisisMockRemote {
     /**
      * Devuelve una lista de catalizadores posibles, asociados con un episodio de dolor.
-     * @param episodio  el episodio del cual se quieren los catalizadores
-     * @return la lista de los catalizadores 
+     * @param id - id number del episodio.
      * @throws NoExisteException si el episodio de dolor no existe
      */
-    public List<Catalizador> getCatalizadores(EpisodioDolor episodio) throws NoExisteException;
+    public List<Catalizador> getCatalizadores(Long id) throws NoExisteException;
     
-    /**
-     * Devuelve una lista de episodios de dolor, asociados a un numero de identificacion de un paciente
-     * @param noIdPaciente Numero de identificacion del paciente
-     * @return La lista de episodios
-     * @throws NoExisteException si el paciente con el numero de identificacion no existe
-     */
-    public List<EpisodioDolor> getEpisodiosPaciente(Long noIdPaciente) throws NoExisteException;    
 }

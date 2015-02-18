@@ -13,6 +13,7 @@ import migrainetracking.dto.Catalizador;
 import migrainetracking.dto.EpisodioDolor;
 import migrainetracking.dto.Medicamento;
 import migrainetracking.dto.Sintoma;
+import migrainetracking.excepciones.NoExisteException;
 
 /**
  *
@@ -32,10 +33,11 @@ public interface IServicioRevisionEpisodiosMockRemote {
      * Devuelve los episodios de dolor que ha registrado un paciente, en un periodo de tiempo especifico.
      * @param fecha_in - Fecha inicial del periodo de tiempo
      * @param fecha_fin - Fecha final del periodo de tiempo 
-     * @param id - Consecutivo identificador del paciente.
+     * @param noId - Cedula o numero de id del paciente.
      * @return los episodios que se encuentran entre las fechas dadas por parametros
+     * @throws migrainetracking.excepciones.NoExisteException  - Cuando no existe el paciente.
      */
-    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in,Date fecha_fin,Long id);
+    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in,Date fecha_fin,int noId) throws NoExisteException;
     
     
     // Revisiones del episodio en mas profundidad. (Para armar un reporte o informe del episodio)

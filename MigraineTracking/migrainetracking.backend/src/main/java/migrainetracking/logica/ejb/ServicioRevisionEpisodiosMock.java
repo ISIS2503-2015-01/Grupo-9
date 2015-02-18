@@ -14,10 +14,12 @@ import migrainetracking.dto.EpisodioDolor;
 import migrainetracking.dto.Medicamento;
 import migrainetracking.dto.Paciente;
 import migrainetracking.dto.Sintoma;
+import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.persistencia.mock.ServicioPersistenciaEpisodioDolor;
+import migrainetracking.persistencia.mock.ServicioPersistenciaPaciente;
 
 /**
  *
@@ -86,10 +88,16 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      * @param fecha_fin fecha de fin de los episodios
      * @param noId el numero de id del paciente
      * @return los episodios del paciente entre las fechas establecidas
+     * @throws migrainetracking.excepciones.NoExisteException
      */
     @Override
-    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, Long noId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId) throws NoExisteException {
+        IServicioPersistenciaPaciente pacServ = ServicioPersistenciaPaciente.getInstance();
+        Paciente pac = (Paciente) pacServ.findById(Paciente.class, noId);
+        if( pac == null ){
+            throw new NoExisteException("El paciente con ese numero de identificacion no existe");
+        }
+        return persistencia.getEpisodioByFechas( fecha_in, fecha_fin, pac.getEpisodios() );
     }
 
     /**

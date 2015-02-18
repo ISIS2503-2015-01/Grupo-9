@@ -79,7 +79,7 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
             throw new OperacionInvalidaException("No existe el paciente a quien se le quiere registrar el episodio.");
         }
         persistencia.create(nuevo);
-        return respId;
+        return nuevo.getId();
     }
 
     /**
