@@ -3,13 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package migrainetracking.persistencia.interfaces;
+
+import java.util.Date;
+import java.util.List;
+import migrainetracking.dto.EpisodioDolor;
 
 /**
  *
  * @author Personal
  */
-public interface IServicioPersistenciaEpisodioDolor extends IServicioPersistenciaMockRemote{
-    
+public interface IServicioPersistenciaEpisodioDolor extends IServicioPersistenciaMockRemote {
+
+    /**
+     *
+     * @param fecha_in 
+     * @param fecha_fin
+     * @param episodiosDelPaciente 
+     * @return Los episodios de un paciente en un rango de fechas dado. La lista es vacia si no hay episodios en el rango.
+     */
+    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, List<EpisodioDolor> episodiosDelPaciente) ;
+
 }

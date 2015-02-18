@@ -48,7 +48,7 @@ public interface IServicioPersistenciaMockRemote {
      * Retorna la instancia de una entidad dado un identificador y la clase de la entidad.
      * @param c Clase de la instancia que se quiere buscar.
      * @param id Identificador unico del objeto.
-     * @return obj Resultado de la consulta.
+     * @return obj Resultado de la consulta. Devuelve null si no encontro nada.
      */
     public java.lang.Object findById(java.lang.Class c, Object id);
 }
