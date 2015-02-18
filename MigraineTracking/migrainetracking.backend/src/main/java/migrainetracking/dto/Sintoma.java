@@ -30,6 +30,11 @@ public class Sintoma {
      */
     private int intensidad;
     
+    /**
+     * El id del sintoma
+     */
+    private Long id;
+    
     //-----------------------------------------------------
     // Constructor
     //-----------------------------------------------------
@@ -100,5 +105,23 @@ public class Sintoma {
     public void setIntensidad(int intensidad)
     {
         this.intensidad = intensidad;
+    }
+    
+    /**
+     * Metodo que retorna el id del sintoma
+     * @return el id del sintoma
+     */
+    public Long getId()
+    {
+        return id;
+    }
+    
+    /**
+     * Metodo que cambia el id por el id dado por parametro
+     * @param id el nuevo id
+     */
+    public void setId(Long id)
+    {
+        this.id = id;
     }
 }

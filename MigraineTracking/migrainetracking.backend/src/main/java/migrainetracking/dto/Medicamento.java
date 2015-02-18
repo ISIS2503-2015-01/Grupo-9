@@ -41,6 +41,11 @@ public class Medicamento {
      * La fecha en que fue recetado el medicamento. En caso de no ser recetado por un medico es null.
      */
     private Date fechaRecetado;
+    
+    /**
+     * El identificador del medicamento
+     */
+    private Long id;
 
     //-----------------------------------------------
     //Constructor
@@ -128,5 +133,23 @@ public class Medicamento {
      */
     public void setMiligramos(int miligramos) {
         this.miligramos = miligramos;
+    }
+    
+    /**
+     * Metodo que retorna el id del medicamento
+     * @return el id del medicamento
+     */
+    public long getId()
+    {
+        return id;
+    }
+    
+    /**
+     * Metodo que cambia el id por el id dado por parametro
+     * @param id el id nuevo
+     */
+    public void setId(Long id)
+    {
+        this.id = id;
     }
 }
