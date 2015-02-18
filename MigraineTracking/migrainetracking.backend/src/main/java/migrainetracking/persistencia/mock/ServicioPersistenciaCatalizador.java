@@ -44,7 +44,7 @@ public class ServicioPersistenciaCatalizador implements IServicioPersistenciaCat
         }
     }
     
-    public static ServicioPersistenciaCatalizador getinstance()
+    public static ServicioPersistenciaCatalizador getInstance()
     {
         if(instancia==null)
             return new ServicioPersistenciaCatalizador();
