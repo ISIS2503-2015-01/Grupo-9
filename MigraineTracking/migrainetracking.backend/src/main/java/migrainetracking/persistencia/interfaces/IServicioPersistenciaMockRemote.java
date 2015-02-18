@@ -20,6 +20,7 @@ public interface IServicioPersistenciaMockRemote {
     /**
      * Crea un objeto dentro de la persistencia del sistema.
      * @param obj Objeto que representa la instancia de la entidad que se quiere crear.
+     * @throws OperacionInvalidaException si no se puede crear el objeto
      */
     public void create(java.lang.Object obj)throws OperacionInvalidaException;
 
@@ -32,6 +33,7 @@ public interface IServicioPersistenciaMockRemote {
     /**
      * Elimina un objeto dentro de la persistencia del sistema.
      * @param obj Objeto que representa la instancia de la entidad que se quiere borrar.
+     * @throws OperacionInvalidaException si no se puede borrar el elementos
      */
     public void delete(java.lang.Object obj)throws OperacionInvalidaException;
 
@@ -49,6 +51,5 @@ public interface IServicioPersistenciaMockRemote {
      * @return obj Resultado de la consulta.
      */
     public java.lang.Object findById(java.lang.Class c, Object id);
-    
 }
 

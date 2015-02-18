@@ -36,6 +36,7 @@ public interface IServicioPersistenciaPaciente extends IServicioPersistenciaMock
     /**
      * 
      * @param toEdit - Episodio de dolor que se quiere editar.
+     * @param noIdPaciente el id del paciente quien presento el episodio a editar
      * @return Id del episodio editado. 
      */
     public Long actualizarEpsiodio(EpisodioDolor toEdit,int noIdPaciente);
@@ -46,5 +47,4 @@ public interface IServicioPersistenciaPaciente extends IServicioPersistenciaMock
      * @return Los episodios de un paciente en especifico
      */
     public List<EpisodioDolor> getEpisodiosByPaciente(int noId);
-    
 }
