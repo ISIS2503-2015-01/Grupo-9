@@ -49,7 +49,11 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla{
             reglas = new ArrayList<Regla>();
         }
     }
-    
+
+    /**
+     * Metodo para manejar la instanciacion de la clase
+     * @return la instanciacion de la clase
+     */
     public static ServicioPersistenciaRegla getInstance()
     {
         if(instancia==null)
@@ -63,6 +67,11 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla{
     // Metodos
     //----------------------------------------------------------------------
 
+    /**
+     * metodo que se encarga de crear una nuevva regla
+     * @param obj la regla que se va a agregar
+     * @throws OperacionInvalidaException si no se puede agregar la regla
+     */
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
         Regla nueva = (Regla) obj;
@@ -70,24 +79,61 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla{
         Utils.printf("Se ha agregado la nueva regla");
     }
 
+    /**
+     *Metodo que se encarga de editar una regla  
+     * @param obj la regla que se va a editar
+     */
     @Override
     public void update(Object obj) {
-        new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Regla editar = (Regla) obj;
+        int id = editar.getId();
+        for(int i=0;i<reglas.size();i++)
+        {
+            Regla actual = reglas.get(i);
+            if(actual.getId()==id)
+            {
+                reglas.set(i, editar);
+            }
+        }
     }
 
+    /**
+     * Metodo que se encarga de eliminar una regla
+     * @param obj la regla que se va a eliminar
+     * @throws OperacionInvalidaException si no se puede eliminar la regla
+     */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
         reglas.remove(obj);
     }
 
+    /**
+     * Metodo que se encarga de retornar todas las reglas
+     * @param c la clase a la cual pertenecen los elementos que se quieren retornar
+     * @return todas las reglas
+     */
     @Override
     public List findAll(Class c) {
         return reglas;
     }
 
+    /**
+     * Metodo que retorna una regla dado su id
+     * @param c la clase a la cual pertenece el objeto que se quiere retornar
+     * @param id el id de la regla que se esta buscando
+     * @return la regla que se esta buscando
+     */
     @Override
     public Object findById(Class c, Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int idL = Integer.parseInt(id.toString());
+        for(int i=0;i<reglas.size();i++)
+        {
+            Regla actual = reglas.get(i);
+            if(actual.getId()==idL)
+            {
+                return actual;
+            }
+        }
+        return null;
     }
-    
 }

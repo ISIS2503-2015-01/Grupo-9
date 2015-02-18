@@ -51,6 +51,7 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
     
     /**
      *Metodo que retorna la instancia de la clase 
+     * @return la instanciacion de la clase
      */
     public static ServicioPersistenciaSintoma getInstance()
     {
@@ -65,6 +66,11 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
     // Metodos
     //----------------------------------------------------------------------
 
+    /**
+     * Metodo que se encarga de crear un sintoma
+     * @param obj el sintoma que se va a crear
+     * @throws OperacionInvalidaException si no se puede crear el sintoma
+     */
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
         Sintoma nuevo = (Sintoma) obj;
@@ -79,6 +85,10 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
         }
     }
 
+    /**
+     * Metodo que se encarga de editar el sintoma que se da por parametor
+     * @param obj el sintoma que se va a editar
+     */
     @Override
     public void update(Object obj) {
         Sintoma nuevo = (Sintoma) obj;
@@ -93,6 +103,11 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
         }
     }
 
+    /**
+     * Metodo para eliminar un sintoma dado por parametro
+     * @param obj el sintoma que se va a eliminar
+     * @throws OperacionInvalidaException si no se puede eliminar el sintoma
+     */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
         Sintoma borrar = (Sintoma) obj;
@@ -110,11 +125,22 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
         throw new OperacionInvalidaException ("El sintoma " + borrar.getNombre() + " no se puede eliminar porque no existe en el sistema");
     }
 
+    /**
+     * Metodo que se encarga de retornar todos los sintomas
+     * @param c la clase a la que pertenecen los elementos que se quieren retornar
+     * @return todos los sintomas
+     */
     @Override
     public List findAll(Class c) {
         return sintomas;
     }
 
+    /**
+     * Metodo que busca un sintoma dado su id
+     * @param c la clase a la que pertenece el elemento que se quiere retornar
+     * @param id el id del sintoma que se busca
+     * @return el sintoma que se esta buscando
+     */
     @Override
     public Object findById(Class c, Object id) {
         String nombre = id.toString();

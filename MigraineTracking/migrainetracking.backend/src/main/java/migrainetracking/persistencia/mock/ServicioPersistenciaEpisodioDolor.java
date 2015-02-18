@@ -25,21 +25,30 @@ import org.fluttercode.datafactory.impl.DataFactory;
  */
 public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaEpisodioDolor{
     
-    private static ServicioPersistenciaEpisodioDolor instancia;
     //----------------------------------------------------------------------
     // Atributos
     //----------------------------------------------------------------------
+    
+    /**
+     * Atributo que contiene los episodios del sistema
+     */
     private List<EpisodioDolor> episodios;
+    
+    /**
+     * Atributo para manejar la instanciacion de la clase
+     */
+    private static ServicioPersistenciaEpisodioDolor instancia;
     
     //----------------------------------------------------------------------
     // Constructores
     //----------------------------------------------------------------------
+    
+    /**
+     * Metodo constructor sin argumentos
+     */
     public ServicioPersistenciaEpisodioDolor(){
         if(this.episodios==null){
-
-            episodios = new ArrayList<EpisodioDolor>();
-
-            
+            episodios = new ArrayList<EpisodioDolor>();         
             /*Dataos pruebas funcionalidades*/
 //            int numData = 30;
 //            String[] loc = {"Alrededor del ojo","Mitad derecha de la cabeza","Mitad izquierda de la cabeza","Frente del ojo","Mejilla","Nariz","Encias"};
@@ -60,11 +69,14 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
 //                
 //                this.episodios.add(ep);
 //            }
-            
               /*Datos pruebas de carga (A mano y poquitos) [rampup = 1 seg && loopcount = 1] */ 
         }
     }
     
+    /**
+     * Metodo que se encarga de retornar la instancia de la clase
+     * @return la instancia de la clase
+     */
     public static ServicioPersistenciaEpisodioDolor getInstance(){
         if(instancia==null || true){
             instancia = new ServicioPersistenciaEpisodioDolor();
@@ -75,6 +87,11 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
     // Metodos
     //----------------------------------------------------------------------
 
+    /**
+     * Metodo que se encarga de crear un episodio de dolor
+     * @param obj el episodio que se va a crear
+     * @throws OperacionInvalidaException si no se puede crear el episodio
+     */
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
        EpisodioDolor ep = (EpisodioDolor) obj;
@@ -83,6 +100,10 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
        
     }
 
+    /**
+     * Metodo que se encarga de editar a un episodio
+     * @param obj el episodio a editar 
+     */
     @Override
     public void update(Object obj) {
         EpisodioDolor toEdit = (EpisodioDolor) obj;
@@ -95,6 +116,11 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
         }
     }
 
+    /**
+     * Metodo que se encarga de eliminar el episodio que se da por parametro
+     * @param obj el episodio a eliminar
+     * @throws OperacionInvalidaException si no se puede eliminar el episodio
+     */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
        EpisodioDolor ep = (EpisodioDolor) obj;
@@ -106,11 +132,22 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
        }
     }
 
+    /**
+     * Metodo que se encarga de retornar todos los episodios en el sistema
+     * @param c la clase a la que pertencen los elementos que se quieren buscar
+     * @return todos los episodios
+     */
     @Override
     public List findAll(Class c) {
         return this.episodios;
     }
 
+    /**
+     * Metodo que se encarga de retornar un episodio dado su id
+     * @param c la clase a la cual pertence el elemento que se quiere retornar
+     * @param id el id del objeto que se quiere retornar
+     * @return el episodio cuyo id es igual al id dado por parametro
+     */
     @Override
     public Object findById(Class c, Object id) {
         Long nId = Long.parseLong(id.toString());
@@ -121,5 +158,4 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
         }
         return null;
     }
-    
 }

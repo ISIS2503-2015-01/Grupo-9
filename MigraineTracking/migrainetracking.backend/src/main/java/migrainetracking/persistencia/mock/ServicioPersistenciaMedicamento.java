@@ -38,7 +38,7 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
     //----------------------------------------------------------------------
     
     /**
-     *Metodo constructor de la clase 
+     *Metodo constructor de la clase sin atributos 
      */
     public ServicioPersistenciaMedicamento()
     {
@@ -49,7 +49,8 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
     }
     
     /**
-     *  
+     *  metodo que se encarga de la instanciacion de la clase
+     * @return la instancia de la clase
      */
     public static ServicioPersistenciaMedicamento getInstance()
     {
@@ -68,6 +69,11 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
     // Metodos
     //----------------------------------------------------------------------
 
+    /**
+     * Metodo que se encarga de crear un nuevo medicamento
+     * @param obj el medicamento a crear
+     * @throws OperacionInvalidaException si no se puede crear el medicamento 
+     */
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
         Medicamento nuevo = (Medicamento) obj;
@@ -82,6 +88,10 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
         medicamentos.add(nuevo);
     }
 
+    /**
+     * Metodo que se encarga de editar un medicamento
+     * @param obj el medicamento a editar
+     */
     @Override
     public void update(Object obj) {
         Medicamento actualizar = (Medicamento) obj;
@@ -98,6 +108,11 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
         }
     }
 
+    /**
+     * Metodo que se encarga de eliminar un medicamento
+     * @param obj el medicamento a eliminar
+     * @throws OperacionInvalidaException si no se puede eliminar el medicamento
+     */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
         Medicamento borrar = (Medicamento) obj;
@@ -113,11 +128,22 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
         }
     }
 
+    /**
+     * Metodo que se encarga de retornar a todos los medicamentos
+     * @param c la clase a la que pertenecen los elementos que se quieren retornar
+     * @return la lista con los medicamentos
+     */
     @Override
     public List findAll(Class c) {
         return this.medicamentos;
     }
 
+    /**
+     * Metodo que retorna el medicamento con el id dado por parametro
+     * @param c la clase a la que pertence el objeto que se quiere buscar
+     * @param id el id del medicamento
+     * @return el medicamento con el id igual al que se dio por parametro
+     */
     @Override
     public Object findById(Class c, Object id) {
         String nombre = id.toString();
