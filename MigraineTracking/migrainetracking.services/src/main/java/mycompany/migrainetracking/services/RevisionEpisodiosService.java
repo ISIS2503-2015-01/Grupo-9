@@ -57,7 +57,7 @@ public class RevisionEpisodiosService {
         List<EpisodioDolor> eps = revEpService.getEpisodiosById(id);
         return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(eps).build();
     }
-
+    //Pruebas prioridad (desempeño y escalabilidad) a nivel de Doctor, probar que funcione
     @GET
     @Path("/getEpisodiosByFechas/pacid={id}&fechas=[{fechain},{fechafin}]")
     @Produces(MediaType.APPLICATION_JSON)

@@ -60,7 +60,7 @@ public class RegistroEpisodioService {
         beanRegEps  = ServicioRegistroEpisodioMock.getInstance();
         beanAnalisis = ServicioAnalisisMock.getInstance();
     }
-
+    //Meter regla y probar funcion no prioridad
     @POST
     @Path("/create/EpisodioDolor/pacid={id}")
     @Produces(MediaType.APPLICATION_JSON)

@@ -51,7 +51,7 @@ public class CRUDService {
     public CRUDService() {
         beanCRUD = ServiciosCRUDMock.getInstance();
     }
-
+    //Pruebas no prioridad (desempeño)
     @POST
     @Path("/create/Sintoma")
     @Produces(MediaType.APPLICATION_JSON)
@@ -59,7 +59,7 @@ public class CRUDService {
     {
         JSONObject resp = new JSONObject();
         try
-        {
+        {   
             Long id = beanCRUD.create(s);
             resp.put("Sintoma ID", id);
         }
@@ -69,7 +69,7 @@ public class CRUDService {
         }
          return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
-    
+    //Pruebas no prioridad (desempeño)
     @POST
     @Path("/create/Catalizador")
     @Produces(MediaType.APPLICATION_JSON)
@@ -87,7 +87,7 @@ public class CRUDService {
         }
          return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
-    
+    //Pruebas no prioridad (desempeño)
     @POST
     @Path("/create/Medicamento")
     @Produces(MediaType.APPLICATION_JSON)
@@ -105,7 +105,7 @@ public class CRUDService {
         }
          return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
-    
+    //Pruebas no prioridad (desempeño)
     @POST
     @Path("/create/Regla")
     @Produces(MediaType.APPLICATION_JSON)
@@ -113,7 +113,7 @@ public class CRUDService {
     {
         JSONObject resp = new JSONObject();
         try
-        {
+        {   
             Long id = beanCRUD.create(r);
             resp.put("Regla ID", id);
         }
@@ -202,7 +202,7 @@ public class CRUDService {
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
     }
-    
+    //Pruebas no prioridad (desempeño)
     @POST
     @Path("/update/Catalizador")
     @Produces(MediaType.APPLICATION_JSON)
@@ -232,7 +232,7 @@ public class CRUDService {
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
     }
-    
+    //Pruebas no prioridad (desempeño)
     @POST
     @Path("/update/Regla")
     @Produces(MediaType.APPLICATION_JSON)
@@ -247,7 +247,7 @@ public class CRUDService {
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
     }
-    
+    //Pruebas prioridad (desempeño y escalabilidad)
     @GET
     @Path("/getAll/Sintomas")
     @Produces(MediaType.APPLICATION_JSON)
@@ -256,7 +256,7 @@ public class CRUDService {
         sintomas = beanCRUD.getAll(Sintoma.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(sintomas).build();
     }
-    
+    //Pruebas prioridad (desempeño y escalabilidad)
     @GET
     @Path("/getAll/Catalizadores")
     @Produces(MediaType.APPLICATION_JSON)
@@ -265,7 +265,7 @@ public class CRUDService {
         catalizadores = beanCRUD.getAll(Catalizador.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(catalizadores).build();
     }
-    
+    //Pruebas prioridad (desempeño y escalabilidad)
     @GET
     @Path("/getAll/Medicamentos")
     @Produces(MediaType.APPLICATION_JSON)
@@ -274,7 +274,7 @@ public class CRUDService {
         medicamentos = beanCRUD.getAll(Medicamento.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(medicamentos).build();
     }
-    
+    //Pruebas no prioridad (desempeño)
     @GET
     @Path("/getAll/Reglas")
     @Produces(MediaType.APPLICATION_JSON)
