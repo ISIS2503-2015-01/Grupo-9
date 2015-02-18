@@ -47,15 +47,15 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
         if (this.pacientes == null) {
             this.pacientes = new ArrayList<Paciente>();
             /* Datos pruebas funcionalidades*/
-//            int numData = 20;
-//            for (int i = 0; i < numData; i++) {
-//                DataFactory df = new DataFactory();
-//                String nomb = df.getFirstName() +" "+ df.getLastName() ;
-//                int ced = df.getNumberBetween(80000000, 110000000);
-//                Date fechNac = df.getBirthDate();
-//                Paciente temp = new Paciente(nomb, ced, fechNac);
-//                this.pacientes.add(temp);
-//            }
+            int numData = 20;
+            for (int i = 0; i < numData; i++) {
+                DataFactory df = new DataFactory();
+                String nomb = df.getFirstName() +" "+ df.getLastName() ;
+                int ced = df.getNumberBetween(80000000, 110000000);
+                Date fechNac = df.getBirthDate();
+                Paciente temp = new Paciente(nomb, ced, fechNac);
+                this.pacientes.add(temp);
+            }
             /*Datos deterministicos prueba carga (A mano)*/
         }
     }
@@ -65,7 +65,8 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      * @return la instancia de la clase
      */
     public static ServicioPersistenciaPaciente getInstance() {
-        if (instancia == null || true) {
+        boolean pruebaCarga = false;
+        if (instancia == null || pruebaCarga) {
             return new ServicioPersistenciaPaciente();
         } else {
             return instancia;

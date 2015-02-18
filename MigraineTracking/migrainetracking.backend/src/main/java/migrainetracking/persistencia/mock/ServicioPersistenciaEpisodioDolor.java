@@ -48,27 +48,27 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
      */
     public ServicioPersistenciaEpisodioDolor(){
         if(this.episodios==null){
-            episodios = new ArrayList<EpisodioDolor>();         
+             episodios = new ArrayList<EpisodioDolor>();         
             /*Dataos pruebas funcionalidades*/
-//            int numData = 30;
-//            String[] loc = {"Alrededor del ojo","Mitad derecha de la cabeza","Mitad izquierda de la cabeza","Frente del ojo","Mejilla","Nariz","Encias"};
-//            Integer[] intens = {1,2,3,4,5};
-//            Random rand = new Random();
-//            for(int i = 0 ; i < numData ; i++){
-//                DataFactory df = new DataFactory();
-//                EpisodioDolor ep = new EpisodioDolor();
-//                ep.setId( (long)i );
-//                Date endDate = new java.util.Date();
-//                ep.setFecha( df.getDateBetween( new Date( endDate.getTime() - 60*24*3600*1000 )  , endDate ) ) ;
-//                ep.setIntensidadDolor( df.getItem(intens) );
-//                ep.setLocalizacion( df.getItem(loc) );
-//                
-//                List<Paciente> pacientes = ServicioPersistenciaPaciente.getInstance().getPacientes();
-//                Paciente pac = pacientes.get( df.getNumberBetween( 0, pacientes.size()-1 ) );
-//                pac.getEpisodios().add( ep );
-//                
-//                this.episodios.add(ep);
-//            }
+            int numData = 30;
+            String[] loc = {"Alrededor del ojo","Mitad derecha de la cabeza","Mitad izquierda de la cabeza","Frente del ojo","Mejilla","Nariz","Encias"};
+            Integer[] intens = {1,2,3,4,5};
+            Random rand = new Random();
+            for(int i = 0 ; i < numData ; i++){
+                DataFactory df = new DataFactory();
+                EpisodioDolor ep = new EpisodioDolor();
+                ep.setId( (long)i );
+                Date endDate = new java.util.Date();
+                ep.setFecha( df.getDateBetween( new Date( endDate.getTime() - 60*24*3600*1000 )  , endDate ) ) ;
+                ep.setIntensidadDolor( df.getItem(intens) );
+                ep.setLocalizacion( df.getItem(loc) );
+                
+                List<Paciente> pacientes = ServicioPersistenciaPaciente.getInstance().getPacientes();
+                Paciente pac = pacientes.get( df.getNumberBetween( 0, pacientes.size()-1 ) );
+                pac.getEpisodios().add( ep );
+                
+                this.episodios.add(ep);
+            }
               /*Datos pruebas de carga (A mano y poquitos) [rampup = 1 seg && loopcount = 1] */ 
         }
     }
@@ -78,7 +78,8 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
      * @return la instancia de la clase
      */
     public static ServicioPersistenciaEpisodioDolor getInstance(){
-        if(instancia==null || true){
+        boolean pruebaCarga = false;
+        if(instancia==null || pruebaCarga){
             instancia = new ServicioPersistenciaEpisodioDolor();
         }
         return instancia;

@@ -69,6 +69,7 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
 //                j+=2;
 //            }   
             /*Datos para prueba de carga*/ 
+
         }
     }
 
@@ -77,7 +78,8 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
      * @return la instancia de la clase
      */
     public static ServicioPersistenciaDoctor getInstance(){
-        if(instancia == null || true){
+        boolean pruebaCarga = false;
+        if(instancia == null || pruebaCarga ){
             return new ServicioPersistenciaDoctor();
         }
             return instancia;
