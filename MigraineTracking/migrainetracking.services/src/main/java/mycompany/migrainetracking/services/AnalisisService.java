@@ -6,6 +6,7 @@
 
 package mycompany.migrainetracking.services;
 
+import javax.ejb.EJB;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -14,6 +15,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
+import migrainetracking.logica.ejb.ServicioAnalisisMock;
+import migrainetracking.logica.interfaces.IServicioAnalisisMockRemote;
 
 /**
  * REST Web Service
@@ -25,13 +28,20 @@ public class AnalisisService {
 
     @Context
     private UriInfo context;
-
+    
+    @EJB
+    private IServicioAnalisisMockRemote beanAnalisis;
+    
     /**
      * Creates a new instance of analisis
      */
     public AnalisisService() {
-        
+        beanAnalisis = ServicioAnalisisMock.getInstance();
     }
+    
+    /**
+     * 
+     */
 
     /**
      * Retrieves representation of an instance of mycompany.migrainetracking.services.analisis
