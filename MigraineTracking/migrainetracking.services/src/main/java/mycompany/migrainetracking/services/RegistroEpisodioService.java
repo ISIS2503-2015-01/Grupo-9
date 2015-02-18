@@ -63,7 +63,7 @@ public class RegistroEpisodioService {
         } catch (OperacionInvalidaException ex) {
             rta.put("Error de sistema : ",ex.getMessage());
         }
-        return Response.status(200).header("Acces-Control-Allow-Origin", "").entity(rta).build();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
     }
     
     @GET
@@ -71,16 +71,15 @@ public class RegistroEpisodioService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEpisodios(){
         List<EpisodioDolor> eps = beanRegEps.getEpisodios();
-        return Response.status(200).header("Acces-Control-Allow-Origin", "").entity(eps).build();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(eps).build();
     }
     
     @GET
     @Path("/getEpisodios/pacid={id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEpisiodiosByPaciente(@PathParam("id") int noIdPaciente){
-        JSONObject rta = new JSONObject();
         List<EpisodioDolor> eps = beanRegEps.getEpisodiosPorPaciente(noIdPaciente);
-        return Response.status(200).header("Acces-Control-Allow-Origin", "").entity(eps).build();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(eps).build();
     }
     
     /**
