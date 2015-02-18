@@ -53,7 +53,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
                 String nomb = df.getFirstName() +" "+ df.getLastName() ;
                 int ced = df.getNumberBetween(80000000, 110000000);
                 Date fechNac = df.getBirthDate();
-                Paciente temp = new Paciente(nomb, ced, fechNac);
+                Paciente temp = new Paciente(nomb, ced, fechNac,89, 180);
                 this.pacientes.add(temp);
             }
             /*Datos deterministicos prueba carga (A mano)*/
