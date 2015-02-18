@@ -87,7 +87,7 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      * @param noId el numero de id del paciente
      * @return los episodios del paciente entre las fechas establecidas
      */
-    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId) {
+    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, Long noId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -122,6 +122,5 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
     public List<Medicamento> getMedicamentosDelEpisodio(Long id) {
         EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, id);
         return e.getMedicamentosActuales();
-    }
-     
+    }     
 }
