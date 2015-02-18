@@ -8,6 +8,7 @@ package migrainetracking.logica.interfaces;
 
 import java.util.List;
 import javax.ejb.Remote;
+import migrainetracking.excepciones.OperacionInvalidaException;
 
 /**
  *
@@ -20,15 +21,16 @@ public interface IServiciosCRUDMockRemote {
      * Agrega un nuevo registro a la presistence unit
      * @param o - Es el objeto generico a agregar
      * @return El id del objeto creado
+     * @throws OperacionInvalidaException si no se puede crear el objeto
      */
-    public Long create(Object o);
+    public Long create(Object o) throws OperacionInvalidaException;
     
     /**
      * Borra un registro en la presistence unit
      * @param o - Es el objeto generico a agregar
      * @return El id del objeto borrado
      */
-    public Long delete(Object o);
+    public Long delete(Object o) throws OperacionInvalidaException;
     
     /**
      * Actualiza un registro en la presistence unit
