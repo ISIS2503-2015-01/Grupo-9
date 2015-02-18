@@ -223,6 +223,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     public List<EpisodioDolor> getEpisodiosByPaciente(int noId) {
         Paciente p = (Paciente) findById(Paciente.class, noId);
         assert p==null:"No se cumplio la precondicion del metodo. Revise implementacion web";
+        System.out.println(p);
         return p.getEpisodios();
     }
 }

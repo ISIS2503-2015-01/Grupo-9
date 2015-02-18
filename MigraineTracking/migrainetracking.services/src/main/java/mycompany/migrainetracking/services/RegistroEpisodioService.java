@@ -75,11 +75,11 @@ public class RegistroEpisodioService {
     }
     
     @GET
-    @Path("/getEpisodios/pacid={id}")
+    @Path("/getEpisodios/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEpisiodiosByPaciente(@PathParam("id") int noIdPaciente){
         List<EpisodioDolor> eps = beanRegEps.getEpisodiosPorPaciente(noIdPaciente);
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(eps).build();
+        return Response.status(Response.Status.OK).entity(eps).build();
     }
     
     /**
