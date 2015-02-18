@@ -42,25 +42,23 @@ public interface IServicioRevisionEpisodiosMockRemote {
     
     /**
      * Devuelve la lista de sintomas presentados en el episodio de dolor.
-     * @param id - Consecutivo identificador del paciente.
+     * @param id - Consecutivo identificador del episodio.
      * @return 
      */
     public List<Sintoma> getSintomasDelEpisodio(Long id);
     
     /**
      * Devuelve la lista de catalizadores presentados en el episodio de dolor.
-     * @param id - Consecutivo identificador del paciente.
+     * @param id - Consecutivo identificador del episodio.
      * @return 
      */
     public List<Catalizador> getCatalizadoresDelEpisodio(Long id);
     
     /**
      * Devuelve la lista de medicamentos presentados en el episodio de dolor.
-     * @param id - Consecutivo identificador del paciente.
+     * @param id - Consecutivo identificador del episodio.
      * @return 
      */
     public List<Medicamento> getMedicamentosDelEpisodio(Long id);
-    
-    
 }
 
