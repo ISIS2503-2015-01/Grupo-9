@@ -17,15 +17,19 @@ import migrainetracking.excepciones.OperacionInvalidaException;
  */
 @Remote
 public interface IServicioRegistroUsuariosMockRemote {
+    
     /**
      * Crea un nuevo usuario
      * @param nuevo El usuario nuevo
+     * @return el id del usuario creado 
      * @throws OperacionInvalidaException Excepcion en caso de error operacional
      */
     public Long crearUsuario(Object nuevo) throws OperacionInvalidaException;
     
     /**
      * Crea elimina un usuario con un numero de identificacion
+     * @param viejo el usuario que se va a eliminar
+     * @return el id del usuario eliminado
      * @throws OperacionInvalidaException Excepcion en caso de error operacional
      * @throws NoExisteException en caso de que no exista el paciente que se quiere eliminar.
      */
@@ -34,7 +38,7 @@ public interface IServicioRegistroUsuariosMockRemote {
     /**
      * <b>pre:</b> El usuario que se va a actualizar ya existe
      * @param actualizar
-     * @return 
+     * @return el id del usuario actualizado
      */
     public Long actualizarUsuario( Object actualizar );
     

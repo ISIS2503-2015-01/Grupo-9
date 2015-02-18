@@ -23,6 +23,7 @@ public interface IServicioRegistroEpisodioMockRemote {
      * Registra un nuevo episodioDeDolor
      * @param nuevo El episodio de dolor que se quiere registrar
      * @param noIdPaciente El numero de identificacion del Paciente al que se quiere asociar el episodio de dolor
+     * @return el id del episodio que se registro
      * @throws OperacionInvalidaException Excepcion en caso de error operacional
      */
     public Long registrarEpisodio( EpisodioDolor nuevo, int noIdPaciente ) throws OperacionInvalidaException;
@@ -31,6 +32,7 @@ public interface IServicioRegistroEpisodioMockRemote {
      * Elimina un episodio de dolor
      * @param idEpisodio El id del episodio de dolor 
      * @param noIdPaciente el numero de identificacion del paciente
+     * @return el id del episodio que se elimino 
      * @throws OperacionInvalidaException Excepcion en caso de error operacional
      * @throws NoExisteException en caso de que no exista el episodio con ese id 
      *         o un paciente con ese numero de identificacion
@@ -42,8 +44,9 @@ public interface IServicioRegistroEpisodioMockRemote {
      * <b>pre:</b> El episodio y el paciente que se van a actualizar ya existe
      * @param editado el episodio de dolor que se quiere editar
      * @param noIdPaciente el numero de identificacion del paciente
+     * @return el id del episodio editado 
      */
-    public Long editarEpisodio(EpisodioDolor editado, int noIdPaciente) ;
+    public Long editarEpisodio(EpisodioDolor editado, int noIdPaciente);
     
     /**
      * Devuelve todos los episodios del sistema
@@ -59,5 +62,4 @@ public interface IServicioRegistroEpisodioMockRemote {
      * @return la lista de episodios
      */
     public List<EpisodioDolor> getEpisodiosPorPaciente(int noIdPaciente);
-    
 }

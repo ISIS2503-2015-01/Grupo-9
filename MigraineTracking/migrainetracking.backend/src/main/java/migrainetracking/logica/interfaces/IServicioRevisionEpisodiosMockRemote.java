@@ -33,7 +33,7 @@ public interface IServicioRevisionEpisodiosMockRemote {
      * @param fecha_in - Fecha inicial del periodo de tiempo
      * @param fecha_fin - Fecha final del periodo de tiempo 
      * @param id - Consecutivo identificador del paciente.
-     * @return 
+     * @return los episodios que se encuentran entre las fechas dadas por parametros
      */
     public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in,Date fecha_fin,Long id);
     
@@ -43,21 +43,21 @@ public interface IServicioRevisionEpisodiosMockRemote {
     /**
      * Devuelve la lista de sintomas presentados en el episodio de dolor.
      * @param id - Consecutivo identificador del episodio.
-     * @return 
+     * @return los sintomas del episodio
      */
     public List<Sintoma> getSintomasDelEpisodio(Long id);
     
     /**
      * Devuelve la lista de catalizadores presentados en el episodio de dolor.
      * @param id - Consecutivo identificador del episodio.
-     * @return 
+     * @return los catalizadores del episodio
      */
     public List<Catalizador> getCatalizadoresDelEpisodio(Long id);
     
     /**
      * Devuelve la lista de medicamentos presentados en el episodio de dolor.
      * @param id - Consecutivo identificador del episodio.
-     * @return 
+     * @return los medicamentos del episodio
      */
     public List<Medicamento> getMedicamentosDelEpisodio(Long id);
 }
