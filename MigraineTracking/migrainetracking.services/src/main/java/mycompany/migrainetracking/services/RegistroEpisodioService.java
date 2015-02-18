@@ -6,6 +6,7 @@
 
 package mycompany.migrainetracking.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,10 +22,14 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import migrainetracking.dto.Catalizador;
 import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
+import migrainetracking.logica.ejb.ServicioAnalisisMock;
 import migrainetracking.logica.ejb.ServicioRegistroEpisodioMock;
 import migrainetracking.logica.ejb.ServicioRevisionEpisodiosMock;
+import migrainetracking.logica.interfaces.IServicioAnalisisMockRemote;
 import migrainetracking.logica.interfaces.IServicioRegistroEpisodioMockRemote;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
 import org.codehaus.jettison.json.JSONException;
@@ -44,12 +49,16 @@ public class RegistroEpisodioService {
     @EJB
     private IServicioRegistroEpisodioMockRemote beanRegEps;
     
+    @EJB
+    private IServicioAnalisisMockRemote beanAnalisis;
+    
 
     /**
      * Creates a new instance of RegistroEpisodioService
      */
     public RegistroEpisodioService() {
         beanRegEps  = ServicioRegistroEpisodioMock.getInstance();
+        beanAnalisis = ServicioAnalisisMock.getInstance();
     }
 
     @POST
@@ -57,13 +66,16 @@ public class RegistroEpisodioService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createEpisdioDolor(EpisodioDolor ep,@PathParam("id")int idPac ) throws JSONException{
         JSONObject rta = new JSONObject();
+         List<Catalizador> evitables  = new ArrayList<Catalizador>();
         try {
             Long id = beanRegEps.registrarEpisodio(ep, idPac);
-            rta.put("episodio id",id);
+            evitables = beanAnalisis.getCatalizadores( id );
         } catch (OperacionInvalidaException ex) {
             rta.put("Error de sistema : ",ex.getMessage());
+        } catch (NoExisteException ex) {
+           // Si pasa por aqui es pq el registro del episodio no esta persistido.
         }
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(evitables).build();
     }
     
     @GET

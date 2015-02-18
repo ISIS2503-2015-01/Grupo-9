@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mycompany.migrainetracking.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -19,8 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.logica.ejb.ServicioRevisionEpisodiosMock;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  * REST Web Service
@@ -35,6 +42,7 @@ public class RevisionEpisodiosService {
 
     @EJB
     IServicioRevisionEpisodiosMockRemote revEpService;
+
     /**
      * Creates a new instance of RevisionEpisodiosService
      */
@@ -43,15 +51,34 @@ public class RevisionEpisodiosService {
     }
 
     @GET
-    @Path("/getEpisodios/pacid{id}")
+    @Path("/getEpisodios/pacid={id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEpsByPacId(@PathParam("id") Long id){
+    public Response getEpsByPacId(@PathParam("id") Long id) {
         List<EpisodioDolor> eps = revEpService.getEpisodiosById(id);
-        return Response.status(200).header("Access-Allow-Control-Origin", "").entity(eps).build();
+        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(eps).build();
     }
-    
+
+    @GET
+    @Path("/getEpisodiosByFechas/pacid={id}&fechas=[{fechain},{fechafin}]")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEpsByFechas(@PathParam("id") int noIdentificacion, @PathParam("fechain") String fechain, @PathParam("fechafin") String fechafin) throws ParseException, JSONException {
+        Date fecha_in = new SimpleDateFormat("yyyy-MM-dd").parse(fechain);
+        Date fecha_fin = new SimpleDateFormat("yyyy-MM-dd").parse(fechafin);
+        List<EpisodioDolor> eps;
+        try {
+            eps = revEpService.getEpisodioByFechas(fecha_in, fecha_fin, noIdentificacion);
+        } catch (NoExisteException ex) {
+            JSONObject msj = new JSONObject();
+            msj.put("Error de sistema", ex.getMessage());
+            return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(msj).build();
+        }
+        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(eps).build();
+    }
+
     /**
-     * Retrieves representation of an instance of mycompany.migrainetracking.services.RevisionEpisodiosService
+     * Retrieves representation of an instance of
+     * mycompany.migrainetracking.services.RevisionEpisodiosService
+     *
      * @return an instance of java.lang.String
      */
     @GET
@@ -62,7 +89,9 @@ public class RevisionEpisodiosService {
     }
 
     /**
-     * PUT method for updating or creating an instance of RevisionEpisodiosService
+     * PUT method for updating or creating an instance of
+     * RevisionEpisodiosService
+     *
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */
