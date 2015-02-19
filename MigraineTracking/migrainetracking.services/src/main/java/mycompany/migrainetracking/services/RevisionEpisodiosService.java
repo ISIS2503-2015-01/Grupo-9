@@ -59,7 +59,7 @@ public class RevisionEpisodiosService {
     }
     //Pruebas prioridad (desempeño y escalabilidad) a nivel de Doctor, probar que funcione
     @GET
-    @Path("/getEpisodiosByFechas/pacid={id}&fechas=[{fechain},{fechafin}]")
+    @Path("/getEpisodiosByFechas/pacid={id}&fechas={fechain}&{fechafin}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEpsByFechas(@PathParam("id") int noIdentificacion, @PathParam("fechain") String fechain, @PathParam("fechafin") String fechafin) throws ParseException, JSONException {
         Date fecha_in = new SimpleDateFormat("yyyy-MM-dd").parse(fechain);
