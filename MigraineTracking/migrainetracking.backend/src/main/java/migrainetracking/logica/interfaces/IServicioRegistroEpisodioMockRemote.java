@@ -8,7 +8,7 @@ package migrainetracking.logica.interfaces;
 
 import java.util.List;
 import javax.ejb.Remote;
-import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 
@@ -26,7 +26,7 @@ public interface IServicioRegistroEpisodioMockRemote {
      * @return el id del episodio que se registro
      * @throws OperacionInvalidaException Excepcion en caso de error operacional
      */
-    public Long registrarEpisodio( EpisodioDolor nuevo, int noIdPaciente ) throws OperacionInvalidaException;
+    public Long registrarEpisodio( EpisodioDolorDTO nuevo, int noIdPaciente ) throws OperacionInvalidaException;
     
     /**
      * Elimina un episodio de dolor
@@ -46,13 +46,13 @@ public interface IServicioRegistroEpisodioMockRemote {
      * @param noIdPaciente el numero de identificacion del paciente
      * @return el id del episodio editado 
      */
-    public Long editarEpisodio(EpisodioDolor editado, int noIdPaciente);
+    public Long editarEpisodio(EpisodioDolorDTO editado, int noIdPaciente);
     
     /**
      * Devuelve todos los episodios del sistema
      * @return la lista de episodios
      */
-    public List<EpisodioDolor> getEpisodios( );
+    public List<EpisodioDolorDTO> getEpisodios( );
     
     
     /**
@@ -61,5 +61,5 @@ public interface IServicioRegistroEpisodioMockRemote {
      * @param  noIdPaciente el numero de identificacion de un paciente
      * @return la lista de episodios
      */
-    public List<EpisodioDolor> getEpisodiosPorPaciente(int noIdPaciente);
+    public List<EpisodioDolorDTO> getEpisodiosPorPaciente(int noIdPaciente);
 }

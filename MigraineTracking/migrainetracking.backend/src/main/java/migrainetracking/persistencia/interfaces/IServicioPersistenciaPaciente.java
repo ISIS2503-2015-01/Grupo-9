@@ -7,8 +7,8 @@
 package migrainetracking.persistencia.interfaces;
 
 import java.util.List;
-import migrainetracking.dto.EpisodioDolor;
-import migrainetracking.dto.Paciente;
+import migrainetracking.dto.EpisodioDolorDTO;
+import migrainetracking.dto.PacienteDTO;
 
 /**
  *
@@ -23,7 +23,7 @@ public interface IServicioPersistenciaPaciente extends IServicioPersistenciaMock
      * @return 1. Id del paciente agregado
      *         2. Null en caso de que no exista el paciente.
      */
-    public Long agregarEpsiodio(EpisodioDolor nuevo,int noIdPaciente);
+    public Long agregarEpsiodio(EpisodioDolorDTO nuevo,int noIdPaciente);
     
     /**
      * 
@@ -31,7 +31,7 @@ public interface IServicioPersistenciaPaciente extends IServicioPersistenciaMock
      * @param noIdPaciente - Nuemro id del paciente al cual se le va a eliminar el episodio.
      * @return Id del episodio eliminado o null si el paciente no existe.
      */
-    public Long eliminarEpisodio(EpisodioDolor viejo,int noIdPaciente);
+    public Long eliminarEpisodio(EpisodioDolorDTO viejo,int noIdPaciente);
     
     /**
      * 
@@ -39,12 +39,12 @@ public interface IServicioPersistenciaPaciente extends IServicioPersistenciaMock
      * @param noIdPaciente el id del paciente quien presento el episodio a editar
      * @return Id del episodio editado. 
      */
-    public Long actualizarEpsiodio(EpisodioDolor toEdit,int noIdPaciente);
+    public Long actualizarEpsiodio(EpisodioDolorDTO toEdit,int noIdPaciente);
     
     /**
      * <b>pre;</b> El paciente ya existe.
      * @param noId
      * @return Los episodios de un paciente en especifico
      */
-    public List<EpisodioDolor> getEpisodiosByPaciente(int noId);
+    public List<EpisodioDolorDTO> getEpisodiosByPaciente(int noId);
 }

@@ -8,8 +8,8 @@ package migrainetracking.persistencia.mock;
 
 import java.util.ArrayList;
 import java.util.List;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.Medicamento;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.MedicamentoDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaMedicamento;
 import migrainetracking.utils.Utils;
@@ -26,7 +26,7 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
     /**
      * La lista de los medicamentos en el sistema
      */
-    private List<Medicamento> medicamentos;
+    private List<MedicamentoDTO> medicamentos;
     
     /**
      * Atributo para modelar la instanciacion de la clase
@@ -44,7 +44,7 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
     {
         if(medicamentos==null)
         {
-            medicamentos = new ArrayList<Medicamento>();
+            medicamentos = new ArrayList<MedicamentoDTO>();
         }
     }
     
@@ -54,15 +54,15 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
      */
     public static ServicioPersistenciaMedicamento getInstance()
     {
-        if(instancia!=null)
-        {
-            return instancia;
-        }
-        else
-        {
+//        if(instancia!=null)
+//        {
+//            return instancia;
+//        }
+//        else
+//        {
             instancia = new ServicioPersistenciaMedicamento();
             return instancia;
-        }
+//        }
     }
     
     //----------------------------------------------------------------------
@@ -76,9 +76,9 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
      */
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
-        Medicamento nuevo = (Medicamento) obj;
+        MedicamentoDTO nuevo = (MedicamentoDTO) obj;
         
-        for(Medicamento med: medicamentos)
+        for(MedicamentoDTO med: medicamentos)
         {
             if(med.getNombre().equals(nuevo.getNombre()))
             {
@@ -94,11 +94,11 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
      */
     @Override
     public void update(Object obj) {
-        Medicamento actualizar = (Medicamento) obj;
+        MedicamentoDTO actualizar = (MedicamentoDTO) obj;
         
         for(int i=0;i<medicamentos.size();i++)
         {
-            Medicamento actual = medicamentos.get(i);
+            MedicamentoDTO actual = medicamentos.get(i);
             if(actual.getNombre().equals(actualizar.getNombre()))
             {
                 medicamentos.set(i,actualizar);
@@ -115,9 +115,9 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
      */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        Medicamento borrar = (Medicamento) obj;
+        MedicamentoDTO borrar = (MedicamentoDTO) obj;
         
-        if(findById(Medicamento.class, borrar.getNombre())!=null)
+        if(findById(MedicamentoDTO.class, borrar.getNombre())!=null)
         {
             this.medicamentos.remove(borrar);
             Utils.printf("El medicamento " + borrar.getNombre() + " ha sido eliiminado");
@@ -149,7 +149,7 @@ public class ServicioPersistenciaMedicamento  implements IServicioPersistenciaMe
         String nombre = id.toString();
         for(int i=0;i<medicamentos.size();i++)
         {
-            Medicamento actual = medicamentos.get(i);
+            MedicamentoDTO actual = medicamentos.get(i);
             if(actual.getNombre().equals(nombre))
             {
                 return actual;

@@ -9,10 +9,10 @@ package migrainetracking.logica.interfaces;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Remote;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.EpisodioDolor;
-import migrainetracking.dto.Medicamento;
-import migrainetracking.dto.Sintoma;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.EpisodioDolorDTO;
+import migrainetracking.dto.MedicamentoDTO;
+import migrainetracking.dto.SintomaDTO;
 import migrainetracking.excepciones.NoExisteException;
 
 /**
@@ -27,7 +27,7 @@ public interface IServicioRevisionEpisodiosMockRemote {
      * @param id - Consecutivo identificador del paciente.
      * @return Los episodios de dolor de un paciente especifico.
      */
-    public List<EpisodioDolor> getEpisodiosById(Long id);
+    public List<EpisodioDolorDTO> getEpisodiosById(Long id);
     
     /**
      * Devuelve los episodios de dolor que ha registrado un paciente, en un periodo de tiempo especifico.
@@ -37,7 +37,7 @@ public interface IServicioRevisionEpisodiosMockRemote {
      * @return los episodios que se encuentran entre las fechas dadas por parametros
      * @throws migrainetracking.excepciones.NoExisteException  - Cuando no existe el paciente.
      */
-    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in,Date fecha_fin,int noId) throws NoExisteException;
+    public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in,Date fecha_fin,int noId) throws NoExisteException;
     
     
     // Revisiones del episodio en mas profundidad. (Para armar un reporte o informe del episodio)
@@ -47,20 +47,20 @@ public interface IServicioRevisionEpisodiosMockRemote {
      * @param id - Consecutivo identificador del episodio.
      * @return los sintomas del episodio
      */
-    public List<Sintoma> getSintomasDelEpisodio(Long id);
+    public List<SintomaDTO> getSintomasDelEpisodio(Long id);
     
     /**
      * Devuelve la lista de catalizadores presentados en el episodio de dolor.
      * @param id - Consecutivo identificador del episodio.
      * @return los catalizadores del episodio
      */
-    public List<Catalizador> getCatalizadoresDelEpisodio(Long id);
+    public List<CatalizadorDTO> getCatalizadoresDelEpisodio(Long id);
     
     /**
      * Devuelve la lista de medicamentos presentados en el episodio de dolor.
      * @param id - Consecutivo identificador del episodio.
      * @return los medicamentos del episodio
      */
-    public List<Medicamento> getMedicamentosDelEpisodio(Long id);
+    public List<MedicamentoDTO> getMedicamentosDelEpisodio(Long id);
 }
 

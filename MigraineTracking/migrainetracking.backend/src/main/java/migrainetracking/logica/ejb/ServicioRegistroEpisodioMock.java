@@ -7,7 +7,7 @@ package migrainetracking.logica.ejb;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.interfaces.IServicioRegistroEpisodioMockRemote;
@@ -51,8 +51,8 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
      * @return la instancia de la clase
      */
     public static ServicioRegistroEpisodioMock getInstance(){
-        boolean pruebaCarga = false;
-        if( instancia==null || pruebaCarga ){
+        boolean sinSingleton = true;
+        if( instancia==null || sinSingleton ){
             instancia = new ServicioRegistroEpisodioMock();
         }
         return instancia;
@@ -70,7 +70,7 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
      * @throws OperacionInvalidaException si no se puede registrar el episodio
      */
     @Override
-    public Long registrarEpisodio(EpisodioDolor nuevo, int noIdPaciente) throws OperacionInvalidaException {
+    public Long registrarEpisodio(EpisodioDolorDTO nuevo, int noIdPaciente) throws OperacionInvalidaException {
         
         IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;
         Long respId = pacPersServ.agregarEpsiodio(nuevo, noIdPaciente);
@@ -92,7 +92,7 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
      */
     @Override
     public Long eliminarEpisodio(int idEpisodio, int noIdPaciente) throws OperacionInvalidaException, NoExisteException {
-        EpisodioDolor ep = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, (long) idEpisodio);
+        EpisodioDolorDTO ep = (EpisodioDolorDTO) persistencia.findById(EpisodioDolorDTO.class, (long) idEpisodio);
         
         IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;
         Long respId = pacPersServ.eliminarEpisodio(ep, noIdPaciente);
@@ -114,7 +114,7 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
      * @return el id del paciente al cual se le edito el episodio
      */
     @Override
-    public Long editarEpisodio(EpisodioDolor editado, int noIdPaciente) {
+    public Long editarEpisodio(EpisodioDolorDTO editado, int noIdPaciente) {
         IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;
         persistencia.update(editado);
         Long respId = pacPersServ.actualizarEpsiodio(editado, noIdPaciente);
@@ -127,9 +127,9 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
      * @return una lista con todos los episodios de dolor
      */
     @Override
-    public List<EpisodioDolor> getEpisodios() {
+    public List<EpisodioDolorDTO> getEpisodios() {
         IServicioPersistenciaEpisodioDolor epPUServ = ServicioPersistenciaEpisodioDolor.getInstance();
-        return epPUServ.findAll(EpisodioDolor.class);
+        return epPUServ.findAll(EpisodioDolorDTO.class);
     }
 
     /**
@@ -138,7 +138,7 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
      * @return los episodios del paciente cuyo id se dio como parametro
      */
     @Override
-    public List<EpisodioDolor> getEpisodiosPorPaciente(int noIdPaciente) {
+    public List<EpisodioDolorDTO> getEpisodiosPorPaciente(int noIdPaciente) {
         IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;;
         return pacPersServ.getEpisodiosByPaciente(noIdPaciente);
     }

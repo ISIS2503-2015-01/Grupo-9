@@ -8,9 +8,9 @@ package migrainetracking.persistencia.mock;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.EpisodioDolor;
-import migrainetracking.dto.Regla;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.EpisodioDolorDTO;
+import migrainetracking.dto.ReglaDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaRegla;
 import migrainetracking.utils.Utils;
@@ -27,7 +27,7 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla {
     /**
      * Lista de reglas en el sistema
      */
-    private List<Regla> reglas;
+    private List<ReglaDTO> reglas;
 
     /**
      * Atributo para manejar la instanciacion
@@ -42,7 +42,7 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla {
      */
     public ServicioPersistenciaRegla() {
         if (reglas == null) {
-            reglas = new ArrayList<Regla>();
+            reglas = new ArrayList<ReglaDTO>();
         }
     }
 
@@ -52,7 +52,8 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla {
      * @return la instanciacion de la clase
      */
     public static ServicioPersistenciaRegla getInstance() {
-        if (instancia == null) {
+        boolean sinSingleton = true;
+        if (instancia == null || sinSingleton) {
             instancia = new ServicioPersistenciaRegla();
         }
         return instancia;
@@ -69,7 +70,7 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla {
      */
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
-        Regla nueva = (Regla) obj;
+        ReglaDTO nueva = (ReglaDTO) obj;
         reglas.add(nueva);
         Utils.printf("Se ha agregado la nueva regla");
     }
@@ -81,10 +82,10 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla {
      */
     @Override
     public void update(Object obj) {
-        Regla editar = (Regla) obj;
+        ReglaDTO editar = (ReglaDTO) obj;
         int id = editar.getId();
         for (int i = 0; i < reglas.size(); i++) {
-            Regla actual = reglas.get(i);
+            ReglaDTO actual = reglas.get(i);
             if (actual.getId() == id) {
                 reglas.set(i, editar);
             }
@@ -125,7 +126,7 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla {
     public Object findById(Class c, Object id) {
         int idL = Integer.parseInt(id.toString());
         for (int i = 0; i < reglas.size(); i++) {
-            Regla actual = reglas.get(i);
+            ReglaDTO actual = reglas.get(i);
             if (actual.getId() == idL) {
                 return actual;
             }
@@ -135,14 +136,14 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla {
 
     @Override
     // NOTA: HAY TENTACION DE PASAR ESTA FUNCIONALIDAD AL EJB DE ANALISIS. 
-    public List<Catalizador> getEvitables(EpisodioDolor episodio) {
-        HashSet<Catalizador> conjuntoEvitables = new HashSet<Catalizador>();
-        for (Regla regla : this.reglas) {
+    public List<CatalizadorDTO> getEvitables(EpisodioDolorDTO episodio) {
+        HashSet<CatalizadorDTO> conjuntoEvitables = new HashSet<CatalizadorDTO>();
+        for (ReglaDTO regla : this.reglas) {
             if( cumpleCriterios(episodio, regla) ){
                 conjuntoEvitables.addAll( regla.getEvitables() ); 
             }
         }
-        return new ArrayList<Catalizador>(conjuntoEvitables);
+        return new ArrayList<CatalizadorDTO>(conjuntoEvitables);
     }
     
     /**
@@ -151,7 +152,7 @@ public class ServicioPersistenciaRegla implements IServicioPersistenciaRegla {
      * @param episodio - Episodio de dolor
      * @return true en caso de que el episodio concuerde con los criterios definidos en las reglas. False en caso contrario
      */
-    private boolean cumpleCriterios(EpisodioDolor episodio , Regla regla){
+    private boolean cumpleCriterios(EpisodioDolorDTO episodio , ReglaDTO regla){
         if (  regla.getIntensidadDolorMin() <= episodio.getIntensidadDolor() && episodio.getIntensidadDolor() <= regla.getIntensidadDolorMax() 
             && episodio.getLocalizacion().equals( regla.getLocalizacionDolor() ) ) {
                 return true;

@@ -10,9 +10,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.EpisodioDolor;
-import migrainetracking.dto.Paciente;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.EpisodioDolorDTO;
+import migrainetracking.dto.PacienteDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
@@ -31,7 +31,7 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
     /**
      * Atributo que contiene los episodios del sistema
      */
-    private List<EpisodioDolor> episodios;
+    private List<EpisodioDolorDTO> episodios;
 
     /**
      * Atributo para manejar la instanciacion de la clase
@@ -46,7 +46,7 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
      */
     public ServicioPersistenciaEpisodioDolor() {
         if (this.episodios == null) {
-            episodios = new ArrayList<EpisodioDolor>();
+            episodios = new ArrayList<EpisodioDolorDTO>();
             /*Dataos pruebas funcionalidades*/
             int numData = 30;
             String[] loc = {"Alrededor del ojo", "Mitad derecha de la cabeza", "Mitad izquierda de la cabeza", "Frente del ojo", "Mejilla", "Nariz", "Encias"};
@@ -54,15 +54,15 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
             Random rand = new Random();
             for (int i = 0; i < numData; i++) {
                 DataFactory df = new DataFactory();
-                EpisodioDolor ep = new EpisodioDolor();
+                EpisodioDolorDTO ep = new EpisodioDolorDTO();
                 ep.setId((long) i);
                 Date endDate = new java.util.Date();
                 ep.setFecha(df.getDateBetween(new Date(endDate.getTime() - 60 * 24 * 3600 * 1000), endDate));
                 ep.setIntensidadDolor(df.getItem(intens));
                 ep.setLocalizacion(df.getItem(loc));
 
-                List<Paciente> pacientes = ServicioPersistenciaPaciente.getInstance().getPacientes();
-                Paciente pac = pacientes.get(df.getNumberBetween(0, pacientes.size() - 1));
+                List<PacienteDTO> pacientes = ServicioPersistenciaPaciente.getInstance().getPacientes();
+                PacienteDTO pac = pacientes.get(df.getNumberBetween(0, pacientes.size() - 1));
                 pac.getEpisodios().add(ep);
 
                 this.episodios.add(ep);
@@ -77,8 +77,8 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
      * @return la instancia de la clase
      */
     public static ServicioPersistenciaEpisodioDolor getInstance() {
-        boolean pruebaCarga = false;
-        if (instancia == null || pruebaCarga) {
+        boolean sinSingleton = true;
+        if (instancia == null || sinSingleton) {
             instancia = new ServicioPersistenciaEpisodioDolor();
         }
         return instancia;
@@ -95,7 +95,7 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
      */
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
-        EpisodioDolor ep = (EpisodioDolor) obj;
+        EpisodioDolorDTO ep = (EpisodioDolorDTO) obj;
         this.episodios.add(ep);
         Utils.printf("EpisodioDolor(" + ep.getId() + ") was created");
 
@@ -108,9 +108,9 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
      */
     @Override
     public void update(Object obj) {
-        EpisodioDolor toEdit = (EpisodioDolor) obj;
+        EpisodioDolorDTO toEdit = (EpisodioDolorDTO) obj;
         for (int i = 0; i < episodios.size(); i++) {
-            EpisodioDolor tempEp = episodios.get(i);
+            EpisodioDolorDTO tempEp = episodios.get(i);
             if (toEdit.equals(tempEp)) {
                 episodios.set(i, toEdit);
                 break;
@@ -126,8 +126,8 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
      */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        EpisodioDolor ep = (EpisodioDolor) obj;
-        if (findById(EpisodioDolor.class, ep) != null) {
+        EpisodioDolorDTO ep = (EpisodioDolorDTO) obj;
+        if (findById(EpisodioDolorDTO.class, ep) != null) {
             this.episodios.remove(ep);
             Utils.printf("EpisodioDolor(" + ep.getId() + ") was deleted");
         } else {
@@ -156,7 +156,7 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
     @Override
     public Object findById(Class c, Object id) {
         Long nId = Long.parseLong(id.toString());
-        for (EpisodioDolor ep : this.episodios) {
+        for (EpisodioDolorDTO ep : this.episodios) {
             if (ep.getId().equals(nId)) {
                 return ep;
             }
@@ -165,9 +165,9 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
     }
 
     @Override
-    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, List<EpisodioDolor> episodiosDelPaciente) {
-        List<EpisodioDolor> resp = new ArrayList<EpisodioDolor>();
-        for (EpisodioDolor ep : episodiosDelPaciente) {
+    public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, List<EpisodioDolorDTO> episodiosDelPaciente) {
+        List<EpisodioDolorDTO> resp = new ArrayList<EpisodioDolorDTO>();
+        for (EpisodioDolorDTO ep : episodiosDelPaciente) {
             if (ep.getFecha().after(fecha_in) && ep.getFecha().before(fecha_fin)) {
                 resp.add(ep);
             }

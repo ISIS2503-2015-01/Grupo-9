@@ -7,8 +7,8 @@ package migrainetracking.logica.ejb;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import migrainetracking.dto.Doctor;
-import migrainetracking.dto.Paciente;
+import migrainetracking.dto.DoctorDTO;
+import migrainetracking.dto.PacienteDTO;
 
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
@@ -64,8 +64,8 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
      * @return la instancia de la clase
      */
     public static ServicioRegistroUsuariosMock getInstance(){
-        boolean pruebaCarga = false;
-        if( instancia==null || pruebaCarga ){
+        boolean sinSingleton = true;
+        if( instancia==null || sinSingleton ){
             instancia = new ServicioRegistroUsuariosMock();
         }
         return instancia;
@@ -82,12 +82,12 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
      */
     @Override
     public Long crearUsuario(Object nuevo) throws OperacionInvalidaException {
-        if (nuevo instanceof Doctor) {
+        if (nuevo instanceof DoctorDTO) {
             this.persistenciaDoctor.create(nuevo);
-            return (long) ((Doctor) nuevo).getNoIdentificacion();
-        } else if (nuevo instanceof Paciente) {
+            return (long) ((DoctorDTO) nuevo).getNoIdentificacion();
+        } else if (nuevo instanceof PacienteDTO) {
             this.persistenciaPaciente.create(nuevo);
-            return (long) ((Paciente) nuevo).getNoIdentificacion();
+            return (long) ((PacienteDTO) nuevo).getNoIdentificacion();
         } else {
             return (long) -1;
         }
@@ -102,12 +102,12 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
      */
     @Override
     public Long eliminarUsuario(Object viejo) throws OperacionInvalidaException, NoExisteException {
-        if (viejo instanceof Doctor) {
+        if (viejo instanceof DoctorDTO) {
             this.persistenciaDoctor.delete(viejo);
-            return (long) ((Doctor) viejo).getNoIdentificacion();
-        } else if (viejo instanceof Paciente) {
+            return (long) ((DoctorDTO) viejo).getNoIdentificacion();
+        } else if (viejo instanceof PacienteDTO) {
             this.persistenciaPaciente.delete(viejo);
-            return (long) ((Paciente) viejo).getNoIdentificacion();
+            return (long) ((PacienteDTO) viejo).getNoIdentificacion();
         } else {
             return (long) -1;
         }
@@ -120,10 +120,10 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
      */
     @Override
     public List getUsuarios(Class c) {
-        if (c.equals(Doctor.class)) {
-            return this.persistenciaDoctor.findAll(Doctor.class);
-        } else if (c.equals(Paciente.class)) {
-            return this.persistenciaPaciente.findAll(Paciente.class);
+        if (c.equals(DoctorDTO.class)) {
+            return this.persistenciaDoctor.findAll(DoctorDTO.class);
+        } else if (c.equals(PacienteDTO.class)) {
+            return this.persistenciaPaciente.findAll(PacienteDTO.class);
         }
         return null;
     }
@@ -135,12 +135,12 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
      */
     @Override
     public Long actualizarUsuario(Object actualizar) {
-        if (actualizar instanceof Doctor) {
+        if (actualizar instanceof DoctorDTO) {
             this.persistenciaDoctor.update(actualizar);
-            return (long) ((Doctor) actualizar).getNoIdentificacion();
-        } else if (actualizar instanceof Paciente) {
+            return (long) ((DoctorDTO) actualizar).getNoIdentificacion();
+        } else if (actualizar instanceof PacienteDTO) {
             this.persistenciaPaciente.update(actualizar);
-            return (long) ((Paciente) actualizar).getNoIdentificacion();
+            return (long) ((PacienteDTO) actualizar).getNoIdentificacion();
         }
         return (long) -1;
     }

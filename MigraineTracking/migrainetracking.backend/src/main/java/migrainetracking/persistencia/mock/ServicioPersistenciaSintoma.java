@@ -8,8 +8,8 @@ package migrainetracking.persistencia.mock;
 
 import java.util.ArrayList;
 import java.util.List;
-import migrainetracking.dto.Regla;
-import migrainetracking.dto.Sintoma;
+import migrainetracking.dto.ReglaDTO;
+import migrainetracking.dto.SintomaDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaSintoma;
 import migrainetracking.utils.Utils;
@@ -27,7 +27,7 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
     /**
      * Lista de sintomas en el sistema
      */
-    private List<Sintoma> sintomas;
+    private List<SintomaDTO> sintomas;
     
     /**
      * Atributo para manejar la instanciacion
@@ -45,7 +45,7 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
     {
         if(sintomas == null)
         {
-            sintomas = new ArrayList<Sintoma>();
+            sintomas = new ArrayList<SintomaDTO>();
         }
     }
     
@@ -55,7 +55,7 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
      */
     public static ServicioPersistenciaSintoma getInstance()
     {
-        if(instancia==null)
+        if(instancia==null || true)
         {
             instancia = new ServicioPersistenciaSintoma();
         }
@@ -73,8 +73,8 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
      */
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
-        Sintoma nuevo = (Sintoma) obj;
-        if(findById(Sintoma.class, nuevo.getNombre())!=null)
+        SintomaDTO nuevo = (SintomaDTO) obj;
+        if(findById(SintomaDTO.class, nuevo.getNombre())!=null)
         {
             sintomas.add(nuevo);
             Utils.printf("Se ha agregado el sintoma con el nombre " + nuevo.getNombre());
@@ -91,10 +91,10 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
      */
     @Override
     public void update(Object obj) {
-        Sintoma nuevo = (Sintoma) obj;
+        SintomaDTO nuevo = (SintomaDTO) obj;
         for(int i=0;i<sintomas.size();i++)
         {
-            Sintoma actual = sintomas.get(i);
+            SintomaDTO actual = sintomas.get(i);
             if(actual.getNombre().equals(nuevo.getNombre()))
             {
                 sintomas.set(i, nuevo);
@@ -110,11 +110,11 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
      */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        Sintoma borrar = (Sintoma) obj;
+        SintomaDTO borrar = (SintomaDTO) obj;
         
         for(int i=0;i<sintomas.size();i++)
         {
-            Sintoma actual = sintomas.get(i);
+            SintomaDTO actual = sintomas.get(i);
             if(actual.getNombre().equals(borrar.getNombre()))
             {
                 sintomas.remove(i);
@@ -146,7 +146,7 @@ public class ServicioPersistenciaSintoma implements IServicioPersistenciaSintoma
         String nombre = id.toString();
         for(int i=0;i<sintomas.size();i++)
         {
-            Sintoma actual = sintomas.get(i);
+            SintomaDTO actual = sintomas.get(i);
             if(actual.getNombre().equals(nombre))
             {
                 return actual;

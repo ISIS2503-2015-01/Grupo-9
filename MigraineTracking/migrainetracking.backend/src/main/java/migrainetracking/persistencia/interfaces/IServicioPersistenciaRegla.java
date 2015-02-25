@@ -7,8 +7,8 @@
 package migrainetracking.persistencia.interfaces;
 
 import java.util.List;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.EpisodioDolorDTO;
 
 /**
  *
@@ -21,6 +21,6 @@ public interface IServicioPersistenciaRegla extends IServicioPersistenciaMockRem
      * @param episodio - Es el objeto del episodio de dolor.
      * @return Los evitables del episodio segun las reglas definidas por los doctores.
      */
-    public List<Catalizador> getEvitables(EpisodioDolor episodio);
+    public List<CatalizadorDTO> getEvitables(EpisodioDolorDTO episodio);
     
 }

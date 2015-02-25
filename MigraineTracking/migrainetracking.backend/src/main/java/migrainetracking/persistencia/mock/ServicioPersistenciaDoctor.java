@@ -10,10 +10,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.Doctor;
-import migrainetracking.dto.Paciente;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.DoctorDTO;
+import migrainetracking.dto.PacienteDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
+import migrainetracking.persistencia.conexion.PersistenceManager;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaDoctor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.utils.Utils;
@@ -37,8 +40,10 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
     /**
      * Lista de doctores en el sistema
      */
-    private List<Doctor> doctores;
-
+    private List<DoctorDTO> doctores;
+    
+    @PersistenceContext(unitName="migraineTrackingPU")
+    private EntityManager em;
     //----------------------------------------------------------------------
     // Constructores
     //----------------------------------------------------------------------
@@ -47,8 +52,13 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
      * Constructor sin argumentos
      */
     public ServicioPersistenciaDoctor() {
+        try{
+            this.em = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
+        }
+        catch(Exception e){}
+        
         if (doctores == null) {
-            doctores = new ArrayList<Doctor>();
+            doctores = new ArrayList<DoctorDTO>();
               /*Datos para prueba funcionalidad*/
 //            int numData = 8;
 //            int j = 0;
@@ -78,8 +88,8 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
      * @return la instancia de la clase
      */
     public static ServicioPersistenciaDoctor getInstance(){
-        boolean pruebaCarga = false;
-        if(instancia == null || pruebaCarga ){
+        boolean sinSingleton = true;
+        if(instancia == null || sinSingleton ){
             return new ServicioPersistenciaDoctor();
         }
             return instancia;
@@ -96,8 +106,8 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
      */
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
-        Doctor newDoc = (Doctor) obj;
-        if (findById(Doctor.class, newDoc.getNoIdentificacion()) == null) {
+        DoctorDTO newDoc = (DoctorDTO) obj;
+        if (findById(DoctorDTO.class, newDoc.getNoIdentificacion()) == null) {
             doctores.add(newDoc);
             Utils.printf("New doctor(" + newDoc.getNombre() + ") was added");
         } else {
@@ -111,9 +121,9 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
      */
     @Override
     public void update(Object obj) {
-        Doctor toEdit = (Doctor) obj;
+        DoctorDTO toEdit = (DoctorDTO) obj;
         for (int i = 0; i < doctores.size(); i++) {
-            Doctor tempDoc = doctores.get(i);
+            DoctorDTO tempDoc = doctores.get(i);
             if (toEdit.equals(tempDoc)) {
                 doctores.set(i, toEdit);
                 Utils.printf("Doctor(" + tempDoc.getNombre() + ")was UPDATED");
@@ -129,8 +139,8 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
      */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        Doctor oldDoc = (Doctor) obj;
-        if (findById(Doctor.class, oldDoc.getNoIdentificacion()) != null) {
+        DoctorDTO oldDoc = (DoctorDTO) obj;
+        if (findById(DoctorDTO.class, oldDoc.getNoIdentificacion()) != null) {
             doctores.remove(oldDoc);
             Utils.printf("Doctor(" + oldDoc.getNombre() + ")was deleted");
         } else {
@@ -145,6 +155,8 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
      */
     @Override
     public List findAll(Class c) {
+        // prueba
+        em.createNativeQuery("SELECT u.* FROM SYS.SYSCOLUMNS u ");
         return this.doctores;
     }
 
@@ -156,9 +168,9 @@ public class ServicioPersistenciaDoctor implements IServicioPersistenciaDoctor {
      */
     @Override
     // El id en este caso es la cedula del doctor.
-    public Doctor findById(Class c, Object id) {
+    public DoctorDTO findById(Class c, Object id) {
         int noId = Integer.parseInt(id.toString());
-        for (Doctor doctor : doctores) {
+        for (DoctorDTO doctor : doctores) {
             if (doctor.getNoIdentificacion() == noId) {
                 return doctor;
             }

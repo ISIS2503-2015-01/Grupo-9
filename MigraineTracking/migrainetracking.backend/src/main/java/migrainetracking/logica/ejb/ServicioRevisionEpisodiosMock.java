@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.EpisodioDolor;
-import migrainetracking.dto.Medicamento;
-import migrainetracking.dto.Paciente;
-import migrainetracking.dto.Sintoma;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.EpisodioDolorDTO;
+import migrainetracking.dto.MedicamentoDTO;
+import migrainetracking.dto.PacienteDTO;
+import migrainetracking.dto.SintomaDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
@@ -60,8 +60,8 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      * @return
      */
     public static ServicioRevisionEpisodiosMock getInstance(){
-        boolean pruebaCarga = false;
-        if(instancia == null || pruebaCarga){
+        boolean sinSingleton = true;
+        if(instancia == null || sinSingleton){
             instancia = new ServicioRevisionEpisodiosMock();
         }
         return instancia;
@@ -77,7 +77,7 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      * @return la lista de episodios del paciente cuyo id se da por parametro
      */
     @Override
-    public List<EpisodioDolor> getEpisodiosById(Long id) {
+    public List<EpisodioDolorDTO> getEpisodiosById(Long id) {
         IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;
         return pacPersServ.getEpisodiosByPaciente( id.intValue() );
     }
@@ -91,9 +91,9 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      * @throws migrainetracking.excepciones.NoExisteException
      */
     @Override
-    public List<EpisodioDolor> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId) throws NoExisteException {
+    public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId) throws NoExisteException {
         IServicioPersistenciaPaciente pacServ = ServicioPersistenciaPaciente.getInstance();
-        Paciente pac = (Paciente) pacServ.findById(Paciente.class, noId);
+        PacienteDTO pac = (PacienteDTO) pacServ.findById(PacienteDTO.class, noId);
         if( pac == null ){
             throw new NoExisteException("El paciente con ese numero de identificacion no existe");
         }
@@ -106,8 +106,8 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      * @return los sintomas del episodio cuyo numero de id se dio como parametro
      */
     @Override
-    public List<Sintoma> getSintomasDelEpisodio(Long id) {
-        EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, id);
+    public List<SintomaDTO> getSintomasDelEpisodio(Long id) {
+        EpisodioDolorDTO e = (EpisodioDolorDTO) persistencia.findById(EpisodioDolorDTO.class, id);
         return e.getSintomas();
     }
 
@@ -117,8 +117,8 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      * @return la lista de los catalizadores del episodio
      */
     @Override
-    public List<Catalizador> getCatalizadoresDelEpisodio(Long id) {
-        EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, id);
+    public List<CatalizadorDTO> getCatalizadoresDelEpisodio(Long id) {
+        EpisodioDolorDTO e = (EpisodioDolorDTO) persistencia.findById(EpisodioDolorDTO.class, id);
         return e.getCatalizadores();
     }
 
@@ -128,8 +128,8 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      * @return los medicamentos del episodio
      */
     @Override
-    public List<Medicamento> getMedicamentosDelEpisodio(Long id) {
-        EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, id);
+    public List<MedicamentoDTO> getMedicamentosDelEpisodio(Long id) {
+        EpisodioDolorDTO e = (EpisodioDolorDTO) persistencia.findById(EpisodioDolorDTO.class, id);
         return e.getMedicamentosActuales();
     }     
 }

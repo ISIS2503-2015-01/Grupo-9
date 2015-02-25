@@ -8,7 +8,7 @@ package migrainetracking.persistencia.mock;
 
 import java.util.ArrayList;
 import java.util.List;
-import migrainetracking.dto.Catalizador;
+import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaCatalizador;
 import migrainetracking.utils.Utils;
@@ -26,7 +26,7 @@ public class ServicioPersistenciaCatalizador implements IServicioPersistenciaCat
     /**
      * La lista que contiene a los catalizadores
      */
-    private List<Catalizador> catalizadores;
+    private List<CatalizadorDTO> catalizadores;
     
     /**
      * 
@@ -46,7 +46,7 @@ public class ServicioPersistenciaCatalizador implements IServicioPersistenciaCat
     
     public static ServicioPersistenciaCatalizador getInstance()
     {
-        if(instancia==null)
+        if(instancia==null || true)
             return new ServicioPersistenciaCatalizador();
         else
             return instancia;
@@ -58,8 +58,8 @@ public class ServicioPersistenciaCatalizador implements IServicioPersistenciaCat
 
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
-        Catalizador nuevo = (Catalizador) obj;
-        if(findById(Catalizador.class, nuevo.getId())==null)
+        CatalizadorDTO nuevo = (CatalizadorDTO) obj;
+        if(findById(CatalizadorDTO.class, nuevo.getId())==null)
         {
             catalizadores.add(nuevo);
             Utils.printf("New catalizador(" + nuevo.getEspecificacion()+ ") was added");
@@ -72,10 +72,10 @@ public class ServicioPersistenciaCatalizador implements IServicioPersistenciaCat
 
     @Override
     public void update(Object obj) {
-        Catalizador update = (Catalizador) obj;
+        CatalizadorDTO update = (CatalizadorDTO) obj;
         for(int i=0;i<catalizadores.size();i++)
         {
-            Catalizador actual = catalizadores.get(i);
+            CatalizadorDTO actual = catalizadores.get(i);
             if(actual.getId()==update.getId())
             {
                 catalizadores.set(i, update);
@@ -87,8 +87,8 @@ public class ServicioPersistenciaCatalizador implements IServicioPersistenciaCat
 
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        Catalizador borrar = (Catalizador) obj;
-        if(findById(Catalizador.class,borrar.getId())!=null)
+        CatalizadorDTO borrar = (CatalizadorDTO) obj;
+        if(findById(CatalizadorDTO.class,borrar.getId())!=null)
         {
             catalizadores.remove(borrar);
             Utils.printf("Se ha eliminado el catalizador " + borrar.getEspecificacion());
@@ -107,7 +107,7 @@ public class ServicioPersistenciaCatalizador implements IServicioPersistenciaCat
     @Override
     public Object findById(Class c, Object id) {
         long idNo = Long.parseLong(id.toString());
-        for(Catalizador cat: catalizadores)
+        for(CatalizadorDTO cat: catalizadores)
         {
             if(cat.getId()==idNo)
             {

@@ -9,9 +9,9 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.EpisodioDolor;
-import migrainetracking.dto.Paciente;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.EpisodioDolorDTO;
+import migrainetracking.dto.PacienteDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.utils.Utils;
@@ -34,7 +34,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     /**
      * Lista de pacientes en el sistema
      */
-    private List<Paciente> pacientes;
+    private List<PacienteDTO> pacientes;
 
     //----------------------------------------------------------------------
     // Constructores
@@ -45,7 +45,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      */
     public ServicioPersistenciaPaciente() {
         if (this.pacientes == null) {
-            this.pacientes = new ArrayList<Paciente>();
+            this.pacientes = new ArrayList<PacienteDTO>();
             /* Datos pruebas funcionalidades*/
             int numData = 20;
             for (int i = 0; i < numData; i++) {
@@ -53,7 +53,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
                 String nomb = df.getFirstName() +" "+ df.getLastName() ;
                 int ced = df.getNumberBetween(80000000, 110000000);
                 Date fechNac = df.getBirthDate();
-                Paciente temp = new Paciente(nomb, ced, fechNac,89, 180);
+                PacienteDTO temp = new PacienteDTO(nomb, ced, fechNac,89, 180);
                 this.pacientes.add(temp);
             }
             /*Datos deterministicos prueba carga (A mano)*/
@@ -65,8 +65,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      * @return la instancia de la clase
      */
     public static ServicioPersistenciaPaciente getInstance() {
-        boolean pruebaCarga = false;
-        if (instancia == null || pruebaCarga) {
+        if (instancia == null || true) {
             return new ServicioPersistenciaPaciente();
         } else {
             return instancia;
@@ -83,8 +82,8 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      */
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
-        Paciente newPac = (Paciente) obj;
-        if (findById(Paciente.class, newPac.getNoIdentificacion()) == null) {
+        PacienteDTO newPac = (PacienteDTO) obj;
+        if (findById(PacienteDTO.class, newPac.getNoIdentificacion()) == null) {
             pacientes.add(newPac);
             Utils.printf("New paciente(" + newPac.getNombre() + ") was ADDED");
         } else {
@@ -98,9 +97,9 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      */
     @Override
     public void update(Object obj) {
-        Paciente toEdit = (Paciente) obj;
+        PacienteDTO toEdit = (PacienteDTO) obj;
         for (int i = 0; i < pacientes.size(); i++) {
-            Paciente tempPac = pacientes.get(i);
+            PacienteDTO tempPac = pacientes.get(i);
             if (toEdit.equals(tempPac)) {
                 pacientes.set(i, toEdit);
                 Utils.printf("New paciente(" + tempPac.getNombre() + ") was UPDATED");
@@ -116,8 +115,8 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        Paciente oldPac = (Paciente) obj;
-        if (findById(Paciente.class, oldPac.getNoIdentificacion()) != null) {
+        PacienteDTO oldPac = (PacienteDTO) obj;
+        if (findById(PacienteDTO.class, oldPac.getNoIdentificacion()) != null) {
             pacientes.remove(oldPac);
             Utils.printf("Paciente(" + oldPac.getNombre() + ")was DELETED");
         } else {
@@ -144,7 +143,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     @Override
     public Object findById(Class c, Object id) {
         int noId = Integer.parseInt(id.toString());
-        for (Paciente paciente : pacientes) {
+        for (PacienteDTO paciente : pacientes) {
             if (paciente.getNoIdentificacion() == noId) {
                 return paciente;
             }
@@ -153,7 +152,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     }
 
     //----- find all hace la misma monda.
-    public List<Paciente> getPacientes() {
+    public List<PacienteDTO> getPacientes() {
         return pacientes;
     }
 
@@ -164,8 +163,8 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      * @return el id del paciente al cual se le agrego el episodio. null en caso que no se halla agregado
      */
     @Override
-    public Long agregarEpsiodio(EpisodioDolor nuevo, int noIdPaciente) {
-        Paciente p = (Paciente) findById(Paciente.class, noIdPaciente);
+    public Long agregarEpsiodio(EpisodioDolorDTO nuevo, int noIdPaciente) {
+        PacienteDTO p = (PacienteDTO) findById(PacienteDTO.class, noIdPaciente);
         if (p != null) {
             p.getEpisodios().add(nuevo);
             return (long) noIdPaciente;
@@ -181,8 +180,8 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      * @return el id del paciente al cual se le elimino el episodio
      */
     @Override
-    public Long eliminarEpisodio(EpisodioDolor viejo, int noIdPaciente) {
-        Paciente p = (Paciente) findById(Paciente.class, noIdPaciente);
+    public Long eliminarEpisodio(EpisodioDolorDTO viejo, int noIdPaciente) {
+        PacienteDTO p = (PacienteDTO) findById(PacienteDTO.class, noIdPaciente);
         if (p != null) {
             p.getEpisodios().remove(viejo);
             return (long) noIdPaciente;
@@ -198,12 +197,12 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      * @return el id del paciente al cual se le edito el episodio
      */
     @Override
-    public Long actualizarEpsiodio(EpisodioDolor toEdit, int noIdPaciente) {
-        Paciente p = (Paciente) findById(Paciente.class, noIdPaciente);
+    public Long actualizarEpsiodio(EpisodioDolorDTO toEdit, int noIdPaciente) {
+        PacienteDTO p = (PacienteDTO) findById(PacienteDTO.class, noIdPaciente);
         if (p != null) {
-            List<EpisodioDolor> eps = p.getEpisodios();
+            List<EpisodioDolorDTO> eps = p.getEpisodios();
             for (int i = 0; i < eps.size(); i++) {
-                EpisodioDolor tempEp = eps.get(i);
+                EpisodioDolorDTO tempEp = eps.get(i);
                 if (toEdit.equals(tempEp)) {
                     eps.set(i, tempEp);
                     return tempEp.getId();
@@ -220,8 +219,8 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      * @return los episodios del paciente 
      */
     @Override
-    public List<EpisodioDolor> getEpisodiosByPaciente(int noId) {
-        Paciente p = (Paciente) findById(Paciente.class, noId);
+    public List<EpisodioDolorDTO> getEpisodiosByPaciente(int noId) {
+        PacienteDTO p = (PacienteDTO) findById(PacienteDTO.class, noId);
         assert p==null:"No se cumplio la precondicion del metodo. Revise implementacion web";
         System.out.println(p);
         return p.getEpisodios();

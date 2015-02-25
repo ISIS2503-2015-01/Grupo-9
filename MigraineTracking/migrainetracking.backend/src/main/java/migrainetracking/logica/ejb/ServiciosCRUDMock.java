@@ -8,11 +8,11 @@ package migrainetracking.logica.ejb;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.Doctor;
-import migrainetracking.dto.Medicamento;
-import migrainetracking.dto.Regla;
-import migrainetracking.dto.Sintoma;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.DoctorDTO;
+import migrainetracking.dto.MedicamentoDTO;
+import migrainetracking.dto.ReglaDTO;
+import migrainetracking.dto.SintomaDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.interfaces.IServiciosCRUDMockRemote;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaCatalizador;
@@ -81,8 +81,8 @@ public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
      */
     public static ServiciosCRUDMock getInstance()
     {
-        boolean pruebaCarga = false;
-        if( instancia==null || pruebaCarga ){
+        boolean sinSingleton = true;
+        if( instancia==null || sinSingleton ){
             instancia = new ServiciosCRUDMock();
         }
         return instancia;
@@ -101,25 +101,25 @@ public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
      */
     @Override
     public Long create(Object o) throws OperacionInvalidaException {
-        if(o instanceof Catalizador)
+        if(o instanceof CatalizadorDTO)
         {
             this.persistenciaCatalizadores.create(o);
-            return ((Catalizador)o).getId();
+            return ((CatalizadorDTO)o).getId();
         }
-        else if(o instanceof Medicamento)
+        else if(o instanceof MedicamentoDTO)
         {
             this.persistenciaMedicamentos.create(o);
-            return ((Medicamento)o).getId();
+            return ((MedicamentoDTO)o).getId();
         }
-        else if(o instanceof Regla)
+        else if(o instanceof ReglaDTO)
         {
             this.persistenciaReglas.create(o);
-            return (long) ((Regla)o).getId();
+            return (long) ((ReglaDTO)o).getId();
         }
-        else if(o instanceof Sintoma)
+        else if(o instanceof SintomaDTO)
         {
             this.persistenciaSintomas.create(o);
-            return ((Sintoma)o).getId();
+            return ((SintomaDTO)o).getId();
         }
         else
             return (long) -1;
@@ -132,25 +132,25 @@ public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
      */
     @Override
     public Long delete(Object o) throws OperacionInvalidaException {
-        if(o instanceof Catalizador)
+        if(o instanceof CatalizadorDTO)
         {
             this.persistenciaCatalizadores.delete(o);
-            return ((Catalizador)o).getId();
+            return ((CatalizadorDTO)o).getId();
         }
-        else if(o instanceof Medicamento)
+        else if(o instanceof MedicamentoDTO)
         {
             this.persistenciaMedicamentos.delete(o);
-            return ((Medicamento)o).getId();
+            return ((MedicamentoDTO)o).getId();
         }
-        else if(o instanceof Regla)
+        else if(o instanceof ReglaDTO)
         {
             this.persistenciaReglas.delete(o);
-            return (long) ((Regla)o).getId();
+            return (long) ((ReglaDTO)o).getId();
         }
-        else if(o instanceof Sintoma)
+        else if(o instanceof SintomaDTO)
         {
             this.persistenciaSintomas.delete(o);
-            return ((Sintoma)o).getId();
+            return ((SintomaDTO)o).getId();
         }
         else
             return (long) -1;
@@ -163,25 +163,25 @@ public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
      */
     @Override
     public Long update(Object o) {
-        if(o instanceof Catalizador)
+        if(o instanceof CatalizadorDTO)
         {
             this.persistenciaCatalizadores.update(o);
-            return ((Catalizador)o).getId();
+            return ((CatalizadorDTO)o).getId();
         }
-        else if(o instanceof Medicamento)
+        else if(o instanceof MedicamentoDTO)
         {
             this.persistenciaMedicamentos.update(o);
-            return ((Medicamento)o).getId();
+            return ((MedicamentoDTO)o).getId();
         }
-        else if(o instanceof Regla)
+        else if(o instanceof ReglaDTO)
         {
             this.persistenciaReglas.update(o);
-            return (long) ((Regla)o).getId();
+            return (long) ((ReglaDTO)o).getId();
         }
-        else if(o instanceof Sintoma)
+        else if(o instanceof SintomaDTO)
         {
             this.persistenciaSintomas.update(o);
-            return ((Sintoma)o).getId();
+            return ((SintomaDTO)o).getId();
         }
         else
             return (long) -1;
@@ -194,21 +194,21 @@ public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
      */
     @Override
     public List<Object> getAll(Class clase) {
-        if(Catalizador.class.equals(clase))
+        if(CatalizadorDTO.class.equals(clase))
         {
-            return persistenciaCatalizadores.findAll(Catalizador.class);
+            return persistenciaCatalizadores.findAll(CatalizadorDTO.class);
         }
-        else if(Medicamento.class.equals(clase))
+        else if(MedicamentoDTO.class.equals(clase))
         {
-            return persistenciaMedicamentos.findAll(Medicamento.class);
+            return persistenciaMedicamentos.findAll(MedicamentoDTO.class);
         }
-        else if(Regla.class.equals(clase))
+        else if(ReglaDTO.class.equals(clase))
         {
-            return persistenciaReglas.findAll(Regla.class);
+            return persistenciaReglas.findAll(ReglaDTO.class);
         }
-        else if(Sintoma.class.equals(clase))
+        else if(SintomaDTO.class.equals(clase))
         {
-            return persistenciaSintomas.findAll(Sintoma.class);
+            return persistenciaSintomas.findAll(SintomaDTO.class);
         }
         else
             return null;

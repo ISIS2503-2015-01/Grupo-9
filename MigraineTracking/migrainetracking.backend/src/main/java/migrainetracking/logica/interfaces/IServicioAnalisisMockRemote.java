@@ -8,8 +8,8 @@ package migrainetracking.logica.interfaces;
 
 import java.util.List;
 import javax.ejb.Remote;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.excepciones.NoExisteException;
 
 /**
@@ -23,6 +23,6 @@ public interface IServicioAnalisisMockRemote {
      * @param id - id number del episodio.
      * @throws NoExisteException si el episodio de dolor no existe
      */
-    public List<Catalizador> getCatalizadores(Long id) throws NoExisteException;
+    public List<CatalizadorDTO> getCatalizadores(Long id) throws NoExisteException;
     
 }

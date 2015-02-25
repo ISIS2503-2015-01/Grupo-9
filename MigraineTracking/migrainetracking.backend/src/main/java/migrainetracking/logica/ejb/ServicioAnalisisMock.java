@@ -8,8 +8,8 @@ package migrainetracking.logica.ejb;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.logica.interfaces.IServicioAnalisisMockRemote;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaCatalizador;
@@ -62,8 +62,8 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
      * @return
      */
     public static ServicioAnalisisMock getInstance(){
-        boolean pruebaCarga = false;
-        if(instancia == null || pruebaCarga){
+        boolean sinSingleton = true;
+        if(instancia == null || sinSingleton){
             instancia = new ServicioAnalisisMock();
         }
         return instancia;
@@ -73,8 +73,8 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
     // Metodos
     //---------------------------------------------------------------------------
     @Override
-    public List<Catalizador> getCatalizadores(Long id) throws NoExisteException {
-       EpisodioDolor ep = (EpisodioDolor) persistenciaEpisodios.findById(EpisodioDolor.class, id);
+    public List<CatalizadorDTO> getCatalizadores(Long id) throws NoExisteException {
+       EpisodioDolorDTO ep = (EpisodioDolorDTO) persistenciaEpisodios.findById(EpisodioDolorDTO.class, id);
        if( ep ==null){
            throw new NoExisteException("El episodio ese no existe en el sistema");
        }
