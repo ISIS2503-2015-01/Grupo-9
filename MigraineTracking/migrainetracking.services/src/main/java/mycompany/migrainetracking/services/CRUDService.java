@@ -19,10 +19,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.Medicamento;
-import migrainetracking.dto.Regla;
-import migrainetracking.dto.Sintoma;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.MedicamentoDTO;
+import migrainetracking.dto.ReglaDTO;
+import migrainetracking.dto.SintomaDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.ejb.ServiciosCRUDMock;
 import migrainetracking.logica.interfaces.IServiciosCRUDMockRemote;
@@ -55,7 +55,7 @@ public class CRUDService {
     @POST
     @Path("/create/Sintoma")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createSintoma(Sintoma s) throws JSONException
+    public Response createSintoma(SintomaDTO s) throws JSONException
     {
         JSONObject resp = new JSONObject();
         try
@@ -73,7 +73,7 @@ public class CRUDService {
     @POST
     @Path("/create/Catalizador")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createCatalizador(Catalizador c) throws JSONException
+    public Response createCatalizador(CatalizadorDTO c) throws JSONException
     {
         JSONObject resp = new JSONObject();
         try
@@ -91,7 +91,7 @@ public class CRUDService {
     @POST
     @Path("/create/Medicamento")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createMedicamento(Medicamento m) throws JSONException
+    public Response createMedicamento(MedicamentoDTO m) throws JSONException
     {
         JSONObject resp = new JSONObject();
         try
@@ -109,7 +109,7 @@ public class CRUDService {
     @POST
     @Path("/create/Regla")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createRegla(Regla r) throws JSONException
+    public Response createRegla(ReglaDTO r) throws JSONException
     {
         JSONObject resp = new JSONObject();
         try
@@ -127,7 +127,7 @@ public class CRUDService {
     @POST
     @Path("/delete/Sintoma")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteSintoma(Sintoma s) throws JSONException{
+    public Response deleteSintoma(SintomaDTO s) throws JSONException{
         
         JSONObject rta = new JSONObject();
         try {
@@ -143,7 +143,7 @@ public class CRUDService {
     @POST
     @Path("/delete/Catalizador")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteCatalizador(Catalizador c) throws JSONException{
+    public Response deleteCatalizador(CatalizadorDTO c) throws JSONException{
         
         JSONObject rta = new JSONObject();
         try {
@@ -159,7 +159,7 @@ public class CRUDService {
     @POST
     @Path("/delete/Medicamento")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteMedicamento(Medicamento m) throws JSONException{
+    public Response deleteMedicamento(MedicamentoDTO m) throws JSONException{
         
         JSONObject rta = new JSONObject();
         try {
@@ -175,7 +175,7 @@ public class CRUDService {
     @POST
     @Path("/delete/Regla")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteRegla(Regla r) throws JSONException{
+    public Response deleteRegla(ReglaDTO r) throws JSONException{
         
         JSONObject rta = new JSONObject();
         try {
@@ -191,7 +191,7 @@ public class CRUDService {
     @POST
     @Path("/update/Sintoma")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateSintoma(Sintoma s) throws JSONException{
+    public Response updateSintoma(SintomaDTO s) throws JSONException{
         JSONObject rta = new JSONObject();
         try {
             Long id = beanCRUD.update(s);
@@ -206,7 +206,7 @@ public class CRUDService {
     @POST
     @Path("/update/Catalizador")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateCatalizador(Catalizador c) throws JSONException{
+    public Response updateCatalizador(CatalizadorDTO c) throws JSONException{
         JSONObject rta = new JSONObject();
         try {
             Long id = beanCRUD.update(c);
@@ -221,7 +221,7 @@ public class CRUDService {
     @POST
     @Path("/update/Medicamento")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateMedicamento(Medicamento m) throws JSONException{
+    public Response updateMedicamento(MedicamentoDTO m) throws JSONException{
         JSONObject rta = new JSONObject();
         try {
             Long id = beanCRUD.update(m);
@@ -236,7 +236,7 @@ public class CRUDService {
     @POST
     @Path("/update/Regla")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateRegla(Regla r) throws JSONException{
+    public Response updateRegla(ReglaDTO r) throws JSONException{
         JSONObject rta = new JSONObject();
         try {
             Long id = beanCRUD.update(r);
@@ -253,7 +253,7 @@ public class CRUDService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllSintomas(){
         List sintomas;
-        sintomas = beanCRUD.getAll(Sintoma.class);
+        sintomas = beanCRUD.getAll(SintomaDTO.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(sintomas).build();
     }
     //Pruebas prioridad (desempeño y escalabilidad)
@@ -262,7 +262,7 @@ public class CRUDService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllCatalizadores(){
         List catalizadores;
-        catalizadores = beanCRUD.getAll(Catalizador.class);
+        catalizadores = beanCRUD.getAll(CatalizadorDTO.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(catalizadores).build();
     }
     //Pruebas prioridad (desempeño y escalabilidad)
@@ -271,7 +271,7 @@ public class CRUDService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllMedicamentos(){
         List medicamentos;
-        medicamentos = beanCRUD.getAll(Medicamento.class);
+        medicamentos = beanCRUD.getAll(MedicamentoDTO.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(medicamentos).build();
     }
     //Pruebas no prioridad (desempeño)
@@ -280,7 +280,7 @@ public class CRUDService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllReglas(){
         List reglas;
-        reglas = beanCRUD.getAll(Regla.class);
+        reglas = beanCRUD.getAll(ReglaDTO.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(reglas).build();
     }
     

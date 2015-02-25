@@ -22,8 +22,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import migrainetracking.dto.Catalizador;
-import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.ejb.ServicioAnalisisMock;
@@ -64,9 +64,9 @@ public class RegistroEpisodioService {
     @POST
     @Path("/create/EpisodioDolor/pacid={id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createEpisdioDolor(EpisodioDolor ep,@PathParam("id")int idPac ) throws JSONException{
+    public Response createEpisdioDolor(EpisodioDolorDTO ep,@PathParam("id")int idPac ) throws JSONException{
         JSONObject rta = new JSONObject();
-         List<Catalizador> evitables  = new ArrayList<Catalizador>();
+         List<CatalizadorDTO> evitables  = new ArrayList<CatalizadorDTO>();
         try {
             Long id = beanRegEps.registrarEpisodio(ep, idPac);
             evitables = beanAnalisis.getCatalizadores( id );
@@ -82,7 +82,7 @@ public class RegistroEpisodioService {
     @Path("/getAll/EpisodiosDolor")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEpisodios(){
-        List<EpisodioDolor> eps = beanRegEps.getEpisodios();
+        List<EpisodioDolorDTO> eps = beanRegEps.getEpisodios();
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(eps).build();
     }
     
@@ -90,7 +90,7 @@ public class RegistroEpisodioService {
     @Path("/getEpisodios/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEpisiodiosByPaciente(@PathParam("id") int noIdPaciente){
-        List<EpisodioDolor> eps = beanRegEps.getEpisodiosPorPaciente(noIdPaciente);
+        List<EpisodioDolorDTO> eps = beanRegEps.getEpisodiosPorPaciente(noIdPaciente);
         return Response.status(Response.Status.OK).entity(eps).build();
     }
     

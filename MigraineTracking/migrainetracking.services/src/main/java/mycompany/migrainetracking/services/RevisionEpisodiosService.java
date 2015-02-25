@@ -22,7 +22,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import migrainetracking.dto.EpisodioDolor;
+import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.logica.ejb.ServicioRevisionEpisodiosMock;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
@@ -54,7 +54,7 @@ public class RevisionEpisodiosService {
     @Path("/getEpisodios/pacid={id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEpsByPacId(@PathParam("id") Long id) {
-        List<EpisodioDolor> eps = revEpService.getEpisodiosById(id);
+        List<EpisodioDolorDTO> eps = revEpService.getEpisodiosById(id);
         return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(eps).build();
     }
     //Pruebas prioridad (desempeño y escalabilidad) a nivel de Doctor, probar que funcione
@@ -64,7 +64,7 @@ public class RevisionEpisodiosService {
     public Response getEpsByFechas(@PathParam("id") int noIdentificacion, @PathParam("fechain") String fechain, @PathParam("fechafin") String fechafin) throws ParseException, JSONException {
         Date fecha_in = new SimpleDateFormat("yyyy-MM-dd").parse(fechain);
         Date fecha_fin = new SimpleDateFormat("yyyy-MM-dd").parse(fechafin);
-        List<EpisodioDolor> eps;
+        List<EpisodioDolorDTO> eps;
         try {
             eps = revEpService.getEpisodioByFechas(fecha_in, fecha_fin, noIdentificacion);
         } catch (NoExisteException ex) {

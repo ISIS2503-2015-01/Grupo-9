@@ -22,8 +22,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import migrainetracking.dto.Doctor;
-import migrainetracking.dto.Paciente;
+import migrainetracking.dto.DoctorDTO;
+import migrainetracking.dto.PacienteDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.ejb.ServicioRegistroUsuariosMock;
@@ -57,7 +57,7 @@ public class RegistroUsuariosService {
     @POST
     @Path("/create/Doctor")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createDoctor(Doctor doctorDTO) throws JSONException {
+    public Response createDoctor(DoctorDTO doctorDTO) throws JSONException {
         JSONObject resp = new JSONObject();
         try {
             Long id = userRegService.crearUsuario(doctorDTO);
@@ -72,7 +72,7 @@ public class RegistroUsuariosService {
     @POST
     @Path("/create/Paciente")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createPaciente(Paciente pacienteDTO) throws JSONException{
+    public Response createPaciente(PacienteDTO pacienteDTO) throws JSONException{
         JSONObject resp = new JSONObject();
         try {
             Long id = userRegService.crearUsuario(pacienteDTO);
@@ -87,7 +87,7 @@ public class RegistroUsuariosService {
     @POST
     @Path("/delete/Doctor")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteDoctor(Doctor docDto) throws JSONException{
+    public Response deleteDoctor(DoctorDTO docDto) throws JSONException{
         
         JSONObject rta = new JSONObject();
         try {
@@ -103,7 +103,7 @@ public class RegistroUsuariosService {
      @POST
     @Path("/delete/Paciente")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deletePaciente(Paciente pacDto) throws JSONException{
+    public Response deletePaciente(PacienteDTO pacDto) throws JSONException{
         
         JSONObject rta = new JSONObject();
         try {
@@ -119,7 +119,7 @@ public class RegistroUsuariosService {
     @POST
     @Path("/update/Paciente")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updatePaciente(Paciente pacDto) throws JSONException{
+    public Response updatePaciente(PacienteDTO pacDto) throws JSONException{
         JSONObject rta = new JSONObject();
         try {
             Long id = userRegService.actualizarUsuario(pacDto);
@@ -134,7 +134,7 @@ public class RegistroUsuariosService {
     @POST
     @Path("/update/Doctor")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateDoctor(Doctor docDto) throws JSONException{
+    public Response updateDoctor(DoctorDTO docDto) throws JSONException{
         JSONObject rta = new JSONObject();
         try {
             Long id = userRegService.actualizarUsuario(docDto);
@@ -150,8 +150,8 @@ public class RegistroUsuariosService {
     @Path("/getAll/Doctores")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllDoctors(){
-        List<Doctor> docs;
-        docs = userRegService.getUsuarios(Doctor.class);
+        List<DoctorDTO> docs;
+        docs = userRegService.getUsuarios(DoctorDTO.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(docs).build();
     }
     
@@ -159,8 +159,8 @@ public class RegistroUsuariosService {
     @Path("/getAll/Pacientes")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPacients(){
-        List<Paciente> pacs;
-        pacs = userRegService.getUsuarios(Paciente.class);
+        List<PacienteDTO> pacs;
+        pacs = userRegService.getUsuarios(PacienteDTO.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacs).build();
     }
     
