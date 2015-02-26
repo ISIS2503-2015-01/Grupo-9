@@ -21,21 +21,21 @@ import javax.persistence.Temporal;
  * @author estudiante
  */
 @Entity
-public class Doctor implements Serializable {
+public class Paciente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
      /**
-     * El nombre del doctor
+     * El nombre del paciente
      */
     private String nombre;
     
     /**
-     * El número de identificación del doctor
+     * El número de identificación del paciente.(Pendiente un non-clust index) 
      */
-    private int noIdentificacion; // pending non-clustered index
+    private int noIdentificacion;
     
     /**
      * Fecha de Nacimiento del Usuario
@@ -44,34 +44,41 @@ public class Doctor implements Serializable {
     private Date fechaNacimiento;
 
     /**
-     * La lista de pacientes
+     * El peso del paciente
      */
-    
-    @OneToMany(orphanRemoval = false)
-    private List<Paciente> pacientes;
+    private int peso;
     
     /**
-     * La lista de colegas que pueden brindar una segunda opinión
+     * La estatura del paciente
      */
-    
-    @OneToMany(orphanRemoval = false)
-    private List<Doctor> colegas;
+    private int estatura;
     
     /**
-     * La especialidad del doctor
-     * (e.g. neurologia, medicina general)
+     * Los medicamentos que toma a diario el paciente
      */
-    private String especialidad;
+    @OneToMany(orphanRemoval = true)
+    private List<Medicamento> medicamentosDiarios;
+    
+    /**
+     * La lista de habitos que tiene el paciente
+     */
+    @OneToMany(orphanRemoval = true)
+    private List<Catalizador> habitos; // Estos deben ser de tipo habito...
+    
+    /**
+     * La lista con los episodios de dolor que ha tenido el paciente
+     */
+    @OneToMany(orphanRemoval=true,mappedBy="paciente")
+    private List<EpisodioDolor> episodios;
     
     
-    public Doctor(){
-    
+    public Paciente(){
+        
     }
     
-    //--------------------------------------------------------------------------
-    // METODOS
-    //--------------------------------------------------------------------------
-    
+    //-------------------------------------------------------------------------
+    //Metodos
+    //-------------------------------------------------------------------------
     public Long getId() {
         return id;
     }
@@ -104,28 +111,44 @@ public class Doctor implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public List<Paciente> getPacientes() {
-        return pacientes;
+    public int getPeso() {
+        return peso;
     }
 
-    public void setPacientes(List<Paciente> pacientes) {
-        this.pacientes = pacientes;
+    public void setPeso(int peso) {
+        this.peso = peso;
     }
 
-    public List<Doctor> getColegas() {
-        return colegas;
+    public int getEstatura() {
+        return estatura;
     }
 
-    public void setColegas(List<Doctor> colegas) {
-        this.colegas = colegas;
+    public void setEstatura(int estatura) {
+        this.estatura = estatura;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
+    public List<Medicamento> getMedicamentosDiarios() {
+        return medicamentosDiarios;
     }
 
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
+    public void setMedicamentosDiarios(List<Medicamento> medicamentosDiarios) {
+        this.medicamentosDiarios = medicamentosDiarios;
+    }
+
+    public List<Catalizador> getHabitos() {
+        return habitos;
+    }
+
+    public void setHabitos(List<Catalizador> habitos) {
+        this.habitos = habitos;
+    }
+
+    public List<EpisodioDolor> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<EpisodioDolor> episodios) {
+        this.episodios = episodios;
     }
 
     
@@ -140,10 +163,10 @@ public class Doctor implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Doctor)) {
+        if (!(object instanceof Paciente)) {
             return false;
         }
-        Doctor other = (Doctor) object;
+        Paciente other = (Paciente) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -152,7 +175,7 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString() {
-        return "migrainetracking.persistencia.Entities.Doctor[ id=" + id + " ]";
+        return "migrainetracking.persistencia.Entities.Paciente[ id=" + id + " ]";
     }
     
 }

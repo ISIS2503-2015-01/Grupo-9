@@ -23,16 +23,12 @@ import org.fluttercode.datafactory.impl.DataFactory;
  *
  * @author Personal
  */
-public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaEpisodioDolor {
+public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster implements IServicioPersistenciaEpisodioDolor {
 
     //----------------------------------------------------------------------
     // Atributos
     //----------------------------------------------------------------------
-    /**
-     * Atributo que contiene los episodios del sistema
-     */
-    private List<EpisodioDolorDTO> episodios;
-
+    
     /**
      * Atributo para manejar la instanciacion de la clase
      */
@@ -45,30 +41,8 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
      * Metodo constructor sin argumentos
      */
     public ServicioPersistenciaEpisodioDolor() {
-        if (this.episodios == null) {
-            episodios = new ArrayList<EpisodioDolorDTO>();
-            /*Dataos pruebas funcionalidades*/
-            int numData = 30;
-            String[] loc = {"Alrededor del ojo", "Mitad derecha de la cabeza", "Mitad izquierda de la cabeza", "Frente del ojo", "Mejilla", "Nariz", "Encias"};
-            Integer[] intens = {1, 2, 3, 4, 5};
-            Random rand = new Random();
-            for (int i = 0; i < numData; i++) {
-                DataFactory df = new DataFactory();
-                EpisodioDolorDTO ep = new EpisodioDolorDTO();
-                ep.setId((long) i);
-                Date endDate = new java.util.Date();
-                ep.setFecha(df.getDateBetween(new Date(endDate.getTime() - 60 * 24 * 3600 * 1000), endDate));
-                ep.setIntensidadDolor(df.getItem(intens));
-                ep.setLocalizacion(df.getItem(loc));
-
-                List<PacienteDTO> pacientes = ServicioPersistenciaPaciente.getInstance().getPacientes();
-                PacienteDTO pac = pacientes.get(df.getNumberBetween(0, pacientes.size() - 1));
-                pac.getEpisodios().add(ep);
-
-                this.episodios.add(ep);
-            }
-            /*Datos pruebas de carga (A mano y poquitos) [rampup = 1 seg && loopcount = 1] */
-        }
+        
+            super();        
     }
 
     /**
@@ -96,7 +70,7 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
         EpisodioDolorDTO ep = (EpisodioDolorDTO) obj;
-        this.episodios.add(ep);
+        
         Utils.printf("EpisodioDolor(" + ep.getId() + ") was created");
 
     }
@@ -109,13 +83,7 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
     @Override
     public void update(Object obj) {
         EpisodioDolorDTO toEdit = (EpisodioDolorDTO) obj;
-        for (int i = 0; i < episodios.size(); i++) {
-            EpisodioDolorDTO tempEp = episodios.get(i);
-            if (toEdit.equals(tempEp)) {
-                episodios.set(i, toEdit);
-                break;
-            }
-        }
+       
     }
 
     /**
@@ -128,7 +96,7 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
     public void delete(Object obj) throws OperacionInvalidaException {
         EpisodioDolorDTO ep = (EpisodioDolorDTO) obj;
         if (findById(EpisodioDolorDTO.class, ep) != null) {
-            this.episodios.remove(ep);
+            
             Utils.printf("EpisodioDolor(" + ep.getId() + ") was deleted");
         } else {
             throw new OperacionInvalidaException("El EpisodioDolor(" + ep.getId() + ") no existe en el sistema");
@@ -143,7 +111,7 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
      */
     @Override
     public List findAll(Class c) {
-        return this.episodios;
+        return null;
     }
 
     /**
@@ -156,22 +124,14 @@ public class ServicioPersistenciaEpisodioDolor implements IServicioPersistenciaE
     @Override
     public Object findById(Class c, Object id) {
         Long nId = Long.parseLong(id.toString());
-        for (EpisodioDolorDTO ep : this.episodios) {
-            if (ep.getId().equals(nId)) {
-                return ep;
-            }
-        }
+        
         return null;
     }
 
     @Override
     public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, List<EpisodioDolorDTO> episodiosDelPaciente) {
         List<EpisodioDolorDTO> resp = new ArrayList<EpisodioDolorDTO>();
-        for (EpisodioDolorDTO ep : episodiosDelPaciente) {
-            if (ep.getFecha().after(fecha_in) && ep.getFecha().before(fecha_fin)) {
-                resp.add(ep);
-            }
-        }
+       
         return resp;
     }
 

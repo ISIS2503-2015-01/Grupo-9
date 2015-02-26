@@ -21,7 +21,8 @@ import org.fluttercode.datafactory.impl.DataFactory;
  *
  * @author Personal
  */
-public class ServicioPersistenciaPaciente implements IServicioPersistenciaPaciente {
+public class ServicioPersistenciaPaciente extends PersistenceServiceMaster implements IServicioPersistenciaPaciente 
+{
     //----------------------------------------------------------------------
     // Atributos
     //----------------------------------------------------------------------
@@ -30,38 +31,21 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
      * Atruto para manejar la instanciacion de la clase
      */
     private static ServicioPersistenciaPaciente instancia;
-    
-    /**
-     * Lista de pacientes en el sistema
-     */
-    private List<PacienteDTO> pacientes;
 
     //----------------------------------------------------------------------
     // Constructores
     //----------------------------------------------------------------------
-    
     /**
      * Constructor sin argumentos
      */
     public ServicioPersistenciaPaciente() {
-        if (this.pacientes == null) {
-            this.pacientes = new ArrayList<PacienteDTO>();
-            /* Datos pruebas funcionalidades*/
-            int numData = 20;
-            for (int i = 0; i < numData; i++) {
-                DataFactory df = new DataFactory();
-                String nomb = df.getFirstName() +" "+ df.getLastName() ;
-                int ced = df.getNumberBetween(80000000, 110000000);
-                Date fechNac = df.getBirthDate();
-                PacienteDTO temp = new PacienteDTO(nomb, ced, fechNac,89, 180);
-                this.pacientes.add(temp);
-            }
-            /*Datos deterministicos prueba carga (A mano)*/
-        }
+        super();
+
     }
 
     /**
      * Metodo que se encarga de la instanciacion de la clase
+     *
      * @return la instancia de la clase
      */
     public static ServicioPersistenciaPaciente getInstance() {
@@ -77,6 +61,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
 
     /**
      * Metodo que se encarga de crear a un paciente
+     *
      * @param obj el paciente que se va a crear
      * @throws OperacionInvalidaException si no se puede crear el paciente
      */
@@ -84,7 +69,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     public void create(Object obj) throws OperacionInvalidaException {
         PacienteDTO newPac = (PacienteDTO) obj;
         if (findById(PacienteDTO.class, newPac.getNoIdentificacion()) == null) {
-            pacientes.add(newPac);
+
             Utils.printf("New paciente(" + newPac.getNombre() + ") was ADDED");
         } else {
             throw new OperacionInvalidaException("El paciente que quiere agregar ya existe en el sistema");
@@ -93,23 +78,17 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
 
     /**
      * Metodo que se encarga de editar el paciente que se da por parametro
+     *
      * @param obj el paciente que se va a editar
      */
     @Override
     public void update(Object obj) {
         PacienteDTO toEdit = (PacienteDTO) obj;
-        for (int i = 0; i < pacientes.size(); i++) {
-            PacienteDTO tempPac = pacientes.get(i);
-            if (toEdit.equals(tempPac)) {
-                pacientes.set(i, toEdit);
-                Utils.printf("New paciente(" + tempPac.getNombre() + ") was UPDATED");
-                break;
-            }
-        }
     }
 
     /**
      * Metodo que se encarga de eliminar el paciente que se da por parametro
+     *
      * @param obj el paciente que se quiere eliminar
      * @throws OperacionInvalidaException si no se puede eliminar el paciente
      */
@@ -117,7 +96,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     public void delete(Object obj) throws OperacionInvalidaException {
         PacienteDTO oldPac = (PacienteDTO) obj;
         if (findById(PacienteDTO.class, oldPac.getNoIdentificacion()) != null) {
-            pacientes.remove(oldPac);
+           
             Utils.printf("Paciente(" + oldPac.getNombre() + ")was DELETED");
         } else {
             throw new OperacionInvalidaException("El paciente que quiere eliminar no existe en el sistema");
@@ -126,16 +105,19 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
 
     /**
      * Metodo que se encarga de retornar a todos los paciente
-     * @param c la clase a la que pertenecen los elementos que se quieren retornar
+     *
+     * @param c la clase a la que pertenecen los elementos que se quieren
+     * retornar
      * @return todos los pacientes
      */
     @Override
     public List findAll(Class c) {
-        return this.pacientes;
+        return null;
     }
 
     /**
      * Metodo que retorna al paciente que tiene el id dado por parametro
+     *
      * @param c la clase a la que pertence el elemento que se va a retornar
      * @param id el id del paciente
      * @return el paciente con el id dado por parameto
@@ -143,30 +125,29 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     @Override
     public Object findById(Class c, Object id) {
         int noId = Integer.parseInt(id.toString());
-        for (PacienteDTO paciente : pacientes) {
-            if (paciente.getNoIdentificacion() == noId) {
-                return paciente;
-            }
-        }
+        
         return null;
     }
 
     //----- find all hace la misma monda.
     public List<PacienteDTO> getPacientes() {
-        return pacientes;
+        return null;
     }
 
     /**
      * metodo que se encarga de agregarle un episodio al paciente
+     *
      * @param nuevo el nuevo episodio
-     * @param noIdPaciente el id del paciente al cual se le va a agregar el episodio
-     * @return el id del paciente al cual se le agrego el episodio. null en caso que no se halla agregado
+     * @param noIdPaciente el id del paciente al cual se le va a agregar el
+     * episodio
+     * @return el id del paciente al cual se le agrego el episodio. null en caso
+     * que no se halla agregado
      */
     @Override
     public Long agregarEpsiodio(EpisodioDolorDTO nuevo, int noIdPaciente) {
         PacienteDTO p = (PacienteDTO) findById(PacienteDTO.class, noIdPaciente);
         if (p != null) {
-            p.getEpisodios().add(nuevo);
+            
             return (long) noIdPaciente;
         } else {
             return null;
@@ -175,6 +156,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
 
     /**
      * Metodo que se encarga de eliminar un episodio de un paciente
+     *
      * @param viejo el episodio que se va a eliminar
      * @param noIdPaciente el id del paciene dueno del episodio
      * @return el id del paciente al cual se le elimino el episodio
@@ -183,7 +165,7 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     public Long eliminarEpisodio(EpisodioDolorDTO viejo, int noIdPaciente) {
         PacienteDTO p = (PacienteDTO) findById(PacienteDTO.class, noIdPaciente);
         if (p != null) {
-            p.getEpisodios().remove(viejo);
+          
             return (long) noIdPaciente;
         } else {
             return null;
@@ -191,7 +173,8 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     }
 
     /**
-     * Metodo que se encarga de actualizar un episodio 
+     * Metodo que se encarga de actualizar un episodio
+     *
      * @param toEdit el episodio que se va a editar
      * @param noIdPaciente el id del paciente dueno del episodio
      * @return el id del paciente al cual se le edito el episodio
@@ -200,29 +183,23 @@ public class ServicioPersistenciaPaciente implements IServicioPersistenciaPacien
     public Long actualizarEpsiodio(EpisodioDolorDTO toEdit, int noIdPaciente) {
         PacienteDTO p = (PacienteDTO) findById(PacienteDTO.class, noIdPaciente);
         if (p != null) {
-            List<EpisodioDolorDTO> eps = p.getEpisodios();
-            for (int i = 0; i < eps.size(); i++) {
-                EpisodioDolorDTO tempEp = eps.get(i);
-                if (toEdit.equals(tempEp)) {
-                    eps.set(i, tempEp);
-                    return tempEp.getId();
-                }
-            }
+           
         }
-        
         return null;
     }
 
     /**
-     *Metodo que se encarga de retornar los episodios de un paciente dado su id 
+     * Metodo que se encarga de retornar los episodios de un paciente dado su id
+     *
      * @param noId el id del paciente
-     * @return los episodios del paciente 
+     * @return los episodios del paciente
      */
     @Override
     public List<EpisodioDolorDTO> getEpisodiosByPaciente(int noId) {
         PacienteDTO p = (PacienteDTO) findById(PacienteDTO.class, noId);
-        assert p==null:"No se cumplio la precondicion del metodo. Revise implementacion web";
+        assert p == null : "No se cumplio la precondicion del metodo. Revise implementacion web";
         System.out.println(p);
         return p.getEpisodios();
     }
+    
 }

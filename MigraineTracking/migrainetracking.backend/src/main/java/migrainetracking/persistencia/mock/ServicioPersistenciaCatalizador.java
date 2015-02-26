@@ -8,8 +8,11 @@ package migrainetracking.persistencia.mock;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
+import migrainetracking.persistencia.conexion.PersistenceManager;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaCatalizador;
 import migrainetracking.utils.Utils;
 
@@ -17,16 +20,11 @@ import migrainetracking.utils.Utils;
  *
  * @author Personal
  */
-public class ServicioPersistenciaCatalizador implements IServicioPersistenciaCatalizador{
+public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster implements IServicioPersistenciaCatalizador {
     
     //----------------------------------------------------------------------
     // Atributos
     //----------------------------------------------------------------------
-    
-    /**
-     * La lista que contiene a los catalizadores
-     */
-    private List<CatalizadorDTO> catalizadores;
     
     /**
      * 
@@ -37,11 +35,8 @@ public class ServicioPersistenciaCatalizador implements IServicioPersistenciaCat
     // Constructores
     //----------------------------------------------------------------------
     public ServicioPersistenciaCatalizador()
-    {
-        if(catalizadores==null)
-        {
-            catalizadores = new ArrayList();
-        }
+    {   
+        super();
     }
     
     public static ServicioPersistenciaCatalizador getInstance()
@@ -58,64 +53,30 @@ public class ServicioPersistenciaCatalizador implements IServicioPersistenciaCat
 
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
-        CatalizadorDTO nuevo = (CatalizadorDTO) obj;
-        if(findById(CatalizadorDTO.class, nuevo.getId())==null)
-        {
-            catalizadores.add(nuevo);
-            Utils.printf("New catalizador(" + nuevo.getEspecificacion()+ ") was added");
-        }
-        else
-        {
-            throw new OperacionInvalidaException("El catalizador que se quiere agregar ya existe.");
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void update(Object obj) {
-        CatalizadorDTO update = (CatalizadorDTO) obj;
-        for(int i=0;i<catalizadores.size();i++)
-        {
-            CatalizadorDTO actual = catalizadores.get(i);
-            if(actual.getId()==update.getId())
-            {
-                catalizadores.set(i, update);
-                Utils.printf("El catalizador " + update.getEspecificacion() + " se ha actualizado" );
-                break;
-            }
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        CatalizadorDTO borrar = (CatalizadorDTO) obj;
-        if(findById(CatalizadorDTO.class,borrar.getId())!=null)
-        {
-            catalizadores.remove(borrar);
-            Utils.printf("Se ha eliminado el catalizador " + borrar.getEspecificacion());
-        }
-        else
-        {
-            throw new OperacionInvalidaException("El catalizador " + borrar.getEspecificacion() + " no se puede borrar, porque no existe en el sistema");
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List findAll(Class c) {
-        return this.catalizadores;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Object findById(Class c, Object id) {
-        long idNo = Long.parseLong(id.toString());
-        for(CatalizadorDTO cat: catalizadores)
-        {
-            if(cat.getId()==idNo)
-            {
-                return cat;
-            }
-        }
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
     
     

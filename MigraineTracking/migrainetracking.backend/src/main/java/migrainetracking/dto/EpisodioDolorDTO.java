@@ -59,6 +59,7 @@ public class EpisodioDolorDTO {
      */
     private List<MedicamentoDTO> medicamentosActuales;
     
+    private Long pacienteId;
     //-----------------------------------------------
     //Constructor
     //-----------------------------------------------
@@ -67,9 +68,7 @@ public class EpisodioDolorDTO {
      * Metodo constructor sin parametros
      */
     public EpisodioDolorDTO() {
-        sintomas = new ArrayList<SintomaDTO>();
-        catalizadores = new ArrayList<CatalizadorDTO>();
-        medicamentosActuales = new ArrayList<MedicamentoDTO>();
+        
     }
 
     /**
@@ -220,4 +219,15 @@ public class EpisodioDolorDTO {
     public void setHorasDeSueño(int horasDeSueño) {
         this.horasDeSueño = horasDeSueño;
     }
+
+    public Long getPacienteId() {
+        return pacienteId;
+    }
+
+    public void setPacienteId(Long pacienteId) {
+        this.pacienteId = pacienteId;
+    }
+    
+    
+    
 }
