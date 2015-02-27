@@ -27,10 +27,30 @@ public class DoctorConverter {
         
         List<PacienteDTO> pacs = new ArrayList<PacienteDTO>();
         for( Paciente p : entity.getPacientes() ){
-            // convierto paciente a dto y agrego.
+            pacs.add( PacienteConverter.entityToDto(p));
         }
+        
+        dto.setPacientes(pacs);
+        
         return dto;
     }
     
+    public static Doctor dtoToEntity(DoctorDTO dto){
+        Doctor resp= new Doctor();
+        resp.setId(dto.getId());
+        resp.setNombre(dto.getNombre());
+        resp.setNoIdentificacion(dto.getNoIdentificacion());
+        resp.setEspecialidad(dto.getEspecialidad());
+        resp.setFechaNacimiento(dto.getFechaNacimiento());
+        
+        List<Paciente> pacs = new ArrayList<Paciente>();
+        for( PacienteDTO p : dto.getPacientes() ){
+            pacs.add( PacienteConverter.dtoToEntity(p));
+        }
+        
+        resp.setPacientes(pacs);
+        
+        return resp;
+    }
     
 }
