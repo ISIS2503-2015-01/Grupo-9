@@ -20,6 +20,9 @@ public class PacienteDTO {
     // Atributos
     //-----------------------------------------------------
     
+    // Consecutivo identificador del paciente
+    private Long id;
+    
     /**
      * El nombre del paciente
      */
@@ -96,6 +99,15 @@ public class PacienteDTO {
     // Metodos
     //-----------------------------------------------------
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    
     /**
      * Metodo que retorna el nombre del paciente
      * @return el nombre del paciente
