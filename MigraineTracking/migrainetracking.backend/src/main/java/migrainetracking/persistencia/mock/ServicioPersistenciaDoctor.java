@@ -116,8 +116,6 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
      */
     @Override
     public List findAll(Class c) {
-        // prueba
-        em.createNativeQuery("SELECT u.* FROM SYS.SYSCOLUMNS u ");
         return null;
     }
 

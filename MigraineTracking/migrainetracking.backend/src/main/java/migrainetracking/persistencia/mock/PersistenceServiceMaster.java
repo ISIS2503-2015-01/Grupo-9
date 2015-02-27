@@ -16,11 +16,11 @@ import migrainetracking.persistencia.conexion.PersistenceManager;
 public class PersistenceServiceMaster {
     
     @PersistenceContext(unitName="migraineTrackingPU")
-    protected EntityManager em;
+    protected EntityManager entityMgr;
     
     public PersistenceServiceMaster(){
         try{
-            this.em = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
+            this.entityMgr = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
         }
         catch(Exception e){}
     }
