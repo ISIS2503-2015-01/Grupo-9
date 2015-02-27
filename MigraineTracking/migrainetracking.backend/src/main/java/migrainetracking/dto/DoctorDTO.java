@@ -43,11 +43,7 @@ public class DoctorDTO {
      */
     private List<PacienteDTO> pacientes;
     
-    /**
-     * La lista de colegas que pueden brindar una segunda opinión
-     */
-    private List<DoctorDTO> colegas;
-    
+
     /**
      * La especialidad del doctor
      * (e.g. neurologia, medicina general)
@@ -64,7 +60,6 @@ public class DoctorDTO {
      */
     public DoctorDTO() {
         pacientes = new ArrayList<PacienteDTO>();
-        colegas = new ArrayList<DoctorDTO>();
     }
 
     /**
@@ -82,7 +77,6 @@ public class DoctorDTO {
         this.fechaNacimiento=fechaNacimiento;
         this.especialidad = especialidad;
         pacientes = new ArrayList<PacienteDTO>();
-        colegas = new ArrayList<DoctorDTO>();
         
     }
 
@@ -161,22 +155,6 @@ public class DoctorDTO {
      */
     public void setPacientes(List<PacienteDTO> pacientes) {
         this.pacientes = pacientes;
-    }
-
-    /**
-     * Devuelve la lista de colegas asociados al doctor para dar una segunda opinion
-     * @return la lista de doctores
-     */
-    public List<DoctorDTO> getColegas() {
-        return colegas;
-    }
-
-    /**
-     * Modifica la lista de colegas asociados al doctor
-     * @param colegas la lista de doctores
-     */
-    public void setColegas(List<DoctorDTO> colegas) {
-        this.colegas = colegas;
     }
 
     /**

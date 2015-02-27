@@ -51,13 +51,6 @@ public class Doctor implements Serializable {
     private List<Paciente> pacientes;
     
     /**
-     * La lista de colegas que pueden brindar una segunda opinión
-     */
-    
-    @OneToMany(orphanRemoval = false)
-    private List<Doctor> colegas;
-    
-    /**
      * La especialidad del doctor
      * (e.g. neurologia, medicina general)
      */
@@ -110,14 +103,6 @@ public class Doctor implements Serializable {
 
     public void setPacientes(List<Paciente> pacientes) {
         this.pacientes = pacientes;
-    }
-
-    public List<Doctor> getColegas() {
-        return colegas;
-    }
-
-    public void setColegas(List<Doctor> colegas) {
-        this.colegas = colegas;
     }
 
     public String getEspecialidad() {
