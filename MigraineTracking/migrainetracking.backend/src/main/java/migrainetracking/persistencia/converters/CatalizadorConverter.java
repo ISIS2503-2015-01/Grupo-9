@@ -13,6 +13,12 @@ import migrainetracking.persistencia.Entities.Catalizador;
  * @author estudiante
  */
 public class CatalizadorConverter {
+   
+    /**
+     * Metodo que convierte un catalizador entity a dto
+     * @param entity el entity a convertir
+     * @return el dto resultante
+     */
     public static CatalizadorDTO entityToDTO(Catalizador entity){
         CatalizadorDTO resp = new CatalizadorDTO();
         resp.setId(entity.getId());
@@ -22,6 +28,11 @@ public class CatalizadorConverter {
         return resp;
     }
     
+    /**
+     * Metodo que convierte un dto en un entity
+     * @param dto el dto que se va a convertir
+     * @return el entity resultante
+     */
     public static Catalizador dtoToEntity(CatalizadorDTO dto){
         Catalizador resp = new Catalizador();
         resp.setId(dto.getId());

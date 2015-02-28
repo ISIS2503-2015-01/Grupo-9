@@ -13,6 +13,12 @@ import migrainetracking.persistencia.Entities.Medicamento;
  * @author estudiante
  */
 public class MedicamentoConverter {
+    
+    /**
+     * Metodo que se encarga de transformar un medicamentoEntity a un medicamentoDTO
+     * @param entity el medicamentoEntity a transformar
+     * @return el medicamentoDTO resultante
+     */
     public static MedicamentoDTO entityToDto(Medicamento entity){
         MedicamentoDTO resp = new MedicamentoDTO();
         resp.setId(entity.getId());
@@ -23,6 +29,11 @@ public class MedicamentoConverter {
         return resp;
     }
     
+    /**
+     * Metodo que se encarga de convertir un medicmanetoDTO a un medicamentoEntity
+     * @param dto el medicamentoDTO a transformar
+     * @return el medicamentoEntity resultante
+     */
     public static Medicamento dtoToEntity(MedicamentoDTO dto){
         Medicamento resp = new Medicamento();
         resp.setId(dto.getId());

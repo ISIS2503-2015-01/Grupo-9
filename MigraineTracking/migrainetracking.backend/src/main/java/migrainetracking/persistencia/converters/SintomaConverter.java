@@ -13,6 +13,12 @@ import migrainetracking.persistencia.Entities.Sintoma;
  * @author estudiante
  */
 public class SintomaConverter {
+    
+    /**
+     * Metodo que se encarga de transformar un sintomaEntity en un sintomaDTO
+     * @param entity el sintomaEntity a transformar
+     * @return el sintomaDTO resultante
+     */
     public static SintomaDTO entityToDto(Sintoma entity){
         SintomaDTO dto = new SintomaDTO();
         dto.setId(entity.getId());
@@ -22,6 +28,11 @@ public class SintomaConverter {
         return dto;
     }
     
+    /**
+     *Metodo que se encarga de transformar un sintomaDTO en un sintomaEntity 
+     * @param dto el sintomaDTO a transformar
+     * @return el sintomaEntity resultante
+     */
     public static Sintoma dtoToEntity(SintomaDTO dto){
         Sintoma entity = new Sintoma();
         entity.setId(dto.getId());
@@ -30,5 +41,4 @@ public class SintomaConverter {
         entity.setNombre(dto.getNombre());
         return entity;
     }
-    
 }
