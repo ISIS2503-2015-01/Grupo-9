@@ -71,6 +71,10 @@ public class MedicamentoDTO {
     public MedicamentoDTO() {
     }
 
+    //-----------------------------------------------
+    //Metodos
+    //-----------------------------------------------
+    
     /**
      * Metodo que retorna el nombre del medicamento
      * @return el nombre del medicamento

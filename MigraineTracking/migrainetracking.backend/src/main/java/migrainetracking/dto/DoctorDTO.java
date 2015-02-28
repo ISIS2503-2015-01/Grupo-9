@@ -15,14 +15,13 @@ import java.util.List;
  */
 public class DoctorDTO {
     
-    
-   
     //-----------------------------------------------------
     // Atributos
     //-----------------------------------------------------
     
     // Consecutivo identificador del doctor
     private Long id;
+    
     /**
      * El nombre del doctor
      */
@@ -43,7 +42,6 @@ public class DoctorDTO {
      */
     private List<PacienteDTO> pacientes;
     
-
     /**
      * La especialidad del doctor
      * (e.g. neurologia, medicina general)
@@ -76,22 +74,28 @@ public class DoctorDTO {
         this.noIdentificacion=noIdentificacion;
         this.fechaNacimiento=fechaNacimiento;
         this.especialidad = especialidad;
-        pacientes = new ArrayList<PacienteDTO>();
-        
+        pacientes = new ArrayList<PacienteDTO>();    
     }
 
     //-----------------------------------------------------
     // Metodos
     //-----------------------------------------------------
 
+    /**
+     * Metodo que retorna el id del doctor
+     * @return el id del doctor
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Metodo que camibia el id del doctor por el id dado por parametro
+     * @param id el nuevo id del doctor
+     */
     public void setId(Long id) {
         this.id = id;
     }
-    
     
     /**
      * Metodo que retorna el nombre del doctor
@@ -173,6 +177,11 @@ public class DoctorDTO {
         this.especialidad = especialidad;
     }
     
+    /**
+     * Metodo para comparar el doctor con otros objetos
+     * @param obj el objeto con el que se va a comparar
+     * @return true si son iguales, false en caso contrario
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

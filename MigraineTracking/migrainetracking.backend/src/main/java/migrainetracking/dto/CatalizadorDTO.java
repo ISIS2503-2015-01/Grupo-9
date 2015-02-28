@@ -122,7 +122,4 @@ public class CatalizadorDTO {
     public void setFrecuencia(int frecuencia) {
         this.frecuencia = frecuencia;
     }
-    
-    
-    
 }
