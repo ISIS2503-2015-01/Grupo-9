@@ -22,7 +22,23 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class Doctor implements Serializable {
+    
+    //--------------------------------
+    //Constante de Serializacion
+    //--------------------------------
+    
+    /**
+     * Constante para manejar la serializacion de la clase
+     */
     private static final long serialVersionUID = 1L;
+    
+    //--------------------------------
+    //Atributos
+    //--------------------------------
+    
+    /**
+     * El id del doctor
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -56,7 +72,13 @@ public class Doctor implements Serializable {
      */
     private String especialidad;
     
+    //--------------------------------
+    //Constructor
+    //--------------------------------
     
+    /**
+     * Metodo constructor sin argumentos
+     */
     public Doctor(){
     
     }
@@ -65,56 +87,106 @@ public class Doctor implements Serializable {
     // METODOS
     //--------------------------------------------------------------------------
     
+    /**
+     * Metodo que se encarga de retornar el id del doctor
+     * @return el id del doctor
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Metodo que cambia el id del doctor por el id dado como parametro
+     * @param id el nuevo id del doctor
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Metodo que retorna el nombre del doctor
+     * @return el nombre del doctor
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Metodo que cambia el nombre del doctor por el nombre dado por parametro
+     * @param nombre el nuevo nombre del doctor
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Metodo que retorna el numero de identificacion del doctor
+     * @return el numero de indentificacion del doctor
+     */
     public int getNoIdentificacion() {
         return noIdentificacion;
     }
 
+    /**
+     * Metodo que cambia el numero de identificacion por el numero dado por parametro
+     * @param noIdentificacion el nuevo numero de identificacion del doctor
+     */
     public void setNoIdentificacion(int noIdentificacion) {
         this.noIdentificacion = noIdentificacion;
     }
 
+    /**
+     * Metodo que retorna la fecha de nacimiento del doctor
+     * @return la fecha de nacimiento del doctor
+     */
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
+    /**
+     * Metodo que cambia la fecha de nacimiento por la fecha dada por parametro
+     * @param fechaNacimiento la nueva fecha de nacimiento del doctor
+     */
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    /**
+     * Metodo que retorna los paciente que atiende el doctor
+     * @return la lista de paciente que atiende el doctor
+     */
     public List<Paciente> getPacientes() {
         return pacientes;
     }
 
+    /**
+     * Metodo que cambia la lista de pacientes que atiende el doctor
+     * @param pacientes la nueva lista de pacientes que atiende el doctor
+     */
     public void setPacientes(List<Paciente> pacientes) {
         this.pacientes = pacientes;
     }
 
+    /**
+     * Metodo que retorna la especialidad del doctor
+     * @return la especialidad del doctor
+     */
     public String getEspecialidad() {
         return especialidad;
     }
 
+    /**
+     * Metodo que cambia la especialidad del doctor
+     * @param especialidad la nueva epacialdad del doctor
+     */
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
 
-    
-    
+    /**
+     * Metodo que retorna el codigo hash del doctor
+     * @return el hashcode del doctor
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -122,6 +194,11 @@ public class Doctor implements Serializable {
         return hash;
     }
 
+    /**
+     * Metodo para comparar el doctor actual con otro objeto
+     * @param object el objeto con el cual se va a comparar
+     * @return true si son iguales, false en caso contrario
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -135,9 +212,12 @@ public class Doctor implements Serializable {
         return true;
     }
 
+    /**
+     * Metodo para convertir el doctor en un string
+     * @return el string en el cual se ha convertido el doctor
+     */
     @Override
     public String toString() {
         return "migrainetracking.persistencia.Entities.Doctor[ id=" + id + " ]";
     }
-    
 }

@@ -25,8 +25,23 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class EpisodioDolor implements Serializable {
+    
+    //--------------------------------
+    //Constante de Serializacion
+    //--------------------------------
+    
+    /**
+     * Constante para manejar la serializacion de la clase
+     */
     private static final long serialVersionUID = 1L;
     
+    //--------------------------------
+    //Atributos
+    //--------------------------------
+    
+    /**
+     * EL id del episodio de dolor
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -70,9 +85,19 @@ public class EpisodioDolor implements Serializable {
     @OneToMany(orphanRemoval = false,fetch = FetchType.LAZY)
     private List<Medicamento> medicamentosActuales;
     
+    /**
+     * El paciente dueno del episodio
+     */
     @ManyToOne
     private Paciente paciente;
 
+    //--------------------------------
+    //Constructor
+    //--------------------------------
+    
+    /**
+     * Metodo constructor sin argumentos
+     */
     public EpisodioDolor(){
         
     }
@@ -80,80 +105,155 @@ public class EpisodioDolor implements Serializable {
     //-------------------------------------------------------------------------
     //Metodos
     //-------------------------------------------------------------------------
+    
+    /**
+     * Metodo que retorna el id del episodio de dolor
+     * @return el id del episodio de dolor
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Metodo que cambia el id del episodio por el id dado por parametro
+     * @param id el nuevo id del episodio
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Metodo que retorna la fehca del episodio
+     * @return la fecha del episodio
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     * Metodo que cambia la fecha del episodio por la fecha dada por parametro
+     * @param fecha la nueva fecha del episodio
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     * Metodo que retorna la localizacion del episodio
+     * @return la localizacion del episodio
+     */
     public String getLocalizacion() {
         return localizacion;
     }
 
+    /**
+     * Metodo que cambia la localizacion por la localizacion dada por parametro
+     * @param localizacion la nueva localizacion del episodio
+     */
     public void setLocalizacion(String localizacion) {
         this.localizacion = localizacion;
     }
 
+    /**
+     * Metodo que retorna la intensidad del dolor 
+     * @return la intendisd de dolor
+     */
     public int getIntensidadDolor() {
         return intensidadDolor;
     }
 
+    /**
+     * Metodo que cambia la intensidad del dolor por la intensidad dada por parametro
+     * @param intensidadDolor la nueva intensidad del dolor
+     */
     public void setIntensidadDolor(int intensidadDolor) {
         this.intensidadDolor = intensidadDolor;
     }
 
+    /**
+     * Metodo que retorna las horas de sueno del episodio
+     * @return las horas de sueno del episodio
+     */
     public int getHorasDeSueño() {
         return horasDeSueño;
     }
 
+    /**
+     * Parametro que cambia las horas de sueno por las horas dadas por parametro
+     * @param horasDeSueño las nuevas horas de sueno
+     */
     public void setHorasDeSueño(int horasDeSueño) {
         this.horasDeSueño = horasDeSueño;
     }
 
+    /**
+     * Metodo que retorna los sintomas del episodio
+     * @return los sintomas del episodio
+     */
     public List<Sintoma> getSintomas() {
         return sintomas;
     }
 
+    /**
+     * Metodo que cambia los sintomas del episodio, por los sintomas dados por parametro
+     * @param sintomas los nuevos sintomas del episodio
+     */
     public void setSintomas(List<Sintoma> sintomas) {
         this.sintomas = sintomas;
     }
 
+    /**
+     * Metodo que retorna los catalizadores del episodio
+     * @return los episodios de los catalizadores
+     */
     public List<Catalizador> getCatalizadores() {
         return catalizadores;
     }
 
+    /**
+     * Metodo que cambia los catalizadores del episodio, por los catalizadores dados por parametro
+     * @param catalizadores los nuevos catalizadores
+     */
     public void setCatalizadores(List<Catalizador> catalizadores) {
         this.catalizadores = catalizadores;
     }
 
+    /**
+     * Metodo que retorna la lista de los medicamentos del episodio
+     * @return los medicamentos del episodio
+     */
     public List<Medicamento> getMedicamentosActuales() {
         return medicamentosActuales;
     }
 
+    /**
+     * Metodo que cambia los medicamentos, por los medicamentos dados por parametro
+     * @param medicamentosActuales los nuevos medicamentos
+     */
     public void setMedicamentosActuales(List<Medicamento> medicamentosActuales) {
         this.medicamentosActuales = medicamentosActuales;
     }
 
+    /**
+     * Metodo que retorna el paciente del cual el episodio se genero
+     * @return el paciente que registro el episodio
+     */
     public Paciente getPaciente() {
         return paciente;
     }
 
+    /**
+     * Metodo que cambia el paciente por el paciente dado como parametro
+     * @param paciente el nuevo paciente del episodio
+     */
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-
     
-    
+    /**
+     * Metodo que retorna el codigo hash del episodio
+     * @return el codigo hash del episodio
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -161,6 +261,11 @@ public class EpisodioDolor implements Serializable {
         return hash;
     }
 
+    /**
+     * Metodo para compara el episodio con otro objeto
+     * @param object el objeto con el cual se va a comparar
+     * @return true si son iguales, false en caso contrario
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -174,6 +279,10 @@ public class EpisodioDolor implements Serializable {
         return true;
     }
 
+    /**
+     * Metodo para convertir el episodio en string
+     * @return el strign resultante
+     */
     @Override
     public String toString() {
         return "migrainetracking.persistencia.Entities.EpisodioDolor[ id=" + id + " ]";
