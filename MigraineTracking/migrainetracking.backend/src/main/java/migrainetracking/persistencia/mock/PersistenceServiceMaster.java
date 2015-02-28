@@ -23,6 +23,5 @@ public class PersistenceServiceMaster {
             this.entityMgr = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
         }
         catch(Exception e){}
-    }
-    
+    }    
 }

@@ -52,4 +52,3 @@ public interface IServicioPersistenciaMockRemote {
      */
     public java.lang.Object findById(java.lang.Class c, Object id);
 }
-

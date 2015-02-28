@@ -56,8 +56,8 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
     
 
     /**
-     *
-     * @return
+     * Metodo para retornar la instanciacion de la clase
+     * @return la instancia de la clase
      */
     public static ServicioRevisionEpisodiosMock getInstance(){
         boolean sinSingleton = true;

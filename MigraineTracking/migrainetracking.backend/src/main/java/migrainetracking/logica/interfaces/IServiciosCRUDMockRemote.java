@@ -29,6 +29,7 @@ public interface IServiciosCRUDMockRemote {
      * Borra un registro en la presistence unit
      * @param o - Es el objeto generico a agregar
      * @return El id del objeto borrado
+     * @throws OperacionInvalidaException si el objeto no existe
      */
     public Long delete(Object o) throws OperacionInvalidaException;
     
@@ -46,6 +47,4 @@ public interface IServiciosCRUDMockRemote {
      * @return La lista 
      */
     public List<Object> getAll(Class clase);
-    
 }
-

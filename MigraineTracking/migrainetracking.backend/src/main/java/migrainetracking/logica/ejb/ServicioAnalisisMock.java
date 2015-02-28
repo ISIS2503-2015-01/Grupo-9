@@ -39,10 +39,13 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
     public static ServicioAnalisisMock instancia;
     
     /**
-     * persistencia para los episodios de dolor
+     * persistencia para los episodios de las reglas
      */
     IServicioPersistenciaRegla persistenciaReglas;
-    
+
+    /**
+     * Persistnecia de los episodios de dolor
+     */
     IServicioPersistenciaEpisodioDolor persistenciaEpisodios;
     //---------------------------------------------------------------------------
     // Constructor
@@ -58,8 +61,8 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
     }
     
     /**
-     *
-     * @return
+     *Metodo para retornar la instancia de la clase
+     * @return la instancia de la clase
      */
     public static ServicioAnalisisMock getInstance(){
         boolean sinSingleton = true;
@@ -72,6 +75,13 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
     //---------------------------------------------------------------------------
     // Metodos
     //---------------------------------------------------------------------------
+    
+    /**
+     * Metodo que retorna los catalizadores
+     * @param id el id del episodio de dolor del cual se quieren los catalizadores
+     * @return Los catalizadores del episodio
+     * @throws NoExisteException si el episodio no existe
+     */
     @Override
     public List<CatalizadorDTO> getCatalizadores(Long id) throws NoExisteException {
        EpisodioDolorDTO ep = (EpisodioDolorDTO) persistenciaEpisodios.findById(EpisodioDolorDTO.class, id);
@@ -80,5 +90,4 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
        }
        return persistenciaReglas.getEvitables(ep);
     }
-       
 }

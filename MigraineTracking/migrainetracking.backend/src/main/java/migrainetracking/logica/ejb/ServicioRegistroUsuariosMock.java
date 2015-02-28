@@ -70,6 +70,7 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
         }
         return instancia;
     }
+    
     //---------------------------------------------------------------------------
     // Metodos
     //---------------------------------------------------------------------------
@@ -144,5 +145,4 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
         }
         return (long) -1;
     }
-
 }

@@ -92,7 +92,6 @@ public class ServiciosCRUDMock implements IServiciosCRUDMockRemote {
     // Metodos
     //---------------------------------------------------------------------------
     
-    
     /**
      * Se encarga de crear los objetos que recibe como parametro
      * @param o el objeto a crear

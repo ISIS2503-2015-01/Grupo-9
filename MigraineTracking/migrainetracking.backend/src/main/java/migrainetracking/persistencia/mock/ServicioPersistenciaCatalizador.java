@@ -27,13 +27,17 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
     //----------------------------------------------------------------------
     
     /**
-     * 
+     * Instncia de la clase
      */
     public static ServicioPersistenciaCatalizador instancia;
     
     //----------------------------------------------------------------------
     // Constructores
     //----------------------------------------------------------------------
+    
+    /**
+     * 
+     */
     public ServicioPersistenciaCatalizador()
     {   
         super();
