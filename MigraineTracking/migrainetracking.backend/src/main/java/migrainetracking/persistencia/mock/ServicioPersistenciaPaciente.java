@@ -203,6 +203,5 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
         assert p == null : "No se cumplio la precondicion del metodo. Revise implementacion web";
         System.out.println(p);
         return p.getEpisodios();
-    }
-    
+    }  
 }

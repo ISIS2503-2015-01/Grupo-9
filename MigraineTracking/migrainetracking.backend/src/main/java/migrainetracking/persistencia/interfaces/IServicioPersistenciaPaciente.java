@@ -8,7 +8,6 @@ package migrainetracking.persistencia.interfaces;
 
 import java.util.List;
 import migrainetracking.dto.EpisodioDolorDTO;
-import migrainetracking.dto.PacienteDTO;
 
 /**
  *

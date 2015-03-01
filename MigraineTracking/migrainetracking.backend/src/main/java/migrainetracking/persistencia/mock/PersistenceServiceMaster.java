@@ -15,9 +15,15 @@ import migrainetracking.persistencia.conexion.PersistenceManager;
  */
 public class PersistenceServiceMaster {
     
+    /**
+     * Atributo para modelar el entity manager
+     */
     @PersistenceContext(unitName="migraineTrackingPU")
     protected EntityManager entityMgr;
     
+    /**
+     * Metodo constructor de la clase
+     */
     public PersistenceServiceMaster(){
         try{
             this.entityMgr = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();

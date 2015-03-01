@@ -128,11 +128,17 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
         return null;
     }
 
+    /**
+     * Metodo que retorna los episodios de un paciente en un periodo de tiempo
+     * @param fecha_in fecha en que comienzan los episodios
+     * @param fecha_fin fecha en que terminan
+     * @param episodiosDelPaciente los episodios del paciente
+     * @return los episodios que ocurrieron entre la fecha de inicio y la fecha de fin
+     */
     @Override
     public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, List<EpisodioDolorDTO> episodiosDelPaciente) {
         List<EpisodioDolorDTO> resp = new ArrayList<EpisodioDolorDTO>();
        
         return resp;
     }
-
 }

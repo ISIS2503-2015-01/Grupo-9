@@ -14,19 +14,42 @@ import migrainetracking.utils.Utils;
  * @author estudiante
  */
 public class PersistenceManager {
-        public static final boolean DEBUG = true;
+    
+    /**
+     * 
+     */
+    public static final boolean DEBUG = true;
+    
+    /**
+     * COnstante para manejar el componente singleton
+     */
     private static final PersistenceManager singleton = new PersistenceManager();
+    
+    /**
+     * Atributo que modela al entityManagerFactory para manejar la persistencia de las entidades
+     */
     protected EntityManagerFactory emf;
  
+    /**
+     * Metodo que retorna la instancia de la clase
+     * @return la instancia de la clase
+     */
     public static PersistenceManager getInstance() {
  
         return singleton;
     }
  
  
+    /**
+     * Metodo constructor de la clase sin atributos
+     */
     private PersistenceManager() {
     }
  
+    /**
+     * Metodo que retorna el entityManagerFactore
+     * @return el entityManagerFactory
+     */
     public EntityManagerFactory getEntityManagerFactory() {
  
         if (emf == null) {
@@ -35,6 +58,9 @@ public class PersistenceManager {
         return emf;
     }
  
+    /**
+     * Meotod que se encarga de cerrar el entity manager
+     */
     public void closeEntityManagerFactory() {
  
         if (emf != null) {
@@ -47,6 +73,9 @@ public class PersistenceManager {
         }
     }
  
+    /**
+     * Metodo que crea un nuevo entity manager factory
+     */
     protected void createEntityManagerFactory() {
         this.emf = Persistence.createEntityManagerFactory("migraineTrackingPU", System.getProperties());
         if (DEBUG) {
