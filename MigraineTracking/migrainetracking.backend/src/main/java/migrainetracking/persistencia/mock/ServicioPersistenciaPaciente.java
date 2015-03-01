@@ -82,8 +82,11 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
      * @param obj el paciente que se va a editar
      */
     @Override
-    public void update(Object obj) {
+    public void update(Object obj){
         PacienteDTO toEdit = (PacienteDTO) obj;
+        if(findById(PacienteDTO.class, toEdit.getNoIdentificacion())!=null){
+            Utils.printf("The paciente(" + toEdit.getNombre() + ") was UPDATED");
+        }
     }
 
     /**
