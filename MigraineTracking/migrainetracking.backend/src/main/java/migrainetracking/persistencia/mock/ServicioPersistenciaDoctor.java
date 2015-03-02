@@ -5,22 +5,11 @@
  */
 package migrainetracking.persistencia.mock;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.DoctorDTO;
-import migrainetracking.dto.PacienteDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
-import migrainetracking.persistencia.conexion.PersistenceManager;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaDoctor;
-import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.utils.Utils;
-import org.fluttercode.datafactory.impl.DataFactory;
 
 /**
  *
@@ -132,8 +121,4 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
        
         return null;
     }
-    
-    //------------------------------------------------------------------------
-    // Metodos auxiliares
-    //------------------------------------------------------------------------
 }
