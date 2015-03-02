@@ -22,27 +22,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class Doctor implements Serializable {
-    
-    //--------------------------------
-    //Constante de Serializacion
-    //--------------------------------
-    
-    /**
-     * Constante para manejar la serializacion de la clase
-     */
-    private static final long serialVersionUID = 1L;
-    
-    //--------------------------------
-    //Atributos
-    //--------------------------------
-    
-    /**
-     * El id del doctor
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
+    private static final long serialVersionUID = 1L;    
      /**
      * El nombre del doctor
      */
@@ -51,6 +31,7 @@ public class Doctor implements Serializable {
     /**
      * El número de identificación del doctor
      */
+    @Id
     private int noIdentificacion; // pending non-clustered index
     
     /**
@@ -87,21 +68,6 @@ public class Doctor implements Serializable {
     // METODOS
     //--------------------------------------------------------------------------
     
-    /**
-     * Metodo que se encarga de retornar el id del doctor
-     * @return el id del doctor
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * Metodo que cambia el id del doctor por el id dado como parametro
-     * @param id el nuevo id del doctor
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * Metodo que retorna el nombre del doctor
@@ -184,17 +150,6 @@ public class Doctor implements Serializable {
     }
 
     /**
-     * Metodo que retorna el codigo hash del doctor
-     * @return el hashcode del doctor
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    /**
      * Metodo para comparar el doctor actual con otro objeto
      * @param object el objeto con el cual se va a comparar
      * @return true si son iguales, false en caso contrario
@@ -206,18 +161,10 @@ public class Doctor implements Serializable {
             return false;
         }
         Doctor other = (Doctor) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ( this.noIdentificacion != other.noIdentificacion ) {
             return false;
         }
         return true;
     }
-
-    /**
-     * Metodo para convertir el doctor en un string
-     * @return el string en el cual se ha convertido el doctor
-     */
-    @Override
-    public String toString() {
-        return "migrainetracking.persistencia.Entities.Doctor[ id=" + id + " ]";
-    }
+   
 }

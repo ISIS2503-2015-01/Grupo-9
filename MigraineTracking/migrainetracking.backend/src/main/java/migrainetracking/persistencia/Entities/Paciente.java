@@ -31,17 +31,6 @@ public class Paciente implements Serializable {
      * Constante para manejar la serializacion de la clase
      */
     private static final long serialVersionUID = 1L;
-    
-    //-----------------------------------------------
-    //Atributos
-    //-----------------------------------------------
-    
-    /**
-     * El id generado del paciente
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
      /**
      * El nombre del paciente
@@ -51,6 +40,7 @@ public class Paciente implements Serializable {
     /**
      * El número de identificación del paciente.(Pendiente un non-clust index) 
      */
+    @Id
     private int noIdentificacion;
     
     /**
@@ -101,23 +91,7 @@ public class Paciente implements Serializable {
     //-------------------------------------------------------------------------
     //Metodos
     //-------------------------------------------------------------------------
-    
-    /**
-     * Metodo que retorna el id del paciente
-     * @return el id del paciente
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * Metodo que cambia el id por el id dado por parametro
-     * @param id el nuevo id del paciente
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+   
     /**
      * Metodo que retorna el nombre del paciente
      * @return el nombre del paciente
@@ -246,16 +220,6 @@ public class Paciente implements Serializable {
         this.episodios = episodios;
     }
 
-    /**
-     * Metodo que retorna el codigo hash del paciente
-     * @return el codigo hash del paciente
-     */
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
     /**
      * Metodo para comparar el paciente con otros objetos
@@ -269,18 +233,9 @@ public class Paciente implements Serializable {
             return false;
         }
         Paciente other = (Paciente) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ( this.noIdentificacion != other.noIdentificacion ) {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Metodo para convertir a string el paciente
-     * @return el string resultante
-     */
-    @Override
-    public String toString() {
-        return "migrainetracking.persistencia.Entities.Paciente[ id=" + id + " ]";
     }
 }

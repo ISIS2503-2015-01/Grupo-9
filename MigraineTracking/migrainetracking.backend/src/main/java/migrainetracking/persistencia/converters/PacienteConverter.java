@@ -6,6 +6,7 @@
 package migrainetracking.persistencia.converters;
 
 import java.util.ArrayList;
+import java.util.List;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.dto.MedicamentoDTO;
@@ -28,7 +29,6 @@ public class PacienteConverter {
      */
     public static PacienteDTO entityToDto(Paciente entity){
         PacienteDTO convertido = new PacienteDTO();
-        convertido.setId(entity.getId());
         convertido.setNombre(entity.getNombre());
         convertido.setNoIdentificacion(entity.getNoIdentificacion());
         convertido.setFechaNacimiento(entity.getFechaNacimiento());
@@ -65,7 +65,6 @@ public class PacienteConverter {
      */
     public static Paciente dtoToEntity(PacienteDTO dto){
         Paciente convertido = new Paciente();
-        convertido.setId(dto.getId());
         convertido.setNombre(dto.getNombre());
         convertido.setNoIdentificacion(dto.getNoIdentificacion());
         convertido.setFechaNacimiento(dto.getFechaNacimiento());
@@ -94,4 +93,22 @@ public class PacienteConverter {
         convertido.setEpisodios(eps);
         return convertido;
     }
+    
+   
+    public static List<Paciente> dtoToEntityList(List<PacienteDTO> list){
+        List<Paciente> resp = new ArrayList<Paciente>();
+        for( PacienteDTO p : list){
+            resp.add( dtoToEntity(p) );
+        }
+        return resp;
+    }
+    
+    public static List<PacienteDTO> entityToDtoList(List<Paciente> list){
+        List<PacienteDTO> resp = new ArrayList<PacienteDTO>();
+        for( Paciente p : list){
+            resp.add( entityToDto(p) );
+        }
+        return resp;
+    }
+    
 }

@@ -59,10 +59,7 @@ public class EpisodioDolorDTO {
      */
     private List<MedicamentoDTO> medicamentosActuales;
     
-    /**
-     * El id del paciente
-     */
-    private Long pacienteId;
+    private int pacienteId;
     
     //-----------------------------------------------
     //Constructor
@@ -224,19 +221,11 @@ public class EpisodioDolorDTO {
         this.horasDeSueño = horasDeSueño;
     }
 
-    /**
-     * Metodo que retorna el id del paciente
-     * @return el id del paciente
-     */
-    public Long getPacienteId() {
+    public int getPacienteId() {
         return pacienteId;
     }
 
-    /**
-     * Metodo que cmabia el id del paciente por el id dado por parametro
-     * @param pacienteId el nuevo id del paciente
-     */
-    public void setPacienteId(Long pacienteId) {
+    public void setPacienteId(int pacienteId) {
         this.pacienteId = pacienteId;
     }
 }

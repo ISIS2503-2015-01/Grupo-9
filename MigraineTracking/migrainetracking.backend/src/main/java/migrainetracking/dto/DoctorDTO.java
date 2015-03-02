@@ -19,8 +19,7 @@ public class DoctorDTO {
     // Atributos
     //-----------------------------------------------------
     
-    // Consecutivo identificador del doctor
-    private Long id;
+   
     
     /**
      * El nombre del doctor
@@ -81,21 +80,7 @@ public class DoctorDTO {
     // Metodos
     //-----------------------------------------------------
 
-    /**
-     * Metodo que retorna el id del doctor
-     * @return el id del doctor
-     */
-    public Long getId() {
-        return id;
-    }
 
-    /**
-     * Metodo que camibia el id del doctor por el id dado por parametro
-     * @param id el nuevo id del doctor
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
     
     /**
      * Metodo que retorna el nombre del doctor

@@ -17,44 +17,52 @@ import migrainetracking.persistencia.Entities.Paciente;
  * @author estudiante
  */
 public class DoctorConverter {
-    
-    /**
-     * Metodo que convierte un entity en un DTO
-     * @param entity el doctor tipo entity a convertir
-     * @return el doctorDTO resultante
-     */
-    public static DoctorDTO entityToDTO(Doctor entity){
-        DoctorDTO dto = new DoctorDTO();
-        dto.setId(entity.getId());
+
+    public static DoctorDTO entityToDTO(Doctor entity) {
+        DoctorDTO dto = new DoctorDTO();        
         dto.setNombre(entity.getNombre());
         dto.setNoIdentificacion(entity.getNoIdentificacion());
         dto.setEspecialidad(entity.getEspecialidad());
-        dto.setFechaNacimiento(entity.getFechaNacimiento());   
+        dto.setFechaNacimiento(entity.getFechaNacimiento());
+
         List<PacienteDTO> pacs = new ArrayList<PacienteDTO>();
-        for( Paciente p : entity.getPacientes() ){
-            pacs.add( PacienteConverter.entityToDto(p));
+        for (Paciente p : entity.getPacientes()) {
+            pacs.add(PacienteConverter.entityToDto(p));
         }
+
         dto.setPacientes(pacs);
+
         return dto;
     }
-    
-    /**
-     * Metodo que convierte un doctorDTO a un doctorEntity
-     * @param dto el doctorDTO que se va a convertir
-     * @return el doctorEntity resultante
-     */
-    public static Doctor dtoToEntity(DoctorDTO dto){
-        Doctor resp= new Doctor();
-        resp.setId(dto.getId());
+
+    public static Doctor dtoToEntity(DoctorDTO dto) {
+        Doctor resp = new Doctor();
         resp.setNombre(dto.getNombre());
         resp.setNoIdentificacion(dto.getNoIdentificacion());
         resp.setEspecialidad(dto.getEspecialidad());
         resp.setFechaNacimiento(dto.getFechaNacimiento());
+
         List<Paciente> pacs = new ArrayList<Paciente>();
-        for( PacienteDTO p : dto.getPacientes() ){
-            pacs.add( PacienteConverter.dtoToEntity(p));
+        for (PacienteDTO p : dto.getPacientes()) {
+            pacs.add(PacienteConverter.dtoToEntity(p));
         }
+
         resp.setPacientes(pacs);
+
+        return resp;
+    }
+
+    public static List<Doctor> dtoToEntityList(List<DoctorDTO> list) {
+        List<Doctor> resp = new ArrayList<Doctor>();
+        for (DoctorDTO d : list) 
+            resp.add(dtoToEntity(d));
+        return resp;
+    }
+
+    public static List<DoctorDTO> entityToDtoList(List<Doctor> list) {
+        List<DoctorDTO> resp = new ArrayList<DoctorDTO>();
+        for (Doctor d : list) 
+            resp.add(entityToDTO(d));
         return resp;
     }
 }

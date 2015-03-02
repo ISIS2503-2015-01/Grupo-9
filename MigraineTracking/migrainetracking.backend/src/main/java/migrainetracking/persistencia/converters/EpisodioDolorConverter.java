@@ -24,70 +24,83 @@ import migrainetracking.persistencia.mock.ServicioPersistenciaPaciente;
  * @author estudiante
  */
 public class EpisodioDolorConverter {
-    
-    /**
-     * Metodo que se encarga de transformar un episodioEntity a un episodioDTO
-     * @param entity el episodioEntity a transformar
-     * @return el EpisodioDTO resultante
-     */
-    public static EpisodioDolorDTO entityToDto(EpisodioDolor entity){
+
+    public static EpisodioDolorDTO entityToDto(EpisodioDolor entity) {
         EpisodioDolorDTO resp = new EpisodioDolorDTO();
         resp.setId(entity.getId());
         resp.setFecha(entity.getFecha());
         resp.setHorasDeSueño(entity.getHorasDeSueño());
         resp.setIntensidadDolor(entity.getIntensidadDolor());
         resp.setLocalizacion(entity.getLocalizacion());
+
         List<CatalizadorDTO> catDtoList = new ArrayList<CatalizadorDTO>();
-        for( Catalizador catEn : entity.getCatalizadores() ){
-            catDtoList.add( CatalizadorConverter.entityToDTO(catEn) ); 
+        for (Catalizador catEn : entity.getCatalizadores()) {
+            catDtoList.add(CatalizadorConverter.entityToDTO(catEn));
         }
         resp.setCatalizadores(catDtoList);
+
         List<MedicamentoDTO> medDtolist = new ArrayList<MedicamentoDTO>();
-        for( Medicamento meden : entity.getMedicamentosActuales() ){
-            medDtolist.add( MedicamentoConverter.entityToDto(meden) );
+        for (Medicamento meden : entity.getMedicamentosActuales()) {
+            medDtolist.add(MedicamentoConverter.entityToDto(meden));
         }
         resp.setMedicamentosActuales(medDtolist);
+
         List<SintomaDTO> sinDtoList = new ArrayList<SintomaDTO>();
-        for( Sintoma sinEn : entity.getSintomas() ){
-            sinDtoList.add( SintomaConverter.entityToDto(sinEn) );
+        for (Sintoma sinEn : entity.getSintomas()) {
+            sinDtoList.add(SintomaConverter.entityToDto(sinEn));
         }
         resp.setSintomas(sinDtoList);
-        resp.setPacienteId(entity.getPaciente().getId());  
+
+        resp.setPacienteId(entity.getPaciente().getNoIdentificacion());
+
         return resp;
     }
-    
-    /**
-     * Metodo que se encarga de transformar un episodioDTO a un episodioEntity
-     * @param dto el episodioDTO a transformar
-     * @return el episodioEntity resultante
-     */
-    public static EpisodioDolor dtoToEntity(EpisodioDolorDTO dto){
+
+    public static EpisodioDolor dtoToEntity(EpisodioDolorDTO dto) {
         EpisodioDolor resp = new EpisodioDolor();
         resp.setId(dto.getId());
         resp.setFecha(dto.getFecha());
         resp.setHorasDeSueño(dto.getHorasDeSueño());
         resp.setIntensidadDolor(dto.getIntensidadDolor());
         resp.setLocalizacion(dto.getLocalizacion());
+
         List<Catalizador> catList = new ArrayList<Catalizador>();
-        for( CatalizadorDTO catDTO : dto.getCatalizadores() )
-        {
-            catList.add( CatalizadorConverter.dtoToEntity(catDTO) ); 
+        for (CatalizadorDTO catDTO : dto.getCatalizadores()) {
+            catList.add(CatalizadorConverter.dtoToEntity(catDTO));
         }
         resp.setCatalizadores(catList);
+
         List<Medicamento> medlist = new ArrayList<Medicamento>();
-        for( MedicamentoDTO medDTO : dto.getMedicamentosActuales() )
-        {
-            medlist.add( MedicamentoConverter.dtoToEntity(medDTO) );
+        for (MedicamentoDTO medDTO : dto.getMedicamentosActuales()) {
+            medlist.add(MedicamentoConverter.dtoToEntity(medDTO));
         }
         resp.setMedicamentosActuales(medlist);
+
         List<Sintoma> sinList = new ArrayList<Sintoma>();
-        for( SintomaDTO sinDto : dto.getSintomas() )
-        {
-            sinList.add( SintomaConverter.dtoToEntity(sinDto));
+        for (SintomaDTO sinDto : dto.getSintomas()) {
+            sinList.add(SintomaConverter.dtoToEntity(sinDto));
         }
         resp.setSintomas(sinList);
+
         IServicioPersistenciaPaciente serv = new ServicioPersistenciaPaciente();
-        resp.setPaciente( (Paciente)serv.findById(Paciente.class, dto.getPacienteId()) );
+        resp.setPaciente((Paciente) serv.findById(Paciente.class, dto.getPacienteId()));
+
         return resp;
-     }
+    }
+
+    public static List<EpisodioDolor> dtoToEntityList(List<EpisodioDolorDTO> list) {
+        List<EpisodioDolor> resp = new ArrayList<EpisodioDolor>();
+        for (EpisodioDolorDTO d : list) {
+            resp.add(dtoToEntity(d));
+        }
+        return resp;
+    }
+
+    public static List<EpisodioDolorDTO> entityToDtoList(List<EpisodioDolor> list) {
+        List<EpisodioDolorDTO> resp = new ArrayList<EpisodioDolorDTO>();
+        for (EpisodioDolor d : list) {
+            resp.add(entityToDto(d));
+        }
+        return resp;
+    }
 }
