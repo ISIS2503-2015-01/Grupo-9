@@ -38,7 +38,7 @@ DataFactory df;
     public void poblarDoctores(){
         String values[] = {"Neurologia","Pediatria","Medicina General", "Medicina Interna", "Acupuntura"};
         //Lista Doctores
-        for(int i =0;i<300;i++){
+        for(int i =0;i<30;i++){
             String name = df.getFirstName() +" "+df.getLastName();
             int id = Integer.parseInt(df.getNumberText(8));
             Date fecha = df.getBirthDate();
