@@ -78,7 +78,7 @@ public class Paciente implements Serializable {
     private List<EpisodioDolor> episodios;
     
     //-----------------------------------------------
-    //Constructor
+    //Constructor    
     //-----------------------------------------------
     
     /**
