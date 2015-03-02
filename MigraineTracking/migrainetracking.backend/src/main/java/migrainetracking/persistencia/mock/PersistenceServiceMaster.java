@@ -7,6 +7,7 @@ package migrainetracking.persistencia.mock;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import migrainetracking.persistencia.conexion.PersistenceManager;
 
 /**
@@ -15,10 +16,7 @@ import migrainetracking.persistencia.conexion.PersistenceManager;
  */
 public class PersistenceServiceMaster {
     
-    /**
-     * Atributo para modelar el entity manager
-     */
-    @PersistenceContext(unitName="migraineTrackingPU")
+    @PersistenceUnit(unitName="migraineTrackingPU")
     protected EntityManager entityMgr;
     
     /**

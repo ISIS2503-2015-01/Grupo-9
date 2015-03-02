@@ -62,13 +62,13 @@ public class RegistroEpisodioService {
     }
     //Meter regla y probar funcion no prioridad
     @POST
-    @Path("/create/EpisodioDolor/pacid={id}")
+    @Path("/create/EpisodioDolor/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createEpisdioDolor(EpisodioDolorDTO ep,@PathParam("id")int idPac ) throws JSONException{
+    public Response createEpisdioDolor(EpisodioDolorDTO ep ) throws JSONException{
         JSONObject rta = new JSONObject();
          List<CatalizadorDTO> evitables  = new ArrayList<CatalizadorDTO>();
         try {
-            Long id = beanRegEps.registrarEpisodio(ep, idPac);
+            Long id = beanRegEps.registrarEpisodio(ep,ep.getPacienteId());
             evitables = beanAnalisis.getCatalizadores( id );
         } catch (OperacionInvalidaException ex) {
             rta.put("Error de sistema : ",ex.getMessage());

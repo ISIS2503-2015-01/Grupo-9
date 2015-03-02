@@ -8,10 +8,14 @@ package migrainetracking.persistencia.mock;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import javax.persistence.Query;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.dto.ReglaDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
+import migrainetracking.persistencia.Entities.Catalizador;
+import migrainetracking.persistencia.Entities.Regla;
+import migrainetracking.persistencia.converters.CatalizadorConverter;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaRegla;
 import migrainetracking.utils.Utils;
 
@@ -120,9 +124,18 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
     @Override
     // NOTA: HAY TENTACION DE PASAR ESTA FUNCIONALIDAD AL EJB DE ANALISIS. 
     public List<CatalizadorDTO> getEvitables(EpisodioDolorDTO episodio) {
-        HashSet<CatalizadorDTO> conjuntoEvitables = new HashSet<CatalizadorDTO>();
+        HashSet<Catalizador> conjuntoEvitables = new HashSet<Catalizador>();
+        Query  q = this.entityMgr.createQuery(
+                "SELECT r FROM Regla r WHERE r.localizacionDolor = :locDolor"
+                        + " AND :intenDolor BETWEEN (r.intensidadDolorMin AND r.intensidadDolorMax) " , Regla.class); 
+        q.setParameter("locDolor", episodio.getLocalizacion());
+        q.setParameter("intenDolor", episodio.getIntensidadDolor());
+        List<Regla> reglas = q.getResultList();
+        for( Regla r : reglas ){
+            conjuntoEvitables.addAll( r.getEvitables() );
+        }
         
-        return new ArrayList<CatalizadorDTO>(conjuntoEvitables);
+        return CatalizadorConverter.entityToDtoList( new ArrayList<Catalizador>(conjuntoEvitables) );
     }
     
     /**

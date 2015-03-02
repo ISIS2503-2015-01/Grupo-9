@@ -22,5 +22,5 @@ public interface IServicioPersistenciaEpisodioDolor extends IServicioPersistenci
      * @param episodiosDelPaciente los episodios del paciente del cual se quiere conocer los episodios en las fechas establecidas
      * @return Los episodios de un paciente en un rango de fechas dado. La lista es vacia si no hay episodios en el rango.
      */
-    public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, List<EpisodioDolorDTO> episodiosDelPaciente);
+    public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId);
 }

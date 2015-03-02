@@ -6,18 +6,21 @@
 package migrainetracking.persistencia.mock;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
-import migrainetracking.dto.CatalizadorDTO;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import javax.transaction.UserTransaction;
 import migrainetracking.dto.EpisodioDolorDTO;
-import migrainetracking.dto.PacienteDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
+import migrainetracking.persistencia.Entities.EpisodioDolor;
+import migrainetracking.persistencia.converters.EpisodioDolorConverter;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
-import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.utils.Utils;
-import org.fluttercode.datafactory.impl.DataFactory;
 
 /**
  *
@@ -71,8 +74,22 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
     public void create(Object obj) throws OperacionInvalidaException {
         EpisodioDolorDTO ep = (EpisodioDolorDTO) obj;
         
-        Utils.printf("EpisodioDolor(" + ep.getId() + ") was created");
-
+            EntityTransaction tran = this.entityMgr.getTransaction() ;
+            try {
+                tran.begin();
+                EpisodioDolor epEntity = EpisodioDolorConverter.dtoToEntity(ep);
+                this.entityMgr.persist(epEntity);
+                tran.commit();
+                this.entityMgr.refresh(epEntity);
+                Utils.printf("EpisodioDolor(" + epEntity.getId() + ") was created");
+                ep.setId( epEntity.getId() );
+                
+            }catch (Exception e){
+                tran.rollback();
+                e.printStackTrace();
+                throw new OperacionInvalidaException(e.getMessage());
+            }
+        
     }
 
     /**
@@ -111,7 +128,7 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
      */
     @Override
     public List findAll(Class c) {
-        return null;
+        return EpisodioDolorConverter.entityToDtoList( this.entityMgr.createQuery("SELECT e FROM EpisodioDolor e",EpisodioDolor.class).getResultList() );
     }
 
     /**
@@ -124,7 +141,14 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
     @Override
     public Object findById(Class c, Object id) {
         Long nId = Long.parseLong(id.toString());
-        
+        Query q = this.entityMgr.createQuery("SELECT e FROM EpisodioDolor e WHERE e.id = :id");
+        q.setParameter("id", nId);
+        try {
+            EpisodioDolorDTO resp =  EpisodioDolorConverter.entityToDto( (EpisodioDolor)q.getSingleResult() ) ;
+            return resp;
+        } catch (NoResultException e) {
+            Utils.printf(e.getLocalizedMessage());
+        }
         return null;
     }
 
@@ -136,9 +160,12 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
      * @return los episodios que ocurrieron entre la fecha de inicio y la fecha de fin
      */
     @Override
-    public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, List<EpisodioDolorDTO> episodiosDelPaciente) {
+    public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId) {
         List<EpisodioDolorDTO> resp = new ArrayList<EpisodioDolorDTO>();
-       
+        Query q = this.entityMgr.createQuery("SELECT ep FROM EpisodioDolor ep WHERE ep.paciente = :noID AND  :fecha1 <= ep.fecha AND ep.fecha <= :fecha2 ");
+        q.setParameter("noID", noId);
+        q.setParameter("fecha1", fecha_in);
+        q.setParameter("fecha2", fecha_fin);
         return resp;
     }
 }

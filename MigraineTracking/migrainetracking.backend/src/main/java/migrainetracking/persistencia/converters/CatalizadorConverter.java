@@ -5,6 +5,8 @@
  */
 package migrainetracking.persistencia.converters;
 
+import java.util.ArrayList;
+import java.util.List;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.persistencia.Entities.Catalizador;
 
@@ -39,6 +41,20 @@ public class CatalizadorConverter {
         resp.setFrecuencia(dto.getFrecuencia());
         resp.setEspecificacion(dto.getEspecificacion());
         resp.setTipo(dto.getTipo());
+        return resp;
+    }
+
+    public static List<CatalizadorDTO> entityToDtoList(List<Catalizador> list) {
+        List<CatalizadorDTO> resp = new ArrayList<CatalizadorDTO>();
+        for( Catalizador c : list )
+            resp.add ( entityToDTO(c) );
+        return resp;
+    }
+    
+    public static List<Catalizador> dtoToEntityList(List<CatalizadorDTO> list) {
+        List<Catalizador> resp = new ArrayList<Catalizador>();
+        for( CatalizadorDTO c : list )
+            resp.add ( dtoToEntity(c) );
         return resp;
     }
 }

@@ -5,9 +5,28 @@
  */
 package migrainetracking.persistencia.mock;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
+import javax.transaction.Transaction;
+import javax.transaction.UserTransaction;
 import migrainetracking.dto.DoctorDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
+import migrainetracking.persistencia.Entities.Doctor;
+import migrainetracking.persistencia.conexion.PersistenceManager;
+import migrainetracking.persistencia.converters.DoctorConverter;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaDoctor;
 import migrainetracking.utils.Utils;
 
@@ -26,8 +45,7 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
      */
     public static ServicioPersistenciaDoctor instancia;
     
-    
-    
+
     //----------------------------------------------------------------------
     // Constructores
     //----------------------------------------------------------------------
@@ -36,8 +54,7 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
      * Constructor sin argumentos
      */
     public ServicioPersistenciaDoctor() {
-        super(); // inicializo el entity manager
-        
+        super(); 
     }
 
     /**
@@ -62,14 +79,28 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
      * @throws OperacionInvalidaException si no se puede crear el doctor
      */
     @Override
+    //@TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void create(Object obj) throws OperacionInvalidaException {
         DoctorDTO newDoc = (DoctorDTO) obj;
-        if (findById(DoctorDTO.class, newDoc.getNoIdentificacion()) == null) {
-            
-            Utils.printf("New doctor(" + newDoc.getNombre() + ") was added");
-        } else {
-            throw new OperacionInvalidaException("El doctor, con ese id, ya existe en el sistema");
+        if ( this.entityMgr.find( Doctor.class,newDoc.getNoIdentificacion() ) != null ){
+               throw new OperacionInvalidaException("El paciente que quiere agregar ya existe en el sistema");  
         }
+        
+            EntityTransaction tran = this.entityMgr.getTransaction() ;
+            Doctor d = DoctorConverter.dtoToEntity(newDoc);
+            try { 
+                tran.begin();
+                this.entityMgr.persist( d );
+                tran.commit();
+                this.entityMgr.refresh(d);
+                Utils.printf("New doctor(" + newDoc.getNombre() + ") was added");
+            }  catch( Exception e){
+                e.printStackTrace();
+                tran.rollback();
+                Utils.printf(">>>>> EXCEPCION : "+e.getMessage());
+            }   
+                    
+        
     }
 
     /**
@@ -105,7 +136,9 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
      */
     @Override
     public List findAll(Class c) {
-        return null;
+        Query q =  this.entityMgr.createQuery("SELECT d FROM Doctor d");
+        List<Doctor> Doctores = q.getResultList();
+        return DoctorConverter.entityToDtoList(Doctores);
     }
 
     /**
@@ -118,7 +151,14 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
     // El id en este caso es la cedula del doctor.
     public DoctorDTO findById(Class c, Object id) {
         int noId = Integer.parseInt(id.toString());
-       
-        return null;
+        Query q = this.entityMgr.createQuery("SELECT d FROM Doctor d WHERE d.noIdentificacion = :ID");
+        q.setParameter("ID", noId);        
+        Doctor resp;
+        try{
+              resp = (Doctor)q.getSingleResult();
+        }catch(NoResultException e){
+            return null;
+        }
+        return DoctorConverter.entityToDTO(resp);
     }
 }

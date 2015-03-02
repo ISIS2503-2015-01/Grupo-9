@@ -72,14 +72,9 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
     @Override
     public Long registrarEpisodio(EpisodioDolorDTO nuevo, int noIdPaciente) throws OperacionInvalidaException {
         
-        IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;
-        Long respId = pacPersServ.agregarEpsiodio(nuevo, noIdPaciente);
-        
-        if (respId == null) {
-            throw new OperacionInvalidaException("No existe el paciente a quien se le quiere registrar el episodio.");
-        }
         persistencia.create(nuevo);
-        return nuevo.getId();
+        nuevo = (EpisodioDolorDTO) nuevo;
+        return nuevo.getId() ;
     }
 
     /**

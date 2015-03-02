@@ -10,6 +10,7 @@ import java.util.List;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.dto.MedicamentoDTO;
+import migrainetracking.dto.PacienteDTO;
 import migrainetracking.dto.SintomaDTO;
 import migrainetracking.persistencia.Entities.Catalizador;
 import migrainetracking.persistencia.Entities.EpisodioDolor;
@@ -82,8 +83,9 @@ public class EpisodioDolorConverter {
         }
         resp.setSintomas(sinList);
 
-        IServicioPersistenciaPaciente serv = new ServicioPersistenciaPaciente();
-        resp.setPaciente((Paciente) serv.findById(Paciente.class, dto.getPacienteId()));
+        ServicioPersistenciaPaciente serv = ServicioPersistenciaPaciente.getInstance() ;
+        PacienteDTO pacDTO = (PacienteDTO) serv.findById(Paciente.class, dto.getPacienteId());
+        resp.setPaciente( serv.findById( dto.getPacienteId() ) );
 
         return resp;
     }

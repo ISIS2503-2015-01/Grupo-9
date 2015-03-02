@@ -97,7 +97,7 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
         if( pac == null ){
             throw new NoExisteException("El paciente con ese numero de identificacion no existe");
         }
-        return persistencia.getEpisodioByFechas( fecha_in, fecha_fin, pac.getEpisodios() );
+        return persistencia.getEpisodioByFechas( fecha_in, fecha_fin, noId );
     }
 
     /**
