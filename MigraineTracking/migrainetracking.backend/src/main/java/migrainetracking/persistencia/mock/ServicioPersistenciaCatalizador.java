@@ -114,7 +114,7 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
      */
     @Override
     public List findAll(Class c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override

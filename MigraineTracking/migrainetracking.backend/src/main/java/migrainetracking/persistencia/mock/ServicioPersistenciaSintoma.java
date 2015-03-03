@@ -8,6 +8,7 @@ package migrainetracking.persistencia.mock;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import migrainetracking.dto.ReglaDTO;
 import migrainetracking.dto.SintomaDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
@@ -122,7 +123,16 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
      */
     @Override
     public List findAll(Class c) {
-        return null;
+        Query q = this.entityMgr.createQuery("SELECT s FROM SINTOMA s");
+        List<Sintoma> sintomas = q.getResultList();
+        List<SintomaDTO> sintomasDTO = new ArrayList();
+        for(int i=0;i<sintomas.size();i++)
+        {   
+            Sintoma actual = sintomas.get(i);
+            SintomaDTO dto = SintomaConverter.entityToDto(actual);
+            sintomasDTO.add(dto);
+        }
+        return sintomasDTO;
     }
 
     /**
@@ -133,9 +143,19 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
      * @return el sintoma que se esta buscando
      */
     @Override
-    public Object findById(Class c, Object id) {
-        String nombre = id.toString();
-        
-        return null;
+    public SintomaDTO findById(Class c, Object id) {
+        int SintId = Integer.parseInt(id.toString());
+        Query q = this.entityMgr.createQuery("SELECT s FROM SINTOMA s WHERE s.id=:param");
+        q.setParameter("param", SintId);
+        Sintoma sol;
+        try
+        {
+            sol = (Sintoma)q.getSingleResult();
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+        return SintomaConverter.entityToDto(sol);
     }
 }
