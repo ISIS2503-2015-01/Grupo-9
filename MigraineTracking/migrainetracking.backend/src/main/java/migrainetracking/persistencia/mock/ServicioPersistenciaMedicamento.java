@@ -8,6 +8,7 @@ package migrainetracking.persistencia.mock;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.MedicamentoDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
@@ -124,7 +125,16 @@ public class ServicioPersistenciaMedicamento extends PersistenceServiceMaster im
      */
     @Override
     public List findAll(Class c) {
-        return null;
+        Query q = this.entityMgr.createQuery("SELECT m FROM MEDICAMENTO m;");
+        List<Medicamento> medicamentos = q.getResultList();
+        List<MedicamentoDTO> medicamentosDTO = new ArrayList<MedicamentoDTO>();
+        for(int i=0;i<medicamentos.size();i++)
+        {
+            Medicamento acutal = medicamentos.get(i);
+            MedicamentoDTO dto = MedicamentoConverter.entityToDto(acutal);
+            medicamentosDTO.add(dto);
+        }
+        return medicamentosDTO;
     }
 
     /**
@@ -136,8 +146,18 @@ public class ServicioPersistenciaMedicamento extends PersistenceServiceMaster im
      */
     @Override
     public Object findById(Class c, Object id) {
-        String nombre = id.toString();
-        
-        return null;
-    } 
+        int idMed = Integer.parseInt(id.toString());
+        Query q = this.entityMgr.createQuery("SELECT m FROM MEDICAMENTO m WHERE m.id=param;");
+        q.setParameter("param", idMed);
+        Medicamento sol;
+        try
+        {
+            sol =(Medicamento)q.getSingleResult();
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+        return MedicamentoConverter.entityToDto(sol);
+    }   
 }

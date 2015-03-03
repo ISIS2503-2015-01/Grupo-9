@@ -123,7 +123,7 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
      */
     @Override
     public List findAll(Class c) {
-        Query q = this.entityMgr.createQuery("SELECT s FROM SINTOMA s");
+        Query q = this.entityMgr.createQuery("SELECT s FROM SINTOMA s;");
         List<Sintoma> sintomas = q.getResultList();
         List<SintomaDTO> sintomasDTO = new ArrayList();
         for(int i=0;i<sintomas.size();i++)
@@ -145,7 +145,7 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
     @Override
     public SintomaDTO findById(Class c, Object id) {
         int SintId = Integer.parseInt(id.toString());
-        Query q = this.entityMgr.createQuery("SELECT s FROM SINTOMA s WHERE s.id=:param");
+        Query q = this.entityMgr.createQuery("SELECT s FROM SINTOMA s WHERE s.id=:param;");
         q.setParameter("param", SintId);
         Sintoma sol;
         try

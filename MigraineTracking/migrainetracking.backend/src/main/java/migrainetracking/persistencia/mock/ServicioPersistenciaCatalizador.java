@@ -115,7 +115,7 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
      */
     @Override
     public List findAll(Class c) {
-        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c");
+        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c;");
         List<Catalizador> catalizadores = q.getResultList();
         return CatalizadorConverter.entityToDtoList(catalizadores);
     }
@@ -123,7 +123,7 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
     @Override
     public Object findById(Class c, Object id) {
         int idCat = Integer.parseInt(id.toString());
-        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c WHERE c.id=:param");
+        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c WHERE c.id=:param;");
         q.setParameter("param", idCat);
         Catalizador sol;
         try
