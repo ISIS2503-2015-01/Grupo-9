@@ -128,12 +128,26 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
      */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        DoctorDTO oldDoc = (DoctorDTO) obj;
-        if (findById(DoctorDTO.class, oldDoc.getNoIdentificacion()) != null) {
-            
-            Utils.printf("Doctor(" + oldDoc.getNombre() + ")was deleted");
-        } else {
-            throw new OperacionInvalidaException("El doctor que quiere eliminar no existe en el sistema");
+        DoctorDTO eliminar = (DoctorDTO)obj;
+        if(findById(DoctorDTO.class, eliminar)==null)
+        {
+            throw new OperacionInvalidaException("No se puede eliminar el objeto porque no existe");
+        }
+        Doctor cat = DoctorConverter.dtoToEntity(eliminar);
+        EntityTransaction tran = this.entityMgr.getTransaction();
+        try
+        {
+            tran.begin();
+            this.entityMgr.remove(cat);
+            tran.commit();
+            this.entityMgr.refresh(cat);
+            Utils.printf("El doctor ha sido eliminado");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido un error: " + e.getMessage());
         }
     }
 
