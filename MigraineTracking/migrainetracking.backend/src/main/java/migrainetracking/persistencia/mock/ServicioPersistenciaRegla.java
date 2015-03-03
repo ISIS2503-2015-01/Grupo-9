@@ -124,7 +124,16 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
      */
     @Override
     public List findAll(Class c) {
-        return null;
+        Query q = this.entityMgr.createQuery("SELECT r FROM REGLA r;");
+        List<Regla> reglas = q.getResultList();
+        List<ReglaDTO> reglasDTO = new ArrayList<ReglaDTO>();
+        for(int i=0;i<reglas.size();i++)
+        {
+            Regla actual = reglas.get(i);
+            ReglaDTO dto = ReglaConverter.entityToDto(actual);
+            reglasDTO.add(dto);
+        }
+        return reglasDTO;
     }
 
     /**
@@ -136,9 +145,19 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
      */
     @Override
     public Object findById(Class c, Object id) {
-        int idL = Integer.parseInt(id.toString());
-       
-        return null;
+        int idReg = Integer.parseInt(id.toString());
+        Query q = this.entityMgr.createQuery("SELECT r  FROM REGLA r WHERE r.id=param;");
+        q.setParameter("param", idReg);
+        Regla sol;
+        try
+        {
+            sol = (Regla)q.getSingleResult();
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+        return ReglaConverter.entityToDto(sol);
     }
 
     @Override
