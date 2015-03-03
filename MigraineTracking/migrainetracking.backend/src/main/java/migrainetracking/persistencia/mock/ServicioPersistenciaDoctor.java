@@ -109,8 +109,16 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
      */
     @Override
     public void update(Object obj) {
-        DoctorDTO toEdit = (DoctorDTO) obj;
-        
+        try
+        {
+            this.delete(obj);
+            this.create(obj);
+            Utils.printf("Se ha actualizado el doctor exitosamente");
+        }
+        catch(Exception e)
+        {
+            Utils.printf("Se ha producido un error al actualizar el doctor: " + e.getMessage());
+        }
     }
 
     /**

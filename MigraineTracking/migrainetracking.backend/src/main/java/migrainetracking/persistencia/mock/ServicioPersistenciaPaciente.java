@@ -111,9 +111,15 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
      */
     @Override
     public void update(Object obj){
-        PacienteDTO toEdit = (PacienteDTO) obj;
-        if(findById(PacienteDTO.class, toEdit.getNoIdentificacion())!=null){
-            Utils.printf("The paciente(" + toEdit.getNombre() + ") was UPDATED");
+        try
+        {
+            this.delete(obj);
+            this.create(obj);
+            Utils.printf("Se ha actualizado el paciente exitosamente");
+        }
+        catch(Exception e)
+        {
+            Utils.printf("Se ha producido un error al actualizar el paciente: " + e.getMessage());
         }
     }
 
