@@ -8,6 +8,7 @@ package migrainetracking.persistencia.mock;
 
 import java.util.List;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.Entities.Catalizador;
@@ -114,11 +115,25 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
      */
     @Override
     public List findAll(Class c) {
-        
+        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c");
+        List<Catalizador> catalizadores = q.getResultList();
+        return CatalizadorConverter.entityToDtoList(catalizadores);
     }
 
     @Override
     public Object findById(Class c, Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int idCat = Integer.parseInt(id.toString());
+        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c WHERE c.id=:param");
+        q.setParameter("param", idCat);
+        Catalizador sol;
+        try
+        {
+            sol = (Catalizador)q.getSingleResult();
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+        return CatalizadorConverter.entityToDTO(sol);
     }    
 }
