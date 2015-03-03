@@ -57,7 +57,7 @@ private final DataFactory df;
             String name = df.getFirstName() +" "+df.getLastName();
             int id = Integer.parseInt(df.getNumberText(8));
             String fecha = df.getNumberBetween(1920, 2015) + "-" + df.getNumberBetween(1, 12)+ "-" + df.getNumberBetween(1, 28);
-            String especialidad = df.getItem(values, 70);
+            String especialidad = df.getItem(values, 100);
             System.out.println("INSERT INTO APP.DOCTOR (NOIDENTIFICACION, ESPECIALIDAD, FECHANACIMIENTO, NOMBRE) VALUES ("+id+", '"+especialidad+"', '"+fecha+"', '"+name+"');");
             
             //Lista Pacientes
@@ -75,7 +75,7 @@ private final DataFactory df;
                 for( int k = 0; k<3;k++){
                     String nombres[] = {"ibuprofeno","corticoide","acetaminofen", "eutirox", "hidroclorotiazida"};
                     
-                    String nombre = df.getItem(nombres, 70);
+                    String nombre = df.getItem(nombres, 100);
                     int cantidad = df.getNumberBetween(1, 10);
                     int intervalo = df.getNumberBetween(1, 48);
                     int miligramos = df.getNumberBetween(1, 1000);
@@ -97,7 +97,7 @@ private final DataFactory df;
                 for( int n = 0; n<5;n++){
                     
                     String fecha4 = df.getNumberBetween(2014, 2015) + "-" + df.getNumberBetween(1, 12)+ "-" + df.getNumberBetween(1, 28);
-                    String localizacion = df.getItem(localizaciones, 70);
+                    String localizacion = df.getItem(localizaciones, 100);
                     int intensidad = df.getNumberBetween(1,10);
                     int horas = df.getNumberBetween(0,24);
                     
@@ -106,7 +106,7 @@ private final DataFactory df;
                     
                     //Lista Catalizadores
                     for( int p = 0; p<3;p++){
-                        String tipo1 = df.getItem(tipos, 70);
+                        String tipo1 = df.getItem(tipos, 100);
                         int frecuencia1 = df.getNumberBetween(1,10);
                         String especificacion1 = df.getRandomText(60);
                         
@@ -125,7 +125,7 @@ private final DataFactory df;
                     }
                     //Lista Medicamentos Actuales
                     for( int r = 0; r<2;r++){
-                        String nombre5 = df.getItem(nombres5, 70);
+                        String nombre5 = df.getItem(nombres5, 100);
                         int cantidad5 = df.getNumberBetween(1, 10);
                         int intervalo5 = df.getNumberBetween(1, 48);
                         int miligramos5 = df.getNumberBetween(1, 1000);
@@ -137,9 +137,9 @@ private final DataFactory df;
                     }
                     //Lista Sintomas
                     for( int t = 0; t<3;t++){
-                        String nombre6 = df.getItem(nombres6, 70);
+                        String nombre6 = df.getItem(nombres6, 100);
                         int intensidad6 = df.getNumberBetween(1,10);
-                        String localizacion6 = df.getItem(localizaciones, 70);
+                        String localizacion6 = df.getItem(localizaciones, 100);
                         System.out.println("INSERT INTO APP.SINTOMA (ID, INTENSIDAD, LOCALIZACION, NOMBRE) VALUES ("+idH6+", "+intensidad6+", '"+localizacion6+"', '"+nombre6+"');");
                         System.out.println("INSERT INTO APP.EPISODIODOLOR_SINTOMA (EPISODIODOLOR_ID, SINTOMAS_ID) VALUES ("+idE+", "+idH6+");");
                         idH6++;
