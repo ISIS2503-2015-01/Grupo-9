@@ -94,9 +94,17 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
      */
     @Override
     public void update(Object obj) {
-        SintomaDTO nuevo = (SintomaDTO) obj;
-        Utils.printf("Se ha modificado el sintoma con nombre " + nuevo.getNombre());
-
+        try
+        {
+            this.delete(obj);
+            this.create(obj);
+            Utils.printf("Se ha actualizado el sintoma exitosamente");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            Utils.printf("Se ha producido un error al actualizar el sintoma: " + e.getMessage());
+        }
     }
 
     /**
@@ -107,11 +115,27 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
      */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        SintomaDTO borrar = (SintomaDTO) obj;
-
-        Utils.printf("Se ha eliminado el sintoma con nombre " + borrar.getNombre());
-
-        throw new OperacionInvalidaException("El sintoma " + borrar.getNombre() + " no se puede eliminar porque no existe en el sistema");
+        SintomaDTO borrar = (SintomaDTO)obj;
+        if(findById(SintomaDTO.class, borrar)==null)
+        {
+            throw new OperacionInvalidaException("No se puede borrar el sintoma porque no existe en el sistema");
+        }
+        Sintoma sin = SintomaConverter.dtoToEntity(borrar);
+        EntityTransaction tran = this.entityMgr.getTransaction();
+        try
+        {
+            tran.begin();
+            this.entityMgr.remove(sin);
+            tran.commit();
+            this.entityMgr.refresh(sin);
+            Utils.printf("Se ha eliminado el sintoma exitosamente");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido un error al borrar el sintoma: " + e.getMessage());
+        }
     }
 
     /**

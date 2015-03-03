@@ -94,8 +94,16 @@ public class ServicioPersistenciaMedicamento extends PersistenceServiceMaster im
      */
     @Override
     public void update(Object obj) {
-        MedicamentoDTO actualizar = (MedicamentoDTO) obj;
-
+        try
+        {
+            this.delete(obj);
+            this.create(obj);
+            Utils.printf("Se ha actualizado el medicamento de forma exitosa");
+        }
+        catch(Exception e)
+        {
+            Utils.printf("Se ha producido un error al actualizar el medicamento: " + e.getMessage());
+        }
     }
 
     /**
@@ -107,12 +115,25 @@ public class ServicioPersistenciaMedicamento extends PersistenceServiceMaster im
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
         MedicamentoDTO borrar = (MedicamentoDTO) obj;
-
-        if (findById(MedicamentoDTO.class, borrar.getNombre()) != null) {
-            
-            Utils.printf("El medicamento " + borrar.getNombre() + " ha sido eliiminado");
-        } else {
-            throw new OperacionInvalidaException("No se pudo eliminar el medicamento " + borrar.getNombre());
+        if(findById(MedicamentoDTO.class, obj)==null)
+        {
+            throw new OperacionInvalidaException("El medicamento no se puede eliminar porque no existe en el sistema");
+        }
+        EntityTransaction tran = this.entityMgr.getTransaction();
+        Medicamento med = MedicamentoConverter.dtoToEntity(borrar);
+        try
+        {
+            tran.begin();
+            this.entityMgr.remove(med);
+            tran.commit();
+            this.entityMgr.refresh(med);
+            Utils.printf("El medicamento ha sido eliminado");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido un error al eliminar el medicamento: " + e.getMessage());
         }
     }
 
@@ -125,7 +146,7 @@ public class ServicioPersistenciaMedicamento extends PersistenceServiceMaster im
      */
     @Override
     public List findAll(Class c) {
-        Query q = this.entityMgr.createQuery("SELECT m FROM MEDICAMENTO m;");
+        Query q = this.entityMgr.createQuery("SELECT m FROM MEDICAMENTO m");
         List<Medicamento> medicamentos = q.getResultList();
         List<MedicamentoDTO> medicamentosDTO = new ArrayList<MedicamentoDTO>();
         for(int i=0;i<medicamentos.size();i++)
@@ -147,7 +168,7 @@ public class ServicioPersistenciaMedicamento extends PersistenceServiceMaster im
     @Override
     public Object findById(Class c, Object id) {
         int idMed = Integer.parseInt(id.toString());
-        Query q = this.entityMgr.createQuery("SELECT m FROM MEDICAMENTO m WHERE m.id=param;");
+        Query q = this.entityMgr.createQuery("SELECT m FROM MEDICAMENTO m WHERE m.id:=param");
         q.setParameter("param", idMed);
         Medicamento sol;
         try

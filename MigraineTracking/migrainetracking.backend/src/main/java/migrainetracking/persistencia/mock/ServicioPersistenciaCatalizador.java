@@ -95,7 +95,16 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
      */
     @Override
     public void update(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try
+        {
+            this.delete(obj);
+            this.create(obj);
+            Utils.printf("Se ha actualizado el catalizador exitosamente");
+        }
+        catch(Exception e)
+        {
+            Utils.printf("Se ha producido un error al actualizar el catalizador: " + e.getMessage());
+        }
     }
 
     /**
@@ -105,7 +114,27 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
      */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        CatalizadorDTO eliminar = (CatalizadorDTO)obj;
+        if(findById(CatalizadorDTO.class, eliminar)==null)
+        {
+            throw new OperacionInvalidaException("No se puede eliminar el objeto porque no existe");
+        }
+        Catalizador cat = CatalizadorConverter.dtoToEntity(eliminar);
+        EntityTransaction tran = this.entityMgr.getTransaction();
+        try
+        {
+            tran.begin();
+            this.entityMgr.remove(cat);
+            tran.commit();
+            this.entityMgr.refresh(cat);
+            Utils.printf("El catalizador ha sido eliminado");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido un error: " + e.getMessage());
+        }
     }
 
     /**
@@ -115,7 +144,7 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
      */
     @Override
     public List findAll(Class c) {
-        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c;");
+        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c");
         List<Catalizador> catalizadores = q.getResultList();
         return CatalizadorConverter.entityToDtoList(catalizadores);
     }
@@ -123,7 +152,7 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
     @Override
     public Object findById(Class c, Object id) {
         int idCat = Integer.parseInt(id.toString());
-        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c WHERE c.id=:param;");
+        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c WHERE c.id=:param");
         q.setParameter("param", idCat);
         Catalizador sol;
         try

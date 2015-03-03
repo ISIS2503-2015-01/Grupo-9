@@ -5,6 +5,7 @@
  */
 package migrainetracking.persistencia.mock;
 
+import com.sun.media.sound.SoftEnvelopeGenerator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.EpisodioDolorDTO;
+import migrainetracking.dto.MedicamentoDTO;
 import migrainetracking.dto.ReglaDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.Entities.Catalizador;
@@ -99,9 +101,16 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
      */
     @Override
     public void update(Object obj) {
-        ReglaDTO editar = (ReglaDTO) obj;
-        int id = editar.getId();
-        
+        try
+        {
+            this.delete(obj);
+            this.create(obj);
+            Utils.printf("Se ha actualizado el medicamento exitosamente");
+        }
+        catch(Exception e)
+        {
+            Utils.printf("Se ha producido un error al actualizar la regla " + e.getMessage());
+        }
     }
 
     /**
@@ -112,7 +121,27 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
      */
     @Override
     public void delete(Object obj) throws OperacionInvalidaException {
-        
+        ReglaDTO borrar = (ReglaDTO)obj;
+        if(findById(ReglaDTO.class, borrar)==null)
+        {
+            throw new OperacionInvalidaException("No se puede borrar la regla porque no existe");
+        }
+        EntityTransaction tran = this.entityMgr.getTransaction();
+        Regla reg = ReglaConverter.dtoToEntity(borrar);
+        try
+        {
+            tran.begin();
+            this.entityMgr.remove(reg);
+            tran.commit();
+            this.entityMgr.refresh(reg);
+            Utils.printf("Se ha borrado la regla exitosamente");
+        }
+        catch(Exception e )
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido un error al borrar la regla: "+ e.getMessage());
+        }
     }
 
     /**
