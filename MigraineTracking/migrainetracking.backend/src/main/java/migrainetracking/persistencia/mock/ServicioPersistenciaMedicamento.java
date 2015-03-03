@@ -7,9 +7,12 @@ package migrainetracking.persistencia.mock;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityTransaction;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.MedicamentoDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
+import migrainetracking.persistencia.Entities.Medicamento;
+import migrainetracking.persistencia.converters.MedicamentoConverter;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaMedicamento;
 import migrainetracking.utils.Utils;
 
@@ -61,7 +64,26 @@ public class ServicioPersistenciaMedicamento extends PersistenceServiceMaster im
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
         MedicamentoDTO nuevo = (MedicamentoDTO) obj;
-
+        if(findById(MedicamentoDTO.class, nuevo)!=null)
+        {
+            throw new OperacionInvalidaException("No se puede crear el medicamento porque ya existe en el sistema");
+        }
+        EntityTransaction tran = this.entityMgr.getTransaction();
+        Medicamento med = MedicamentoConverter.dtoToEntity(nuevo);
+        try
+        {
+            tran.begin();
+            this.entityMgr.persist(med);
+            tran.commit();
+            this.entityMgr.refresh(med);
+            Utils.printf("Se ha creado un medicamento nuevo");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido un error " + e.getMessage());
+        }
     }
 
     /**

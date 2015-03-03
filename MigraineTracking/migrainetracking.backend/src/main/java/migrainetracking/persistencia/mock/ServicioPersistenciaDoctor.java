@@ -83,7 +83,7 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
     public void create(Object obj) throws OperacionInvalidaException {
         DoctorDTO newDoc = (DoctorDTO) obj;
         if ( this.entityMgr.find( Doctor.class,newDoc.getNoIdentificacion() ) != null ){
-               throw new OperacionInvalidaException("El paciente que quiere agregar ya existe en el sistema");  
+               throw new OperacionInvalidaException("El doctor que quiere agregar ya existe en el sistema");  
         }
         
             EntityTransaction tran = this.entityMgr.getTransaction() ;

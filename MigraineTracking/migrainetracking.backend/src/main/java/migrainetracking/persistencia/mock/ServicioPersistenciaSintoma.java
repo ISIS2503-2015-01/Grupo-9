@@ -7,9 +7,12 @@ package migrainetracking.persistencia.mock;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityTransaction;
 import migrainetracking.dto.ReglaDTO;
 import migrainetracking.dto.SintomaDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
+import migrainetracking.persistencia.Entities.Sintoma;
+import migrainetracking.persistencia.converters.SintomaConverter;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaSintoma;
 import migrainetracking.utils.Utils;
 
@@ -61,11 +64,25 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
         SintomaDTO nuevo = (SintomaDTO) obj;
-        if (findById(SintomaDTO.class, nuevo.getNombre()) != null) {
-
-            Utils.printf("Se ha agregado el sintoma con el nombre " + nuevo.getNombre());
-        } else {
+        if (findById(SintomaDTO.class, nuevo.getNombre()) != null) 
+        {
             throw new OperacionInvalidaException("El sintoma " + nuevo.getNombre() + " no se pudo agregar en el sistema, porque ya hay un sintoma con el mismsmo nombre");
+        }
+        EntityTransaction tran = this.entityMgr.getTransaction();
+        Sintoma sint = SintomaConverter.dtoToEntity(nuevo);
+        try
+        {
+            tran.begin();
+            this.entityMgr.persist(sint);
+            tran.commit();
+            this.entityMgr.refresh(sint);
+            Utils.printf("Se ha creado un sintoma nuevo cuyo nombre es " + nuevo.getNombre());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido una excepcion " + e.getMessage());
         }
     }
 

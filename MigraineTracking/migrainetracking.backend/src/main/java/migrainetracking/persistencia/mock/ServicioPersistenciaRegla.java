@@ -8,6 +8,7 @@ package migrainetracking.persistencia.mock;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.EpisodioDolorDTO;
@@ -16,6 +17,7 @@ import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.Entities.Catalizador;
 import migrainetracking.persistencia.Entities.Regla;
 import migrainetracking.persistencia.converters.CatalizadorConverter;
+import migrainetracking.persistencia.converters.ReglaConverter;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaRegla;
 import migrainetracking.utils.Utils;
 
@@ -68,8 +70,26 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
     @Override
     public void create(Object obj) throws OperacionInvalidaException {
         ReglaDTO nueva = (ReglaDTO) obj;
-        
-        Utils.printf("Se ha agregado la nueva regla");
+        if(findById(ReglaDTO.class, nueva) !=null)
+        {
+            throw new OperacionInvalidaException("No se puede agregar la regla porque ya existe en el sistema");
+        }
+        EntityTransaction tran = this.entityMgr.getTransaction();
+        Regla reg = ReglaConverter.dtoToEntity(nueva);
+        try
+        {
+            tran.begin();
+            this.entityMgr.persist(reg);
+            tran.commit();
+            this.entityMgr.refresh(reg);
+            Utils.printf("Se ha creado una nueva regla");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido un error " + e.getMessage());
+        }
     }
 
     /**
