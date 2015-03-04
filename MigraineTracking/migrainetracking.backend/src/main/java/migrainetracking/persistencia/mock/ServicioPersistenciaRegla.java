@@ -104,16 +104,17 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
      */
     @Override
     public void update(Object obj) {
-        try
-        {
-            this.delete(obj);
-            this.create(obj);
-            Utils.printf("Se ha actualizado el medicamento exitosamente");
-        }
-        catch(Exception e)
-        {
-            Utils.printf("Se ha producido un error al actualizar la regla " + e.getMessage());
-        }
+        ReglaDTO existe = (ReglaDTO) obj;
+        List<CatalizadorDTO> catalizadores =  existe.getEvitables();
+        int id = existe.getId();
+        int dolorMax = existe.getIntensidadDolorMax();
+        int dolorMin = existe.getIntensidadDolorMin();
+        String localizacion = existe.getLocalizacionDolor();
+        Query q = this.entityMgr.createQuery("UPDATE REGLA SET INTENSIDADDOLORMAX:=param1, INTENDIADDOLORMIN:=param2, LOCALIZACIONDOLOR:=param3 WHERE ID:=param4");
+        q.setParameter("param1", dolorMax);
+        q.setParameter("param2", dolorMin);
+        q.setParameter("param3", localizacion);
+        q.setParameter("param4", id);
     }
 
     /**
