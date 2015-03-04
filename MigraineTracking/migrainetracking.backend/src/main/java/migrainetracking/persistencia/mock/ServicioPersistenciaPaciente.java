@@ -111,16 +111,18 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
      */
     @Override
     public void update(Object obj){
-        try
-        {
-            this.delete(obj);
-            this.create(obj);
-            Utils.printf("Se ha actualizado el paciente exitosamente");
-        }
-        catch(Exception e)
-        {
-            Utils.printf("Se ha producido un error al actualizar el paciente: " + e.getMessage());
-        }
+        PacienteDTO existe = (PacienteDTO)obj;
+        int id = existe.getNoIdentificacion();
+        String nombre = existe.getNombre();
+        Date fechaNacimiento = existe.getFechaNacimiento();
+        int estatura = existe.getEstatura();
+        int peso=existe.getPeso();
+        Query q = this.entityMgr.createQuery("UPDATE APP.PACIENTE SET ESTATURA:=param3, FECHANACIMIENTO:=param2,NOMBRE:=param1, PESO:=param4 WHERE NOIDENTIFICACION:=param5");
+        q.setParameter("param1", nombre);
+        q.setParameter("param2", fechaNacimiento);
+        q.setParameter("param3", estatura);
+        q.setParameter("param4", peso);
+        q.setParameter("param5", id);
     }
 
     /**

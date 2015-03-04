@@ -6,6 +6,7 @@
 package migrainetracking.persistencia.mock;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -109,16 +110,16 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
      */
     @Override
     public void update(Object obj) {
-        try
-        {
-            this.delete(obj);
-            this.create(obj);
-            Utils.printf("Se ha actualizado el doctor exitosamente");
-        }
-        catch(Exception e)
-        {
-            Utils.printf("Se ha producido un error al actualizar el doctor: " + e.getMessage());
-        }
+        DoctorDTO existe = (DoctorDTO)obj;
+        int id = existe.getNoIdentificacion();
+        String nombre = existe.getNombre();
+        Date fechaNacimiento = existe.getFechaNacimiento();
+        String especialidad = existe.getEspecialidad();
+        Query q = this.entityMgr.createQuery("UPDATE APP.DOCTOR SET ESPECIALIDAD:=param3, FECHANACIMIENTO:=param2,NOMBRE:=param1 WHERE NOIDENTIFICACION:=param5");
+        q.setParameter("param1", nombre);
+        q.setParameter("param2", fechaNacimiento);
+        q.setParameter("param3", especialidad);
+        q.setParameter("param5", id);
     }
 
     /**
