@@ -178,12 +178,11 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
     @Override
     public Object findById(Class c, Object id) {
         int noId = Integer.parseInt(id.toString());
-        Query q = this.entityMgr.createQuery("SELECT p FROM Paciente p WHERE p.noIdentificacion = :noId");
-        q.setParameter("noId", noId);
-        Paciente resp;
         try {
-            resp = (Paciente)q.getSingleResult();
-            return PacienteConverter.entityToDto(resp);
+            
+            Paciente pac =this.entityMgr.find(Paciente.class, noId);
+            PacienteDTO p =  PacienteConverter.entityToDto( pac );
+            return p;
         } catch (NoResultException e) {
         }
         return null;
@@ -191,7 +190,9 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
 
     //----- find all hace la misma monda.
     public List<PacienteDTO> getPacientes() {
-        Query q = this.entityMgr.createQuery("SELECT p FROM Paciente p", null);
+        Query q = this.entityMgr.createNativeQuery("SELECT p.NoIdentificacion,p.nombre, FROM Paciente p",Paciente.class);
+
+        //q.setMaxResults();
         List<Paciente> resp = q.getResultList();
         return PacienteConverter.entityToDtoList(resp);
     }
@@ -275,11 +276,9 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
      */
     @Override
     public List<EpisodioDolorDTO> getEpisodiosByPaciente(int noId) {
-        Query q = this.entityMgr.createQuery("SELECT p FROM Paciente p WHERE p.noIdentificacion = :noId");
-        q.setParameter("noId", noId);
-        Paciente p;
+
         try {
-            p = (Paciente)q.getSingleResult();
+            Paciente p = this.entityMgr.find(Paciente.class, noId);
             return EpisodioDolorConverter.entityToDtoList( p.getEpisodios() );
         } catch (NoResultException e) {
         }
