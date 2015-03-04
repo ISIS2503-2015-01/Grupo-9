@@ -94,17 +94,16 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
      */
     @Override
     public void update(Object obj) {
-        try
-        {
-            this.delete(obj);
-            this.create(obj);
-            Utils.printf("Se ha actualizado el sintoma exitosamente");
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            Utils.printf("Se ha producido un error al actualizar el sintoma: " + e.getMessage());
-        }
+        SintomaDTO existe = (SintomaDTO) obj;
+        long id = existe.getId();
+        int intensidad = existe.getIntensidad();
+        String localizacion = existe.getLocalizacion();
+        String nombre = existe.getNombre();
+        Query q = this.entityMgr.createQuery("UPDATE SINTOMA SET INTENSIDAD:=param1, LOCALIZACION:=param2, NOMBRE:=param3 WHERE ID:=param4");
+        q.setParameter("param1", intensidad);
+        q.setParameter("param2", localizacion);
+        q.setParameter("param3", nombre);
+        q.setParameter("param4", id);
     }
 
     /**
