@@ -159,9 +159,10 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
      */
     @Override
     public List findAll(Class c) {
-        Query q =  this.entityMgr.createQuery("SELECT d.nombre,d.noIdentificacion,d.especialidad FROM Doctor d",Doctor.class);
-        q.setMaxResults(50);
+        Query q =  this.entityMgr.createQuery("SELECT d FROM Doctor d",Doctor.class);
+        q.setMaxResults(5);
         List<Doctor> Doctores = q.getResultList();
+        
         return DoctorConverter.entityToDtoList(Doctores);
     }
 

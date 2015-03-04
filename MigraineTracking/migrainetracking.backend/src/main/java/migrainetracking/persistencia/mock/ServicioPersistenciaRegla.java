@@ -198,13 +198,12 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
     public List<CatalizadorDTO> getEvitables(EpisodioDolorDTO episodio) {
         //HashSet<Catalizador> conjuntoEvitables = new HashSet<Catalizador>();
         
-
-        String strQuery = 
-                "SELECT c.* FROM App.REGLA AS r JOIN App.REGLA_CATALIZADOR AS rc ON r.id=rc.Regla_id JOIN APP.CATALIZADOR AS c ON rc.Evitables_id=c.id WHERE r.localizacionDolor = ?locDolor AND ?intenDolor >= r.intensidadDolorMin AND  ?intenDolor <= r.intensidadDolorMax";
-        //strQuery=
-                //"SELECT c.* FROM APP.REGLA_CATALIZADOR as rc JOIN CATALIZADOR as c ON  rc.evitables_id=c.id WHERE rc.REGLA_ID in (SELECT r.ID FROM App.Regla AS r WHERE r.localizacionDolor = 'cuello' AND 5 >= r.intensidadDolorMin AND 5 <= r.intensidadDolorMax) --DERBY-PROPERTIES index=idx_Regla_intensidadesDolor"; 
-             
-                
+//------->Query 1
+        String strQuery = "SELECT c.* FROM App.REGLA AS r JOIN App.REGLA_CATALIZADOR AS rc ON r.id=rc.Regla_id JOIN APP.CATALIZADOR AS c ON rc.Evitables_id=c.id WHERE r.localizacionDolor = ?locDolor AND ?intenDolor >= r.intensidadDolorMin AND  ?intenDolor <= r.intensidadDolorMax";
+  
+//-------->Query 2        
+//        String strQuery="SELECT c.* FROM APP.REGLA_CATALIZADOR as rc JOIN CATALIZADOR as c ON  rc.evitables_id=c.id WHERE rc.REGLA_ID in (SELECT r.ID FROM App.Regla AS r WHERE r.localizacionDolor = 'cuello' AND 5 >= r.intensidadDolorMin AND 5 <= r.intensidadDolorMax) "; 
+                     
         Query  q = this.entityMgr.createNativeQuery(strQuery,Catalizador.class); 
         q.setParameter("locDolor", episodio.getLocalizacion());
         q.setParameter("intenDolor", episodio.getIntensidadDolor());

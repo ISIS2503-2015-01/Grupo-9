@@ -166,6 +166,7 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
     @Override
     public List findAll(Class c) {
         Query q = this.entityMgr.createQuery("SELECT p FROM Paciente p", null);
+        q.setMaxResults(5);
         List<Paciente> resp = q.getResultList();
         return PacienteConverter.entityToDtoList(resp);
     }
@@ -192,9 +193,8 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
 
     //----- find all hace la misma monda.
     public List<PacienteDTO> getPacientes() {
-        Query q = this.entityMgr.createNativeQuery("SELECT p.NoIdentificacion,p.nombre, FROM Paciente p",Paciente.class);
-
-        //q.setMaxResults();
+        Query q = this.entityMgr.createNativeQuery("SELECT p FROM Paciente p ORDER BY p.nombre",Paciente.class);
+        q.setMaxResults(10);
         List<Paciente> resp = q.getResultList();
         return PacienteConverter.entityToDtoList(resp);
     }
