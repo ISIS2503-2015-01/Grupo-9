@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Query;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.EpisodioDolorDTO;
@@ -27,6 +29,7 @@ import migrainetracking.utils.Utils;
  *
  * @author Personal
  */
+ 
 public class ServicioPersistenciaRegla extends PersistenceServiceMaster  implements IServicioPersistenciaRegla {
 
     //----------------------------------------------------------------------
@@ -192,18 +195,21 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
     @Override
     // NOTA: HAY TENTACION DE PASAR ESTA FUNCIONALIDAD AL EJB DE ANALISIS. 
     public List<CatalizadorDTO> getEvitables(EpisodioDolorDTO episodio) {
-        HashSet<Catalizador> conjuntoEvitables = new HashSet<Catalizador>();
-        Query  q = this.entityMgr.createQuery(
-                "SELECT r FROM Regla r WHERE r.localizacionDolor = :locDolor"
-                        + " AND :intenDolor BETWEEN (r.intensidadDolorMin AND r.intensidadDolorMax) " , Regla.class); 
+        //HashSet<Catalizador> conjuntoEvitables = new HashSet<Catalizador>();
+        
+
+        String strQuery = 
+                "SELECT c.* FROM App.REGLA AS r JOIN App.REGLA_CATALIZADOR AS rc ON r.id=rc.Regla_id JOIN APP.CATALIZADOR AS c ON rc.Evitables_id=c.id WHERE r.localizacionDolor = ?locDolor AND ?intenDolor >= r.intensidadDolorMin AND  ?intenDolor <= r.intensidadDolorMax";
+        //strQuery=
+                //"SELECT c.* FROM APP.REGLA_CATALIZADOR as rc JOIN CATALIZADOR as c ON  rc.evitables_id=c.id WHERE rc.REGLA_ID in (SELECT r.ID FROM App.Regla AS r WHERE r.localizacionDolor = 'cuello' AND 5 >= r.intensidadDolorMin AND 5 <= r.intensidadDolorMax) --DERBY-PROPERTIES index=idx_Regla_intensidadesDolor"; 
+             
+                
+        Query  q = this.entityMgr.createNativeQuery(strQuery,Catalizador.class); 
         q.setParameter("locDolor", episodio.getLocalizacion());
         q.setParameter("intenDolor", episodio.getIntensidadDolor());
-        List<Regla> reglas = q.getResultList();
-        for( Regla r : reglas ){
-            conjuntoEvitables.addAll( r.getEvitables() );
-        }
-        
-        return CatalizadorConverter.entityToDtoList( new ArrayList<Catalizador>(conjuntoEvitables) );
+        List<Catalizador> conjuntoEvitables = q.getResultList();
+
+        return CatalizadorConverter.entityToDtoList( conjuntoEvitables );
     }
     
     /**

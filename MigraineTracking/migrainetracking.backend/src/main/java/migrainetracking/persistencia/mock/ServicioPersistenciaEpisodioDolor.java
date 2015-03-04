@@ -18,6 +18,7 @@ import javax.transaction.UserTransaction;
 import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.Entities.EpisodioDolor;
+import migrainetracking.persistencia.Entities.Paciente;
 import migrainetracking.persistencia.converters.EpisodioDolorConverter;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
 import migrainetracking.utils.Utils;
@@ -128,7 +129,8 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
      */
     @Override
     public List findAll(Class c) {
-        return EpisodioDolorConverter.entityToDtoList( this.entityMgr.createQuery("SELECT e FROM EpisodioDolor e",EpisodioDolor.class).getResultList() );
+        return EpisodioDolorConverter.entityToDtoList( this.entityMgr.createNativeQuery(
+                "SELECT e.* FROM APP.EpisodioDolor e FETCH FIRST 50 ROWS ONLY",EpisodioDolor.class).getResultList() );
     }
 
     /**
@@ -141,10 +143,8 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
     @Override
     public Object findById(Class c, Object id) {
         Long nId = Long.parseLong(id.toString());
-        Query q = this.entityMgr.createQuery("SELECT e FROM EpisodioDolor e WHERE e.id = :id");
-        q.setParameter("id", nId);
         try {
-            EpisodioDolorDTO resp =  EpisodioDolorConverter.entityToDto( (EpisodioDolor)q.getSingleResult() ) ;
+            EpisodioDolorDTO resp =  EpisodioDolorConverter.entityToDto( this.entityMgr.find(EpisodioDolor.class, nId) ) ;
             return resp;
         } catch (NoResultException e) {
             Utils.printf(e.getLocalizedMessage());
@@ -161,11 +161,11 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
      */
     @Override
     public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId) {
-        List<EpisodioDolorDTO> resp = new ArrayList<EpisodioDolorDTO>();
         Query q = this.entityMgr.createQuery("SELECT ep FROM EpisodioDolor ep WHERE ep.paciente = :noID AND  :fecha1 <= ep.fecha AND ep.fecha <= :fecha2 ");
-        q.setParameter("noID", noId);
+        q.setParameter("noID", this.entityMgr.find(Paciente.class,noId));
         q.setParameter("fecha1", fecha_in);
         q.setParameter("fecha2", fecha_fin);
-        return resp;
+        List<EpisodioDolor> eps = q.getResultList();
+        return EpisodioDolorConverter.entityToDtoList(eps);
     }
 }
