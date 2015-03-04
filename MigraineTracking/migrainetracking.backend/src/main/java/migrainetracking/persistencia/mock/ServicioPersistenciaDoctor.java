@@ -158,7 +158,8 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
      */
     @Override
     public List findAll(Class c) {
-        Query q =  this.entityMgr.createQuery("SELECT d FROM Doctor d");
+        Query q =  this.entityMgr.createQuery("SELECT d.nombre,d.noIdentificacion,d.especialidad FROM Doctor d",Doctor.class);
+        q.setMaxResults(50);
         List<Doctor> Doctores = q.getResultList();
         return DoctorConverter.entityToDtoList(Doctores);
     }
@@ -173,11 +174,9 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
     // El id en este caso es la cedula del doctor.
     public DoctorDTO findById(Class c, Object id) {
         int noId = Integer.parseInt(id.toString());
-        Query q = this.entityMgr.createQuery("SELECT d FROM Doctor d WHERE d.noIdentificacion = :ID");
-        q.setParameter("ID", noId);        
-        Doctor resp;
+        Doctor resp ;
         try{
-              resp = (Doctor)q.getSingleResult();
+              resp =  this.entityMgr.find(Doctor.class, noId);
         }catch(NoResultException e){
             return null;
         }
