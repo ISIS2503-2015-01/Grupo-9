@@ -117,7 +117,7 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
         Date fechaNacimiento = existe.getFechaNacimiento();
         int estatura = existe.getEstatura();
         int peso=existe.getPeso();
-        Query q = this.entityMgr.createQuery("UPDATE APP.PACIENTE SET ESTATURA:=param3, FECHANACIMIENTO:=param2,NOMBRE:=param1, PESO:=param4 WHERE NOIDENTIFICACION:=param5");
+        Query q = this.entityMgr.createQuery("UPDATE PACIENTE SET ESTATURA:=param3, FECHANACIMIENTO:=param2,NOMBRE:=param1, PESO:=param4 WHERE NOIDENTIFICACION:=param5");
         q.setParameter("param1", nombre);
         q.setParameter("param2", fechaNacimiento);
         q.setParameter("param3", estatura);
