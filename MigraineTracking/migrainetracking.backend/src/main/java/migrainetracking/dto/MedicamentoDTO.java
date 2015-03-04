@@ -156,4 +156,21 @@ public class MedicamentoDTO {
     {
         this.id = id;
     }
+    
+    /**
+     * Metodo que retorna la fecha que el medicamento fue recetado
+    */
+    public Date getFecha()
+    {
+        return fechaRecetado;
+    }  
+    
+    /**
+     * Metodo que cambia la fecha por la fecha dada por parametro
+     * @param fecha la nueva fecha
+     */
+    public void setFecha(Date fecha)
+    {
+        this.fechaRecetado=fecha;
+    }
 }
