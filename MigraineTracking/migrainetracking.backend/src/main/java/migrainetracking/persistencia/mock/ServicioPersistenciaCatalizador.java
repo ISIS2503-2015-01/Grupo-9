@@ -95,16 +95,16 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
      */
     @Override
     public void update(Object obj) {
-        try
-        {
-            this.delete(obj);
-            this.create(obj);
-            Utils.printf("Se ha actualizado el catalizador exitosamente");
-        }
-        catch(Exception e)
-        {
-            Utils.printf("Se ha producido un error al actualizar el catalizador: " + e.getMessage());
-        }
+        CatalizadorDTO existe = (CatalizadorDTO)obj;
+        long id = existe.getId();
+        String especificacion = existe.getEspecificacion();
+        int frecuencia = existe.getFrecuencia();
+        String tipo = existe.getTipo();
+        Query q = this.entityMgr.createQuery("UPDATE CATALIZADOR SET ESPECIFICACION:=param1, FRECUENCIA:=param2,TIPO:=param3 WHERE ID:=param4");
+        q.setParameter("param1", especificacion);
+        q.setParameter("param2", frecuencia);
+        q.setParameter("param3", tipo);
+        q.setParameter("param4", id);
     }
 
     /**
