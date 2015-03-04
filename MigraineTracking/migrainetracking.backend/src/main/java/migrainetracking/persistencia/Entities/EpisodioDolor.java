@@ -7,7 +7,7 @@ package migrainetracking.persistencia.Entities;
 
 import java.io.Serializable;
 import static java.util.Calendar.DATE;
-import java.util.Date;
+import java.util.Date; // sql
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 
 
@@ -24,6 +26,7 @@ import javax.persistence.Temporal;
  * @author estudiante
  */
 @Entity
+@TableGenerator(name="tab1")
 public class EpisodioDolor implements Serializable {
     
     //--------------------------------
@@ -43,7 +46,7 @@ public class EpisodioDolor implements Serializable {
      * EL id del episodio de dolor
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE,generator = "tab1")
     private Long id;
 
     /**
