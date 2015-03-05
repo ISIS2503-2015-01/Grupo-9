@@ -104,6 +104,13 @@ private final DataFactory df;
                     
                     System.out.println("INSERT INTO APP.EPISODIODOLOR (ID, FECHA, \"HORASDESUEÑO\", INTENSIDADDOLOR, LOCALIZACION, PACIENTE_NOIDENTIFICACION) VALUES ("+idE+", '"+fecha4+"', "+horas+", "+intensidad+", '"+localizacion+"', "+id1+");");
                     
+                    
+                    int intensidadMax = df.getNumberBetween(1, 10);
+                    int intensidadMin = df.getNumberBetween(1, 10);
+                    String localizacionRg = df.getItem(localizaciones, 70);
+                        
+                    System.out.println("INSERT INTO APP.REGLA (ID, INTENSIDADDOLORMAX, INTENSIDADDOLORMIN, LOCALIZACIONDOLOR) VALUES ("+idRg+", "+intensidadMax+", "+intensidadMin+", '"+localizacionRg+"');");
+                   
                     //Lista Catalizadores
                     for( int p = 0; p<3;p++){
                         String tipo1 = df.getItem(tipos, 100);
@@ -113,16 +120,13 @@ private final DataFactory df;
                         System.out.println("INSERT INTO APP.CATALIZADOR (ID, ESPECIFICACION, FRECUENCIA, TIPO) VALUES ("+idH+", '"+especificacion1+"', "+frecuencia1+", '"+tipo1+"');");
                         System.out.println("INSERT INTO APP.EPISODIODOLOR_CATALIZADOR (EPISODIODOLOR_ID, CATALIZADORES_ID) VALUES ("+idE+", "+idH+");");
                         
-                        int intensidadMax = df.getNumberBetween(1, 10);
-                        int intensidadMin = df.getNumberBetween(1, 10);
-                        String localizacionRg = df.getItem(localizaciones, 70);
                         
-                        System.out.println("INSERT INTO APP.REGLA (ID, INTENSIDADDOLORMAX, INTENSIDADDOLORMIN, LOCALIZACIONDOLOR) VALUES ("+idRg+", "+intensidadMax+", "+intensidadMin+", '"+localizacionRg+"');");
                         System.out.println("INSERT INTO APP.REGLA_CATALIZADOR (REGLA_ID, EVITABLES_ID) VALUES ("+idRg+", "+idH+");");
-                        idRg++;
+                        
                         idH++;
                         
                     }
+                    idRg++;
                     //Lista Medicamentos Actuales
                     for( int r = 0; r<2;r++){
                         String nombre5 = df.getItem(nombres5, 100);
