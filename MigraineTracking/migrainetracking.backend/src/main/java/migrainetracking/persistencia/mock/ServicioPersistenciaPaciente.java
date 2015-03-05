@@ -92,7 +92,6 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
                 this.entityMgr.persist( p );
                 tran.commit();
                 this.entityMgr.refresh( p );
-                this.entityMgr.close();
                 Utils.printf("New paciente(" + newPac.getNombre() + ") was ADDED");       
            } catch(Exception e){
                tran.rollback();

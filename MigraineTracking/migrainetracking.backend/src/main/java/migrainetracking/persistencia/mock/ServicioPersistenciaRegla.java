@@ -87,7 +87,6 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
             this.entityMgr.persist(reg);
             tran.commit();
             this.entityMgr.refresh(reg);
-            this.entityMgr.close();
             Utils.printf("Se ha creado una nueva regla");
         }
         catch(Exception e)

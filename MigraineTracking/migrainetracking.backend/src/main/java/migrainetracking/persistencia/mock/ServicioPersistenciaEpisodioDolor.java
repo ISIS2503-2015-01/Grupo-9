@@ -82,7 +82,6 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
                 this.entityMgr.persist(epEntity);
                 tran.commit();
                 this.entityMgr.refresh(epEntity);
-                this.entityMgr.close();
                 Utils.printf("EpisodioDolor(" + epEntity.getId() + ") was created");
                 ep.setId( epEntity.getId() );
                 
