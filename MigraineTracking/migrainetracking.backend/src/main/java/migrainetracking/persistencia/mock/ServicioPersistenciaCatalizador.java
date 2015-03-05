@@ -79,6 +79,7 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
             this.entityMgr.persist(cat);
             tran.commit();
             this.entityMgr.refresh(cat);
+            this.entityMgr.close();
             Utils.printf("Se ha creado un catalizador nuevo");
         }
         catch(Exception e)

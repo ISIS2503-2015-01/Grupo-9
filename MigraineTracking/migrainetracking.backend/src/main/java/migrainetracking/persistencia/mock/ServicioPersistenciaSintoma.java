@@ -77,6 +77,7 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
             this.entityMgr.persist(sint);
             tran.commit();
             this.entityMgr.refresh(sint);
+            this.entityMgr.close();
             Utils.printf("Se ha creado un sintoma nuevo cuyo nombre es " + nuevo.getNombre());
         }
         catch(Exception e)

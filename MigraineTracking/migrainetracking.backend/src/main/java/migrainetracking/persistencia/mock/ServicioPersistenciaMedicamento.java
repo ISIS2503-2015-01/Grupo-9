@@ -78,6 +78,7 @@ public class ServicioPersistenciaMedicamento extends PersistenceServiceMaster im
             this.entityMgr.persist(med);
             tran.commit();
             this.entityMgr.refresh(med);
+            this.entityMgr.close();
             Utils.printf("Se ha creado un medicamento nuevo");
         }
         catch(Exception e)

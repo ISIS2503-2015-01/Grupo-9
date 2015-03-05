@@ -94,6 +94,7 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
                 this.entityMgr.persist( d );
                 tran.commit();
                 this.entityMgr.refresh(d);
+                this.entityMgr.close();
                 Utils.printf("New doctor(" + newDoc.getNombre() + ") was added");
             }  catch( Exception e){
                 e.printStackTrace();
