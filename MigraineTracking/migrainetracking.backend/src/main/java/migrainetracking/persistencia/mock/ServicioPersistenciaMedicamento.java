@@ -96,19 +96,21 @@ public class ServicioPersistenciaMedicamento extends PersistenceServiceMaster im
     @Override
     public void update(Object obj) {
         MedicamentoDTO existe = (MedicamentoDTO) obj;
-        int veces = existe.getCantidadVecesAlDia();
-        long id = existe.getId();
-        int intervalos = existe.getIntervaloHoras();
-        int miligramos = existe.getMiligramos();
-        String nombre = existe.getNombre();
-        Date fecha = existe.getFecha();
-        Query q = this.entityMgr.createQuery("UPDATE MEDICAMENTO SET VECESALDIA:=param1, INTERVALOHORAS:=param2, MILIGRAMOS:=param3, NOMBRE:=param4, FECHARECETADO:=param5 WHERE ID:=param5");
-        q.setParameter("param1", veces);
-        q.setParameter("param2", intervalos);
-        q.setParameter("param3", miligramos);
-        q.setParameter("param4", nombre);
-        q.setParameter("param5", fecha);
-        q.setParameter("param6", id);
+        Medicamento med=MedicamentoConverter.dtoToEntity(existe);
+        EntityTransaction tran=this.entityMgr.getTransaction();
+        try
+        {
+            tran.begin();
+            this.entityMgr.merge(med);
+            tran.commit();
+            Utils.printf("El medicamento ha sido actualizado");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido un error: " + e.getMessage());
+        }
     }
 
     /**

@@ -111,15 +111,21 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
     @Override
     public void update(Object obj) {
         DoctorDTO existe = (DoctorDTO)obj;
-        int id = existe.getNoIdentificacion();
-        String nombre = existe.getNombre();
-        Date fechaNacimiento = existe.getFechaNacimiento();
-        String especialidad = existe.getEspecialidad();
-        Query q = this.entityMgr.createQuery("UPDATE DOCTOR SET ESPECIALIDAD:=param3, FECHANACIMIENTO:=param2,NOMBRE:=param1 WHERE NOIDENTIFICACION:=param5");
-        q.setParameter("param1", nombre);
-        q.setParameter("param2", fechaNacimiento);
-        q.setParameter("param3", especialidad);
-        q.setParameter("param5", id);
+        Doctor doc=DoctorConverter.dtoToEntity(existe);
+        EntityTransaction tran=this.entityMgr.getTransaction();
+        try
+        {
+            tran.begin();
+            this.entityMgr.merge(doc);
+            tran.commit();
+            Utils.printf("El doctor ha sido actualizado");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido un error: " + e.getMessage());
+        }
     }
 
     /**

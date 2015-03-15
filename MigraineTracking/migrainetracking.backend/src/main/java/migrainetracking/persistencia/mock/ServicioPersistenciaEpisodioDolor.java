@@ -100,8 +100,22 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
      */
     @Override
     public void update(Object obj) {
-        EpisodioDolorDTO toEdit = (EpisodioDolorDTO) obj;
-       
+        EpisodioDolorDTO existe = (EpisodioDolorDTO) obj;
+        EpisodioDolor epi=EpisodioDolorConverter.dtoToEntity(existe);
+        EntityTransaction tran=this.entityMgr.getTransaction();
+        try
+        {
+            tran.begin();
+            this.entityMgr.merge(epi);
+            tran.commit();
+            Utils.printf("El episodio ha sido actualizado");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            tran.rollback();
+            Utils.printf("Se ha producido un error: " + e.getMessage());
+        }
     }
 
     /**
