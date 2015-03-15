@@ -8,6 +8,7 @@ package migrainetracking.persistencia.mock;
 
 import java.util.List;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
@@ -157,18 +158,13 @@ public class ServicioPersistenciaCatalizador extends PersistenceServiceMaster im
 
     @Override
     public Object findById(Class c, Object id) {
-        int idCat = Integer.parseInt(id.toString());
-        Query q = this.entityMgr.createQuery("SELECT c FROM CATALIZADOR c WHERE c.id=:param");
-        q.setParameter("param", idCat);
-        Catalizador sol;
-        try
-        {
-            sol = (Catalizador)q.getSingleResult();
-        }
-        catch(Exception e)
-        {
+        int noId = Integer.parseInt(id.toString());
+        Catalizador resp ;
+        try{
+              resp =  this.entityMgr.find(Catalizador.class, noId);
+        }catch(NoResultException e){
             return null;
         }
-        return CatalizadorConverter.entityToDTO(sol);
+        return CatalizadorConverter.entityToDTO(resp);
     }    
 }
