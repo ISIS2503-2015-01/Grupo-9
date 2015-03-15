@@ -4,13 +4,29 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<form name="episodioForm" ng-submit="episodioForm.$valid && createEpisodio.createEpisodioDolor()" novalidate="">
+    <h2>Registra un nuevo paciente</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <input ng-model="this.createEpisodio.episodio.localizacion" placeholder="localizacion" type="text" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input ng-model="this.createEpisodio.episodio.intensidadDolor" type="number" placeholder="Intensidad de Dolor" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>Fecha y Hora:</label>
+            <input ng-model="this.createEpisodio.episodio.fecha" type="datetime" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input ng-model="this.createEpisodio.episodio.horasDeSueño" type="number" placeholder="Horas De Sue&ntilde;o" class="form-control" required>
+        </div>
+    </div>
+    <input type="submit" value="Registrar" class="btn btn-default" >
+</form>
+

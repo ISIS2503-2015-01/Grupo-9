@@ -4,13 +4,36 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<form name="pacienteForm" ng-submit="pacienteForm.$valid && createPaciente.createPaciente()" novalidate="">
+    <h2>Registra un nuevo paciente</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <input ng-model="this.createPaciente.paciente.nombre" placeholder="Nombre y Apellidos" type="text" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input ng-model="this.createPaciente.paciente.noIdentificacion" type="number" placeholder="Numero de Indentificaci&oacute;n" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>Fecha de Nacimiento:</label>
+            <input ng-model="this.createPaciente.paciente.fechaNacimiento" type="date" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input ng-model="this.createPaciente.paciente.peso" type="number" placeholder="Peso" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input ng-model="this.createPaciente.paciente.estatura" type="number" placeholder="Estatura" class="form-control" aria-describedby="basic-addon2" required>
+                <span class="input-group-addon" id="basic-addon2"></span>
+            </div>
+        </div>
+    </div>
+    <input type="submit" value="Registrar" class="btn btn-default" >
+</form>

@@ -4,13 +4,25 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<h2>Lista de Doctores</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">Doctores</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No Identificaci&oacute;n</th>
+                <th>Nombre</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Especialidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="doctor in this.getDoctores.doctores | orderBy:'noIdentificacion'">
+                <th>{{doctor.noIdentificacion}}</th>
+                <th>{{doctor.nombre}}</th>
+                <th>{{doctor.fechaNacimienyo}}</th>
+                <th>{{doctor.especialidad}}</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
