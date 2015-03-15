@@ -8,7 +8,7 @@
        return{
            restrict:'E',
            template:'partials/doctorForm.html',
-           controler:['$http', function($http){
+           controller:['$http', function($http){
               var self = this;
               self.doctor={};
               this.createDoctor=function(){
@@ -19,6 +19,36 @@
            }], 
            controllerAs:'createDoctor'
        };
+    });
+    registroDoctor.directive('doctorInfo',function(){
+       return{
+            restrict:'E',
+            template:'partials/doctorInfo.html',
+            controller:['$http',function($http){
+                var self = this;
+                self.doctores = [];
+                $http.get('/registrousuarios/getAll/Doctores').success(function(data){
+                    self.doctores=data;
+                });
+            }],
+            controllerAs:'getDoctores'
+       };
+    });
+    registroDoctor.directive('doctorFormUpdate',function(){
+        return{
+            restrict:'E',
+            template:'partials/doctorFormUpdate.html',
+            controller:['$http',function($http){
+                var self = this;
+                self.doctor={};
+                this.updatePaciente=function(){
+                    $http.post('/registrousuarios/update/Doctor',JSON.stringify(self.doctor)).success(function(data){
+                        self.doctor={};
+                    });
+                };
+            }],
+            controllerAs:'updateDoctor'
+        };
     });
 });
 

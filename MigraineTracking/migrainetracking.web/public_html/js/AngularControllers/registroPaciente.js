@@ -4,6 +4,52 @@
  * and open the template in the editor.
  */
 (function() {var registroPaciente = angular.module('registroPaciente',[]);
+    registroPaciente.directive('pacienteInfo',function(){
+        return{
+            restrict:'E',
+            template:'partials/pacienteInfo.html',
+            controller:['$http',function($http){
+                var self =this;
+                self.pacientes=[];
+                $http.get('/registrousuarios/getAll/Pacientes').success(function(data){
+                    self.pacientes=data;
+                });
+            }],
+            controllerAs:'getPacientes'
+        };
+    });
+    registroPaciente.directive('pacienteForm',function(){
+        return{
+            restrict:'E',
+            template:'partials/pacienteForm.html',
+            controller:['$http',function($http){
+                var self=this;
+                self.paciente={};
+                this.createPaciente=function(){
+                     $http.post('/registrousuarios/create/Paciente',JSON.stringify(self.paciente)).success(function(data){
+                         self.paciente={};
+                     });   
+                }; 
+            }],
+            controllerAs:'createPaciente'
+        };
+    });
+    registroPaciente.directive('pacienteFormUpdate',function(){
+       return{
+            restrict:'E',
+            template:'partials/pacienteFormUpdate.html',
+            controller:['$http',function($http){
+                    var self=this;
+                    self.paciente={};
+                    this.updatePaciente=function(){
+                        $http.post('/registrousuarios/update/Paciente',JSON.stringify(self.paciente)).success(function(data){
+                            self.paciente={};
+                        });
+                    };
+            }],
+            controllerAs:'updatePaciente'
+       }; 
+    });
 });
 
 
