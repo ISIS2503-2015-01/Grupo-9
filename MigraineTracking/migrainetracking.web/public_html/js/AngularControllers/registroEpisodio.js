@@ -8,7 +8,7 @@
     registroEpisodio.directive('episodioInfo',function(){
         return{
             restrict:'E',
-            template:'partials/episodioInfo.html',
+            templateUrl:'partials/episodioInfo.html',
             controller:['$http',function($http){
                     var self=this;
                     self.episodios = [];
@@ -22,7 +22,7 @@
     registroEpisodio.directive('episodioForm', function(){
         return{
             restrict:'E',
-            template:'partials/episodioForm.html',
+            templateUrl:'partials/episodioForm.html',
             controller:['$http',function($http){
                     var self=this;
                     self.episodio={};

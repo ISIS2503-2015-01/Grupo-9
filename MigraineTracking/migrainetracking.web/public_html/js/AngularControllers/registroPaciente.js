@@ -7,7 +7,7 @@
     registroPaciente.directive('pacienteInfo',function(){
         return{
             restrict:'E',
-            template:'partials/pacienteInfo.html',
+            templateUrl:'partials/pacienteInfo.html',
             controller:['$http',function($http){
                 var self =this;
                 self.pacientes=[];
@@ -21,7 +21,7 @@
     registroPaciente.directive('pacienteForm',function(){
         return{
             restrict:'E',
-            template:'partials/pacienteForm.html',
+            templateUrl:'partials/pacienteForm.html',
             controller:['$http',function($http){
                 var self=this;
                 self.paciente={};

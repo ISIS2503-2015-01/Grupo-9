@@ -7,7 +7,7 @@
     registroDoctor.directive('doctorForm', function(){
        return{
            restrict:'E',
-           template:'partials/doctorForm.html',
+           templateUrl:'partials/doctorForm.html',
            controller:['$http', function($http){
               var self = this;
               self.doctor={};
@@ -23,7 +23,7 @@
     registroDoctor.directive('doctorInfo',function(){
        return{
             restrict:'E',
-            template:'partials/doctorInfo.html',
+            templateUrl:'partials/doctorInfo.html',
             controller:['$http',function($http){
                 var self = this;
                 self.doctores = [];
@@ -37,7 +37,7 @@
     registroDoctor.directive('doctorFormUpdate',function(){
         return{
             restrict:'E',
-            template:'partials/doctorFormUpdate.html',
+            templateUrl:'partials/doctorFormUpdate.html',
             controller:['$http',function($http){
                 var self = this;
                 self.doctor={};
