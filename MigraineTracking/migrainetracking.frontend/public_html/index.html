@@ -17,11 +17,15 @@ and open the template in the editor.
         <div>TODO write content</div>
         <script type="text/javascript" src="js/angular.min.js"></script>
         <script type="text/javascript" src="js/AngularControllers/app.js"></script>
+        <script type="text/javascript" src="js/AngularControllers/registroDoctor.js"></script>
+        <script type="text/javascript" src="js/AngularControllers/registroEpisodio.js"></script>
+        <script type="text/javascript" src="js/AngularControllers/registroPaciente.js"></script>
+        <script type="text/javascript" src="js/AngularControllers/revisionEpisodio.js"></script>
         <div class="container theme-showcase" role="main">
  
             <div class="row featurette">
                 <div class="col-md-5">
-                    <img src="images/mundial.jpg" class="img-responsive" alt="500x500" data-holder-rendered="true">
+                    <img src="images/cerebro.jpg" class="img-responsive" alt="500x500" data-holder-rendered="true">
                 </div>
                 <div class="col-md-7">
                     <h2>Migraine Tracking</h2>
@@ -32,14 +36,17 @@ and open the template in the editor.
             </div>
             <hr>
             <toolbar></toolbar>
+            <div ng-if="toolbar.isSelected(0)">
+                <portada></portada>
+            </div>
             <div ng-if="toolbar.isSelected(1)">
-                <competitor-form competitorInfo></competitor-form>
+                <pacienteInfo></pacienteInfo>
             </div>
             <div ng-if="toolbar.isSelected(2)">
                 <competitor-info></competitor-info>
             </div>
             <div ng-if="toolbar.isSelected(3)">
-                <competitor-login></competitor-login>
+                <doctorInfo></doctorInfo>
             </div>
             <div ng-if="toolbar.isSelected(4)">
                 <competitor-logout></competitor-logout>

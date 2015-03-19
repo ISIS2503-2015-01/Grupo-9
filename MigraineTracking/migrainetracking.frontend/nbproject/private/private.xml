@@ -10,6 +10,13 @@
             <file>file:/C:/Users/template/Documents/Laboratorios/LabAngularJS/AplicacionMundialFrontEnd/public_html/partials/competitor-login.html</file>
             <file>file:/C:/Users/template/Documents/Laboratorios/LabAngularJS/AplicacionMundialFrontEnd/public_html/partials/competitor-info.html</file>
         </group>
-        <group name="MigraineTracking"/>
+        <group name="MigraineTracking">
+            <file>file:/C:/Users/template/Documents/Grupo-9/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/index.html</file>
+            <file>file:/C:/Users/template/Documents/Grupo-9/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/partials/portada.html</file>
+            <file>file:/C:/Users/template/Documents/Grupo-9/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/js/AngularControllers/registroPaciente.js</file>
+            <file>file:/C:/Users/template/Documents/Grupo-9/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/partials/pacienteInfo.html</file>
+            <file>file:/C:/Users/template/Documents/Grupo-9/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/partials/toolbar.html</file>
+            <file>file:/C:/Users/template/Documents/Grupo-9/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/js/AngularControllers/app.js</file>
+        </group>
     </open-files>
 </project-private>

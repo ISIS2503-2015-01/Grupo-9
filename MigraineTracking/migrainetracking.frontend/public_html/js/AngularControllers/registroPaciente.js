@@ -11,7 +11,7 @@
             controller:['$http',function($http){
                 var self =this;
                 self.pacientes=[];
-                $http.get('/registrousuarios/getAll/Pacientes').success(function(data){
+                $http.get('../migrainetracking.servicios/registrousuarios/getAll/Pacientes').success(function(data){
                     self.pacientes=data;
                 });
             }],
@@ -50,6 +50,6 @@
             controllerAs:'updatePaciente'
        }; 
     });
-});
+})();
 
 

@@ -20,68 +20,7 @@
             controllerAs:'toolbar'
         };
     });
-    aplicacionMundial.directive('competitorInfo', function(){
-        return{
-            restrict:'E',
-            templateUrl:'partials/competitor-info.html',
-            controller: ['$http',function($http){
-                var self=this;
-                self.competitors=[];
-                    $http.get('URL del Servicio').success(function(data){
-                        self.competitors=data;
-                    });
-            }],
-            controllerAs:'getCompetitors'
-        };
-    });
-    aplicacionMundial.directive('competitorForm', function(){
-        return{
-            restrict:'E',
-            templateUrl:'partials/competitor-form.html',
-            controller: ['$http',function($http){
-                var self=this;
-                self.competitor={};
-                this.addCompetitor=function(){
-                    $http.post('URL del Servicio', JSON.stringify(self.competitor)).success(function(data){
-                        self.competitor={};
-                        toolbar.tab=0;
-                    });
-                };
-            }],
-            controllerAs:'competitorCtrl'
-        };
-    });
-    aplicacionMundial.directive('competitorLogIn', function(){
-        return{
-            restrict:'E',
-            templateUrl:'partials/competitor-login.html',
-            controller: ['$http',function($http){
-                var self=this;
-                self.competitor={};
-                this.login=function(){
-                    $http.post('URL del Servicio', JSON.stringify(self.competitor)).success(function(data){
-                        self.competitor={};
-                        toolbar.tab=0;
-                    });
-                };
-            }],
-            controllerAs:'competitorLogIn'
-        };
-    });
-     aplicacionMundial.directive('competitorLogOut', function(){
-        return{
-            restrict:'E',
-            templateUrl:'partials/competitor-logout.html',
-            controller: ['$http',function($http){
-                var self=this;
-                self.competitors=[];
-                    $http.get('URL del Servicio').success(function(data){
-                        self.competitors=data;
-                    });
-            }],
-            controllerAs:'competitorLogOut'
-        };
-    });
+    
 })();
 
 
