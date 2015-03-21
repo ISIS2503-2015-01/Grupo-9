@@ -34,23 +34,24 @@ public class EpisodioDolorConverter {
         resp.setIntensidadDolor(entity.getIntensidadDolor());
         resp.setLocalizacion(entity.getLocalizacion());
 
-        List<CatalizadorDTO> catDtoList = new ArrayList<CatalizadorDTO>();
-        for (Catalizador catEn : entity.getCatalizadores()) {
-            catDtoList.add(CatalizadorConverter.entityToDTO(catEn));
-        }
-        resp.setCatalizadores(catDtoList);
-
-        List<MedicamentoDTO> medDtolist = new ArrayList<MedicamentoDTO>();
-        for (Medicamento meden : entity.getMedicamentosActuales()) {
-            medDtolist.add(MedicamentoConverter.entityToDto(meden));
-        }
-        resp.setMedicamentosActuales(medDtolist);
-
-        List<SintomaDTO> sinDtoList = new ArrayList<SintomaDTO>();
-        for (Sintoma sinEn : entity.getSintomas()) {
-            sinDtoList.add(SintomaConverter.entityToDto(sinEn));
-        }
-        resp.setSintomas(sinDtoList);
+// ...TODO ESTO SON UN POCO DE JOINS...
+//        List<CatalizadorDTO> catDtoList = new ArrayList<CatalizadorDTO>();
+//        for (Catalizador catEn : entity.getCatalizadores()) {
+//            catDtoList.add(CatalizadorConverter.entityToDTO(catEn));
+//        }
+//        resp.setCatalizadores(catDtoList);
+//
+//        List<MedicamentoDTO> medDtolist = new ArrayList<MedicamentoDTO>();
+//        for (Medicamento meden : entity.getMedicamentosActuales()) {
+//            medDtolist.add(MedicamentoConverter.entityToDto(meden));
+//        }
+//        resp.setMedicamentosActuales(medDtolist);
+//
+//        List<SintomaDTO> sinDtoList = new ArrayList<SintomaDTO>();
+//        for (Sintoma sinEn : entity.getSintomas()) {
+//            sinDtoList.add(SintomaConverter.entityToDto(sinEn));
+//        }
+//        resp.setSintomas(sinDtoList);
 
         resp.setPacienteId(entity.getPaciente().getNoIdentificacion());
 
@@ -59,7 +60,7 @@ public class EpisodioDolorConverter {
 
     public static EpisodioDolor dtoToEntity(EpisodioDolorDTO dto) {
         EpisodioDolor resp = new EpisodioDolor();
-        resp.setId(dto.getId());
+        resp.setId(resp.getId());
         resp.setFecha(dto.getFecha());
         resp.setHorasDeSueño(dto.getHorasDeSueño());
         resp.setIntensidadDolor(dto.getIntensidadDolor());

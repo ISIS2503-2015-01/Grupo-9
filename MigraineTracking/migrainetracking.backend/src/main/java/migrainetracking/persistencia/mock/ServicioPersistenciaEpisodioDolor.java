@@ -86,8 +86,8 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
                 ep.setId( epEntity.getId() );
                 
             }catch (Exception e){
-                tran.rollback();
                 e.printStackTrace();
+                tran.rollback();
                 throw new OperacionInvalidaException(e.getMessage());
             }
         
@@ -144,7 +144,7 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
     @Override
     public List findAll(Class c) {
         return EpisodioDolorConverter.entityToDtoList( this.entityMgr.createNativeQuery(
-                "SELECT e.* FROM APP.EpisodioDolor e FETCH FIRST 50 ROWS ONLY",EpisodioDolor.class).getResultList() );
+                "SELECT e.* FROM APP.EpisodioDolor e FETCH FIRST 10 ROWS ONLY",EpisodioDolor.class).getResultList() );
     }
 
     /**
@@ -158,8 +158,8 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
     public Object findById(Class c, Object id) {
         Long nId = Long.parseLong(id.toString());
         try {
-            EpisodioDolorDTO resp =  EpisodioDolorConverter.entityToDto( this.entityMgr.find(EpisodioDolor.class, nId) ) ;
-            return resp;
+            EpisodioDolor resp =  this.entityMgr.find(EpisodioDolor.class, nId)  ;
+            return EpisodioDolorConverter.entityToDto(resp) ;
         } catch (NoResultException e) {
             Utils.printf(e.getLocalizedMessage());
         }
@@ -175,8 +175,8 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
      */
     @Override
     public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId) {
-        Query q = this.entityMgr.createQuery("SELECT ep FROM EpisodioDolor ep WHERE ep.paciente = :noID AND  :fecha1 <= ep.fecha AND ep.fecha <= :fecha2 ");
-        q.setParameter("noID", this.entityMgr.find(Paciente.class,noId));
+        Query q = this.entityMgr.createQuery("SELECT ep FROM EpisodioDolor ep WHERE ep.paciente.noIdentificacion = :noID AND  :fecha1 <= ep.fecha AND ep.fecha <= :fecha2 ");
+        q.setParameter("noID", noId);
         q.setParameter("fecha1", fecha_in);
         q.setParameter("fecha2", fecha_fin);
         List<EpisodioDolor> eps = q.getResultList();

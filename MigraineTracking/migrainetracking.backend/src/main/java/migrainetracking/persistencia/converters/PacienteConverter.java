@@ -34,27 +34,27 @@ public class PacienteConverter {
         convertido.setFechaNacimiento(entity.getFechaNacimiento());
         convertido.setPeso(entity.getPeso());
         convertido.setEstatura(entity.getEstatura());
-        ArrayList<MedicamentoDTO> med = new ArrayList<MedicamentoDTO>();
-        for(int i=0;i<entity.getMedicamentosDiarios().size();i++)
-        {
-            MedicamentoDTO nuevo = MedicamentoConverter.entityToDto(entity.getMedicamentosDiarios().get(i));
-            med.add(nuevo);
-        }
-        convertido.setMedicamentosDiarios(med);
-        ArrayList<CatalizadorDTO> cat = new ArrayList<CatalizadorDTO>();
-        for(int i=0;i<entity.getHabitos().size();i++)
-        {
-            CatalizadorDTO nuevo = CatalizadorConverter.entityToDTO(entity.getHabitos().get(i));
-            cat.add(nuevo);
-        }
-        convertido.setHabitos(cat);
-        ArrayList<EpisodioDolorDTO> eps = new ArrayList<EpisodioDolorDTO>();
-        for(int i=0;i<entity.getEpisodios().size();i++)
-        {
-            EpisodioDolorDTO nuevo = EpisodioDolorConverter.entityToDto(entity.getEpisodios().get(i));
-            eps.add(nuevo);
-        }
-        convertido.setEpisodios(eps);
+//        ArrayList<MedicamentoDTO> med = new ArrayList<MedicamentoDTO>();
+//        for(int i=0;i<entity.getMedicamentosDiarios().size();i++)
+//        {
+//            MedicamentoDTO nuevo = MedicamentoConverter.entityToDto(entity.getMedicamentosDiarios().get(i));
+//            med.add(nuevo);
+//        }
+//        convertido.setMedicamentosDiarios(med);
+//        ArrayList<CatalizadorDTO> cat = new ArrayList<CatalizadorDTO>();
+//        for(int i=0;i<entity.getHabitos().size();i++)
+//        {
+//            CatalizadorDTO nuevo = CatalizadorConverter.entityToDTO(entity.getHabitos().get(i));
+//            cat.add(nuevo);
+//        }
+//        convertido.setHabitos(cat);
+//        ArrayList<EpisodioDolorDTO> eps = new ArrayList<EpisodioDolorDTO>();
+//        for(int i=0;i<entity.getEpisodios().size();i++)
+//        {
+//            EpisodioDolorDTO nuevo = EpisodioDolorConverter.entityToDto(entity.getEpisodios().get(i));
+//            eps.add(nuevo);
+//        }
+//        convertido.setEpisodios(eps);
         return convertido;
     }
     

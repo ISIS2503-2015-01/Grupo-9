@@ -62,4 +62,6 @@ public interface IServicioRegistroEpisodioMockRemote {
      * @return la lista de episodios
      */
     public List<EpisodioDolorDTO> getEpisodiosPorPaciente(int noIdPaciente);
+
+    public EpisodioDolorDTO getEpisodioById(Long idEp);
 }

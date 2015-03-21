@@ -29,11 +29,8 @@ public class ReglaConverter {
         resp.setIntensidadDolorMax(entity.getIntensidadDolorMax());
         resp.setIntensidadDolorMin(entity.getIntensidadDolorMin());
         resp.setLocalizacionDolor(entity.getLocalizacionDolor());
-        List<CatalizadorDTO> catsDto = new ArrayList<CatalizadorDTO>();
-        for( Catalizador catEn : entity.getEvitables() ){
-            catsDto.add( CatalizadorConverter.entityToDTO(catEn) );
-        }
-        resp.setEvitables(catsDto);
+       
+        
         return resp;
     }
     
@@ -49,10 +46,7 @@ public class ReglaConverter {
         resp.setIntensidadDolorMin(dto.getIntensidadDolorMin());
         resp.setLocalizacionDolor(dto.getLocalizacionDolor());
         List<Catalizador> catsEn = new ArrayList<Catalizador>();
-        for( CatalizadorDTO catDto : dto.getEvitables() ){
-            catsEn.add( CatalizadorConverter.dtoToEntity(catDto) );
-        }
-        resp.setEvitables(catsEn);
+       
         return resp;
     }
 }

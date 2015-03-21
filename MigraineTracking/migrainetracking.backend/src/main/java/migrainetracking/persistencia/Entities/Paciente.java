@@ -6,8 +6,10 @@
 package migrainetracking.persistencia.Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -62,20 +64,20 @@ public class Paciente implements Serializable {
     /**
      * Los medicamentos que toma a diario el paciente
      */
-    @OneToMany(orphanRemoval = true)
-    private List<Medicamento> medicamentosDiarios;
+    @OneToMany
+    private List<Medicamento> medicamentosDiarios ;//= new ArrayList<Medicamento>();
     
     /**
      * La lista de habitos que tiene el paciente
      */
-    @OneToMany(orphanRemoval = true)
-    private List<Catalizador> habitos; // Estos deben ser de tipo habito...
+    @OneToMany
+    private List<Catalizador> habitos;// = new ArrayList<Catalizador>(); // Estos deben ser de tipo habito...
     
     /**
      * La lista con los episodios de dolor que ha tenido el paciente
      */
-    @OneToMany(orphanRemoval=true,mappedBy="paciente")
-    private List<EpisodioDolor> episodios;
+    @OneToMany(mappedBy="paciente")
+    private List<EpisodioDolor> episodios;// = new ArrayList<EpisodioDolor>();
     
     //-----------------------------------------------
     //Constructor    
@@ -220,7 +222,7 @@ public class Paciente implements Serializable {
         this.episodios = episodios;
     }
 
-
+    
     /**
      * Metodo para comparar el paciente con otros objetos
      * @param object el objeto con el cual se va a comparar

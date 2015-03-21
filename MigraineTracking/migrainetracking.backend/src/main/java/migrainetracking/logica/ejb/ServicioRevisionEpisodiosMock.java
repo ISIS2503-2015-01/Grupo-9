@@ -16,6 +16,11 @@ import migrainetracking.dto.PacienteDTO;
 import migrainetracking.dto.SintomaDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
+import migrainetracking.persistencia.Entities.EpisodioDolor;
+import migrainetracking.persistencia.Entities.Sintoma;
+import migrainetracking.persistencia.converters.CatalizadorConverter;
+import migrainetracking.persistencia.converters.MedicamentoConverter;
+import migrainetracking.persistencia.converters.SintomaConverter;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.persistencia.mock.ServicioPersistenciaEpisodioDolor;
@@ -100,6 +105,7 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
         return persistencia.getEpisodioByFechas( fecha_in, fecha_fin, noId );
     }
 
+    // <----------------------------------------------------->
     /**
      * Metodo que retorna los sintomas de un episodio dado su id
      * @param id el id del episodio
@@ -107,8 +113,13 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      */
     @Override
     public List<SintomaDTO> getSintomasDelEpisodio(Long id) {
-        EpisodioDolorDTO e = (EpisodioDolorDTO) persistencia.findById(EpisodioDolorDTO.class, id);
-        return e.getSintomas();
+        EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, id);
+        List<SintomaDTO> resp = new ArrayList<SintomaDTO>();
+        for( Sintoma s : e.getSintomas() ){
+            resp.add( SintomaConverter.entityToDto(s) );
+        }
+        
+        return resp;
     }
 
     /**
@@ -118,8 +129,8 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      */
     @Override
     public List<CatalizadorDTO> getCatalizadoresDelEpisodio(Long id) {
-        EpisodioDolorDTO e = (EpisodioDolorDTO) persistencia.findById(EpisodioDolorDTO.class, id);
-        return e.getCatalizadores();
+        EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, id);
+        return CatalizadorConverter.entityToDtoList( e.getCatalizadores() );
     }
 
     /**
@@ -129,7 +140,7 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      */
     @Override
     public List<MedicamentoDTO> getMedicamentosDelEpisodio(Long id) {
-        EpisodioDolorDTO e = (EpisodioDolorDTO) persistencia.findById(EpisodioDolorDTO.class, id);
-        return e.getMedicamentosActuales();
+        EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolorDTO.class, id);
+        return MedicamentoConverter.entityToDtoList(e.getMedicamentosActuales());
     }     
 }

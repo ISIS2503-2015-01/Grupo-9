@@ -8,6 +8,9 @@ package migrainetracking.logica.interfaces;
 
 import java.util.List;
 import javax.ejb.Remote;
+import migrainetracking.dto.CatalizadorDTO;
+import migrainetracking.dto.MedicamentoDTO;
+import migrainetracking.dto.PacienteDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 
@@ -49,4 +52,16 @@ public interface IServicioRegistroUsuariosMockRemote {
      *         null en caso de que la clase introducida no sea de tipo Paciente o Doctor.
      */
     public List getUsuarios(Class c);
+    
+     
+    public Object getUsuarioById(Class c , Long id);
+    
+    
+    public List<PacienteDTO> getPacientesDeDoctor(Long docId);
+    
+   
+    public List<MedicamentoDTO> getMedicamentosDiariosPaciente(Long pacId);
+    
+
+    public List<CatalizadorDTO> getHabitosPaciente(Long pacId);
 }

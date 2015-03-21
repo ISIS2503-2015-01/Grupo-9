@@ -59,10 +59,9 @@ public class Regla implements Serializable {
     private String localizacionDolor;
     
     /**
-     * Los catalizadores para cuando se presenta una situacion con las condiciones de la regla
+     * Las acciones o sugerencias cuando se presentan catalizadores para cuando se presenta una situacion con las condiciones de la regla
      */
-    @OneToMany(orphanRemoval=true)
-    List<Catalizador> evitables;
+    private String acciones;
     
     //-----------------------------------------------
     //Constructor
@@ -144,20 +143,12 @@ public class Regla implements Serializable {
         this.localizacionDolor = localizacionDolor;
     }
 
-    /**
-     * Metodo que retorna la lista de evitables 
-     * @return la lista de evitables de la regla
-     */
-    public List<Catalizador> getEvitables() {
-        return evitables;
+    public String getAcciones() {
+        return acciones;
     }
 
-    /**
-     * Metodo que cambia la lista de evitables por la lista dada por parametro
-     * @param evitables la nueva lista de evitables
-     */
-    public void setEvitables(List<Catalizador> evitables) {
-        this.evitables = evitables;
+    public void setAcciones(String acciones) {
+        this.acciones = acciones;
     }
     
     /**

@@ -11,6 +11,7 @@ import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.interfaces.IServicioRegistroEpisodioMockRemote;
+import migrainetracking.persistencia.Entities.EpisodioDolor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.persistencia.mock.ServicioPersistenciaEpisodioDolor;
@@ -136,5 +137,10 @@ public class ServicioRegistroEpisodioMock implements IServicioRegistroEpisodioMo
     public List<EpisodioDolorDTO> getEpisodiosPorPaciente(int noIdPaciente) {
         IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;;
         return pacPersServ.getEpisodiosByPaciente(noIdPaciente);
+    }
+    
+    @Override
+    public EpisodioDolorDTO getEpisodioById(Long idEp){
+        return (EpisodioDolorDTO)persistencia.findById(EpisodioDolor.class, idEp);
     }
 }

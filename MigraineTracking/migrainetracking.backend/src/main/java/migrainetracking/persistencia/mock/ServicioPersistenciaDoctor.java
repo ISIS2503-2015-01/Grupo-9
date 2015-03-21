@@ -24,10 +24,12 @@ import javax.persistence.Query;
 import javax.transaction.Transaction;
 import javax.transaction.UserTransaction;
 import migrainetracking.dto.DoctorDTO;
+import migrainetracking.dto.PacienteDTO;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.Entities.Doctor;
 import migrainetracking.persistencia.conexion.PersistenceManager;
 import migrainetracking.persistencia.converters.DoctorConverter;
+import migrainetracking.persistencia.converters.PacienteConverter;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaDoctor;
 import migrainetracking.utils.Utils;
 
@@ -190,4 +192,10 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
         }
         return DoctorConverter.entityToDTO(resp);
     }
+    
+    @Override
+    public List<PacienteDTO> getDocsPacients(int noId){
+        Doctor d = this.entityMgr.find(Doctor.class, noId);
+        return PacienteConverter.entityToDtoList( d.getPacientes() );
+    } 
 }

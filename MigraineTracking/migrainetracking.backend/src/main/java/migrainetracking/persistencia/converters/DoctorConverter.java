@@ -25,12 +25,12 @@ public class DoctorConverter {
         dto.setEspecialidad(entity.getEspecialidad());
         dto.setFechaNacimiento(entity.getFechaNacimiento());
 
-        List<PacienteDTO> pacs = new ArrayList<PacienteDTO>();
-        for (Paciente p : entity.getPacientes()) {
-            pacs.add(PacienteConverter.entityToDto(p));
-        }
-
-        dto.setPacientes(pacs);
+//        List<PacienteDTO> pacs = new ArrayList<PacienteDTO>();
+//        for (Paciente p : entity.getPacientes()) {
+//            pacs.add(PacienteConverter.entityToDto(p));
+//        }
+//
+//        dto.setPacientes(pacs);
 
         return dto;
     }
@@ -54,15 +54,19 @@ public class DoctorConverter {
 
     public static List<Doctor> dtoToEntityList(List<DoctorDTO> list) {
         List<Doctor> resp = new ArrayList<Doctor>();
-        for (DoctorDTO d : list) 
+        for (int i = 0 ; i < list.size() ; i++){
+            DoctorDTO d = (DoctorDTO)list.get(i);
             resp.add(dtoToEntity(d));
+        }
         return resp;
     }
 
     public static List<DoctorDTO> entityToDtoList(List<Doctor> list) {
         List<DoctorDTO> resp = new ArrayList<DoctorDTO>();
-        for (Doctor d : list) 
+        for (int i = 0 ; i < list.size() ; i++){ 
+            Doctor d = Doctor.class.cast( list.get(i) );
             resp.add(entityToDTO(d));
+        }
         return resp;
     }
 }

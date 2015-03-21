@@ -23,6 +23,5 @@ public interface IServicioAnalisisMockRemote {
      * @return La lista de los catalizadores del episodio
      * @throws NoExisteException si el episodio de dolor no existe
      */
-    public List<CatalizadorDTO> getCatalizadores(Long id) throws NoExisteException;
-    
+    public List<String> getAcciones(Long id) throws NoExisteException;
 }

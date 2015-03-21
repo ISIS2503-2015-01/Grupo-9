@@ -5,14 +5,23 @@
  */
 package migrainetracking.logica.ejb;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.DoctorDTO;
+import migrainetracking.dto.MedicamentoDTO;
 import migrainetracking.dto.PacienteDTO;
 
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.interfaces.IServicioRegistroUsuariosMockRemote;
+import migrainetracking.persistencia.Entities.Doctor;
+import migrainetracking.persistencia.Entities.Medicamento;
+import migrainetracking.persistencia.Entities.Paciente;
+import migrainetracking.persistencia.converters.CatalizadorConverter;
+import migrainetracking.persistencia.converters.MedicamentoConverter;
+import migrainetracking.persistencia.converters.PacienteConverter;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaDoctor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaPaciente;
 import migrainetracking.persistencia.mock.ServicioPersistenciaDoctor;
@@ -145,4 +154,39 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
         }
         return (long) -1;
     }
+    
+    @Override
+    public Object getUsuarioById(Class c , Long id){
+       if( c.equals( DoctorDTO.class ) )
+           return (DoctorDTO) persistenciaDoctor.findById(Doctor.class, id.intValue());
+       else if( c.equals(PacienteDTO.class) ) {
+           return (PacienteDTO) persistenciaPaciente.findById(Paciente.class,id.intValue());
+       }else{
+           return null;
+       }
+    }
+    
+    @Override 
+    public List<PacienteDTO> getPacientesDeDoctor(Long docId){
+        return persistenciaDoctor.getDocsPacients( docId.intValue() );
+    }
+    
+    @Override
+    public List<MedicamentoDTO> getMedicamentosDiariosPaciente(Long pacId){
+        Paciente p = (Paciente) this.persistenciaPaciente.findById(pacId.intValue());
+        List<Medicamento> entList = p.getMedicamentosDiarios();
+        List<MedicamentoDTO> dtoList = new ArrayList<MedicamentoDTO>();
+        for( Medicamento entMed : entList ){
+            dtoList.add( MedicamentoConverter.entityToDto(entMed) );
+        }
+        return dtoList;
+    }
+    
+    @Override
+    public List<CatalizadorDTO> getHabitosPaciente(Long pacId)
+    {
+        Paciente p =  this.persistenciaPaciente.findById(pacId.intValue());
+        return CatalizadorConverter.entityToDtoList( p.getHabitos() );
+    }
+    
 }

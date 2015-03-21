@@ -42,7 +42,7 @@ public class ReglaDTO {
     /**
      * Los catalizadores para cuando se presenta una situacion con las condiciones de la regla
      */
-    List<CatalizadorDTO> evitables;
+    private String acciones;
     
     //-----------------------------------------------------
     // Constructor
@@ -52,7 +52,7 @@ public class ReglaDTO {
      * Metodo constructor sin argumentos
      */
     public ReglaDTO(){ 
-        evitables = new ArrayList<CatalizadorDTO>();
+        
     }
     
     /**
@@ -60,14 +60,14 @@ public class ReglaDTO {
      * @param intensidadDolorMin la intensidad minima de dolor
      * @param intensidadDolorMax la intensidad maxima de dolor
      * @param localizacionDolor la localizacion del dolor
-     * @param evitables la lista de catalizadores
+     * @param acciones
      */
-    public ReglaDTO(int intensidadDolorMin, int intensidadDolorMax, String localizacionDolor, List<CatalizadorDTO> evitables)
+    public ReglaDTO(int intensidadDolorMin, int intensidadDolorMax, String localizacionDolor,String acciones)
     {
         this.intensidadDolorMin = intensidadDolorMin;
         this.intensidadDolorMax = intensidadDolorMax;
         this.localizacionDolor = localizacionDolor;
-        this.evitables = evitables;
+        this.acciones = acciones;
     }
 
     //-----------------------------------------------------
@@ -122,22 +122,14 @@ public class ReglaDTO {
         this.localizacionDolor = localizacionDolor;
     }
 
-    /**
-     * Metodo que retorna la lista de catalizadores a la regla
-     * @return 
-     */
-    public List<CatalizadorDTO> getEvitables() {
-        return evitables;
+    public String getAcciones() {
+        return acciones;
     }
 
-    /**
-     * Metodo que se encarga de cambiar la lista de evitables por la lista dada como parametro
-     * @param evitables la nueva lista de catalizadores a la regla
-     */
-    public void setEvitables(List<CatalizadorDTO> evitables) {
-        this.evitables = evitables;
-    }  
-    
+    public void setAcciones(String acciones) {
+        this.acciones = acciones;
+    }
+
     /**
      * Metodo que retorna el id de la regla
      * @return el id de la regla

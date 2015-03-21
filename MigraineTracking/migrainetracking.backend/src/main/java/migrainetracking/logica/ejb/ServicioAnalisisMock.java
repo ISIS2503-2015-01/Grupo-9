@@ -12,6 +12,7 @@ import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.EpisodioDolorDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.logica.interfaces.IServicioAnalisisMockRemote;
+import migrainetracking.persistencia.Entities.EpisodioDolor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaCatalizador;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaEpisodioDolor;
 import migrainetracking.persistencia.interfaces.IServicioPersistenciaRegla;
@@ -83,11 +84,11 @@ public class ServicioAnalisisMock implements IServicioAnalisisMockRemote {
      * @throws NoExisteException si el episodio no existe
      */
     @Override
-    public List<CatalizadorDTO> getCatalizadores(Long id) throws NoExisteException {
+    public List<String> getAcciones(Long id) throws NoExisteException {
        EpisodioDolorDTO ep = (EpisodioDolorDTO) persistenciaEpisodios.findById(EpisodioDolorDTO.class, id);
        if( ep ==null){
            throw new NoExisteException("El episodio ese no existe en el sistema");
        }
-       return persistenciaReglas.getEvitables(ep);
+       return persistenciaReglas.getAcciones(ep);
     }
 }

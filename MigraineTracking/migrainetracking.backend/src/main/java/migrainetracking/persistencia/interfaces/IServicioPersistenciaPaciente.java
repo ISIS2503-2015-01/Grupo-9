@@ -47,4 +47,6 @@ public interface IServicioPersistenciaPaciente extends IServicioPersistenciaMock
      * @return Los episodios de un paciente en especifico
      */
     public List<EpisodioDolorDTO> getEpisodiosByPaciente(int noId);
+    
+    public Paciente findById(Object id);
 }

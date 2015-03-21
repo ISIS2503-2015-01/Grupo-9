@@ -42,7 +42,7 @@ public class Sintoma implements Serializable {
     private String nombre;
 
     /**
-     * La intensidad del dolor del sintoma
+     * La intensidad del dolor del sintoma { 1 , 2 , 3]
      */
     private int intensidad;
 

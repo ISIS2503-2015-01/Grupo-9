@@ -105,6 +105,16 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
     @Override
     public void update(Object obj) {
         ReglaDTO existe = (ReglaDTO) obj;
+//        int id = existe.getId();
+//        int dolorMax = existe.getIntensidadDolorMax();
+//        int dolorMin = existe.getIntensidadDolorMin();
+//        String localizacion = existe.getLocalizacionDolor();
+//        Query q = this.entityMgr.createQuery("UPDATE REGLA SET INTENSIDADDOLORMAX:=param1, INTENDIADDOLORMIN:=param2, LOCALIZACIONDOLOR:=param3 WHERE ID:=param4");
+//        q.setParameter("param1", dolorMax);
+//        q.setParameter("param2", dolorMin);
+//        q.setParameter("param3", localizacion);
+//        q.setParameter("param4", id);
+
         Regla reg=ReglaConverter.dtoToEntity(existe);
         EntityTransaction tran=this.entityMgr.getTransaction();
         try
@@ -120,6 +130,7 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
             tran.rollback();
             Utils.printf("Se ha producido un error: " + e.getMessage());
         }
+
     }
 
     /**
@@ -200,31 +211,16 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
 
     @Override
     // NOTA: HAY TENTACION DE PASAR ESTA FUNCIONALIDAD AL EJB DE ANALISIS. 
-    public List<CatalizadorDTO> getEvitables(EpisodioDolorDTO episodio) {
-        //HashSet<Catalizador> conjuntoEvitables = new HashSet<Catalizador>();
+    public List<String> getAcciones(EpisodioDolorDTO episodio) {
         
-//------->Query 1
-        String strQuery = "SELECT c.* FROM App.REGLA AS r JOIN App.REGLA_CATALIZADOR AS rc ON r.id=rc.Regla_id JOIN APP.CATALIZADOR AS c ON rc.Evitables_id=c.id WHERE r.localizacionDolor = ?locDolor AND ?intenDolor >= r.intensidadDolorMin AND  ?intenDolor <= r.intensidadDolorMax";
-  
-//-------->Query 2        
-//        String strQuery="SELECT c.* FROM APP.REGLA_CATALIZADOR as rc JOIN CATALIZADOR as c ON  rc.evitables_id=c.id WHERE rc.REGLA_ID in (SELECT r.ID FROM App.Regla AS r WHERE r.localizacionDolor = 'cuello' AND 5 >= r.intensidadDolorMin AND 5 <= r.intensidadDolorMax) "; 
-                     
-        Query  q = this.entityMgr.createNativeQuery(strQuery,Catalizador.class); 
+        Query q;
+        q = entityMgr.createQuery(
+                "SELECT r.acciones FROM Regla r WHERE r.localizacionDolor=:locDolor AND :intenDolor BETWEEN r.intensidadDolorMin AND r.intensidadDolorMax"); 
         q.setParameter("locDolor", episodio.getLocalizacion());
         q.setParameter("intenDolor", episodio.getIntensidadDolor());
-        List<Catalizador> conjuntoEvitables = q.getResultList();
+        List<String> acciones = q.getResultList();
 
-        return CatalizadorConverter.entityToDtoList( conjuntoEvitables );
+        return acciones;
     }
     
-    /**
-     * NOTA: HAY TENTACION DE PASAR ESTE METODO PARA EL EJB DE ANALISIS. (!) HAY POQUITAS REGLAS
-     * Metodo donde se definen los criterios para validar un episodio de dolor versus las reglas.
-     * @param episodio - Episodio de dolor
-     * @return true en caso de que el episodio concuerde con los criterios definidos en las reglas. False en caso contrario
-     */
-    private boolean cumpleCriterios(EpisodioDolorDTO episodio , ReglaDTO regla){
-       
-        return false;
-    }
 }

@@ -21,5 +21,5 @@ public interface IServicioPersistenciaRegla extends IServicioPersistenciaMockRem
      * @param episodio - Es el objeto del episodio de dolor.
      * @return Los evitables del episodio segun las reglas definidas por los doctores.
      */
-    public List<CatalizadorDTO> getEvitables(EpisodioDolorDTO episodio);    
+    public List<String> getAcciones(EpisodioDolorDTO episodio);    
 }

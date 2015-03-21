@@ -5,6 +5,8 @@
  */
 package migrainetracking.persistencia.converters;
 
+import java.util.ArrayList;
+import java.util.List;
 import migrainetracking.dto.MedicamentoDTO;
 import migrainetracking.persistencia.Entities.Medicamento;
 
@@ -41,6 +43,14 @@ public class MedicamentoConverter {
         resp.setIntervaloHoras(dto.getIntervaloHoras());
         resp.setMiligramos(dto.getMiligramos());
         resp.setNombre(dto.getNombre());
+        return resp;
+    }
+
+    public static List<MedicamentoDTO> entityToDtoList(List<Medicamento> medicamentosActuales) {
+        List<MedicamentoDTO> resp = new ArrayList<MedicamentoDTO>();
+        for( Medicamento m : medicamentosActuales ){
+            resp.add( entityToDto(m) );
+        }
         return resp;
     }
 }

@@ -6,9 +6,12 @@
 package migrainetracking.persistencia.Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import static java.util.Calendar.DATE;
 import java.util.Date; // sql
 import java.util.List;
+import java.util.UUID;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
+import org.eclipse.persistence.jaxb.javamodel.Helper;
 
 
 /**
@@ -26,7 +30,6 @@ import javax.persistence.Temporal;
  * @author estudiante
  */
 @Entity
-@TableGenerator(name="tab1")
 public class EpisodioDolor implements Serializable {
     
     //--------------------------------
@@ -46,7 +49,6 @@ public class EpisodioDolor implements Serializable {
      * EL id del episodio de dolor
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE,generator = "tab1")
     private Long id;
 
     /**
@@ -73,20 +75,20 @@ public class EpisodioDolor implements Serializable {
     /**
      * La lista de sintomas que presenta el episodio de dolor
      */
-    @OneToMany(orphanRemoval = false,fetch = FetchType.LAZY)
-    private List<Sintoma> sintomas; 
+    @OneToMany
+    private List<Sintoma> sintomas;
     
     /**
      * La lista de catalizadores relacionados con el episodio de dolor. Se llenan con evitables en la busqueda.
      */
-    @OneToMany(orphanRemoval = false,fetch = FetchType.LAZY)
-    private List<Catalizador> catalizadores;
+    @OneToMany
+    private List<Catalizador> catalizadores;// = new ArrayList<Catalizador>();
     
     /**
      * La lista de medicamentos que el paciente esta tomando en el momento del episodio de dolor
      */
-    @OneToMany(orphanRemoval = false,fetch = FetchType.LAZY)
-    private List<Medicamento> medicamentosActuales;
+    @OneToMany
+    private List<Medicamento> medicamentosActuales;// = new ArrayList<Medicamento>();
     
     /**
      * El paciente dueno del episodio
@@ -102,7 +104,7 @@ public class EpisodioDolor implements Serializable {
      * Metodo constructor sin argumentos
      */
     public EpisodioDolor(){
-        
+        this.id =  UUID.randomUUID().getLeastSignificantBits() ;
     }
     
     //-------------------------------------------------------------------------
