@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import static java.util.Calendar.DATE;
 import java.util.Date; // sql
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -104,7 +105,8 @@ public class EpisodioDolor implements Serializable {
      * Metodo constructor sin argumentos
      */
     public EpisodioDolor(){
-        this.id =  UUID.randomUUID().getLeastSignificantBits() ;
+        Random rand = new Random();
+        this.id =  new Integer( rand.nextInt(1000000000) ).longValue() ;
     }
     
     //-------------------------------------------------------------------------

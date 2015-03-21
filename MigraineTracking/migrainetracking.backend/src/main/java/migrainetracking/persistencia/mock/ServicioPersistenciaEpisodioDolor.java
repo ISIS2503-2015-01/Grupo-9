@@ -158,10 +158,13 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
     public Object findById(Class c, Object id) {
         Long nId = Long.parseLong(id.toString());
         try {
-            EpisodioDolor resp =  this.entityMgr.find(EpisodioDolor.class, nId)  ;
+            Query q = this.entityMgr.createQuery("SELECT e FROM EpisodioDolor e WHERE e.id=:nId").setParameter("nId",nId);
+            List<EpisodioDolor> temp = q.getResultList();
+            EpisodioDolor resp = (EpisodioDolor) temp.get(0) ;
+            
             return EpisodioDolorConverter.entityToDto(resp) ;
-        } catch (NoResultException e) {
-            Utils.printf(e.getLocalizedMessage());
+        } catch (Exception e) {
+            Utils.printf(e.getLocalizedMessage()) ;
         }
         return null;
     }
