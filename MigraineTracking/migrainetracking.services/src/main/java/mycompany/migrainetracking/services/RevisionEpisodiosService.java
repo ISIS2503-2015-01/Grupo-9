@@ -22,7 +22,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.EpisodioDolorDTO;
+import migrainetracking.dto.MedicamentoDTO;
+import migrainetracking.dto.SintomaDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.logica.ejb.ServicioRevisionEpisodiosMock;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
@@ -49,7 +52,32 @@ public class RevisionEpisodiosService {
     public RevisionEpisodiosService() {
         revEpService = ServicioRevisionEpisodiosMock.getInstance();
     }
-
+    
+//    @GET
+//    @Path("/getCatalizadores/episodio_id/{id_ep}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getCatalizadoresDeEpisodio(@PathParam("id_ep") Long id){
+//        List<CatalizadorDTO> resp = revEpService.getCatalizadoresDelEpisodio(id);
+//        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(resp).build();
+//    }
+    
+    @GET
+    @Path("/getSintomas/episodio_id/{id_ep}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSintomasDeEpisodio(@PathParam("id_ep") Long id){
+        List<SintomaDTO> resp = revEpService.getSintomasDelEpisodio(id);
+        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(resp).build();
+    }
+    
+//    @GET
+//    @Path("/getCatalizadores/episodio_id/{id_ep}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getMedicamentosActualesDeEpisodio(@PathParam("id_ep") Long id){
+//        List<MedicamentoDTO> resp = revEpService.getMedicamentosDelEpisodio(id);
+//        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(resp).build();
+//    }
+    
+    
     @GET
     @Path("/getEpisodios/pacid={id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -59,7 +87,7 @@ public class RevisionEpisodiosService {
     }
     //Pruebas prioridad (desempeño y escalabilidad) a nivel de Doctor, probar que funcione
     @GET
-    @Path("/getEpisodiosByFechas/pacid={id}&fechas={fechain}&{fechafin}")
+    @Path("/getEpisodiosByFechas/{id}_{fechain}_{fechafin}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEpsByFechas(@PathParam("id") int noIdentificacion, @PathParam("fechain") String fechain, @PathParam("fechafin") String fechafin) throws ParseException, JSONException {
         Date fecha_in = new SimpleDateFormat("yyyy-MM-dd").parse(fechain);
@@ -70,11 +98,35 @@ public class RevisionEpisodiosService {
         } catch (NoExisteException ex) {
             JSONObject msj = new JSONObject();
             msj.put("Error de sistema", ex.getMessage());
-            return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(msj).build();
+            return Response.status(500).header("Access-Allow-Control-Origin", "*").entity(msj).build();
         }
         return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(eps).build();
     }
 
+    @GET
+    @Path("/getCatalizadores/episodioid/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCatalizadoresEpisodio(@PathParam("id") Long id){
+        // TODO
+        return null;
+    }
+    
+    @GET
+    @Path("/getSintomas/episodioid/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSintomasEpisodio(@PathParam("id") Long id){
+        // TODO
+        return null;
+    }
+    
+    @GET
+    @Path("/getMedicamenteos/episodioid/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMedicamentosEpisodio(@PathParam("id") Long id){
+        // TODO
+        return null;
+    }
+    
     /**
      * Retrieves representation of an instance of
      * mycompany.migrainetracking.services.RevisionEpisodiosService

@@ -66,6 +66,7 @@ public class CRUDService {
         catch(OperacionInvalidaException ex)
         {
             resp.put("Operacion invalida exception",ex.getMessage());
+            Response.status(500).header("Access-Control-Allow-Origin", "*").entity(resp).build();
         }
          return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
@@ -84,6 +85,7 @@ public class CRUDService {
         catch(OperacionInvalidaException ex)
         {
             resp.put("Operacion invalida exception",ex.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(resp).build();
         }
          return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
@@ -102,6 +104,7 @@ public class CRUDService {
         catch(OperacionInvalidaException ex)
         {
             resp.put("Operacion invalida exception",ex.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(resp).build();
         }
          return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
@@ -120,6 +123,7 @@ public class CRUDService {
         catch(OperacionInvalidaException ex)
         {
             resp.put("Operacion invalida exception",ex.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(resp).build();
         }
          return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
@@ -135,6 +139,7 @@ public class CRUDService {
             rta.put("Sintoma", id);
         } catch (OperacionInvalidaException ex) {
             rta.put("Excepcion:",ex.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(rta).build();
         }
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
@@ -150,7 +155,9 @@ public class CRUDService {
             Long id = beanCRUD.delete(c);
             rta.put("Catalizador", id);
         } catch (OperacionInvalidaException ex) {
+           
             rta.put("Excepcion:",ex.getMessage());
+             return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(rta).build();
         }
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
@@ -167,6 +174,7 @@ public class CRUDService {
             rta.put("Medicamento", id);
         } catch (OperacionInvalidaException ex) {
             rta.put("Excepcion:",ex.getMessage());
+             return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(rta).build();
         }
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();

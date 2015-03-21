@@ -22,12 +22,16 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.DoctorDTO;
+import migrainetracking.dto.MedicamentoDTO;
 import migrainetracking.dto.PacienteDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.ejb.ServicioRegistroUsuariosMock;
 import migrainetracking.logica.interfaces.IServicioRegistroUsuariosMockRemote;
+import migrainetracking.persistencia.Entities.Doctor;
+import migrainetracking.persistencia.Entities.Paciente;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -64,21 +68,25 @@ public class RegistroUsuariosService {
             resp.put("DoctorID", id);
         } catch (OperacionInvalidaException ex) {
             resp.put("Operacion invalida exception",ex.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(resp).build();
         } 
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
     
     @POST
-    @Path("/create/Paciente")
+    @Path("/create/Paciente/docid/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createPaciente(PacienteDTO pacienteDTO) throws JSONException{
+    public Response createPaciente(PacienteDTO pacienteDTO,@PathParam("id") Long docid) throws JSONException{
         JSONObject resp = new JSONObject();
         try {
             Long id = userRegService.crearUsuario(pacienteDTO);
+            //acoplar el paciente al doctorr...
+            
             resp.put("PacienteID", id);
         } catch (OperacionInvalidaException ex) {
             resp.put("Operacion invalida exception",ex.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(resp).build();
         } 
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
@@ -95,6 +103,7 @@ public class RegistroUsuariosService {
             rta.put("DoctorID", id);
         } catch (Exception e) {
             rta.put("Excepcion:",e.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(rta).build();
         }
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
@@ -111,6 +120,7 @@ public class RegistroUsuariosService {
             rta.put("pacienteID", id);
         } catch (Exception e) {
             rta.put("Excepcion:",e.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(rta).build();
         }
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
@@ -126,6 +136,7 @@ public class RegistroUsuariosService {
             rta.append("pacienteID", id);
         } catch (Exception e) {
             rta.append("Excepcion:",e.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(rta).build();
         }
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
@@ -141,6 +152,7 @@ public class RegistroUsuariosService {
             rta.put("DoctorID", id);
         } catch (Exception e) {
             rta.put("Excepcion:",e.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(rta).build();
         }
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
@@ -162,6 +174,47 @@ public class RegistroUsuariosService {
         List<PacienteDTO> pacs;
         pacs = userRegService.getUsuarios(PacienteDTO.class);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacs).build();
+    }
+    
+    
+    @GET
+    @Path("/getById/Doctor/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDoctorById(@PathParam("id") Long id){
+        DoctorDTO doc;
+        doc = (DoctorDTO) userRegService.getUsuarioById(DoctorDTO.class,id);
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doc).build();
+    }
+    
+    @GET
+    @Path("/getById/Paciente/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPacienteById(@PathParam("id") Long id){
+        PacienteDTO pacs;
+        pacs = (PacienteDTO) userRegService.getUsuarioById(Paciente.class, id);
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacs).build();
+    }
+    
+    @GET
+    @Path("/getPacientes/doctorid/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPacientesDelDoctor(@PathParam("id") Long docid){
+        List<PacienteDTO> pacs = userRegService.getPacientesDeDoctor(docid);
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacs).build();
+    }
+    @GET
+    @Path("/getMedicamentosDiarios/pacienteid/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMedicamentosDiarios(@PathParam("id") Long pacid){
+        List<MedicamentoDTO> resp = userRegService.getMedicamentosDiariosPaciente(pacid);
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
+    }
+    @GET
+    @Path("/getHabitos/pacienteid/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHabitos(@PathParam("id") Long pacid){
+        List<CatalizadorDTO> resp = userRegService.getHabitosPaciente(pacid);
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
     
     /**

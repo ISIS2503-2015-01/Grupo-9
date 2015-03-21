@@ -24,6 +24,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.EpisodioDolorDTO;
+import migrainetracking.dto.MedicamentoDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.logica.ejb.ServicioAnalisisMock;
@@ -66,16 +67,18 @@ public class RegistroEpisodioService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createEpisdioDolor(EpisodioDolorDTO ep ) throws JSONException{
         JSONObject rta = new JSONObject();
-         List<CatalizadorDTO> evitables  = new ArrayList<CatalizadorDTO>();
+        List<String> acciones ;
         try {
             Long id = beanRegEps.registrarEpisodio(ep,ep.getPacienteId());
-            evitables = beanAnalisis.getCatalizadores( id );
+            acciones = beanAnalisis.getAcciones( id );
+            rta.put("acciones", acciones);
         } catch (OperacionInvalidaException ex) {
             rta.put("Error de sistema : ",ex.getMessage());
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(rta).build();
         } catch (NoExisteException ex) {
-           // Si pasa por aqui es pq el registro del episodio no esta persistido.
+            System.err.println("NO SE CUMPLIO LA PRE-CONDICION. EL EPISODIO YA DEBERIA DE EXISTIR");
         }
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(evitables).build();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
     }
     
     @GET
@@ -93,6 +96,18 @@ public class RegistroEpisodioService {
         List<EpisodioDolorDTO> eps = beanRegEps.getEpisodiosPorPaciente(noIdPaciente);
         return Response.status(Response.Status.OK).entity(eps).build();
     }
+    
+    
+    @GET
+    @Path("/getEpisodio/episodio_id/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEpisodio(@PathParam("id") Long id){
+        EpisodioDolorDTO resp = beanRegEps.getEpisodioById(id);
+        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(resp).build();
+    }
+    
+    
+    //<-------------------- Faltan LOS "get" en detalle de un episodio ------------------------->
     
     /**
      * Retrieves representation of an instance of mycompany.migrainetracking.services.RegistroEpisodioService
