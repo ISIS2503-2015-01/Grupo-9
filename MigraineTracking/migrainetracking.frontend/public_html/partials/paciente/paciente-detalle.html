@@ -13,7 +13,7 @@ and open the template in the editor.
         </div>
         <div class="row">
             <div class="col-md-6">
-                <h5><!--aqui va el nombre--></h5>
+                <h5>{{getPacienteDetalle.paciente.nombre}}</h5>
             </div>
         </div>
         <div class="row">
@@ -23,7 +23,7 @@ and open the template in the editor.
         </div>
         <div class="row">
             <div class="col-md-6">
-                <h5><!--aqui va el id--></h5>
+                <h5>{{getPacienteDetalle.paciente.noIdentificacion}}</h5>
             </div>
         </div>
         <div class="row">
@@ -33,7 +33,7 @@ and open the template in the editor.
         </div>
         <div class="row">
             <div class="col-md-6">
-                <h5><!--aqui va la fecha--></h5>
+                <h5>{{getPacienteDetalle.paciente.fechaNacimiento}}</h5>
             </div>
         </div>
         <div class="row">
@@ -43,7 +43,7 @@ and open the template in the editor.
         </div>
         <div class="row">
             <div class="col-md-6">
-                <h5><!--aqui va el peso--></h5>
+                <h5>{{getPacienteDetalle.paciente.peso}}</h5>
             </div>
         </div>
         <div class="row">
@@ -53,7 +53,7 @@ and open the template in the editor.
         </div>
         <div class="row">
             <div class="col-md-6">
-                <h5><!--aqui va la estatura--></h5>
+                <h5>{{getPacienteDetalle.paciente.estatura}}</h5>
             </div>
         </div>
         <div class="row">
@@ -73,12 +73,12 @@ and open the template in the editor.
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="medicamento in pacienteDetalle.paciente.medicamentos | orderBy:'fechaRecetado'">
+                    <tr ng-repeat="medicamento in getPacienteDetalle.paciente.medicamentos | orderBy:'fechaRecetado'">
                         <th>{{medicamento.nombre}}</th>
-                        <th>{{paciente.cantidadVecesAlDia}}</th>
-                        <th>{{paciente.intervaloHoras}}</th>
-                        <th>{{paciente.miligramos}}</th>
-                        <th>{{paciente.fechaRecetado|date}}</th>
+                        <th>{{medicamento.cantidadVecesAlDia}}</th>
+                        <th>{{medicamento.intervaloHoras}}</th>
+                        <th>{{medicamento.miligramos}}</th>
+                        <th>{{medicamento.fechaRecetado|date}}</th>
                     </tr>
                 </tbody>
             </table>
@@ -98,10 +98,10 @@ and open the template in the editor.
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="habito in pacienteDetalle.paciente.habitos | orderBy:'tipo'">
-                        <th>{{medicamento.tipo}}</th>
-                        <th>{{paciente.especificacion}}</th>
-                        <th>{{paciente.frecuencia}}</th>
+                    <tr ng-repeat="catalizador in getPacienteDetalle.paciente.catalizadores | orderBy:'tipo'">
+                        <th>{{catalizador.tipo}}</th>
+                        <th>{{catalizador.especificacion}}</th>
+                        <th>{{catalizador.frecuencia}}</th>
                     </tr>
                 </tbody>
             </table>
