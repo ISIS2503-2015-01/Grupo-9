@@ -6,6 +6,7 @@
 
 package mycompany.migrainetracking.services;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -198,8 +199,19 @@ public class RegistroUsuariosService {
     @GET
     @Path("/getPacientes/doctorid/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPacientesDelDoctor(@PathParam("id") Long docid){
-        List<PacienteDTO> pacs = userRegService.getPacientesDeDoctor(docid);
+    public Response getPacientesDelDoctor(@PathParam("id") Long docid)throws ParseException, JSONException
+    {
+        List<PacienteDTO> pacs;
+        try
+        {
+            pacs = userRegService.getPacientesDeDoctor(docid);
+        }
+        catch(NoExisteException e)
+        {
+            JSONObject msj = new JSONObject();
+            msj.put("Error de sistema", e.getMessage());
+            return Response.status(500).header("Access-Allow-Control-Origin", "*").entity(msj).build();
+        }
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacs).build();
     }
     @GET
