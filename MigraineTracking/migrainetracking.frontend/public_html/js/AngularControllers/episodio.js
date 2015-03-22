@@ -18,6 +18,12 @@
             controllerAs:'getEpisodios'
         };
     });
-    
+    app1.directive('episodioDetalle',function(){
+        return{
+            restrict:'E',
+            templateUrl:'partials/episodio/episodio-detalle'
+        };
+        
+    });
 })();
 

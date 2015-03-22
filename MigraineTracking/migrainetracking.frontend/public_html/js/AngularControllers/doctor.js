@@ -19,28 +19,19 @@
             controllerAs:'getDoctors'
         }; 
     }); 
-    app.directive('doctorColegas',function(){
+    app.directive('doctorDetalle',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/doctor/doctor-colegas.html',
-            controller: function(){
-                this.id=0;
-                this.buscarColegasfunction = function(nId){
-                    id = nId;
-                };
-                this.isSelect = function(){
-                    return !(isNaN(id)) && id>=0;
-                };
-            },
-            controllerAs:'getColegasDoctor'
-        };
-    });
-    app.directive('darColegas',function(){
-        return{
-            restrict:'E',
-            templateUrl:'partials/doctor/darColegas',
-            controller:[],
-            controllerAs:'getColegasDoctor'
+            templateUrl:'partials/doctor/doctor-detalle.html',
+            controller:['$http',function($http){
+                    var self=this;
+                    self.doctor={};
+                    self.id={};
+                    $http.get('URL/'+self.id).success(function(data){
+                        doctor = data;
+                    });
+            }],
+            controllerAs:'getDoctorDetalle'
         };
     });
 })();
