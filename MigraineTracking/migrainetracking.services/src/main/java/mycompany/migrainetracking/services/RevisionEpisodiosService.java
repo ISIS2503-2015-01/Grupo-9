@@ -109,6 +109,15 @@ public class RevisionEpisodiosService {
 
     /** </episodios de un paciente en un rango de fechas>.¨*/
     @GET
+    @Path("/getEpisodios2Dias")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEps2Dias()
+    {
+        List<EpisodioDolorDTO> eps = revEpService.getEpisodios2Dias();
+        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(eps).build();
+    }
+    
+    @GET
     @Path("/getCatalizadores/episodioid/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCatalizadoresEpisodio(@PathParam("id") Long id){
