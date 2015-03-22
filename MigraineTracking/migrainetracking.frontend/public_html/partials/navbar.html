@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div class="panel-navbar-sizes">
+<div class="panel panel-default panel-navbar-sizes">
     <ul class="nav nav-pills nav-stacked">
         <li role="presentation" class="active" ng-class="{active:navbar.isSelected(0)}">
             <a href="#" ng-click="navbar.selectTab(0)">
@@ -44,7 +44,7 @@ and open the template in the editor.
                 <h4><span class="glyphicon glyphicon-th-list"></span> Episodios</h4>
             </a>
             <!--Opciones de los episodios-->
-            <ul class="nav nav-pills nav-stacked" ng-show="navbar.isSelected(2)|| navbar.isSelected(21) || navbar.isSelected(22) || navbar.isSelected(23)|| navbar.isSelected(24)|| navbar.isSelected(25)||navbar.isSelected(26)" >
+            <ul class="nav nav-pills nav-stacked" ng-show="navbar.isSelected(2)|| navbar.isSelected(21) || navbar.isSelected(22) || navbar.isSelected(23)|| navbar.isSelected(24)|| navbar.isSelected(25)" >
                 <li role="presentation" ng-class="{active:navbar.isSelected(21)}">
                     <a href="#" ng-click="navbar.selectTab(21)" >
                         <h5>Ver todos los episodios</h5>
@@ -67,11 +67,6 @@ and open the template in the editor.
                 </li>
                 <li role="presentation" ng-class="{active:navbar.isSelected(25)}">
                     <a href="#" ng-click="navbar.selectTab(25)">
-                        <h5>Ver informaci&oacute;n de un episodio</h5>
-                    </a>
-                </li>
-                <li role="presentation" ng-class="{active:navbar.isSelected(26)}">
-                    <a href="#" ng-click="navbar.selectTab(26)">
                         <h5>An&aacute;lisis de episodios</h5>
                     </a>
                 </li>
@@ -83,7 +78,7 @@ and open the template in the editor.
             </a>
         </li>   
         <!--Opciones de los doctores-->
-            <ul class="nav nav-pills nav-stacked" ng-show="navbar.isSelected(3)|| navbar.isSelected(31) || navbar.isSelected(32) || navbar.isSelected(33)|| navbar.isSelected(34)||navbar.isSelected(35)" >
+            <ul class="nav nav-pills nav-stacked" ng-show="navbar.isSelected(3)|| navbar.isSelected(31) || navbar.isSelected(32) || navbar.isSelected(33)|| navbar.isSelected(34)" >
                 <li role="presentation" ng-class="{active:navbar.isSelected(31)}">
                     <a href="#" ng-click="navbar.selectTab(31)" >
                         <h5>Ver todos los doctores</h5>
@@ -101,11 +96,6 @@ and open the template in the editor.
                 </li>
                 <li role="presentation" ng-class="{active:navbar.isSelected(34)}">
                     <a href="#" ng-click="navbar.selectTab(34)">
-                        <h5>Ver informaci&oacute;n del paciente</h5>
-                    </a>
-                </li>
-                <li role="presentation" ng-class="{active:navbar.isSelected(35)}">
-                    <a href="#" ng-click="navbar.selectTab(35)">
                         <h5>Actualizar informaci&oacute;n del doctor</h5>
                     </a>
                 </li>
