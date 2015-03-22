@@ -26,7 +26,7 @@
             controller:['$http',function($http){
                     var self=this;
                     self.doctor={};
-                    self.id={};
+                    self.id=0;
                     $http.get('URL/'+self.id).success(function(data){
                         doctor = data;
                     });

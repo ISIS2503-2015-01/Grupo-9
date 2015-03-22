@@ -20,6 +20,22 @@
             controllerAs:'navbar'
         };
     });
+    app.directive('formDoctorDetalle',function(){
+       return{
+           restrict:'E',
+           templateUrl:'partials/doctor/form-doctordetalle.html',
+           controller:function(){
+               this.tab2=0;
+               this.selectTab2=function(setTab2){
+                   this.tab2=setTab2;
+               };
+               this.isSelected2=function(tabParam2){
+                    return this.tab2===tabParam2;
+                };
+           },
+           contollerAs:'formDoctorDetalle'
+       }; 
+    });
 })();
 
 
