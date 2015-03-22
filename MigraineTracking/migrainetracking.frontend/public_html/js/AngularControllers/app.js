@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-(function(){var app = angular.module('migraineTracking',[]);
+(function(){var app = angular.module('migraineTracking',['doctorDirectives']);
     app.directive('navbar', function(){
         return{
             restrict:'E',
@@ -19,20 +19,6 @@
             },
             controllerAs:'navbar'
         };
-    });
-    app.directive('doctorInfo',function(){
-        return{
-            restrict:'E',
-            templateUrl:'partials/doctor-info.html',
-            controller:['$http',function($http){
-                var self = this;
-                self.doctors =[];
-                $http.get('URL del servicio').success(function(data){
-                    doctors=data;
-                });
-            }],
-            controllerAs:'getDoctors'
-        }; 
     });
 })();
 
