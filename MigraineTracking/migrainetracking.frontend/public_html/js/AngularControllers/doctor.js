@@ -18,5 +18,23 @@
             }],
             controllerAs:'getDoctors'
         }; 
-    });  
+    }); 
+    app.directive('doctorColegas',function(){
+        return{
+            restrict:'E',
+            templateUrl:'partials/doctor-colegas.html',
+            controller: function(){
+                this.id=0;
+                this.select=false;
+                this.buscarColegasfunction = function(nId){
+                    id = nId;
+                    select = true;
+                };
+                this.isSelect = function(){
+                    return select;
+                };
+            },
+            controllerAs:'getColegasDoctor'
+        };
+    });
 })();
