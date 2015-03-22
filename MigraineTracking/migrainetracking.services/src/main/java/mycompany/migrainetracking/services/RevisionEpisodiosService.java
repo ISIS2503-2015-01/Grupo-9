@@ -53,13 +53,22 @@ public class RevisionEpisodiosService {
         revEpService = ServicioRevisionEpisodiosMock.getInstance();
     }
     
-//    @GET
-//    @Path("/getCatalizadores/episodio_id/{id_ep}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getCatalizadoresDeEpisodio(@PathParam("id_ep") Long id){
-//        List<CatalizadorDTO> resp = revEpService.getCatalizadoresDelEpisodio(id);
-//        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(resp).build();
-//    }
+    // <DETALLES DEL EPISODIO> 
+    @GET
+    @Path("/getMedicamentos/episodioid/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMedicamentosEpisodio(@PathParam("id") Long id){
+        List<MedicamentoDTO> resp = revEpService.getMedicamentosDelEpisodio(id);
+        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(resp).build();
+    }
+    
+    @GET
+    @Path("/getCatalizadores/episodio_id/{id_ep}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCatalizadoresDeEpisodio(@PathParam("id_ep") Long id){
+        List<CatalizadorDTO> resp = revEpService.getCatalizadoresDelEpisodio(id);
+        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(resp).build();
+    }
     
     @GET
     @Path("/getSintomas/episodio_id/{id_ep}")
@@ -68,16 +77,9 @@ public class RevisionEpisodiosService {
         List<SintomaDTO> resp = revEpService.getSintomasDelEpisodio(id);
         return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(resp).build();
     }
+    // </DETALLES DEL EPISODIO>
     
-//    @GET
-//    @Path("/getCatalizadores/episodio_id/{id_ep}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getMedicamentosActualesDeEpisodio(@PathParam("id_ep") Long id){
-//        List<MedicamentoDTO> resp = revEpService.getMedicamentosDelEpisodio(id);
-//        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(resp).build();
-//    }
-    
-    
+    /** <episodios de un paciente>.¨*/
     @GET
     @Path("/getEpisodios/pacid={id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -85,7 +87,9 @@ public class RevisionEpisodiosService {
         List<EpisodioDolorDTO> eps = revEpService.getEpisodiosById(id);
         return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(eps).build();
     }
-    //Pruebas prioridad (desempeño y escalabilidad) a nivel de Doctor, probar que funcione
+    /** </episodios de un paciente>.¨*/
+    
+    /** <episodios de un paciente en un rango de fechas>.¨*/
     @GET
     @Path("/getEpisodiosByFechas/{id}_{fechain}_{fechafin}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -103,6 +107,7 @@ public class RevisionEpisodiosService {
         return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(eps).build();
     }
 
+    /** </episodios de un paciente en un rango de fechas>.¨*/
     @GET
     @Path("/getCatalizadores/episodioid/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -110,23 +115,7 @@ public class RevisionEpisodiosService {
         List<CatalizadorDTO> cat = revEpService.getCatalizadoresDelEpisodio(id);
         return Response.status(200).header("Access-Allow-Control-Origin","*").entity(cat).build();
     }
-    
-    @GET
-    @Path("/getSintomas/episodioid/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getSintomasEpisodio(@PathParam("id") Long id){
-        List<SintomaDTO> sint = revEpService.getSintomasDelEpisodio(id);
-        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(sint).build();
-    }
-    
-    @GET
-    @Path("/getMedicamentos/episodioid/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getMedicamentosEpisodio(@PathParam("id") Long id){
-        List<MedicamentoDTO> med = revEpService.getMedicamentosDelEpisodio(id);
-        return Response.status(200).header("Access-Allow-Control-Origin","*").entity(med).build();
-    }
-    
+   
     /**
      * Retrieves representation of an instance of
      * mycompany.migrainetracking.services.RevisionEpisodiosService

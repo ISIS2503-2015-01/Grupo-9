@@ -81,6 +81,7 @@ public class RegistroEpisodioService {
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(rta).build();
     }
     
+    /** <Todos los episodios>. OJO SOLO BOTA 10 pq no hay paginacion todavia¨*/
     @GET
     @Path("/getAll/EpisodiosDolor")
     @Produces(MediaType.APPLICATION_JSON)
@@ -88,16 +89,19 @@ public class RegistroEpisodioService {
         List<EpisodioDolorDTO> eps = beanRegEps.getEpisodios();
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(eps).build();
     }
+    /** <TODOS los episodios>.¨*/
+    
     
     @GET
     @Path("/getEpisodios/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Deprecated
     public Response getEpisiodiosByPaciente(@PathParam("id") int noIdPaciente){
         List<EpisodioDolorDTO> eps = beanRegEps.getEpisodiosPorPaciente(noIdPaciente);
         return Response.status(Response.Status.OK).entity(eps).build();
     }
     
-    
+    /** <DEVUELVE UN EPISODIO DADO SU ID>*/
     @GET
     @Path("/getEpisodio/episodio_id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -105,9 +109,9 @@ public class RegistroEpisodioService {
         EpisodioDolorDTO resp = beanRegEps.getEpisodioById(id);
         return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(resp).build();
     }
+    /** </DEVUELVE UN EPISODIO DADO SU ID>*/
     
-    
-    //<-------------------- Faltan LOS "get" en detalle de un episodio ------------------------->
+    //<--------------------------------------------->
     
     /**
      * Retrieves representation of an instance of mycompany.migrainetracking.services.RegistroEpisodioService

@@ -74,6 +74,7 @@ public class RegistroUsuariosService {
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
     
+    /**<AGREGAR PACIENTE AL SISTEMA>*/
     @POST
     @Path("/create/Paciente/docid/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -81,8 +82,6 @@ public class RegistroUsuariosService {
         JSONObject resp = new JSONObject();
         try {
             Long id = userRegService.crearUsuario(pacienteDTO);
-            //acoplar el paciente al doctorr...
-            
             resp.put("PacienteID", id);
         } catch (OperacionInvalidaException ex) {
             resp.put("Operacion invalida exception",ex.getMessage());
@@ -91,6 +90,7 @@ public class RegistroUsuariosService {
         
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(resp).build();
     }
+    /**</AGREGAR PACIENTE AL SISTEMA>*/
     
     @POST
     @Path("/delete/Doctor")
