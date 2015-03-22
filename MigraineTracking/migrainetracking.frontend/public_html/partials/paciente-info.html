@@ -18,7 +18,7 @@ and open the template in the editor.
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="paciente in this.getPacientes.pacientes | orderBy:'noIdentificacion'">
+            <tr ng-repeat="paciente in getPacientes.pacientes | orderBy:'noIdentificacion'">
                 <th>{{paciente.noIdentificacion}}</th>
                 <th>{{paciente.nombre}}</th>
                 <th>{{paciente.fechaNacimienyo}}</th>
