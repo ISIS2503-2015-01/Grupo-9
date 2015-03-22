@@ -143,6 +143,6 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
     @Override
     public List<EpisodioDolorDTO> getEpisodios2Dias()
     {
-        return null;
+        return persistencia.getEpisodios2Dias();
     }
 }

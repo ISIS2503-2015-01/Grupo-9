@@ -196,6 +196,21 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
         return EpisodioDolorConverter.entityToDtoList(eps);
     }
     
+    /**
+     * Metodo que retorna los episodios de los ultimos dos 2 
+     * @return una lista con los episodis registrados en los ultimos dos dias
+     */
+    @Override
+    public List<EpisodioDolorDTO> getEpisodios2Dias()
+    {   
+        Date fechaActual = new Date();
+        Date fecha = new Date(fechaActual.getTime()-2*24*3600*1000);
+        Query q = this.entityMgr.createQuery("SELECT ep FROM EpisodioDolor ep WHERE ep.fecha>=2dias");
+        q.setParameter("2dias", fecha);
+        List<EpisodioDolor> eps = q.getResultList();
+        return EpisodioDolorConverter.entityToDtoList(eps);
+    } 
+    
     @Override
     public List<SintomaDTO> getSintomas(Long id) {
         EpisodioDolor e = this.entityMgr.find(EpisodioDolor.class, id);
