@@ -107,24 +107,24 @@ public class RevisionEpisodiosService {
     @Path("/getCatalizadores/episodioid/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCatalizadoresEpisodio(@PathParam("id") Long id){
-        // TODO
-        return null;
+        List<CatalizadorDTO> cat = revEpService.getCatalizadoresDelEpisodio(id);
+        return Response.status(200).header("Access-Allow-Control-Origin","*").entity(cat).build();
     }
     
     @GET
     @Path("/getSintomas/episodioid/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSintomasEpisodio(@PathParam("id") Long id){
-        // TODO
-        return null;
+        List<SintomaDTO> sint = revEpService.getSintomasDelEpisodio(id);
+        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(sint).build();
     }
     
     @GET
-    @Path("/getMedicamenteos/episodioid/{id}")
+    @Path("/getMedicamentos/episodioid/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMedicamentosEpisodio(@PathParam("id") Long id){
-        // TODO
-        return null;
+        List<MedicamentoDTO> med = revEpService.getMedicamentosDelEpisodio(id);
+        return Response.status(200).header("Access-Allow-Control-Origin","*").entity(med).build();
     }
     
     /**
