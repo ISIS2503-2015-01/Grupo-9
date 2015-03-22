@@ -165,7 +165,7 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
     }
     
     @Override 
-    public List<PacienteDTO> getPacientesDeDoctor(Long docId){
+    public List<PacienteDTO> getPacientesDeDoctor(Long docId) throws NoExisteException{
         return persistenciaDoctor.getDocsPacients( docId.intValue() );
     }
     

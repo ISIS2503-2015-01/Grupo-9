@@ -8,6 +8,7 @@ package migrainetracking.persistencia.interfaces;
 
 import java.util.List;
 import migrainetracking.dto.PacienteDTO;
+import migrainetracking.excepciones.NoExisteException;
 
 /**
  *
@@ -19,6 +20,5 @@ public interface IServicioPersistenciaDoctor extends IServicioPersistenciaMockRe
      * Lista de pacientes del doctor
      * @return 
      */
-    public List<PacienteDTO> getDocsPacients(int noId);
-    
+    public List<PacienteDTO> getDocsPacients(int noId) throws NoExisteException;
 }

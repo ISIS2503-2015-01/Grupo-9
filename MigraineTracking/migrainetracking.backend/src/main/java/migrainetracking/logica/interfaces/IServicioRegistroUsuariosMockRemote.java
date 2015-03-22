@@ -54,14 +54,33 @@ public interface IServicioRegistroUsuariosMockRemote {
     public List getUsuarios(Class c);
     
      
+    /**
+     * Metodo que retorna el usuario cuy id es igual al id dado por parametro
+     * @param c la clase a la que pertenece el usuario que se esta buscando
+     * @param id el id del usuario que se esta busando
+     * @return el usuario cuyo id es igual al id dado por parametro
+     */
     public Object getUsuarioById(Class c , Long id);
     
-    
-    public List<PacienteDTO> getPacientesDeDoctor(Long docId);
-    
+    /**
+     * Metodo que se encarga de retornar los pacientes de un doctor
+     * @param docId el id del doctor del cual se quiere conocer los pacientes
+     * @return los pacientes del doctor cuyo id se dio por parametro
+     */
+    public List<PacienteDTO> getPacientesDeDoctor(Long docId) throws NoExisteException;
    
+    /**
+     * Metodo que retorna los medicamentos que toma el paciente cuyo id es dado por parametro
+     * @param pacId el id del paciente del cual se quiere conocer los medicamentos diarios
+     * @return  una lista con los medicamentos que toma el paciente cuyo id se dio por parametro
+     */
     public List<MedicamentoDTO> getMedicamentosDiariosPaciente(Long pacId);
     
 
+    /**
+     * Metodo que retorna los habitos del paciente cuyo id se da por parametro
+     * @param pacId el id del paciente del cual se quiere conocer los habitos
+     * @return los habitos del paciente cuyo id se da por parametro
+     */
     public List<CatalizadorDTO> getHabitosPaciente(Long pacId);
 }

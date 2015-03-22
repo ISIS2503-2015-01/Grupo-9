@@ -25,6 +25,7 @@ import javax.transaction.Transaction;
 import javax.transaction.UserTransaction;
 import migrainetracking.dto.DoctorDTO;
 import migrainetracking.dto.PacienteDTO;
+import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.excepciones.OperacionInvalidaException;
 import migrainetracking.persistencia.Entities.Doctor;
 import migrainetracking.persistencia.conexion.PersistenceManager;
@@ -195,8 +196,11 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
     }
     
     @Override
-    public List<PacienteDTO> getDocsPacients(int noId){
+    public List<PacienteDTO> getDocsPacients(int noId) throws NoExisteException{
         Doctor d = this.entityMgr.find(Doctor.class, noId);
-        return PacienteConverter.entityToDtoList( d.getPacientes() );
+        if(d!=null)
+            return PacienteConverter.entityToDtoList( d.getPacientes() );
+        else
+            throw new NoExisteException("El doctor del cual se quieren los pacientes no existe");
     } 
 }
