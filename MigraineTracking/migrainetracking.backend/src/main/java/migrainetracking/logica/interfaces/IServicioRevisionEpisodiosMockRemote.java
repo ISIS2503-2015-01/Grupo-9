@@ -62,5 +62,11 @@ public interface IServicioRevisionEpisodiosMockRemote {
      * @return los medicamentos del episodio
      */
     public List<MedicamentoDTO> getMedicamentosDelEpisodio(Long id);
+    
+    /**
+     * Devuelve todos los episodios que se han registrado en los ultimos dos dias
+     * @return Una lista con los episodios de los ultimos dos dias
+     */
+    public List<EpisodioDolorDTO> getEpisodios2Dias();
 }
 

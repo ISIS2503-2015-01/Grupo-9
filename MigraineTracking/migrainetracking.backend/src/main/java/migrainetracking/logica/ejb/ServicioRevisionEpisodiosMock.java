@@ -135,4 +135,14 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
     public List<MedicamentoDTO> getMedicamentosDelEpisodio(Long id) {
         return persistencia.getMedicamentos(id);
     }     
+    
+    /**
+     * Metodo que retorna los episodios de dolor registrados en los ultimos dos dias
+     * @return una lista con los episodios de dolor  
+     */
+    @Override
+    public List<EpisodioDolorDTO> getEpisodios2Dias()
+    {
+        return null;
+    }
 }
