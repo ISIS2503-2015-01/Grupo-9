@@ -21,7 +21,16 @@
     app1.directive('episodioDetalle',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/episodio/episodio-detalle'
+            templateUrl:'partials/episodio/episodio-detalle',
+            controller:['$http',function($http){
+                    var self = this;
+                    self.episodio ={};
+                    self.id={};
+                    $http.get('URL/'+ self.id).success(function(data){
+                        episodio=data;
+                    });
+            }],
+            controllerAs:'getEpisodioDetalle'
         };
         
     });

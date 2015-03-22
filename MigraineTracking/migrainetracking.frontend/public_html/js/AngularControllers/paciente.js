@@ -18,6 +18,21 @@
             controllerAs:'getPacientes'
         };
     });
+    app2.directive('pacienteDetalle', function(){
+        return{
+            restrict:'E',
+            templateUrl:'partials/paciente/paciente-detalle.html',
+            controller:['$http',function($http){
+                var self = this;
+                self.paciente={};
+                self.id={};
+                $http.get('URL/'+self.id).success(function(data){
+                    paciente=data;
+                });
+            }],
+            controllerAs:'getPacienteDetalle'
+        };
+    });
     
 })();
 
