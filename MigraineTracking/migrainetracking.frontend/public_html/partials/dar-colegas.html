@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="panel panel-default panel-informacion">
+    <div class="panel-heading"><h4>Colegas</h4></div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No Identificaci&oacute;n</th>
+                <th>Nombre</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Especialidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="doctor in getColegas.doctors | orderBy:'noIdentificacion'">
+                <th>{{doctor.noIdentificacion}}</th>
+                <th>{{doctor.nombre}}</th>
+                <th>{{doctor.fechaNacimiento}}</th>
+                <th>{{doctor.especialidad}}</th>
+            </tr>
+        </tbody>
+    </table>
+</div>

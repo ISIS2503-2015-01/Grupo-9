@@ -25,15 +25,21 @@
             templateUrl:'partials/doctor-colegas.html',
             controller: function(){
                 this.id=0;
-                this.select=false;
                 this.buscarColegasfunction = function(nId){
                     id = nId;
-                    select = true;
                 };
                 this.isSelect = function(){
-                    return select;
+                    return !(isNaN(id)) && id>=0;
                 };
             },
+            controllerAs:'getColegasDoctor'
+        };
+    });
+    app.directive('darColegas',function(){
+        return{
+            restrict:'E',
+            templateUrl:'partials/darColegas',
+            controller:[],
             controllerAs:'getColegasDoctor'
         };
     });
