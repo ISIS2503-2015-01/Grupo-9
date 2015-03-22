@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-(function(){var app = angular.module('migraineTracking',['doctorDirectives']);
+(function(){var app = angular.module('migraineTracking',['doctorDirectives','episodioDirectives']);
     app.directive('navbar', function(){
         return{
             restrict:'E',

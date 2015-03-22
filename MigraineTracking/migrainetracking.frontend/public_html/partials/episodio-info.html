@@ -5,7 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <h2>Lista de Episodios</h2>
-<div class="panel panel-default">
+<div class="panel panel-default panel-informacion">
     <div class="panel-heading">Episodios</div>
     <table class="table">
         <thead>
@@ -17,7 +17,7 @@ and open the template in the editor.
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="episodio in this.getEpisodios.episodios | orderBy:'fecha'">
+            <tr ng-repeat="episodio in getEpisodios.episodios | orderBy:'fecha'">
                 <th>{{episodio.localizacion}}</th>
                 <th>{{episodio.intensidadDolor}}</th>
                 <th>{{episodio.fecha}}</th>
