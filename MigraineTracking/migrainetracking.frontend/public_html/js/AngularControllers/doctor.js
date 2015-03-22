@@ -8,7 +8,7 @@
      app.directive('doctorInfo',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/doctor-info.html',
+            templateUrl:'partials/doctor/doctor-info.html',
             controller:['$http',function($http){
                 var self = this;
                 self.doctors =[];
@@ -22,7 +22,7 @@
     app.directive('doctorColegas',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/doctor-colegas.html',
+            templateUrl:'partials/doctor/doctor-colegas.html',
             controller: function(){
                 this.id=0;
                 this.buscarColegasfunction = function(nId){
@@ -38,7 +38,7 @@
     app.directive('darColegas',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/darColegas',
+            templateUrl:'partials/doctor/darColegas',
             controller:[],
             controllerAs:'getColegasDoctor'
         };

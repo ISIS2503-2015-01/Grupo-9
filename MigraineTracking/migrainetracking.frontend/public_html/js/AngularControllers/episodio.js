@@ -7,7 +7,7 @@
     app1.directive('episodioInfo',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/episodio-info.html',
+            templateUrl:'partials/episodio/episodio-info.html',
             controller:['$http',function($http){
                     var self = this;
                     self.episodios = [];

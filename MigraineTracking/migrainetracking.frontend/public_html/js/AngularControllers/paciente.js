@@ -7,7 +7,7 @@
     app2.directive('pacienteInfo',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/paciente-info.html',
+            templateUrl:'partials/paciente/paciente-info.html',
             controller:['$http',function($http){
                     var self = this;
                     self.pacientes =[];
