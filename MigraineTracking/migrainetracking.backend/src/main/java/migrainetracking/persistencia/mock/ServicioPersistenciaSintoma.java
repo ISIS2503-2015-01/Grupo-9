@@ -84,6 +84,9 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
             e.printStackTrace();
             tran.rollback();
             Utils.printf("Se ha producido una excepcion " + e.getMessage());
+        }finally {
+            entityMgr.clear();
+            entityMgr.close();
         }
     }
 

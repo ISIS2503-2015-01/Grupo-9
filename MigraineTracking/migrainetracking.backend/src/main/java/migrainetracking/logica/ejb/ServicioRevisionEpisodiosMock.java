@@ -113,13 +113,7 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      */
     @Override
     public List<SintomaDTO> getSintomasDelEpisodio(Long id) {
-        EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, id);
-        List<SintomaDTO> resp = new ArrayList<SintomaDTO>();
-        for( Sintoma s : e.getSintomas() ){
-            resp.add( SintomaConverter.entityToDto(s) );
-        }
-        
-        return resp;
+        return persistencia.getSintomas(id);
     }
 
     /**
@@ -129,8 +123,7 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      */
     @Override
     public List<CatalizadorDTO> getCatalizadoresDelEpisodio(Long id) {
-        EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolor.class, id);
-        return CatalizadorConverter.entityToDtoList( e.getCatalizadores() );
+        return persistencia.getCatalizadores(id);
     }
 
     /**
@@ -140,7 +133,6 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      */
     @Override
     public List<MedicamentoDTO> getMedicamentosDelEpisodio(Long id) {
-        EpisodioDolor e = (EpisodioDolor) persistencia.findById(EpisodioDolorDTO.class, id);
-        return MedicamentoConverter.entityToDtoList(e.getMedicamentosActuales());
+        return persistencia.getMedicamentos(id);
     }     
 }

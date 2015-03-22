@@ -105,8 +105,7 @@ public class EpisodioDolor implements Serializable {
      * Metodo constructor sin argumentos
      */
     public EpisodioDolor(){
-        Random rand = new Random();
-        this.id =  new Integer( rand.nextInt(1000000000) ).longValue() ;
+        this.id =  UUID.randomUUID().getLeastSignificantBits() ;
     }
     
     //-------------------------------------------------------------------------

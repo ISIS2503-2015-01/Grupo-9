@@ -5,6 +5,7 @@
  */
 package migrainetracking.persistencia.conexion;
 
+import java.util.Map;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import migrainetracking.utils.Utils;
@@ -28,7 +29,7 @@ public class PersistenceManager {
     /**
      * Atributo que modela al entityManagerFactory para manejar la persistencia de las entidades
      */
-    protected EntityManagerFactory emf;
+    private EntityManagerFactory emf;
  
     /**
      * Metodo que retorna la instancia de la clase

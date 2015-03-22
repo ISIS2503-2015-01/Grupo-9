@@ -100,6 +100,9 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
                e.printStackTrace();
            }
         } catch (Exception e) {
+        }finally {
+            entityMgr.clear();
+            entityMgr.close();
         }
         
             
@@ -127,6 +130,9 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
             e.printStackTrace();
             tran.rollback();
             Utils.printf("Se ha producido un error: " + e.getMessage());
+        }finally {
+            entityMgr.clear();
+            entityMgr.close();
         }
     }
 

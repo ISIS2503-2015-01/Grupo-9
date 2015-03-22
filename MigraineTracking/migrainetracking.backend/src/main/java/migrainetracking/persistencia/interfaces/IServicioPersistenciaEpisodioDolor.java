@@ -7,7 +7,10 @@ package migrainetracking.persistencia.interfaces;
 
 import java.util.Date;
 import java.util.List;
+import migrainetracking.dto.CatalizadorDTO;
 import migrainetracking.dto.EpisodioDolorDTO;
+import migrainetracking.dto.MedicamentoDTO;
+import migrainetracking.dto.SintomaDTO;
 
 /**
  *
@@ -23,4 +26,16 @@ public interface IServicioPersistenciaEpisodioDolor extends IServicioPersistenci
      * @return Los episodios de un paciente en un rango de fechas dado. La lista es vacia si no hay episodios en el rango.
      */
     public List<EpisodioDolorDTO> getEpisodioByFechas(Date fecha_in, Date fecha_fin, int noId);
+    
+    
+   
+    public List<SintomaDTO> getSintomas(Long id) ;  
+    
+
+   
+    public List<CatalizadorDTO> getCatalizadores(Long id) ;
+
+   
+    public List<MedicamentoDTO> getMedicamentos(Long id) ;
+    
 }

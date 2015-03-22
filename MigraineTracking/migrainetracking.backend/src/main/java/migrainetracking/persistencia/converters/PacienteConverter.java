@@ -105,7 +105,7 @@ public class PacienteConverter {
     
     public static List<PacienteDTO> entityToDtoList(List<Paciente> list){
         List<PacienteDTO> resp = new ArrayList<PacienteDTO>();
-        for( Paciente p : list){
+        for( Paciente p : list ){
             resp.add( entityToDto(p) );
         }
         return resp;

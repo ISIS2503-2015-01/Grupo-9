@@ -159,10 +159,8 @@ public class ServicioRegistroUsuariosMock implements IServicioRegistroUsuariosMo
     public Object getUsuarioById(Class c , Long id){
        if( c.equals( DoctorDTO.class ) )
            return (DoctorDTO) persistenciaDoctor.findById(Doctor.class, id.intValue());
-       else if( c.equals(PacienteDTO.class) ) {
+       else {
            return (PacienteDTO) persistenciaPaciente.findById(Paciente.class,id.intValue());
-       }else{
-           return null;
        }
     }
     

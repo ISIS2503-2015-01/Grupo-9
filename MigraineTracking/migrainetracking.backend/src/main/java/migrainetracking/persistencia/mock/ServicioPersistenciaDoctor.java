@@ -101,7 +101,10 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
                 e.printStackTrace();
                 tran.rollback();
                 Utils.printf(">>>>> EXCEPCION : "+e.getMessage());
-            }   
+            }finally {
+            entityMgr.clear();
+            entityMgr.close();
+        }
     }
 
     /**
