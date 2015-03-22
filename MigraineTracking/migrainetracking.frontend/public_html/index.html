@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html ng-app="aplicacionMundial">
+<html ng-app="migraineTracking">
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
@@ -13,7 +13,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/app.css">
 
     </head>
-    <body>
+    <body >
         <div>TODO write content</div>
         <script type="text/javascript" src="js/angular.min.js"></script>
         <script type="text/javascript" src="js/AngularControllers/app.js"></script>
@@ -21,38 +21,7 @@ and open the template in the editor.
         <script type="text/javascript" src="js/AngularControllers/registroEpisodio.js"></script>
         <script type="text/javascript" src="js/AngularControllers/registroPaciente.js"></script>
         <script type="text/javascript" src="js/AngularControllers/revisionEpisodio.js"></script>
-        <div class="container theme-showcase" role="main">
  
-            <div class="row featurette">
-                <div class="col-md-5">
-                    <img src="images/cerebro.jpg" class="img-responsive" alt="500x500" data-holder-rendered="true">
-                </div>
-                <div class="col-md-7">
-                    <h2>Migraine Tracking</h2>
-                    <p class="lead">
-                        Revisa los ultimos episodios de dolor de los pacientes con an&aacute;lisis y estad&iacute;sticas.
-                    </p>
-                </div>
-            </div>
-            <hr>
-            <toolbar></toolbar>
-            <div ng-if="toolbar.isSelected(0)">
-                <portada></portada>
-            </div>
-            <div ng-if="toolbar.isSelected(1)">
-                <pacienteInfo></pacienteInfo>
-            </div>
-            <div ng-if="toolbar.isSelected(2)">
-                <competitor-info></competitor-info>
-            </div>
-            <div ng-if="toolbar.isSelected(3)">
-                <doctorInfo></doctorInfo>
-            </div>
-            <div ng-if="toolbar.isSelected(4)">
-                <competitor-logout></competitor-logout>
-            </div>
-        </div>
-       
-        {{4+5}}
+           
     </body>
 </html>

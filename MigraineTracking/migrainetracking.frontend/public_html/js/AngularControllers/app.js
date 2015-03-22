@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-(function(){var aplicacionMundial= angular.module('aplicacionMundial',[]);
-    aplicacionMundial.directive('toolbar', function(){
+(function(){var app = angular.module('migraineTracking',['registroDoctor', 'registroEpisodio', 'registroPaciente','revisionEpisodio']);
+    app.directive('toolbar', function(){
         return{
             restrict:'E',
             templateUrl: 'partials/toolbar.html',

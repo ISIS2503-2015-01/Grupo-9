@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-(function() {var registroEpisodio = angular.module('registroEpisodio',[]);
-    registroEpisodio.directive('episodioInfo',function(){
+(function() {var app = angular.module('registroEpisodio',[]);
+    app.directive('episodioInfo',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/episodioInfo.html',
+            templateUrl:'partials/episodio-info.html',
             controller:['$http',function($http){
                     var self=this;
                     self.episodios = [];
@@ -19,10 +19,10 @@
             controllerAs:'getEpisodios'
         };
     });
-    registroEpisodio.directive('episodioForm', function(){
+    app.directive('episodioForm', function(){
         return{
             restrict:'E',
-            templateUrl:'partials/episodioForm.html',
+            templateUrl:'partials/episodio-form.html',
             controller:['$http',function($http){
                     var self=this;
                     self.episodio={};
@@ -35,4 +35,4 @@
             controllerAs:'createEpisodio'
         };
     });
-});
+})();

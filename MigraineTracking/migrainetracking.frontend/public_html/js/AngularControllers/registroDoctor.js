@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-(function() {var registroDoctor = angular.module('registroDoctor', []);
-    registroDoctor.directive('doctorForm', function(){
+(function() {var app = angular.module('registroDoctor', []);
+    app.directive('doctorForm', function(){
        return{
            restrict:'E',
-           templateUrl:'partials/doctorForm.html',
+           templateUrl:'partials/doctor-form.html',
            controller:['$http', function($http){
               var self = this;
               self.doctor={};
@@ -20,10 +20,10 @@
            controllerAs:'createDoctor'
        };
     });
-    registroDoctor.directive('doctorInfo',function(){
+    app.directive('doctorInfo',function(){
        return{
             restrict:'E',
-            templateUrl:'partials/doctorInfo.html',
+            templateUrl:'partials/doctor-info.html',
             controller:['$http',function($http){
                 var self = this;
                 self.doctores = [];
@@ -34,10 +34,10 @@
             controllerAs:'getDoctores'
        };
     });
-    registroDoctor.directive('doctorFormUpdate',function(){
+    app.directive('doctorFormupdate',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/doctorFormUpdate.html',
+            templateUrl:'partials/doctor-formupdate.html',
             controller:['$http',function($http){
                 var self = this;
                 self.doctor={};
@@ -50,5 +50,5 @@
             controllerAs:'updateDoctor'
         };
     });
-});
+})();
 

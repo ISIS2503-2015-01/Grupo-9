@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-(function() {var registroPaciente = angular.module('registroPaciente',[]);
-    registroPaciente.directive('pacienteInfo',function(){
+(function() {var app = angular.module('registroPaciente',[]);
+    app.directive('pacienteInfo',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/pacienteInfo.html',
+            templateUrl:'partials/paciente-info.html',
             controller:['$http',function($http){
                 var self =this;
                 self.pacientes=[];
@@ -18,10 +18,10 @@
             controllerAs:'getPacientes'
         };
     });
-    registroPaciente.directive('pacienteForm',function(){
+    app.directive('pacienteForm',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/pacienteForm.html',
+            templateUrl:'partials/paciente-form.html',
             controller:['$http',function($http){
                 var self=this;
                 self.paciente={};
@@ -34,10 +34,10 @@
             controllerAs:'createPaciente'
         };
     });
-    registroPaciente.directive('pacienteFormUpdate',function(){
+    app.directive('pacienteFormupdate',function(){
        return{
             restrict:'E',
-            template:'partials/pacienteFormUpdate.html',
+            template:'partials/paciente-formupdate.html',
             controller:['$http',function($http){
                     var self=this;
                     self.paciente={};
