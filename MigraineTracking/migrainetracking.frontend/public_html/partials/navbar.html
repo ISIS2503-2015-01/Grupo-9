@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<ul class="nav nav-pills nav-stacked">
+  <li role="presentation" class="active" ng-class="{active:navbar.isSelected(1)}">
+      <a href="#" ng-click="navbar.selectTab(1)">Inicio</a>
+  </li>
+  <li role="presentation" ng-class="{active:navbar.isSelected(2)}">
+      <a href="#" ng-click="navbar.selectTab(2)">Pacientes</a>
+  </li>
+  <li role="presentation" ng-class="{active:navbar.isSelected(3)}">
+      <a href="#" ng-click="navbar.selectTab(3)">Episodios</a>
+  </li>
+  <li role="presentation" ng-class="{active:navbar.isSelected(4)}">
+      <a href="#" ng-click="navbar.selectTab(4)">Doctores</a>
+  </li>   
+</ul>

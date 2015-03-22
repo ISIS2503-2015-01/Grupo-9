@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 (function(){var app = angular.module('migraineTracking',['registroDoctor', 'registroEpisodio', 'registroPaciente','revisionEpisodio']);
-    app.directive('toolbar', function(){
+    app.directive('navbar', function(){
         return{
             restrict:'E',
-            templateUrl: 'partials/toolbar.html',
+            templateUrl: 'partials/navbar.html',
             controller:function(){
                 this.tab=0;
                 this.selectTab=function(setTab){
@@ -17,7 +17,7 @@
                     return this.tab===tabParam;
                 };
             },
-            controllerAs:'toolbar'
+            controllerAs:'navbar'
         };
     });
     
