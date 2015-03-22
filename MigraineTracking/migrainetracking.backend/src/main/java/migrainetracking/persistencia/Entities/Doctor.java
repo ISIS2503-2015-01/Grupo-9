@@ -166,5 +166,4 @@ public class Doctor implements Serializable {
         }
         return true;
     }
-   
 }

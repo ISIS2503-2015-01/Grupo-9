@@ -102,8 +102,6 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
                 tran.rollback();
                 Utils.printf(">>>>> EXCEPCION : "+e.getMessage());
             }   
-                    
-        
     }
 
     /**

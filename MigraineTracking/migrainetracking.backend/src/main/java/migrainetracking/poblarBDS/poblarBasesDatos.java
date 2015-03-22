@@ -36,6 +36,14 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
 
     private final DataFactory df;
     private final EntityManager em;
+    
+    private final static int NUMPACS = 100;
+    private final static int NUMCAT = 75;
+    private final static int NUMSINT = 25;
+    private final static int NUMMED = 25;
+    private final static int NUMEPS = 300;
+    private final static int NUMDOCS = 50;
+    private final static int NUMREG = 25;
 
     public poblarBasesDatos() {
         df = new DataFactory();
@@ -49,31 +57,32 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
 
             EntityTransaction tran;
             tran = entityMgr.getTransaction();
+            tran.begin();
+ 
 
-//            tran.begin();
-//            poblarSintomas();
-//            tran.commit();
+            poblarSintomas();
+            tran.commit();
 
-//            tran.begin();
-//            poblarCatalizadores();
-//            tran.commit();
+            tran.begin();
+            poblarCatalizadores();
+            tran.commit();
 
             tran.begin();
             poblarReglas();
             tran.commit();
 
-//            tran.begin();
-//            poblarMedicamentos();
-//            tran.commit();
+            tran.begin();
+            poblarMedicamentos();
+            tran.commit();
 
-//            poblarPacientes();
-//            actualizarRelacionesPacientes();
-//
-//            poblarEpisodios();
-//            actualizarRelacionesEpisodios();
-//
-//            poblarDoctores();
-//            actualizarRelacionesDoctores();
+            poblarPacientes();
+            actualizarRelacionesPacientes();
+
+            poblarEpisodios();
+            actualizarRelacionesEpisodios();
+
+            poblarDoctores();
+            actualizarRelacionesDoctores();
             
             Utils.printf("Se poblo exitosamente");
 
@@ -139,8 +148,7 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
 
         EntityTransaction tran = entityMgr.getTransaction();
 
-        int numPacs = 13000;
-        for (int i = 1; i <= numPacs; i++) {
+        for (int i = 1; i <= NUMPACS; i++) {
             
             tran.begin();
 
@@ -169,7 +177,7 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
      */
     private void poblarMedicamentos() {
         String nombres5[] = {"ibuprofeno", "corticoide", "acetaminofen", "eutirox", "hidroclorotiazida"};
-        for (int r = 0; r < 25; r++) {
+        for (int r = 0; r < NUMMED; r++) {
             String nombre5 = df.getItem(nombres5, 100);
             int cantidad5 = df.getNumberBetween(1, 10);
             int intervalo5 = df.getNumberBetween(1, 48);
@@ -243,8 +251,7 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
 
         String localizaciones[] = {"frente", "cabeza", "cuello", "ojos", "oidos"};
 
-        Integer numEps = 39000;
-        for (int j = 0; j < numEps; j++) {
+        for (int j = 0; j < NUMEPS; j++) {
             em.getTransaction().begin();
             String localizacion = df.getItem(localizaciones, 100);
             int intensidad = df.getNumberBetween(1, 10);
@@ -276,8 +283,7 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
     private void poblarDoctores() {
 
         String values[] = {"Neurologia", "Pediatria", "Medicina General", "Medicina Interna", "Acupuntura"};
-        int numDocs = 300;
-        for (int i = 1; i <= numDocs; i++) {
+        for (int i = 1; i <= NUMDOCS; i++) {
             em.getTransaction().begin();
             String name = df.getFirstName() + " " + df.getLastName();
             int id = Integer.parseInt(df.getNumberText(8));
@@ -327,7 +333,7 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
     private void poblarCatalizadores() throws Exception {
         String tipos[] = {"alimento", "actividad fisica", "bebida", "habito"};
 
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < NUMCAT; i++) {
             int frec = df.getNumberBetween(0, 4);
             String especificacion = df.getRandomText(60);
 
@@ -351,7 +357,7 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
         String localizaciones[] = {"frente", "cabeza", "cuello", "ojos", "oidos"};
         String nombres6[] = {"mareo", "nauseas", "escalofrios", "temblor", "zumbido"};
 
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < NUMSINT; i++) {
             Sintoma s = new Sintoma();
             s.setNombre(df.getItem(nombres6, 100));
             s.setLocalizacion(df.getItem(localizaciones, 100));
@@ -370,7 +376,7 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
     private void poblarReglas() throws Exception {
         String localizaciones[] = {"frente", "cabeza", "cuello", "ojos", "oidos"};
         String[] acciones = {"No se rompa una pata", "Haga algo inteligente", "No haga nada", "Dirigase a la division de urgencias", "Ponga sus pies en agua", "Tomese una pastilla", "No haga activaidades fisicas", "No coma azucar"};
-        for (int i = 0; i < 25 ; i++) {
+        for (int i = 0; i < NUMREG ; i++) {
             int intensidadMin = df.getNumberBetween(1, 10);
             int intensidadMax = df.getNumberBetween(intensidadMin, 10);
             Regla r = new Regla();
