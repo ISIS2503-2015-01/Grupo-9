@@ -72,6 +72,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
         </activity>
+        <activity
+            android:name=".VerEpisodiosActivity"
+            android:label="@string/title_activity_ver_episodios"
+            android:parentActivityName=".MenuPrincipalActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+        </activity>
     </application>
 
 </manifest>

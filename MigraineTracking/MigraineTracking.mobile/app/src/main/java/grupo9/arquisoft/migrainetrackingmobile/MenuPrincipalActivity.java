@@ -70,4 +70,9 @@ public class MenuPrincipalActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void verEpisodios(View view){
+        Intent intent = new Intent(this, VerEpisodiosActivity.class);
+        startActivity(intent);
+    }
+
 }

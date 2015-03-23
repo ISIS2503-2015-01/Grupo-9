@@ -16,6 +16,7 @@
     <string name="registrarHabitoButton">Registrar habitos</string>
     <string name="verAnalisisButton">Ver analisis de episodios</string>
     <string name="escucharGrabacionesButton">Escuchar grabaciones</string>
+    <string name="verEpisodiosButton">Lista de episodios registrados</string>
 
     <!--Titulos de las Actividades-->
     <string name="title_activity_menu_principal">Menu</string>
@@ -25,4 +26,7 @@
     <string name="title_activity_agregar_medicamento">Agrega un medicamento</string>
     <string name="title_activity_agregar_habito">Agrega un habito</string>
     <string name="title_activity_ver_analisis">Analisis de episodios</string>
+    <string name="title_activity_ver_episodios">Lista de Episodios de Dolor</string>
+
+
 </resources>
