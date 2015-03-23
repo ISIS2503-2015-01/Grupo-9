@@ -1,18 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="match_parent">
+
     <EditText android:id="@+id/usuario_edit"
-        android:layout_weight="1"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/usuario_edit"/>
+
     <EditText android:id="@+id/contrasenia_edit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/contrasenia_edit"/>
-    <Button android:layout_width="wrap_content"
+
+    <Button android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/entrar_button"
         android:onClick="login"/>
