@@ -5,25 +5,22 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 
 
-public class MainActivity extends ActionBarActivity {
-
-    public final static String EXTRA_USUARIO = "grupo9.arquisoft.migrainetrackingmobile.USUARIO";
+public class AgregarMedicamentoActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_agregar_medicamento);
+        Intent intent = getIntent();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_agregar_medicamento, menu);
         return true;
     }
 
@@ -40,12 +37,5 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    public void login(View view){
-        Intent intent = new Intent(this, MenuPrincipalActivity.class);
-        EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
-        String usuario = usuarioEdit.getText().toString();
-        intent.putExtra(EXTRA_USUARIO, usuario);
-        startActivity(intent);
     }
 }

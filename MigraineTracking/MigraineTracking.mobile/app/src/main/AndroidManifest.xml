@@ -16,6 +16,62 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MenuPrincipalActivity"
+            android:label="@string/title_activity_menu_principal"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MainActivity" />
+        </activity>
+        <activity
+            android:name=".RegistrarEpisodioActivity"
+            android:label="@string/title_activity_registrar_episodio"
+            android:parentActivityName=".MenuPrincipalActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+        </activity>
+        <activity
+            android:name=".GrabarEpisodioActivity"
+            android:label="@string/title_activity_grabar_episodio"
+            android:parentActivityName=".MenuPrincipalActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+        </activity>
+        <activity
+            android:name=".EscucharGrabacionesActivity"
+            android:label="@string/title_activity_escuchar_grabaciones"
+            android:parentActivityName=".MenuPrincipalActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+        </activity>
+        <activity
+            android:name=".AgregarMedicamentoActivity"
+            android:label="@string/title_activity_agregar_medicamento"
+            android:parentActivityName=".MenuPrincipalActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+        </activity>
+        <activity
+            android:name=".AgregarHabitoActivity"
+            android:label="@string/title_activity_agregar_habito"
+            android:parentActivityName=".MenuPrincipalActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+        </activity>
+        <activity
+            android:name=".VerAnalisisActivity"
+            android:label="@string/title_activity_ver_analisis"
+            android:parentActivityName=".MenuPrincipalActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+        </activity>
     </application>
 
 </manifest>
