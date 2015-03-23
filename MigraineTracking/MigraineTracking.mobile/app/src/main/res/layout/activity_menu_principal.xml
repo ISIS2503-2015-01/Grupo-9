@@ -7,34 +7,34 @@
     android:layout_height="match_parent">
 
     <Button android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/registrarEpisodioButton"
         android:onClick="registrarEpisodio"
     />
     <Button android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/grabarEpisodioButton"
         android:onClick="grabarEpisodio"/>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/escucharGrabacionesButton"
         android:onClick="escucharGrabaciones"/>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/registrarMedicamentoButton"
         android:onClick="agregarMedicamento"/>
     <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/registrarHabitoButton"
         android:onClick="agregarHabito"/>
     <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/verAnalisisButton"
         android:onClick="verAnalisis"/>
 

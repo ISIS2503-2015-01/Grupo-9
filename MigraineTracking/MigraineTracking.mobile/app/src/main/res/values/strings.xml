@@ -18,8 +18,7 @@
     <string name="escucharGrabacionesButton">Escuchar grabaciones</string>
 
     <!--Titulos de las Actividades-->
-    <string name="title_activity_menu_principal">MenuPrincipalActivity</string>
-    <string name="title_activity_menu_principal_actity">Menu</string>
+    <string name="title_activity_menu_principal">Menu</string>
     <string name="title_activity_registrar_episodio">Registra un episodio</string>
     <string name="title_activity_grabar_episodio">Graba un episodio</string>
     <string name="title_activity_escuchar_grabaciones">Escucha tus grabaciones</string>
