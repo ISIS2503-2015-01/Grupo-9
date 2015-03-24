@@ -11,7 +11,7 @@
             controller:['$http',function($http){
                     var self = this;
                     self.pacientes =[];
-                    $http.get('URL').success(function(data){
+                    $http.get('http://localhost:8080/migrainetracking.services/webresources/getAll/Pacientes').success(function(data){
                         pacientes =data;
                     });
             }],

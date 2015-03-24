@@ -12,7 +12,7 @@
             controller:['$http',function($http){
                 var self = this;
                 self.doctors =[];
-                $http.get('URL del servicio').success(function(data){
+                $http.get('http://localhost:8080/migrainetracking.services/webresources/getAll/Doctores').success(function(data){
                     doctors=data;
                 });
             }],
