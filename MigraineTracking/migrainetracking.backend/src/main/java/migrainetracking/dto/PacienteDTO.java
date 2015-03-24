@@ -59,6 +59,11 @@ public class PacienteDTO {
      * La lista con los episodios de dolor que ha tenido el paciente
      */
     private List<EpisodioDolorDTO> episodios;
+    
+    /**
+     * La contraseña del paciente
+     */
+    private String contrasenia;
 
     //-----------------------------------------------------
     // Constructores
@@ -71,8 +76,9 @@ public class PacienteDTO {
      * @param fechaNacimiento la fecha de nacimiento del paciente
      * @param peso el peso del paciente
      * @param estatura la estatura del paciente
+     * @param contrasenia la contraseña del paciente
      */
-    public PacienteDTO(String nombre, int noIdentificacion, Date fechaNacimiento, int peso, int estatura) {
+    public PacienteDTO(String nombre, int noIdentificacion, Date fechaNacimiento, int peso, int estatura, String contrasenia) {
        this.nombre = nombre;
         this.noIdentificacion=noIdentificacion;
         this.fechaNacimiento=fechaNacimiento;
@@ -81,6 +87,7 @@ public class PacienteDTO {
         habitos = new ArrayList<CatalizadorDTO>();
         medicamentosDiarios = new ArrayList<MedicamentoDTO>();
         episodios = new ArrayList<EpisodioDolorDTO>();
+        this.contrasenia = contrasenia;
     }
 
     /**
@@ -223,6 +230,22 @@ public class PacienteDTO {
      */
     public void setEpisodios(List<EpisodioDolorDTO> episodios) {
         this.episodios = episodios;
+    }
+    
+    /**
+     * Devuelve la contraseña del paciente
+     * @return la contraseña
+     */
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    /**
+     * Modifica la contraseña del paciente
+     * @param contrasenia
+     */
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     /**

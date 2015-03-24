@@ -79,6 +79,11 @@ public class Paciente implements Serializable {
     @OneToMany(mappedBy="paciente")
     private List<EpisodioDolor> episodios;// = new ArrayList<EpisodioDolor>();
     
+    /**
+     * La contraseña del paciente
+     */
+    private String contrasenia;
+    
     //-----------------------------------------------
     //Constructor    
     //-----------------------------------------------
@@ -221,7 +226,22 @@ public class Paciente implements Serializable {
     public void setEpisodios(List<EpisodioDolor> episodios) {
         this.episodios = episodios;
     }
+    
+        /**
+     * Devuelve la contraseña del paciente
+     * @return la contraseña
+     */
+    public String getContrasenia() {
+        return contrasenia;
+    }
 
+    /**
+     * Modifica la contraseña del paciente
+     * @param contrasenia
+     */
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
     
     /**
      * Metodo para comparar el paciente con otros objetos

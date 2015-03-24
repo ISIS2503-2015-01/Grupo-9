@@ -53,6 +53,11 @@ public class Doctor implements Serializable {
      */
     private String especialidad;
     
+    /**
+     * La contraseña del doctor
+     */
+    private String contrasenia;
+    
     //--------------------------------
     //Constructor
     //--------------------------------
@@ -147,6 +152,22 @@ public class Doctor implements Serializable {
      */
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
+    }
+    
+        /**
+     * Devuelve la contraseña del doctor
+     * @return la contraseña
+     */
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    /**
+     * Modifica la contraseña del doctor
+     * @param contrasenia
+     */
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     /**

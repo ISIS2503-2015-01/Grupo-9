@@ -46,6 +46,11 @@ public class DoctorDTO {
      * (e.g. neurologia, medicina general)
      */
     private String especialidad;
+    
+    /**
+     * La contraseña del doctor
+     */
+    private String contrasenia;
 
     //-----------------------------------------------------
     // Constructores
@@ -66,14 +71,16 @@ public class DoctorDTO {
      * @param fechaNacimiento
      * @param pacientes
      * @param colegas
-     * @param especialidad 
+     * @param especialidad
+     * @param contrasenia
      */
-    public DoctorDTO(String nombre, int noIdentificacion, Date fechaNacimiento, String especialidad) {
+    public DoctorDTO(String nombre, int noIdentificacion, Date fechaNacimiento, String especialidad, String contrasenia) {
         this.nombre = nombre;
         this.noIdentificacion=noIdentificacion;
         this.fechaNacimiento=fechaNacimiento;
         this.especialidad = especialidad;
-        pacientes = new ArrayList<PacienteDTO>();    
+        pacientes = new ArrayList<PacienteDTO>();  
+        this.contrasenia= contrasenia;
     }
 
     //-----------------------------------------------------
@@ -160,6 +167,22 @@ public class DoctorDTO {
      */
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
+    }
+    
+    /**
+     * Devuelve la contraseña del doctor
+     * @return la contraseña
+     */
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    /**
+     * Modifica la contraseña del doctor
+     * @param contrasenia
+     */
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
     
     /**

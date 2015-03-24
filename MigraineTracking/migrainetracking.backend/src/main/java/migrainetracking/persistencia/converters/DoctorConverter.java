@@ -24,6 +24,7 @@ public class DoctorConverter {
         dto.setNoIdentificacion(entity.getNoIdentificacion());
         dto.setEspecialidad(entity.getEspecialidad());
         dto.setFechaNacimiento(entity.getFechaNacimiento());
+        dto.setContrasenia(entity.getContrasenia());
 
 //        List<PacienteDTO> pacs = new ArrayList<PacienteDTO>();
 //        for (Paciente p : entity.getPacientes()) {
@@ -48,6 +49,7 @@ public class DoctorConverter {
         }
 
         resp.setPacientes(pacs);
+        resp.setContrasenia(dto.getContrasenia());
 
         return resp;
     }

@@ -34,6 +34,7 @@ public class PacienteConverter {
         convertido.setFechaNacimiento(entity.getFechaNacimiento());
         convertido.setPeso(entity.getPeso());
         convertido.setEstatura(entity.getEstatura());
+        convertido.setContrasenia(entity.getContrasenia());
 //        ArrayList<MedicamentoDTO> med = new ArrayList<MedicamentoDTO>();
 //        for(int i=0;i<entity.getMedicamentosDiarios().size();i++)
 //        {
@@ -91,6 +92,7 @@ public class PacienteConverter {
             eps.add(nuevo);
         }
         convertido.setEpisodios(eps);
+        convertido.setContrasenia(dto.getContrasenia());
         return convertido;
     }
     
