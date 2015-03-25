@@ -21,55 +21,62 @@ and open the template in the editor.
         <script type="text/javascript" src="js/AngularControllers/episodio.js"></script>
         <script type="text/javascript" src="js/AngularControllers/paciente.js"></script>
         <div class="container theme-showcase" role="main">
-            <navbar></navbar>
-            <div ng-if="navbar.isSelected(1)">
+            <div>
+                <div class="fixed">
+                    <navbar></navbar>
+                </div>
+                <div class="flex-item">
+                   <div ng-if="navbar.isSelected(1)">
                 
+                    </div>
+                    <div ng-if="navbar.isSelected(11)">
+                        <paciente-info></paciente-info>>
+                    </div>
+                    <div ng-show="navbar.isSelected(12)">
+
+                    </div>
+                    <div ng-show="navbar.isSelected(13)">
+
+                    </div>
+                    <div ng-show="navbar.isSelected(14)">
+                        <paciente-detalle></paciente-detalle>
+                    </div>
+                    <div ng-show="navbar.isSelected(2)">
+
+                    </div>
+                    <div ng-show="navbar.isSelected(21)">
+                        <episodio-info></episodio-info>
+                    </div>
+                    <div ng-show="navbar.isSelected(22)">
+
+                    </div>
+                    <div ng-show="navbar.isSelected(23)">
+
+                    </div>
+                    <div ng-show="navbar.isSelected(24)">
+
+                    </div>
+                    <div ng-show="navbar.isSelected(25)">
+
+                    </div>
+                    <div ng-show="navbar.isSelected(3)">
+
+                    </div>
+                    <div ng-show="navbar.isSelected(31)">
+                        <doctor-info></doctor-info>
+                    </div>
+                    <div ng-show="navbar.isSelected(32)">
+                        <doctor-colegas></doctor-colegas>   
+                    </div>
+                    <div ng-show="navbar.isSelected(33)">
+                        <doctor-detalle></doctor-detalle>
+                    </div>
+                    <div ng-show="navbar.isSelected(34)">
+
+                    </div>
+                </div>
             </div>
-            <div ng-if="navbar.isSelected(11)">
-                <paciente-info></paciente-info>>
-            </div>
-            <div ng-show="navbar.isSelected(12)">
-                
-            </div>
-            <div ng-show="navbar.isSelected(13)">
-                
-            </div>
-            <div ng-show="navbar.isSelected(14)">
-                <paciente-detalle></paciente-detalle>
-            </div>
-            <div ng-show="navbar.isSelected(2)">
-                
-            </div>
-            <div ng-show="navbar.isSelected(21)">
-                <episodio-info></episodio-info>
-            </div>
-            <div ng-show="navbar.isSelected(22)">
-                
-            </div>
-            <div ng-show="navbar.isSelected(23)">
-                
-            </div>
-            <div ng-show="navbar.isSelected(24)">
-                
-            </div>
-            <div ng-show="navbar.isSelected(25)">
-                
-            </div>
-            <div ng-show="navbar.isSelected(3)">
-                
-            </div>
-            <div ng-show="navbar.isSelected(31)">
-                <doctor-info></doctor-info>
-            </div>
-            <div ng-show="navbar.isSelected(32)">
-                <doctor-colegas></doctor-colegas>   
-            </div>
-            <div ng-show="navbar.isSelected(33)">
-                <form-doctordetalle></form-doctordetalle>
-            </div>
-            <div ng-show="navbar.isSelected(34)">
-                
-            </div>
+            
 
         </div>      
     </body>

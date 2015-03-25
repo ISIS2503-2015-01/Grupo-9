@@ -4,46 +4,55 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div class="panel panel-default panel-informacion" >
-    <div class="panel-heading">Informaci&oacute;n del Doctor</div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Nombre:</h4>
+<div class="panel panel-default ">
+    <form name="getDoctorDetalleForm" ng-submit="getDoctorDetalle.buscarDoctorDetalle()" class="navbar-form navbar-default" role="search" novalidate>
+        <div class="form-group">
+          <input ng-model="id" class="form-control" type="number" placeholder="Ingrese el id del doctor"  required/>
+      </div>
+        <input type="submit" value="ver Detalle" class="btn btn-default" >
+    </form>
+
+    <div class="panel panel-default ">
+        <div class="panel-heading">Informaci&oacute;n del Doctor</div>
+            <div class="row">
+                <div class="col-md-6">
+                    Nombre:
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getDoctorDetalle.doctor.nombre}}</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    {{getDoctorDetalle.doctor.nombre}}
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>N&uacte;mero de Identificaci&oacute;n:</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    N&uacute;mero de Identificaci&oacute;n:
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getDoctorDetalle.doctor.noIdentificacion}}</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    {{getDoctorDetalle.doctor.noIdentificacion}}
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Fecha de Nacimiento:</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    Fecha de Nacimiento:
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getDoctorDetalle.doctor.fechaNacimiento}}</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    {{getDoctorDetalle.doctor.fechaNacimiento}}
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Especialidad:</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    Especialidad:
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getDoctorDetalle.doctor.especialidad}}</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    {{getDoctorDetalle.doctor.especialidad}}
+                </div>
             </div>
-        </div>
+    </div>
 </div>

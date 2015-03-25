@@ -38,11 +38,11 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
     private final EntityManager em;
     
     private final static int NUMPACS = 100;
-    private final static int NUMCAT = 75;
+    private final static int NUMCAT = 50;
     private final static int NUMSINT = 25;
     private final static int NUMMED = 25;
     private final static int NUMEPS = 300;
-    private final static int NUMDOCS = 50;
+    private final static int NUMDOCS = 10;
     private final static int NUMREG = 25;
 
     public poblarBasesDatos() {
@@ -118,9 +118,6 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
             int r1 = df.getNumberBetween(0, tamHab - 5);
             int r2 = r1 + df.getItem(maxRows, 100);
 
-            r1 = df.getNumberBetween(0, meds.size() - 5);
-            r2 = r1 + df.getItem(maxRows, 100);
-
             entityMgr.getTransaction().begin();
 
             List<Catalizador> catas = habitos.subList(r1, r2);
@@ -128,7 +125,10 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
                 Catalizador hab = catas.get(i);
                 p.getHabitos().add(hab);
             }
-
+            
+            r1 = df.getNumberBetween(0, meds.size() - 5);
+            r2 = r1 + df.getItem(maxRows, 100);
+            
             for (Medicamento m : meds.subList(r1, r2)) {
                 p.getMedicamentosDiarios().add(m);
             }
@@ -157,13 +157,14 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
             Date fecha = df.getBirthDate();
             int peso = df.getNumberBetween(40, 100);
             int estatura = df.getNumberBetween(140, 200);
+            String contrasenia=df.getRandomText(10); // pa prox esto se cifra..
             Paciente p = new Paciente();
             p.setNoIdentificacion(id);
             p.setNombre(name);
             p.setEstatura(estatura);
             p.setPeso(peso);
             p.setFechaNacimiento(fecha);
-
+            p.setContrasenia(contrasenia);
             entityMgr.persist(p);
             tran.commit();
             Utils.printf("Pacientes : "+i);
@@ -289,13 +290,13 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
             int id = Integer.parseInt(df.getNumberText(8));
             Date fecha = df.getDateBetween(df.getDate(1930, 1, 1), df.getDate(2015, 1, 1));
             String especialidad = df.getItem(values, 100);
-
+            String contrasenia=df.getRandomText(10); // pa prox esto se cifra..
             Doctor d = new Doctor();
             d.setNombre(name);
             d.setEspecialidad(especialidad);
             d.setFechaNacimiento(fecha);
             d.setNoIdentificacion(id);
-
+            d.setContrasenia(contrasenia);
             em.persist(d);
             em.getTransaction().commit();
             Utils.printf("Doctores : "+i);

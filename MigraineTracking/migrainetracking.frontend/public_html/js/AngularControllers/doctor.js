@@ -12,7 +12,7 @@
             controller:['$http',function($http){
                 var self = this;
                 self.doctors =[];
-                $http.get('http://localhost:8080/migrainetracking.services/webresources/getAll/Doctores').success(function(data){
+                $http.get('http://localhost:8080/migrainetracking.services/webresources/registrousuarios/getAll/Pacientes').success(function(data){
                     doctors=data;
                 });
             }],
@@ -26,12 +26,31 @@
             controller:['$http',function($http){
                     var self=this;
                     self.doctor={};
-                    self.id=0;
-                    $http.get('URL/'+self.id).success(function(data){
+                    self.id={ };
+                    this.buscarDoctorDetalle = function( ){
+                       $http.get('http://localhost:8080/migrainetracking.services/webresources/registrousuarios/getById/Doctor/'+ id).success(function(data){
                         doctor = data;
-                    });
+                       }); 
+                    };
             }],
             controllerAs:'getDoctorDetalle'
+        };
+    });
+    app.directive('doctorPacientes',function(){
+        return{
+            restrict:'E',
+            templateUrl:'partials/doctor/doctor-pacientes.html',
+            controller:['$http',function($http){
+                    var self=this;
+                    self.pacientes=[];
+                    self.id={ };
+                    this.buscarDoctorPacientes = function( ){
+                       $http.get('http://localhost:8080/migrainetracking.services/webresources/registrousuarios/getPacientes/doctorid/'+ id).success(function(data){
+                        pacientes = [];
+                       }); 
+                    };
+            }],
+            controllerAs:'getDoctorPacientes'
         };
     });
 })();

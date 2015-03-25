@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div class="panel panel-default panel-navbar-sizes">
+<div class="panel panel-default ">
     <ul class="nav nav-pills nav-stacked">
         <li role="presentation" class="active" ng-class="{active:navbar.isSelected(0)}">
             <a href="#" ng-click="navbar.selectTab(0)">
@@ -78,7 +78,7 @@ and open the template in the editor.
             </a>
         </li>   
         <!--Opciones de los doctores-->
-            <ul class="nav nav-pills nav-stacked" ng-show="navbar.isSelected(3)|| navbar.isSelected(31) || navbar.isSelected(32) || navbar.isSelected(33)|| navbar.isSelected(34)" >
+            <ul class="nav nav-pills nav-stacked" ng-show="navbar.isSelected(3)|| navbar.isSelected(31) || navbar.isSelected(32) || navbar.isSelected(33)" >
                 <li role="presentation" ng-class="{active:navbar.isSelected(31)}">
                     <a href="#" ng-click="navbar.selectTab(31)" >
                         <h5>Ver todos los doctores</h5>
@@ -86,16 +86,11 @@ and open the template in the editor.
                 </li>
                 <li role="presentation" ng-class="{active:navbar.isSelected(32)}">
                     <a href="#" ng-click="navbar.selectTab(32)">
-                        <h5>Ver colegas del doctor</h5>
+                        <h5>Ver informaci&oacute;n de un doctor</h5>
                     </a>
                 </li>
                 <li role="presentation" ng-class="{active:navbar.isSelected(33)}">
                     <a href="#" ng-click="navbar.selectTab(33)">
-                        <h5>Ver informaci&oacute;n de un doctor</h5>
-                    </a>
-                </li>
-                <li role="presentation" ng-class="{active:navbar.isSelected(34)}">
-                    <a href="#" ng-click="navbar.selectTab(34)">
                         <h5>Actualizar informaci&oacute;n del doctor</h5>
                     </a>
                 </li>

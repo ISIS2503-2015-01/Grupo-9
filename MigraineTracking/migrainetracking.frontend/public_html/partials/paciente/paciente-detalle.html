@@ -4,106 +4,111 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div class="panel panel-default panel-informacion">
-    <div class="panel-heading">Informaci&oacute;n del Paciente</div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Nombre:</h4>
+<div class="panel panel-default">
+    <form name="getPacienteDetalleForm" ng-submit="getPacienteDetalle.buscarPacienteDetalle()" class="navbar-form navbar-default" role="search" novalidate>
+            <div class="form-group">
+              <input ng-model="id" class="form-control" type="number" placeholder="Ingrese el id del paciente"  required/>
+          </div>
+            <input type="submit" value="ver Detalle" class="btn btn-default" >
+    </form>
+
+    <div class="panel panel-default panel-informacion">
+        <div class="panel-heading">Informaci&oacute;n del Paciente</div>
+            <div class="row">
+                <div class="col-md-6">
+                    Nombre:
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{getPacienteDetalle.paciente.nombre}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    N&uacute;mero de Identificaci&oacute;n:
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{getPacienteDetalle.paciente.noIdentificacion}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    Fecha de Nacimiento:
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{getPacienteDetalle.paciente.fechaNacimiento}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    Peso:
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{getPacienteDetalle.paciente.peso}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    Estatura:
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{getPacienteDetalle.paciente.estatura}}
+                </div>
+            </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Medicamentos</div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cantidad de veces</th>
+                            <th>Intervalo de Horas</th>
+                            <th>Miligramos</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="medicamento in getPacienteDetalle.paciente.medicamentos | orderBy:'fechaRecetado'">
+                            <th>{{medicamento.nombre}}</th>
+                            <th>{{medicamento.cantidadVecesAlDia}}</th>
+                            <th>{{medicamento.intervaloHoras}}</th>
+                            <th>{{medicamento.miligramos}}</th>
+                            <th>{{medicamento.fechaRecetado|date}}</th>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getPacienteDetalle.paciente.nombre}}</h5>
+        <div class="panel panel-default">
+            <div class="panel-heading">H&aacute;bitos</div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Especificaci&oacute;n</th>
+                            <th>Frecuencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="catalizador in getPacienteDetalle.paciente.catalizadores | orderBy:'tipo'">
+                            <th>{{catalizador.tipo}}</th>
+                            <th>{{catalizador.especificacion}}</th>
+                            <th>{{catalizador.frecuencia}}</th>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>N&uacte;mero de Identificaci&oacute;n:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getPacienteDetalle.paciente.noIdentificacion}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Fecha de Nacimiento:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getPacienteDetalle.paciente.fechaNacimiento}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Peso:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getPacienteDetalle.paciente.peso}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Estatura:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getPacienteDetalle.paciente.estatura}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Medicamentos:</h4>
-            </div>
-        </div>
-        <div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Cantidad de veces</th>
-                        <th>Intervalo de Horas</th>
-                        <th>Miligramos</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="medicamento in getPacienteDetalle.paciente.medicamentos | orderBy:'fechaRecetado'">
-                        <th>{{medicamento.nombre}}</th>
-                        <th>{{medicamento.cantidadVecesAlDia}}</th>
-                        <th>{{medicamento.intervaloHoras}}</th>
-                        <th>{{medicamento.miligramos}}</th>
-                        <th>{{medicamento.fechaRecetado|date}}</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Habitos:</h4>
-            </div>
-        </div>
-        <div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Especificaci&oacute;n</th>
-                        <th>Frecuencia</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="catalizador in getPacienteDetalle.paciente.catalizadores | orderBy:'tipo'">
-                        <th>{{catalizador.tipo}}</th>
-                        <th>{{catalizador.especificacion}}</th>
-                        <th>{{catalizador.frecuencia}}</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+          </div>
+    </div>
 </div>

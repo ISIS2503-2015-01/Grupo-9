@@ -43,3 +43,13 @@ and open the template in the editor.
    width: 10%; 
 }
 
+.container{
+    display: flex;
+}
+.fixed{
+    width: 200px;
+    float: left;
+}
+.flex-item{
+    margin-left: 220px;
+}
