@@ -4,6 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<h2>Lista de Episodios Recientes</h2>
 <div class="panel panel-default">
     <div class="panel-heading">Episodios</div>
     <table class="table">
@@ -16,16 +17,19 @@ and open the template in the editor.
                 <th>Intensidad de Dolor</th>
                 <th>Fecha y Hora</th>
                 <th>Horas de Sue&ntilde;o</th>
+                <th>Detalles</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="episodio in darEpisodios.episodios | orderBy:'fecha'">
+            <tr ng-repeat="episodio in getEpisodios.episodios | orderBy:'fecha'">
                 <th>{{episodio.paciente.nombre}}</th>
                 <th>{{episodio.paciente.noIdentificacion}}</th>
+                <th>{{episodio.id}}</th>
                 <th>{{episodio.localizacion}}</th>
                 <th>{{episodio.intensidadDolor}}</th>
                 <th>{{episodio.fecha}}</th>
                 <th>{{episodio.horasDeSueño}}</th>
+                <th><a href="#">Ver detalle</a></th>
             </tr>
         </tbody>
     </table>

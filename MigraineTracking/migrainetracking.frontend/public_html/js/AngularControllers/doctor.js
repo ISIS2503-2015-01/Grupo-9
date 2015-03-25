@@ -12,7 +12,7 @@
             controller:['$http',function($http){
                 var self = this;
                 self.doctors =[];
-                $http.get('http://localhost:8080/migrainetracking.services/webresources/registrousuarios/getAll/Pacientes').success(function(data){
+                $http.get('http://localhost:8080/migrainetracking.services/webresources/registrousuarios/getAll/Doctores').success(function(data){
                     doctors=data;
                 });
             }],
@@ -26,7 +26,7 @@
             controller:['$http',function($http){
                     var self=this;
                     self.doctor={};
-                    self.id={ };
+                    self.id={};
                     this.buscarDoctorDetalle = function( ){
                        $http.get('http://localhost:8080/migrainetracking.services/webresources/registrousuarios/getById/Doctor/'+ id).success(function(data){
                         doctor = data;

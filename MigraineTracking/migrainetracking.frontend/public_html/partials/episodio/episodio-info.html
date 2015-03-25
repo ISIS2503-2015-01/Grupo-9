@@ -21,10 +21,10 @@ and open the template in the editor.
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="episodio in getEpisodios.episodios | orderBy:'fecha'">
+            <tr ng-repeat="episodio in getEpisodiosRecientes.episodios | orderBy:'fecha'">
                 <th>{{episodio.paciente.nombre}}</th>
                 <th>{{episodio.paciente.noIdentificacion}}</th>
-                <th ng-model="getEpisodioDetalle.id">{{episodio.id}}</th>
+                <th>{{episodio.id}}</th>
                 <th>{{episodio.localizacion}}</th>
                 <th>{{episodio.intensidadDolor}}</th>
                 <th>{{episodio.fecha}}</th>

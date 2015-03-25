@@ -5,3 +5,37 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
+<div class="panel panel-default">
+    <div class="panel panel-default">
+        <form name="getDoctorPacientesForm" ng-submit="getDoctorPacientes.buscarDoctorPacientes()" class="navbar-form navbar-default" role="search" novalidate>
+                <div class="form-group">
+                  <input ng-model="id" class="form-control" type="number" placeholder="Ingrese el id del doctor  required"/>
+                </div>
+                <input type="submit" value="Ver lista de pacientes" class="btn btn-default" >
+    </form>
+
+    <h3>Lista de Pacientes Asignados</h3>
+    <div class="panel panel-default">
+        <div class="panel-heading">Pacientes</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>No Identificaci&oacute;n</th>
+                    <th>Nombre</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Peso</th>
+                    <th>Estatura</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="paciente in getDoctorPacientes.pacientes | orderBy:'noIdentificacion'">
+                    <th>{{paciente.noIdentificacion}}</th>
+                    <th>{{paciente.nombre}}</th>
+                    <th>{{paciente.fechaNacimienyo}}</th>
+                    <th>{{paciente.peso}}</th>
+                    <th>{{paciente.estatura}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

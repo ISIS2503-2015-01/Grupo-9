@@ -10,10 +10,6 @@
             <file>file:/C:/Users/template/Documents/Laboratorios/LabAngularJS/AplicacionMundialFrontEnd/public_html/partials/competitor-login.html</file>
             <file>file:/C:/Users/template/Documents/Laboratorios/LabAngularJS/AplicacionMundialFrontEnd/public_html/partials/competitor-info.html</file>
         </group>
-        <group name="MigraineTracking">
-            <file>file:/C:/Users/template/Documents/Grupo-9/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/js/AngularControllers/doctor.js</file>
-            <file>file:/C:/Users/template/Documents/Grupo-9/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/js/AngularControllers/paciente.js</file>
-            <file>file:/C:/Users/template/Documents/Grupo-9/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/js/AngularControllers/episodio.js</file>
-        </group>
+        <group name="MigraineTracking"/>
     </open-files>
 </project-private>
