@@ -22,14 +22,16 @@
     app1.directive('episodioDetalle',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/episodio/episodio-detalle',
+            templateUrl:'partials/episodio/episodio-detalle.html',
             controller:['$http',function($http){
                     var self = this;
                     self.episodio ={};
                     self.id=0;
-                    $http.get('URL/'+ self.id).success(function(data){
+                    this.darEpisodioDetalle = function(){
+                    $http.get('http://localhost:8080/migrainetracking.services/webresources/registroepisodios/getEpisodio/episodio_id/'+ self.id).success(function(data){
                         self.episodio=data;
                     });
+                };
             }],
             controllerAs:'getEpisodioDetalle'
         };
@@ -41,11 +43,13 @@
             templateUrl:'partials/episodio/paciente-episodios.html',
             controller:['$http',function($http){
                     var self = this;
-                    self.episodio ={};
+                    self.episodios =[];
                     self.id=0;
                     this.buscarPacienteEpisodios = function( ){
-                       $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodios/pacid='+ self.id).success(function(data){
-                        self.episodio = data;
+                        console.log(self.id);
+                       $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodios/pacid/'+ self.id).success(function(data){
+                        console.log(data);
+                        self.episodios = data;
                        }); 
                     };
             }],
@@ -59,13 +63,17 @@
             templateUrl:'partials/episodio/paciente-episodiosfechas.html',
             controller:['$http',function($http){
                     var self = this;
-                    self.episodio ={};
+                    self.episodios =[];
                     self.id=0;
                     self.fecha1={};
                     self.fecha2={};
                     this.buscarPacienteEpisodiosFechas = function( ){
+                        console.log(self.id);
+                        console.log(self.fecha1);
+                        console.log(self.fecha2);
                        $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodiosByFechas/'+self.id+'_'+self.fecha1+'_'+self.fecha2).success(function(data){
-                        self.episodio = data;
+                        self.episodios = data;
+                        console.log(data);
                        }); 
                     };
             }],

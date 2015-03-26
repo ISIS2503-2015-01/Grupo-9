@@ -205,8 +205,8 @@ public class ServicioPersistenciaEpisodioDolor extends PersistenceServiceMaster 
     {   
         Date fechaActual = new Date();
         Date fecha = new Date(fechaActual.getTime()-2*24*3600*1000);
-        Query q = this.entityMgr.createQuery("SELECT ep FROM EpisodioDolor ep WHERE ep.fecha>=2dias");
-        q.setParameter("2dias", fecha);
+        Query q = this.entityMgr.createQuery("SELECT ep FROM EpisodioDolor ep WHERE ep.fecha>=:dias");
+        q.setParameter("dias", fecha);
         List<EpisodioDolor> eps = q.getResultList();
         return EpisodioDolorConverter.entityToDtoList(eps);
     } 

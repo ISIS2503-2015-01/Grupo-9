@@ -4,78 +4,41 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<div class="panel panel-default">
+<form name="getEpisodioDetalleform" ng-submit="getEpisodioDetalle.darEpisodioDetalle()" class="navbar-form navbar-default" role="search" novalidate>
+            <div class="form-group">
+              <input ng-model="getEpisodioDetalle.id" class="form-control" type="number" placeholder="Ingrese el id del episodio"  required/>
+          </div>
+            <input type="submit" value="ver episodio" class="btn btn-default" >
+    </form>
+
 <div class="panel panel-default ">
     <div class="panel-heading">Informaci&oacute;n del Episodio de dolor</div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Nombre del paciente:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getEpisodioDetalle.episodio.paciente.nombre}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            
                 <h4>N&uacute;mero de Indentificaci&oacute;n:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getEpisodioDetalle.episodio.paciente.noIdentificacion}}</h5>
-            </div>
-        </div>
-    <div class="row">
-            <div class="col-md-6">
+            
+                <h5>{{getEpisodioDetalle.episodio.pacienteId}}</h5>
+            
                 <h4>Id del episodio</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+           
                 <h5>{{getEpisodioDetalle.episodio.id}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+           
                 <h4>Fecha:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getEpisodioDetalle.episodio.fecha|date}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            
+                <h5>{{getEpisodioDetalle.episodio.fecha | date}}</h5>
+            
                 <h4>Localizaci&oacute;n:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+       
                 <h5>{{getEpisodioDetalle.episodio.localizacion}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+        
                 <h4>Intensidad de dolor:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            
                 <h5>{{getEpisodioDetalle.episodio.intensidadDolor}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            
                 <h4>Horas de sue&ntilde;o:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>{{getEpisodioDetalle.episodio.horasDeSueño}}</h5>
-            </div>
-        </div>
+            
+                <h5>{{getEpisodioDetalle.episodio.horasDeSueno}}</h5>
+            
         <div class="row">
             <div class="col-md-6">
                 <h4>Medicamentos:</h4>
@@ -149,4 +112,5 @@ and open the template in the editor.
                 </tbody>
             </table>
         </div>
+</div>
 </div>

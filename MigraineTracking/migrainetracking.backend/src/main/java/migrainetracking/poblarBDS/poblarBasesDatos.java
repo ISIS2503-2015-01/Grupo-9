@@ -42,7 +42,7 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
     private final static int NUMSINT = 25;
     private final static int NUMMED = 25;
     private final static int NUMEPS = 300;
-    private final static int NUMDOCS = 10;
+    private final static int NUMDOCS = 50;
     private final static int NUMREG = 25;
 
     public poblarBasesDatos() {

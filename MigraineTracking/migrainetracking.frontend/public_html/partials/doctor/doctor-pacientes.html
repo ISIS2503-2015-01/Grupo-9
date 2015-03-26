@@ -31,7 +31,7 @@ and open the template in the editor.
                 <tr ng-repeat="paciente in this.getDoctorPacientes.pacientes | orderBy:'noIdentificacion'">
                     <th>{{paciente.noIdentificacion}}</th>
                     <th>{{paciente.nombre}}</th>
-                    <th>{{paciente.fechaNacimienyo}}</th>
+                    <th>{{paciente.fechaNacimiento | date}}</th>
                     <th>{{paciente.peso}}</th>
                     <th>{{paciente.estatura}}</th>
                 </tr>

@@ -27,8 +27,31 @@ and open the template in the editor.
                     <navbar></navbar>
                 </div>
                 <div class="flex-item">
-                   <div ng-if="navbar.isSelected(1)">
-                
+                    <div ng-if="navbar.isSelected(0)">
+                        <div class="row featurette">
+                            <div class="col-md-5">
+                                <img src="images/cerebro.jpg" class="img-responsive" alt="500x500" data-holder-rendered="true">
+                            </div>
+                            <div class="col-md-7">
+                                <h2>Migraine Tracking</h2>
+                                <p class="lead">
+                                Bievenido a Migraine tracking! Aqui podras hacer un seguimiento detallado a los episodios de dolor de los pacientes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="navbar.isSelected(1)">
+                        <div class="row featurette">
+                            <div class="col-md-5">
+                                <img src="images/pacientes.jpg" class="img-responsive" alt="500x500" data-holder-rendered="true">
+                            </div>
+                            <div class="col-md-7">
+                                <h2>Pacientes</h2>
+                                <p class="lead">
+                                    Aqui podras revisar la lista de los pacientes registrados en Migraine Tracking. La lista de tus pacientes y la informaci&oacute;n de cada de uno de ellos.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <div ng-if="navbar.isSelected(11)">
                         <paciente-info></paciente-info>
@@ -43,7 +66,17 @@ and open the template in the editor.
                         <paciente-detalle></paciente-detalle>
                     </div>
                     <div ng-show="navbar.isSelected(2)">
-
+                        <div class="row featurette">
+                            <div class="col-md-5">
+                                <img src="images/episodio.jpg" class="img-responsive" alt="500x500" data-holder-rendered="true">
+                            </div>
+                            <div class="col-md-7">
+                                <h2>Episodios de Dolor</h2>
+                                <p class="lead">
+                                Aqui podras ver los episodios de dolor de un paciente, ver los episodios por fechas y la lista de todos los episodios registrados en Migraine Tracking.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <div ng-show="navbar.isSelected(21)">
                         <episodio-info></episodio-info>
@@ -58,10 +91,20 @@ and open the template in the editor.
                         <episodios-recientes></episodios-recientes>
                     </div>
                     <div ng-show="navbar.isSelected(25)">
-
+                        <episodio-detalle></episodio-detalle>
                     </div>
                     <div ng-show="navbar.isSelected(3)">
-
+                        <div class="row featurette">
+                            <div class="col-md-5">
+                                <img src="images/doctor.jpg" class="img-responsive" alt="500x500" data-holder-rendered="true">
+                            </div>
+                            <div class="col-md-7">
+                                <h2>Doctores</h2>
+                                <p class="lead">
+                                    Aqui podras ver la lista de colegas registrados en Migraine Tracking y su informaci&oacute;n detallada.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <div ng-show="navbar.isSelected(31)">
                         <doctor-info></doctor-info>
@@ -70,7 +113,7 @@ and open the template in the editor.
                         <doctor-detalle></doctor-detalle>
                     </div>
                     <div ng-show="navbar.isSelected(33)">
-
+                        <doctor-form></doctor-form>
                     </div>
                 </div>
             </div>

@@ -82,9 +82,13 @@ public class ServicioRevisionEpisodiosMock implements IServicioRevisionEpisodios
      * @return la lista de episodios del paciente cuyo id se da por parametro
      */
     @Override
-    public List<EpisodioDolorDTO> getEpisodiosById(Long id) {
+    public List<EpisodioDolorDTO> getEpisodiosById(Long id) throws NoExisteException{
         IServicioPersistenciaPaciente pacPersServ = ServicioRegistroUsuariosMock.getInstance().persistenciaPaciente ;
-        return pacPersServ.getEpisodiosByPaciente( id.intValue() );
+        List<EpisodioDolorDTO> resp = pacPersServ.getEpisodiosByPaciente( id.intValue() );
+        if(resp == null )
+            throw new NoExisteException("Lo que ses");
+        else 
+            return resp;
     }
 
     /**

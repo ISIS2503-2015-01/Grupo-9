@@ -26,6 +26,7 @@ import migrainetracking.persistencia.Entities.Paciente;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.transaction.SystemException;
+import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.persistencia.Entities.EpisodioDolor;
 import migrainetracking.persistencia.converters.DoctorConverter;
 import migrainetracking.persistencia.converters.EpisodioDolorConverter;
@@ -287,17 +288,16 @@ public class ServicioPersistenciaPaciente extends PersistenceServiceMaster imple
      * @return los episodios del paciente
      */
     @Override
-    public List<EpisodioDolorDTO> getEpisodiosByPaciente(int noId) {
-        
-        try {
+    public List<EpisodioDolorDTO> getEpisodiosByPaciente(int noId)  {
             Query q = this.entityMgr.createQuery(
                     "SELECT e FROM EpisodioDolor e WHERE e.paciente.noIdentificacion = :id");
             q.setParameter("id", noId);
             List<EpisodioDolor> eps = q.getResultList(); 
-            return EpisodioDolorConverter.entityToDtoList( eps );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+            if(eps.isEmpty())
+                return null;
+            else
+                return EpisodioDolorConverter.entityToDtoList( eps );
+        
+//        return null;
     }  
 }

@@ -27,7 +27,7 @@ public interface IServicioRevisionEpisodiosMockRemote {
      * @param id - Consecutivo identificador del paciente.
      * @return Los episodios de dolor de un paciente especifico.
      */
-    public List<EpisodioDolorDTO> getEpisodiosById(Long id);
+    public List<EpisodioDolorDTO> getEpisodiosById(Long id) throws NoExisteException;
     
     /**
      * Devuelve los episodios de dolor que ha registrado un paciente, en un periodo de tiempo especifico.

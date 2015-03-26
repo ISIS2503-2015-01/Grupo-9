@@ -29,6 +29,7 @@ import migrainetracking.dto.SintomaDTO;
 import migrainetracking.excepciones.NoExisteException;
 import migrainetracking.logica.ejb.ServicioRevisionEpisodiosMock;
 import migrainetracking.logica.interfaces.IServicioRevisionEpisodiosMockRemote;
+import migrainetracking.utils.Utils;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -81,11 +82,24 @@ public class RevisionEpisodiosService {
     
     /** <episodios de un paciente>.¨*/
     @GET
-    @Path("/getEpisodios/pacid={id}")
+    @Path("/getEpisodios/pacid/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEpsByPacId(@PathParam("id") Long id) {
-        List<EpisodioDolorDTO> eps = revEpService.getEpisodiosById(id);
-        return Response.status(200).header("Access-Allow-Control-Origin", "*").entity(eps).build();
+    public Response getEpsByPacId(@PathParam("id") Long id) throws JSONException {
+        List<EpisodioDolorDTO> eps;
+        try
+        {
+            Utils.printf(id+" ");
+            eps = revEpService.getEpisodiosById(id);
+            Utils.printf(eps.size()+"");
+            
+        }
+        catch(Exception e)
+        {
+            JSONObject msj = new JSONObject();
+            msj.put("Error de sistema", e.getMessage());
+            return Response.status(500).header("Access-Allow-Control-Origin", "*").entity(msj).build();
+        }
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(eps).build();
     }
     /** </episodios de un paciente>.¨*/
     
