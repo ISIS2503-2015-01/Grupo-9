@@ -38,7 +38,7 @@
     app1.directive('pacienteEpisodios',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/episodio/paciente-episodios',
+            templateUrl:'partials/episodio/paciente-episodios.html',
             controller:['$http',function($http){
                     var self = this;
                     self.episodio ={};
@@ -56,7 +56,7 @@
     app1.directive('pacienteEpisodiosfechas',function(){
         return{
             restrict:'E',
-            templateUrl:'partials/episodio/paciente-episodiosfechas',
+            templateUrl:'partials/episodio/paciente-episodiosfechas.html',
             controller:['$http',function($http){
                     var self = this;
                     self.episodio ={};
@@ -82,6 +82,8 @@
                     self.episodios = [];
                     $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodios2Dias').success(function(data){
                         self.episodios =data;
+                        console.log("Recientes");
+                        console.log(data);
                     });
             }],
             controllerAs:'getEpisodiosRecientes'

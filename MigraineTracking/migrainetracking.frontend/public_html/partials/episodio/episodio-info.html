@@ -11,23 +11,19 @@ and open the template in the editor.
         <thead>
             <tr>
                 <th>N&uacute;mero de Identificaci&oacute;n del paciente</th>
-                <th>Id del Episodio</th>
                 <th>Localizaci&oacute;n</th>
                 <th>Intensidad de Dolor</th>
                 <th>Fecha y Hora</th>
                 <th>Horas de Sueno</th>
-                <th>Detalles</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="episodio in getEpisodiosRecientes.episodios | orderBy:'fecha'">
+            <tr ng-repeat="episodio in this.getEpisodios.episodios | orderBy:'fecha'">
                 <th>{{episodio.pacienteId}}</th>
-                <th>{{episodio.id}}</th>
                 <th>{{episodio.localizacion}}</th>
                 <th>{{episodio.intensidadDolor}}</th>
                 <th>{{episodio.fecha | date}}</th>
                 <th>{{episodio.horasDeSueno}}</th>
-                <th><a href="#">Ver detalle</a></th>
             </tr>
         </tbody>
     </table>

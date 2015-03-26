@@ -30,7 +30,7 @@ public class EpisodioDolorConverter {
         EpisodioDolorDTO resp = new EpisodioDolorDTO();
         resp.setId(entity.getId());
         resp.setFecha(entity.getFecha());
-        resp.setHorasDeSueño(entity.getHorasDeSueño());
+        resp.setHorasDeSueno(entity.getHorasDeSueno());
         resp.setIntensidadDolor(entity.getIntensidadDolor());
         resp.setLocalizacion(entity.getLocalizacion());
 
@@ -62,7 +62,7 @@ public class EpisodioDolorConverter {
         EpisodioDolor resp = new EpisodioDolor();
         resp.setId(resp.getId());
         resp.setFecha(dto.getFecha());
-        resp.setHorasDeSueño(dto.getHorasDeSueño());
+        resp.setHorasDeSueno(dto.getHorasDeSueno());
         resp.setIntensidadDolor(dto.getIntensidadDolor());
         resp.setLocalizacion(dto.getLocalizacion());
 

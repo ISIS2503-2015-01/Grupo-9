@@ -261,7 +261,7 @@ public class poblarBasesDatos extends PersistenceServiceMaster implements IPobla
             EpisodioDolor e = new EpisodioDolor();
             e.setFecha(df.getDateBetween(df.getDate(2014, 11, 1), df.getDate(2015, 9, 1)));
             e.setIntensidadDolor(intensidad);
-            e.setHorasDeSueño(horas);
+            e.setHorasDeSueno(horas);
             e.setLocalizacion(localizacion);
 
             em.persist(e);

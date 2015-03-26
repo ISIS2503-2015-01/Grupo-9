@@ -76,14 +76,14 @@ public class EpisodioDolorDTO {
      * Metodo constructor con parametros
      * @param fecha la fecha en la que ocurre el episodio de dolor
      * @param localizacion la localizacion del episodio de dolor
-     * @param horasDeSueño las horas de sueno que se tienen durante el espisodio de sueno
+     * @param horasDeSueno las horas de sueno que se tienen durante el espisodio de sueno
      * @param intensidadDolor la intensidad del dolor del episodio
      */
-    public EpisodioDolorDTO( Date fecha, String localizacion, int horasDeSueño, int intensidadDolor) {
+    public EpisodioDolorDTO( Date fecha, String localizacion, int horasDeSueno, int intensidadDolor) {
         this.fecha = fecha;
         this.localizacion = localizacion; 
         this.intensidadDolor = intensidadDolor;
-        this.horasDeSueno = horasDeSueño;
+        this.horasDeSueno = horasDeSueno;
         sintomas = new ArrayList<SintomaDTO>();
         catalizadores = new ArrayList<CatalizadorDTO>();
         medicamentosActuales = new ArrayList<MedicamentoDTO>();
@@ -209,7 +209,7 @@ public class EpisodioDolorDTO {
      * Metodo que retorna las horas de sueno del episodio
      * @return las horas de sueno
      */
-    public int getHorasDeSueño() {
+    public int getHorasDeSueno() {
         return horasDeSueno;
     }
 
@@ -217,8 +217,8 @@ public class EpisodioDolorDTO {
      * Metodo que cambia la cantidad de horas de sueno por la cantidad dada como parametro
      * @param horasDeSueño las nuevas horas de sueno relacionadas con el episodio de dolor
      */
-    public void setHorasDeSueño(int horasDeSueño) {
-        this.horasDeSueno = horasDeSueño;
+    public void setHorasDeSueno(int horasDeSueno) {
+        this.horasDeSueno = horasDeSueno;
     }
 
     public int getPacienteId() {

@@ -180,16 +180,16 @@ public class EpisodioDolor implements Serializable {
      * Metodo que retorna las horas de sueno del episodio
      * @return las horas de sueno del episodio
      */
-    public int getHorasDeSueño() {
+    public int getHorasDeSueno() {
         return horasDeSueno;
     }
 
     /**
      * Parametro que cambia las horas de sueno por las horas dadas por parametro
-     * @param horasDeSueño las nuevas horas de sueno
+     * @param horasDeSueno las nuevas horas de sueno
      */
-    public void setHorasDeSueño(int horasDeSueño) {
-        this.horasDeSueno = horasDeSueño;
+    public void setHorasDeSueno(int horasDeSueno) {
+        this.horasDeSueno = horasDeSueno;
     }
 
     /**
