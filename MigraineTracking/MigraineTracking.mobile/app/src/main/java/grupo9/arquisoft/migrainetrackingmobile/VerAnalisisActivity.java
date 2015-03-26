@@ -26,14 +26,9 @@ public class VerAnalisisActivity extends ActionBarActivity {
         listView = (ListView) findViewById(R.id.listView);
 
         // Defined Array values to show in ListView
-        String[] values = new String[] { "Android List View",
-                "Adapter implementation",
-                "Simple List View In Android",
-                "Create List View Android",
-                "Android Example",
-                "List View Source Code",
-                "List View Array Adapter",
-                "Android Example List View"
+        String[] values = new String[] { "2014-02-03: Debe tomar Sevedol.",
+                "2014-02-10: Episodio normal debido a la baja temperatura.",
+                "2014-02-19: No consumir canela."
         };
 
         // Define a new Adapter
