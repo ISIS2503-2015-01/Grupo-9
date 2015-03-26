@@ -12,7 +12,8 @@
                     var self = this;
                     self.episodios = [];
                     $http.get('http://localhost:8080/migrainetracking.services/webresources/registroepisodios/getAll/EpisodiosDolor').success(function(data){
-                        episodios =data;
+                        console.log(data);
+                        self.episodios =data;
                     });
             }],
             controllerAs:'getEpisodios'
@@ -25,9 +26,9 @@
             controller:['$http',function($http){
                     var self = this;
                     self.episodio ={};
-                    self.id={};
+                    self.id=0;
                     $http.get('URL/'+ self.id).success(function(data){
-                        episodio=data;
+                        self.episodio=data;
                     });
             }],
             controllerAs:'getEpisodioDetalle'
@@ -41,10 +42,10 @@
             controller:['$http',function($http){
                     var self = this;
                     self.episodio ={};
-                    self.id={};
+                    self.id=0;
                     this.buscarPacienteEpisodios = function( ){
-                       $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodios/pacid='+ id).success(function(data){
-                        episodio = data;
+                       $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodios/pacid='+ self.id).success(function(data){
+                        self.episodio = data;
                        }); 
                     };
             }],
@@ -59,12 +60,12 @@
             controller:['$http',function($http){
                     var self = this;
                     self.episodio ={};
-                    self.id={}
+                    self.id=0;
                     self.fecha1={};
                     self.fecha2={};
                     this.buscarPacienteEpisodiosFechas = function( ){
-                       $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodiosByFechas/'+id+'_'+fecha1+'_'+fecha2).success(function(data){
-                        episodio = data;
+                       $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodiosByFechas/'+self.id+'_'+self.fecha1+'_'+self.fecha2).success(function(data){
+                        self.episodio = data;
                        }); 
                     };
             }],
@@ -80,7 +81,7 @@
                     var self = this;
                     self.episodios = [];
                     $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodios2Dias').success(function(data){
-                        episodios =data;
+                        self.episodios =data;
                     });
             }],
             controllerAs:'getEpisodiosRecientes'

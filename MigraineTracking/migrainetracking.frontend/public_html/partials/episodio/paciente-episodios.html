@@ -7,7 +7,7 @@ and open the template in the editor.
 <div class="panel panel-default">
     <form name="getPacienteEpisodiosform" ng-submit="getPacienteEpisodios.buscarPacienteEpisodios()" class="navbar-form navbar-default" role="search" novalidate>
             <div class="form-group">
-              <input ng-model="id" class="form-control" type="number" placeholder="Ingrese el id del paciente"  required/>
+              <input ng-model="getPacienteEpisodios.id" class="form-control" type="number" placeholder="Ingrese el id del paciente"  required/>
           </div>
             <input type="submit" value="ver episodios" class="btn btn-default" >
     </form>
@@ -31,8 +31,8 @@ and open the template in the editor.
                     <th>{{episodio.paciente.noIdentificacion}}</th>
                     <th>{{episodio.localizacion}}</th>
                     <th>{{episodio.intensidadDolor}}</th>
-                    <th>{{episodio.fecha}}</th>
-                    <th>{{episodio.horasDeSueño}}</th>
+                    <th>{{episodio.fecha | date}}</th>
+                    <th>{{episodio.horasDeSueno}}</th>
                 </tr>
             </tbody>
         </table>

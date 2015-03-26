@@ -71,7 +71,7 @@ public class EpisodioDolor implements Serializable {
     /**
      *Aproximado de las horas diarias promdedio que el paciente durmio en los ultimos 3 dias previos. 
      */
-    private int horasDeSueño;
+    private int horasDeSueno;
     
     /**
      * La lista de sintomas que presenta el episodio de dolor
@@ -181,7 +181,7 @@ public class EpisodioDolor implements Serializable {
      * @return las horas de sueno del episodio
      */
     public int getHorasDeSueño() {
-        return horasDeSueño;
+        return horasDeSueno;
     }
 
     /**
@@ -189,7 +189,7 @@ public class EpisodioDolor implements Serializable {
      * @param horasDeSueño las nuevas horas de sueno
      */
     public void setHorasDeSueño(int horasDeSueño) {
-        this.horasDeSueño = horasDeSueño;
+        this.horasDeSueno = horasDeSueño;
     }
 
     /**

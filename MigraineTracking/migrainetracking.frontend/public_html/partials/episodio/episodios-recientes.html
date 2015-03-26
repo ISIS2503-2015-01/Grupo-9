@@ -21,14 +21,14 @@ and open the template in the editor.
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="episodio in getEpisodios.episodios | orderBy:'fecha'">
+            <tr ng-repeat="episodio in this.getEpisodios.episodios | orderBy:'fecha'">
                 <th>{{episodio.paciente.nombre}}</th>
                 <th>{{episodio.paciente.noIdentificacion}}</th>
                 <th>{{episodio.id}}</th>
                 <th>{{episodio.localizacion}}</th>
                 <th>{{episodio.intensidadDolor}}</th>
                 <th>{{episodio.fecha}}</th>
-                <th>{{episodio.horasDeSueño}}</th>
+                <th>{{episodio.horasDeSueno}}</th>
                 <th><a href="#">Ver detalle</a></th>
             </tr>
         </tbody>

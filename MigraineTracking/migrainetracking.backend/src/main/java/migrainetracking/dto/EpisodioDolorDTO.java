@@ -42,7 +42,7 @@ public class EpisodioDolorDTO {
     /**
      *Aproximado de las horas diarias promdedio que el paciente durmio en los ultimos 3 dias previos. 
      */
-    private int horasDeSueño;
+    private int horasDeSueno;
     
     /**
      * La lista de sintomas que presenta el episodio de dolor
@@ -83,7 +83,7 @@ public class EpisodioDolorDTO {
         this.fecha = fecha;
         this.localizacion = localizacion; 
         this.intensidadDolor = intensidadDolor;
-        this.horasDeSueño = horasDeSueño;
+        this.horasDeSueno = horasDeSueño;
         sintomas = new ArrayList<SintomaDTO>();
         catalizadores = new ArrayList<CatalizadorDTO>();
         medicamentosActuales = new ArrayList<MedicamentoDTO>();
@@ -210,7 +210,7 @@ public class EpisodioDolorDTO {
      * @return las horas de sueno
      */
     public int getHorasDeSueño() {
-        return horasDeSueño;
+        return horasDeSueno;
     }
 
     /**
@@ -218,7 +218,7 @@ public class EpisodioDolorDTO {
      * @param horasDeSueño las nuevas horas de sueno relacionadas con el episodio de dolor
      */
     public void setHorasDeSueño(int horasDeSueño) {
-        this.horasDeSueño = horasDeSueño;
+        this.horasDeSueno = horasDeSueño;
     }
 
     public int getPacienteId() {

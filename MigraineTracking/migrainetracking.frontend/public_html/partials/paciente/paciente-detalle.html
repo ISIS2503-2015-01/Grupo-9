@@ -7,13 +7,21 @@ and open the template in the editor.
 <div class="panel panel-default">
     <form name="getPacienteDetalleForm" ng-submit="getPacienteDetalle.buscarPacienteDetalle()" class="navbar-form navbar-default" role="search" novalidate>
             <div class="form-group">
-              <input ng-model="id" class="form-control" type="number" placeholder="Ingrese el id del paciente"  required/>
+              <input ng-model="getPacienteDetalle.id" class="form-control" type="number" placeholder="Ingrese el id del paciente"  required/>
           </div>
             <input type="submit" value="Ver Detalle " class="btn btn-default" >
     </form>
 
     <div class="panel panel-default panel-informacion">
         <div class="panel-heading">Informaci&oacute;n del Paciente</div>
+            <div class="row">
+                <div class="col-md-6">                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     Nombre:
@@ -41,7 +49,7 @@ and open the template in the editor.
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    {{getPacienteDetalle.paciente.fechaNacimiento}}
+                    {{getPacienteDetalle.paciente.fechaNacimiento | date}}
                 </div>
             </div>
             <div class="row">

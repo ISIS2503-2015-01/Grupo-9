@@ -17,10 +17,10 @@ and open the template in the editor.
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="doctor in getDoctors.doctores | orderBy:'noIdentificacion'">
+            <tr ng-repeat="doctor in this.getDoctors.doctors | orderBy:'noIdentificacion'">
                 <th>{{doctor.noIdentificacion}}</th>
                 <th>{{doctor.nombre}}</th>
-                <th>{{doctor.fechaNacimiento}}</th>
+                <th>{{doctor.fechaNacimiento | date}}</th>
                 <th>{{doctor.especialidad}}</th>
             </tr>
         </tbody>

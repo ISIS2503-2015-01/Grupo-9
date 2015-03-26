@@ -9,7 +9,7 @@ and open the template in the editor.
     <div class="panel panel-default">
         <form name="getDoctorPacientesForm" ng-submit="getDoctorPacientes.buscarDoctorPacientes()" class="navbar-form navbar-default" role="search" novalidate>
                 <div class="form-group">
-                  <input ng-model="id" class="form-control" type="number" placeholder="Ingrese el id del doctor  required"/>
+                  <input ng-model="getDoctorPacientes.id" class="form-control" type="number" placeholder="Ingrese el id del doctor  required"/>
                 </div>
                 <input type="submit" value="Ver lista de pacientes" class="btn btn-default" >
     </form>
@@ -28,7 +28,7 @@ and open the template in the editor.
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="paciente in getDoctorPacientes.pacientes | orderBy:'noIdentificacion'">
+                <tr ng-repeat="paciente in this.getDoctorPacientes.pacientes | orderBy:'noIdentificacion'">
                     <th>{{paciente.noIdentificacion}}</th>
                     <th>{{paciente.nombre}}</th>
                     <th>{{paciente.fechaNacimienyo}}</th>

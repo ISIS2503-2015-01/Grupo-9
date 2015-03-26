@@ -7,9 +7,9 @@ and open the template in the editor.
 <div class="panel panel-default">
     <form name="getPacienteEpisodiosFechasform" ng-submit="getPacienteEpisodiosFechas.buscarPacienteEpisodiosFechas()" class="navbar-form navbar-default" role="search" novalidate>
             <div class="form-group">
-              <input ng-model="id" class="form-control" type="number" placeholder="Ingrese el id del paciente"  required/>
-              <input ng-model="fecha1" class="form-control" type="date" placeholder="Ingrese la fecha inicial"  required/>
-              <input ng-model="fecha2" class="form-control" type="date" placeholder="Ingrese la fecha final"  required/>
+              <input ng-model="getPacienteEpisodiosFechas.id" class="form-control" type="number" placeholder="Ingrese el id del paciente"  required/>
+              <input ng-model="getPacienteEpisodiosFechas.fecha1" class="form-control" type="date" placeholder="Ingrese la fecha inicial"  required/>
+              <input ng-model="getPacienteEpisodiosFechas.fecha2" class="form-control" type="date" placeholder="Ingrese la fecha final"  required/>
             </div>
             <input type="submit" value="ver episodios" class="btn btn-default" >
     </form>

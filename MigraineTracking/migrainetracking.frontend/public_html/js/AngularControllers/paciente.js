@@ -12,7 +12,7 @@
                     var self = this;
                     self.pacientes =[];
                     $http.get('http://localhost:8080/migrainetracking.services/webresources/registrousuarios/getAll/Pacientes').success(function(data){
-                        pacientes =data;
+                        self.pacientes =data;
                     });
             }],
             controllerAs:'getPacientes'
@@ -25,10 +25,10 @@
             controller:['$http',function($http){
                 var self = this;
                 self.paciente={};
-                self.id={};
+                self.id=0;
                 this.buscarPacienteDetalle = function(){
-                    $http.get('http://localhost:8080/migrainetracking.services/webresources/registrousuarios/getById/Paciente/'+id).success(function(data){
-                    paciente=data;
+                    $http.get('http://localhost:8080/migrainetracking.services/webresources/registrousuarios/getById/Paciente/'+self.id).success(function(data){
+                    self.paciente=data;
                 });};
                 
             }],
