@@ -129,6 +129,9 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
             e.printStackTrace();
             tran.rollback();
             Utils.printf("Se ha producido un error: " + e.getMessage());
+        }finally {
+            entityMgr.clear();
+            entityMgr.close();
         }
     }
 
@@ -159,6 +162,9 @@ public class ServicioPersistenciaDoctor extends PersistenceServiceMaster impleme
             e.printStackTrace();
             tran.rollback();
             Utils.printf("Se ha producido un error: " + e.getMessage());
+        }finally {
+            entityMgr.clear();
+            entityMgr.close();
         }
     }
 

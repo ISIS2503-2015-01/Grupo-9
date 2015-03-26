@@ -112,6 +112,9 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
             e.printStackTrace();
             tran.rollback();
             Utils.printf("Se ha producido un error: " + e.getMessage());
+        }finally {
+            entityMgr.clear();
+            entityMgr.close();
         }
     }
 
@@ -143,6 +146,9 @@ public class ServicioPersistenciaSintoma extends PersistenceServiceMaster implem
             e.printStackTrace();
             tran.rollback();
             Utils.printf("Se ha producido un error al borrar el sintoma: " + e.getMessage());
+        }finally {
+            entityMgr.clear();
+            entityMgr.close();
         }
     }
 

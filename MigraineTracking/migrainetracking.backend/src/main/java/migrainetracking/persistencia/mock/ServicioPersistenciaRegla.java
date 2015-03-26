@@ -167,6 +167,9 @@ public class ServicioPersistenciaRegla extends PersistenceServiceMaster  impleme
             e.printStackTrace();
             tran.rollback();
             Utils.printf("Se ha producido un error al borrar la regla: "+ e.getMessage());
+        }finally {
+            entityMgr.clear();
+            entityMgr.close();
         }
     }
 
