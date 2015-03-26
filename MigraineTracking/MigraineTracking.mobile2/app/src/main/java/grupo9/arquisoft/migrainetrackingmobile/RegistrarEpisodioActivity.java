@@ -8,9 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.EpisodioDolorDTO;
+import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
 
 
 public class RegistrarEpisodioActivity extends ActionBarActivity {
@@ -26,7 +28,16 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         String[] catalizadores = {"Catalizador 1","Catalizador 2","Catalizador 3"};
         spinCatalizadores = (MultiSelectionSpinner) findViewById(R.id.spinCatalizadores);
         spinCatalizadores.setItems(catalizadores);
-        String[] medicamentos = {"Medicamento 1","Medicamento 2","Medicamento 3"};
+        ArrayList<MedicamentoDTO> medica = MainActivity.medicamentos;
+        ArrayList<String> medicamentos = new ArrayList<String>();
+        medicamentos.add("Medicamento 1");
+        medicamentos.add("Medicamento 2");
+        medicamentos.add("Medicamento 3");
+        for(int i=1;i<medica.size();i++)
+        {
+            String nombre = medica.get(i).getNombre();
+            medicamentos.add(nombre);
+        }
         spinMedicamentos = (MultiSelectionSpinner) findViewById(R.id.spinMedicamentos);
         spinMedicamentos.setItems(medicamentos);
     }

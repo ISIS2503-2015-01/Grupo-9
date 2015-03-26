@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
@@ -17,6 +19,8 @@ import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
 
 
 public class AgregarMedicamentoActivity extends ActionBarActivity {
+
+    public final static String MEDICAMENTOS = "MedicamentosFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,9 @@ public class AgregarMedicamentoActivity extends ActionBarActivity {
         try
         {
             MedicamentoDTO nuevo = new MedicamentoDTO(nomb, Integer.parseInt(cantVeces), Integer.parseInt(hor), Integer.parseInt(cant));
+            MainActivity.medicamentos.add(nuevo);
+            Log.i("MyActivity", nomb);
+            Log.i("MyActivity", MainActivity.medicamentos.size()+ " medicamentos");
         }
         catch(Exception e)
         {

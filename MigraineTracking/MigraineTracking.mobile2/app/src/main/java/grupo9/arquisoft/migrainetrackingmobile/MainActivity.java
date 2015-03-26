@@ -17,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
 
     public final static String EXTRA_USUARIO = "grupo9.arquisoft.migrainetrackingmobile.USUARIO";
 
-    public ArrayList<MedicamentoDTO> medicamentos;
+    public static ArrayList<MedicamentoDTO> medicamentos = new ArrayList<MedicamentoDTO>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
