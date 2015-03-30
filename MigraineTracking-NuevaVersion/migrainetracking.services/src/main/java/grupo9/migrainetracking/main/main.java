@@ -12,7 +12,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
  *
  * @author estudiante
  */
-public class main {
+public class Main {
     public static void main(String[] args) throws Exception{
                 String webappDirLocation = "src/main/webapp/";
 
