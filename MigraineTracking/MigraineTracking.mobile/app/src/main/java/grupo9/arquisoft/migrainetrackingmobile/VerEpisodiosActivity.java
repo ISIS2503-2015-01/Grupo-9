@@ -9,15 +9,12 @@ import android.view.MenuItem;
 
 public class VerEpisodiosActivity extends ActionBarActivity {
 
-    MultiSelectionSpinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_episodios);
         String[] episodios = {"Episodio 1","Episodio 2","Episodio 3"};
-        spinner = (MultiSelectionSpinner) findViewById(R.id.mySpinner);
-        spinner.setItems(episodios);
     }
 
 

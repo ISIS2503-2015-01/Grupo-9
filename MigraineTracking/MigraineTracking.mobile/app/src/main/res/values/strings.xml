@@ -39,4 +39,8 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <color name="Black">#000000</color>
+    <color name="ExpandChildBackground">#ffafabab</color>
+    <color name="ExpandGroupBackground">#ff7c7c7c</color>
 </resources>
