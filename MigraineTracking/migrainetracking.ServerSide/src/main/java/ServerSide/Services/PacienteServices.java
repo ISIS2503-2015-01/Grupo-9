@@ -8,9 +8,13 @@ package ServerSide.Services;
 
 import ServerSide.Init.PersistenceManager;
 import ServerSide.Models.DTOs.PacienteDTO;
+import ServerSide.Models.Entities.EpisodioDolor;
+import ServerSide.Models.Entities.Paciente;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -51,7 +55,9 @@ public class PacienteServices {
     
     @GET
     public Response getAll(){
-        return null;
+       Query q = entityManager.createQuery("SELECT u FROM Paciente u order by u.cedula ASC");
+        List<Paciente> pacientes = q.getResultList();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacientes).build();
         
     }
     
@@ -62,19 +68,14 @@ public class PacienteServices {
         
     }
     
-    @Path("/{cedula}/episodios")
+    @Path("/episodios/{cedula}")
     @GET
     public Response getEpisodiosByPaciente(@PathParam("cedula") Long cedula){
+        
+        Query q = entityManager.createQuery("SELECT u FROM EpisodioDolor u WHERE u.paciente.cedula = :cedula");
+        q.setParameter("cedula", cedula);
+        List<EpisodioDolor> episodios = q.getResultList();
         return null;
         
     }
-    
-    //--------------------------------------------------------------------------
-    // Logic support methods
-    //--------------------------------------------------------------------------
-    
-    
-    //--------------------------------------------------------------------------
-    // Persistence support methods
-    //--------------------------------------------------------------------------
 }

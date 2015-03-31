@@ -30,12 +30,12 @@ import javax.ws.rs.core.Response;
 public class EpisodioServices {
     
     @PersistenceContext(unitName ="myPU")
-    EntityManager em; 
+    EntityManager entityManager; 
 
     @PostConstruct
     public void init(){
         try{
-            em = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
+            entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
         }
         catch(Exception e){}
     }
@@ -50,18 +50,7 @@ public class EpisodioServices {
         return null;
         
     }
-    
-    
-    @POST
-    @Path("/grabacion")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response registrarGrabacion(EpisodioDolorDTO episodioGrabado){
-        return null;
-        // Viene solo el atributo grabacion con los bytes.
-
-    }
-    
-   
+ 
     @GET
     @Path("/{id}")
     public Response getDetalles(@PathParam("id")Long id){
@@ -71,7 +60,7 @@ public class EpisodioServices {
     
     @GET
     @Path("/{id}/{fecha1}/{fecha2}")
-    public Response getBetweenFechas( @PathParam("id") Long id , @PathParam("fecha1") Date fecha1 , @PathParam("fecha2") Date fecha2 ){
+    public Response getBetweenFechas( @PathParam("id") Long id , @PathParam("fecha1") String fecha1 , @PathParam("fecha2") String fecha2 ){
         return null;
         
     }

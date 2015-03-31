@@ -7,7 +7,7 @@
 package ServerSide.Converters;
 
 import ServerSide.Models.DTOs.PacienteDTO;
-import ServerSide.Models.Entities.PacienteEntity;
+import ServerSide.Models.Entities.Paciente;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class PacienteConverter {
 
-     public static PacienteEntity dtoToEntity(PacienteDTO dto){
+     public static Paciente dtoToEntity(PacienteDTO dto){
         
-       PacienteEntity entity = new PacienteEntity();
+       Paciente entity = new Paciente();
        entity.setName( dto.getName() );
        entity.setPassword( dto.getPassword() );
        entity.setUsername( dto.getUsername() );
@@ -28,7 +28,7 @@ public class PacienteConverter {
        return entity ;
     }
     
-    public static PacienteDTO entityToDto(PacienteEntity entity ){
+    public static PacienteDTO entityToDto(Paciente entity ){
         PacienteDTO dto = new PacienteDTO();
         dto.setName( entity.getName() );
         dto.setPassword( entity.getPassword() );
@@ -37,7 +37,7 @@ public class PacienteConverter {
         return dto ;
     }
     
-    public static List<PacienteDTO> entityToDtoList(List<PacienteEntity> entities) {
+    public static List<PacienteDTO> entityToDtoList(List<Paciente> entities) {
         List<PacienteDTO> dtos = new ArrayList<PacienteDTO>();
         for (int i = 0; i < entities.size(); i++) {
             dtos.add( entityToDto( entities.get(0) ) );

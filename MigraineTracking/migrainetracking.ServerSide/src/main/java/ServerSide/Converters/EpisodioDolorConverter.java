@@ -10,7 +10,7 @@ import ServerSide.Models.DTOs.CatalizadorDTO;
 import ServerSide.Models.DTOs.EpisodioDolorDTO;
 import ServerSide.Models.DTOs.MedicamentoDTO;
 import ServerSide.Models.DTOs.SintomaDTO;
-import ServerSide.Models.Entities.EpisodioDolorEntity;
+import ServerSide.Models.Entities.EpisodioDolor;
 import java.io.IOException;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -24,8 +24,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 public class EpisodioDolorConverter {
     
-    public static EpisodioDolorEntity dtoToEntity(EpisodioDolorDTO dto) throws JSONException, IOException{
-        EpisodioDolorEntity entity = new EpisodioDolorEntity();
+    public static EpisodioDolor dtoToEntity(EpisodioDolorDTO dto) throws JSONException, IOException{
+        EpisodioDolor entity = new EpisodioDolor();
         entity.setFecha( dto.getFecha() );
         entity.setHoursSlept( dto.getHoursSlept() );
         entity.setLocalizacion( dto.getLocalizacion() );
@@ -40,7 +40,7 @@ public class EpisodioDolorConverter {
         return entity;
     }
     
-    public static EpisodioDolorDTO entityToDto( EpisodioDolorEntity entity ){
+    public static EpisodioDolorDTO entityToDto( EpisodioDolor entity ){
         EpisodioDolorDTO dto = new EpisodioDolorDTO();
         dto.setFecha(entity.getFecha());
         dto.setCedulaPaciente( entity.getPaciente().getCedula() );
@@ -52,7 +52,7 @@ public class EpisodioDolorConverter {
         return dto;
     } 
     
-    public static List<EpisodioDolorDTO> entityToDtoList( List<EpisodioDolorEntity> entities){
+    public static List<EpisodioDolorDTO> entityToDtoList( List<EpisodioDolor> entities){
         List<EpisodioDolorDTO> dtos = new ArrayList<EpisodioDolorDTO>();
         for( int i = 0 ; i < entities.size() ; i++){
             dtos.add( entityToDto( entities.get(0) ) );
@@ -60,7 +60,7 @@ public class EpisodioDolorConverter {
         return dtos;
     }
             
-    public static EpisodioDolorDTO entityDetailToDto ( EpisodioDolorEntity entity) throws ParseException, IOException{
+    public static EpisodioDolorDTO entityDetailToDto ( EpisodioDolor entity) throws ParseException, IOException{
         EpisodioDolorDTO dto = new EpisodioDolorDTO();
         ObjectMapper mapper = new ObjectMapper();
         

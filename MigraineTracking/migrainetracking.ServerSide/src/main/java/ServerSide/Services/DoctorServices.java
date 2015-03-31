@@ -7,11 +7,12 @@
 package ServerSide.Services;
 
 import ServerSide.Init.PersistenceManager;
-import ServerSide.Models.DTOs.EpisodioDolorDTO;
+import ServerSide.Models.Entities.Doctor;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.Consumes;
+import javax.persistence.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -28,12 +29,12 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class DoctorServices {
     @PersistenceContext(unitName = "myPU")
-    EntityManager em; 
+    EntityManager entityManager; 
 
     @PostConstruct
     public void init(){
         try{
-            em = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
+            entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
         }
         catch(Exception e){}
     }
@@ -51,17 +52,17 @@ public class DoctorServices {
     
     @GET
     public Response findAll(){
-        return null;
+        Query q = entityManager.createQuery("select u from Paciente u order by u.cedula ASC");
+        List<Doctor> doctors = q.getResultList();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctors).build();
         
     }
-   
     
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response registrarEpisodio(){
+    public Response registrarDoctor(){
         return null;
-        
     }
+   
     
     //--------------------------------------------------------------------------
     // Logic support methods
@@ -72,13 +73,6 @@ public class DoctorServices {
     // Persistence support methods
     //--------------------------------------------------------------------------
     
-    /**
-     * Crea un nuevo episodio de dolor     
-     * @pre : El paciente esta registrado en el sistema
-     * @throws Exception - Si llega a haber algun error raro.
-     */
-    public void create(EpisodioDolorDTO dto) throws Exception{
-        
-    }
+
     
 }
