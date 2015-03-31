@@ -16,7 +16,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_episodios);
         String[] episodios = {"Episodio 1","Episodio 2","Episodio 3"};
-        spinner = (MultiSelectionSpinner) findViewById(R.id.mySpinner1);
+        spinner = (MultiSelectionSpinner) findViewById(R.id.mySpinner);
         spinner.setItems(episodios);
     }
 
