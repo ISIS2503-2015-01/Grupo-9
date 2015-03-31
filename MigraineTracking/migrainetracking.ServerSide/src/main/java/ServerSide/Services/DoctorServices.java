@@ -7,7 +7,7 @@
 package ServerSide.Services;
 
 import ServerSide.Init.PersistenceManager;
-import ServerSide.Models.DTOs.DoctorDTO;
+import ServerSide.Models.DTOs.EpisodioDolorDTO;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,37 +41,44 @@ public class DoctorServices {
     //--------------------------------------------------------------------------
     // Service call methods
     //--------------------------------------------------------------------------
+    
+    @GET
+    @Path("/{id}")
+    public Response findById( @PathParam("id") Long id ){
+        return null;
+        
+    }
+    
+    @GET
+    public Response findAll(){
+        return null;
+        
+    }
+   
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registrarEpisodio(){
+        return null;
         
     }
     
     //--------------------------------------------------------------------------
     // Logic support methods
     //--------------------------------------------------------------------------
-    @GET
-    @Path("/{id}")
-    public Response findById( @PathParam("id") Long id ){
-        
-    }
-    
-    @GET
-    public Response findAll(){
-        
-    }
-    
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response registrarEpisodio(DoctorDTO doctor){
-        
-    }
-    
-   
+
     
     //--------------------------------------------------------------------------
     // Persistence support methods
     //--------------------------------------------------------------------------
     
+    /**
+     * Crea un nuevo episodio de dolor     
+     * @pre : El paciente esta registrado en el sistema
+     * @throws Exception - Si llega a haber algun error raro.
+     */
+    public void create(EpisodioDolorDTO dto) throws Exception{
+        
+    }
     
 }

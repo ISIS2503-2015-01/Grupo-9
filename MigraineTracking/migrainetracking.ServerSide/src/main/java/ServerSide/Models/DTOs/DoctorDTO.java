@@ -6,6 +6,8 @@
 
 package ServerSide.Models.DTOs;
 
+import java.util.List;
+
 /**
  *
  * @author Personal
@@ -20,7 +22,7 @@ public class DoctorDTO {
     
     private String name;
     
- 
+    
     public DoctorDTO(){
         
     }
@@ -56,5 +58,7 @@ public class DoctorDTO {
     public void setName(String name) {
         this.name = name;
     }
+    
+    
     
 }

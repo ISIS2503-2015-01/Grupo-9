@@ -16,7 +16,7 @@ public class MedicamentoDTO {
     
     private String referencia;
        
-    private Date fechaDePrescripcion;
+    private String fechaDePrescripcion;
     
     
     public MedicamentoDTO(){
@@ -32,11 +32,11 @@ public class MedicamentoDTO {
         this.referencia = referencia;
     }
 
-    public Date getFechaDePrescripcion() {
+    public String getFechaDePrescripcion() {
         return fechaDePrescripcion;
     }
 
-    public void setFechaDePrescripcion(Date fechaDePrescripcion) {
+    public void setFechaDePrescripcion(String fechaDePrescripcion) {
         this.fechaDePrescripcion = fechaDePrescripcion;
     }
     

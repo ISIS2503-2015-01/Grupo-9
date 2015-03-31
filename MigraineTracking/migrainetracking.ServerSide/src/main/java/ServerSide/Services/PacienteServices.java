@@ -43,19 +43,29 @@ public class PacienteServices {
     // Service call methods
     //--------------------------------------------------------------------------
     @GET
+    @Path("/{id}")
+    public Response findById( @PathParam("id") Long id ){
+        return null;
+        
+    }
+    
+    @GET
     public Response getAll(){
+        return null;
         
     }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registrarEpisodio(PacienteDTO paciente){
+    public Response registrarPaciente(PacienteDTO paciente){
+        return null;
         
     }
     
     @Path("/{cedula}/episodios")
     @GET
     public Response getEpisodiosByPaciente(@PathParam("cedula") Long cedula){
+        return null;
         
     }
     

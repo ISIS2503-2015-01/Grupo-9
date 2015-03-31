@@ -40,6 +40,7 @@ public class EpisodioDolorEntity implements Serializable {
     
     private Integer hoursSlept;
     
+    private Integer intensidad;
     
     @ManyToOne
     private PacienteEntity paciente;
@@ -84,6 +85,15 @@ public class EpisodioDolorEntity implements Serializable {
         this.fecha = fecha;
     }
 
+    public Integer getIntensidad() {
+        return intensidad;
+    }
+
+    public void setIntensidad(Integer intensiadad) {
+        this.intensidad = intensiadad;
+    }
+
+    
     public String getLocalizacion() {
         return localizacion;
     }

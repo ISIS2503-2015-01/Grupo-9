@@ -47,6 +47,7 @@ public class EpisodioServices {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registrarEpisodio(EpisodioDolorDTO episodio){
+        return null;
         
     }
     
@@ -55,19 +56,23 @@ public class EpisodioServices {
     @Path("/grabacion")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registrarGrabacion(EpisodioDolorDTO episodioGrabado){
+        return null;
         // Viene solo el atributo grabacion con los bytes.
+
     }
     
    
     @GET
     @Path("/{id}")
     public Response getDetalles(@PathParam("id")Long id){
+        return null;
        // Mandar el List<EpisodioDolorDTO> con todo vacio excpeto las listas de catalizadores,sintomas, y medicamentos ...
     }
     
     @GET
     @Path("/{id}/{fecha1}/{fecha2}")
     public Response getBetweenFechas( @PathParam("id") Long id , @PathParam("fecha1") Date fecha1 , @PathParam("fecha2") Date fecha2 ){
+        return null;
         
     }
     
