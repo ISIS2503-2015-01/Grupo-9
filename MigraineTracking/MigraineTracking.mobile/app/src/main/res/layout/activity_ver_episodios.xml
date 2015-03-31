@@ -6,4 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="grupo9.arquisoft.migrainetrackingmobile.MultiSelectionSpinner"
+        android:id="@+id/mySpinner"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>
