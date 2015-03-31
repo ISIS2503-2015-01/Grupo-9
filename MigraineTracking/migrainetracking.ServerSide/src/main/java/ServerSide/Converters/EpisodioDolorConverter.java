@@ -16,6 +16,7 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -63,16 +64,16 @@ public class EpisodioDolorConverter {
         EpisodioDolorDTO dto = new EpisodioDolorDTO();
         ObjectMapper mapper = new ObjectMapper();
         
-        List<CatalizadorDTO> cats = new ArrayList<CatalizadorDTO>() ;
-        cats = mapper.readValue( entity.getCatalizadores() , cats.getClass() );
+        List<CatalizadorDTO> cats ;
+        cats = mapper.readValue( entity.getCatalizadores() , new TypeReference<List<CatalizadorDTO>>(){} );
         dto.setCatalizadores( cats );
         
-        List<MedicamentoDTO> meds = new ArrayList<MedicamentoDTO>();
-        meds = mapper.readValue( entity.getMedicamentos() , meds.getClass() );
+        List<MedicamentoDTO> meds ;
+        meds = mapper.readValue( entity.getMedicamentos() , new TypeReference<List<MedicamentoDTO>>(){} );
         dto.setMedicamentos( meds );
         
-        List<SintomaDTO> sints = new ArrayList<SintomaDTO>();
-        sints = mapper.readValue( entity.getSintomas() , sints.getClass() );
+        List<SintomaDTO> sints ;
+        sints = mapper.readValue( entity.getSintomas() , new TypeReference<List<SintomaDTO>>(){} );
         dto.setSintomas(sints);
         
         return dto;
