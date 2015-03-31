@@ -27,6 +27,16 @@
     <string name="title_activity_agregar_habito">Agrega un habito</string>
     <string name="title_activity_ver_analisis">Analisis de episodios</string>
     <string name="title_activity_ver_episodios">Lista de Episodios de Dolor</string>
+    <string name="title_activity_agregar_sintoma">Agregar Sintoma</string>
 
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_agregar_catalizador">"Agregar Catalizador "</string>
+    <string name="title_activity_agregar_medicamentos_episodio">Agregar Medicamento</string>
 
+    <string name="listaCatalizadores">Seleccione un catalizador</string>
+    <string-array name="cat">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

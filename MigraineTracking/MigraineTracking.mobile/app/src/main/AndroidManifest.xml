@@ -80,6 +80,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
         </activity>
+        <activity
+            android:name=".AgregarSintomaActivity"
+            android:label="@string/title_activity_agregar_sintoma"
+            android:parentActivityName=".RegistrarEpisodioActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.RegistrarEpisodioActivity" />
+        </activity>
+        <activity
+            android:name=".AgregarCatalizadorActivity"
+            android:label="@string/title_activity_agregar_catalizador"
+            android:parentActivityName=".RegistrarEpisodioActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.RegistrarEpisodioActivity" />
+        </activity>
+        <activity
+            android:name=".AgregarMedicamentosEpisodio"
+            android:label="@string/title_activity_agregar_medicamentos_episodio"
+            android:parentActivityName=".RegistrarEpisodioActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.RegistrarEpisodioActivity" />
+        </activity>
     </application>
 
 </manifest>

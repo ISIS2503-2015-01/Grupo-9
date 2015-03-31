@@ -8,10 +8,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
+import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
+
 
 public class MainActivity extends ActionBarActivity {
 
     public final static String EXTRA_USUARIO = "grupo9.arquisoft.migrainetrackingmobile.USUARIO";
+
+    public static ArrayList<MedicamentoDTO> medicamentos = new ArrayList<MedicamentoDTO>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,4 +55,10 @@ public class MainActivity extends ActionBarActivity {
         intent.putExtra(EXTRA_USUARIO, usuario);
         startActivity(intent);
     }
+
+    public ArrayList<MedicamentoDTO> darMedicamentos()
+    {
+        return medicamentos;
+    }
+
 }

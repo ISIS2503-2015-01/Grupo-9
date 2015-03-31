@@ -8,6 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
+
 
 public class MenuPrincipalActivity extends ActionBarActivity {
 

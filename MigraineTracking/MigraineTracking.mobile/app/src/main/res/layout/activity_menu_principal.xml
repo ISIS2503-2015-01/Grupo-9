@@ -30,16 +30,6 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/registrarHabitoButton"
-        android:onClick="agregarHabito"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/verAnalisisButton"
-        android:onClick="verAnalisis"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/verEpisodiosButton"
         android:onClick="verEpisodios"/>
 
