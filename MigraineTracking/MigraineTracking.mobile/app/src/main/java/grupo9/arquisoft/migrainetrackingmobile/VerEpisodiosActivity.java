@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
@@ -24,7 +25,20 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         ExpListItems = SetStandardGroups();
         ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
         ExpandList.setAdapter(ExpAdapter);
+        ExpandList.setOnChildClickListener(ExpandList_ItemClicked);
     }
+
+    private ExpandableListView.OnChildClickListener ExpandList_ItemClicked =  new ExpandableListView.OnChildClickListener() {
+
+        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+            // TODO Auto-generated method stub
+            ExpandListChild ch =  ExpListItems.get(groupPosition).getItems().get(childPosition);
+            //Your code where
+
+            return false;
+        }
+
+    };
 
     public ArrayList<ExpandListGroup> SetStandardGroups() {
         ArrayList<ExpandListGroup> list = new ArrayList<ExpandListGroup>();
