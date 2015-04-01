@@ -46,13 +46,16 @@ public class DoctorServices {
     @GET
     @Path("/{id}")
     public Response findById( @PathParam("id") Long id ){
-        return null;
+        Query q = entityManager.createQuery("SELECT u FROM Doctor u WHERE u.id = :id");
+        q.setParameter("id", id);
+        Doctor doctor = (Doctor)q.getSingleResult();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctor).build();
         
     }
     
     @GET
     public Response findAll(){
-        Query q = entityManager.createQuery("select u from Paciente u order by u.cedula ASC");
+        Query q = entityManager.createQuery("select u from Doctor u order by u.id ASC");
         List<Doctor> doctors = q.getResultList();
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctors).build();
         

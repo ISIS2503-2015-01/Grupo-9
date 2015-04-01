@@ -8,10 +8,14 @@ package ServerSide.Services;
 
 import ServerSide.Init.PersistenceManager;
 import ServerSide.Models.DTOs.EpisodioDolorDTO;
-import java.util.Date;
+import ServerSide.Models.Entities.EpisodioDolor;
+import com.google.gson.Gson;
+import java.util.List;
+import org.codehaus.jettison.json.JSONObject;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -37,7 +41,9 @@ public class EpisodioServices {
         try{
             entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
         }
-        catch(Exception e){}
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     
@@ -47,14 +53,56 @@ public class EpisodioServices {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registrarEpisodio(EpisodioDolorDTO episodio){
-        return null;
+        
+       JSONObject respuesta = new JSONObject();
+       EpisodioDolor episodioEntity = new EpisodioDolor();
+       episodioEntity.setFecha(episodio.getFecha());
+       episodioEntity.setHoursSlept(episodio.getHoursSlept());
+       episodioEntity.setId(episodio.getId());
+       episodioEntity.setIntensidad(episodio.getIntensidad());
+       episodioEntity.setLocalizacion(episodio.getLocalizacion());
+       episodioEntity.setCatalizadores(toJson(episodio.getCatalizadores()));
+       episodioEntity.setMedicamentos(toJson(episodio.getMedicamentos()));
+       episodioEntity.setSintomas(toJson(episodio.getSintomas()));
+       //Hace falta asignar el paciente 
+       
+       
+       try{
+           entityManager.getTransaction().begin();
+           entityManager.persist(episodioEntity);
+           entityManager.getTransaction().commit();
+           entityManager.refresh(episodioEntity);
+           respuesta.put("episodio_dolor_id", episodioEntity.getId());
+           
+       }
+       catch(Throwable t){
+          t.printStackTrace();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+          episodioEntity=null;  
+       }
+       finally{
+           entityManager.clear();
+           entityManager.close();
+       }
+       
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(respuesta).build();
         
     }
  
+    /**
+     * Retorna los detalles de un episodio particular
+     * @param id el id del episodio
+     * @return un episodio de dolor dado el id
+     */
     @GET
     @Path("/{id}")
     public Response getDetalles(@PathParam("id")Long id){
-        return null;
+        Query q = entityManager.createQuery("SELECT u FROM EpisodioDolor u WHERE u.id = :id");
+        q.setParameter("id", id);
+        EpisodioDolor episodio = (EpisodioDolor)q.getSingleResult();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodio).build();
        // Mandar el List<EpisodioDolorDTO> con todo vacio excpeto las listas de catalizadores,sintomas, y medicamentos ...
     }
     
@@ -73,4 +121,8 @@ public class EpisodioServices {
     //--------------------------------------------------------------------------
     // Persistence support methods
     //--------------------------------------------------------------------------
+    
+    public String toJson(List lista){
+        return new Gson().toJson(lista);
+    }
 }

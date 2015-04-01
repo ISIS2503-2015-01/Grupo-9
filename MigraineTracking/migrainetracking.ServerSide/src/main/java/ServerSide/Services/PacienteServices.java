@@ -48,9 +48,11 @@ public class PacienteServices {
     //--------------------------------------------------------------------------
     @GET
     @Path("/{id}")
-    public Response findById( @PathParam("id") Long id ){
-        return null;
-        
+    public Response findById( @PathParam("cedula") Long cedula ){
+        Query q = entityManager.createQuery("SELECT u FROM Paciente u WHERE u.cedula = :cedula");
+        q.setParameter("cedula", cedula);
+        Paciente paciente = (Paciente)q.getSingleResult();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(paciente).build();
     }
     
     @GET
@@ -75,7 +77,7 @@ public class PacienteServices {
         Query q = entityManager.createQuery("SELECT u FROM EpisodioDolor u WHERE u.paciente.cedula = :cedula");
         q.setParameter("cedula", cedula);
         List<EpisodioDolor> episodios = q.getResultList();
-        return null;
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
         
     }
 }
