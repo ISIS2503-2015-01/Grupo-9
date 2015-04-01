@@ -20,7 +20,7 @@ public class VerDoctoresActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_pacientes);
+        setContentView(R.layout.activity_ver_doctores);
         ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
         ExpListItems = SetStandardGroups();
         ExpAdapter = new ExpandListAdapter(VerDoctoresActivity.this, ExpListItems);
@@ -71,7 +71,7 @@ public class VerDoctoresActivity extends ActionBarActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_ver_episodios, menu);
+        getMenuInflater().inflate(R.menu.menu_ver_doctores, menu);
         return true;
     }
 
