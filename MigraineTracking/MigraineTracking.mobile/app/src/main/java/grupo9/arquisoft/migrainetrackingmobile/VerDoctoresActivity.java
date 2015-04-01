@@ -1,17 +1,18 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
 
-
-public class VerEpisodiosActivity extends ActionBarActivity {
-
+/**
+ * Created by henryfvargas on 31/03/15.
+ */
+public class VerDoctoresActivity extends ActionBarActivity
+{
     private ExpandListAdapter ExpAdapter;
     private ArrayList<ExpandListGroup> ExpListItems;
     private ExpandableListView ExpandList;
@@ -19,10 +20,10 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_episodios);
+        setContentView(R.layout.activity_ver_pacientes);
         ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
         ExpListItems = SetStandardGroups();
-        ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
+        ExpAdapter = new ExpandListAdapter(VerDoctoresActivity.this, ExpListItems);
         ExpandList.setAdapter(ExpAdapter);
     }
 
@@ -30,44 +31,36 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         ArrayList<ExpandListGroup> list = new ArrayList<ExpandListGroup>();
         ArrayList<ExpandListChild> list2 = new ArrayList<ExpandListChild>();
         ExpandListGroup gru1 = new ExpandListGroup();
-        gru1.setName("Episodio 1");
+        gru1.setName("Doctor: Henry Fabián Vargas");
         ExpandListChild ch1_1 = new ExpandListChild();
-        ch1_1.setName("Fecha: 22/08/2014 11:29:30");
+        ch1_1.setName("Fecha de nacimiento: 22/08/1995");
         ch1_1.setTag(null);
         list2.add(ch1_1);
         ExpandListChild ch1_2 = new ExpandListChild();
-        ch1_2.setName("Localización: Frente");
+        ch1_2.setName("Identificación: 1018488152");
         ch1_2.setTag(null);
         list2.add(ch1_2);
         ExpandListChild ch1_3 = new ExpandListChild();
-        ch1_3.setName("Intensidad: 5");
+        ch1_3.setName("Especialidad: Neurocirujano");
         ch1_3.setTag(null);
         list2.add(ch1_3);
-        ExpandListChild ch1_4 = new ExpandListChild();
-        ch1_4.setName("Horas de sueño: 5");
-        ch1_4.setTag(null);
-        list2.add(ch1_4);
         gru1.setItems(list2);
         list2 = new ArrayList<ExpandListChild>();
 
         ExpandListGroup gru2 = new ExpandListGroup();
-        gru2.setName("Episodio 2");
+        gru2.setName("Doctor: Pedro Otoya");
         ExpandListChild ch2_1 = new ExpandListChild();
-        ch2_1.setName("Fecha: 24/09/2014 07:58:09");
+        ch2_1.setName("Fecha de nacimiento: 24/09/1990");
         ch2_1.setTag(null);
         list2.add(ch2_1);
         ExpandListChild ch2_2 = new ExpandListChild();
-        ch2_2.setName("Localización: Nuca");
+        ch2_2.setName("Identificación: 1006745893");
         ch2_2.setTag(null);
         list2.add(ch2_2);
         ExpandListChild ch2_3 = new ExpandListChild();
-        ch2_3.setName("Intensidad: 8");
+        ch2_3.setName("Especialidad: Pediatra");
         ch2_3.setTag(null);
         list2.add(ch2_3);
-        ExpandListChild ch2_4 = new ExpandListChild();
-        ch2_4.setName("Horas de sueño: 7");
-        ch2_4.setTag(null);
-        list2.add(ch2_4);
         gru2.setItems(list2);
         list.add(gru1);
         list.add(gru2);

@@ -49,7 +49,7 @@ public class VerPacientesActivity extends ActionBarActivity
             ch1_4.setName("Estatura: 170");
             ch1_4.setTag(null);
             list2.add(ch1_4);
-            ExpandListChild ch1_5 = new ExpandListChild();
+            gru1.setItems(list2);
             list2 = new ArrayList<ExpandListChild>();
 
             ExpandListGroup gru2 = new ExpandListGroup();
