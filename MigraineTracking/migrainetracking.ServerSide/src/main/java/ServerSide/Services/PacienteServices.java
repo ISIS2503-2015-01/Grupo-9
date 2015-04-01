@@ -10,6 +10,8 @@ import ServerSide.Init.PersistenceManager;
 import ServerSide.Models.DTOs.PacienteDTO;
 import ServerSide.Models.Entities.EpisodioDolor;
 import ServerSide.Models.Entities.Paciente;
+import com.google.gson.Gson;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -32,20 +34,61 @@ import javax.ws.rs.core.Response;
 @Path("/pacientes")
 @Produces(MediaType.APPLICATION_JSON)
 public class PacienteServices {
+    
+    //--------------------------------------------------------------------------
+    // Atributos
+    //--------------------------------------------------------------------------
+    
+    /**
+     * Atributo del entity manager
+     * Unidad de persistencia, "myPU"
+     */
     @PersistenceContext(unitName = "myPU")
     EntityManager entityManager; 
 
+    //--------------------------------------------------------------------------
+    // INIT
+    //--------------------------------------------------------------------------
+    
+    /**
+     * Inicializa el entity manager
+     */
     @PostConstruct
     public void init(){
         try{
             entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
         }
-        catch(Exception e){}
+        catch(Exception e){
+            e.printStackTrace();
+            System.out.println("No se incializo correctamente!!!");
+        }
     }
     
     //--------------------------------------------------------------------------
-    // Service call methods
+    // POST
     //--------------------------------------------------------------------------
+    
+    /**
+     * Registra el paciente con la informacion dada
+     * @param paciente la informacion de paciente
+     * @return 
+     */
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response registrarPaciente(PacienteDTO paciente){
+        return null;
+        
+    }
+    
+    //--------------------------------------------------------------------------
+    // GET
+    //--------------------------------------------------------------------------
+   
+    /**
+     * Retorna los detalles de un paciente en particular
+     * @param cedula el numero de cedula del paciente
+     * @return la informacion de paciente con el numero de cedula dado
+     */
     @GET
     @Path("/{id}")
     public Response findById( @PathParam("cedula") Long cedula ){
@@ -55,6 +98,10 @@ public class PacienteServices {
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(paciente).build();
     }
     
+    /**
+     * La lista de pacientes todos los pacientes registrados en la aplicacion
+     * @return los pacientes registrados en la aplicacion
+     */
     @GET
     public Response getAll(){
        Query q = entityManager.createQuery("SELECT u FROM Paciente u order by u.cedula ASC");
@@ -63,13 +110,11 @@ public class PacienteServices {
         
     }
     
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response registrarPaciente(PacienteDTO paciente){
-        return null;
-        
-    }
-    
+    /**
+     * La lista de episodios de un paciente en particular
+     * @param cedula el numero de cedula del paciente
+     * @return la lista de episodios del paciente con numero de cedula
+     */
     @Path("/episodios/{cedula}")
     @GET
     public Response getEpisodiosByPaciente(@PathParam("cedula") Long cedula){
@@ -79,5 +124,18 @@ public class PacienteServices {
         List<EpisodioDolor> episodios = q.getResultList();
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
         
+    }
+    
+    //--------------------------------------------------------------------------
+    // Metodos Complementarios
+    //--------------------------------------------------------------------------
+    
+    /**
+     * Convierte una lista a JSON
+     * @param lista una lista con objetos
+     * @return un string con el json de la lista que entra por parametro
+     */
+    public String toJson(List lista){
+        return new Gson().toJson(lista);
     }
 }

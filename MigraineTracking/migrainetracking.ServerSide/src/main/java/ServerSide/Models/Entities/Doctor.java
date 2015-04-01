@@ -7,6 +7,7 @@
 package ServerSide.Models.Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,7 +42,7 @@ public class Doctor implements Serializable {
     // Constructor
     //-------------------------------------------------------------------------
     public Doctor(){
-        
+        pacientes = new ArrayList<Paciente>();
     }
 
     //-------------------------------------------------------------------------
