@@ -30,6 +30,7 @@ public class DoctorConverter {
     
     public static DoctorDTO entityToDto(Doctor entity ){
         DoctorDTO dto = new DoctorDTO();
+        dto.setId( entity.getId() );
         dto.setName( entity.getName() );
         dto.setPassword( entity.getPassword() );
         dto.setUsername( entity.getUsername() );
@@ -39,7 +40,7 @@ public class DoctorConverter {
     public static List<DoctorDTO> entityToDtoList( List<Doctor> entities ){
         List<DoctorDTO> dtos = new ArrayList<DoctorDTO>();
         for( int i = 0 ; i < entities.size() ; i++){
-            dtos.add( entityToDto( entities.get(0) ) );
+            dtos.add( entityToDto( entities.get(i) ) );
         }
         return dtos;
     }

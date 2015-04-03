@@ -6,8 +6,11 @@
 
 package ServerSide.Services;
 
+import ServerSide.Converters.EpisodioDolorConverter;
+import ServerSide.Converters.PacienteConverter;
 import ServerSide.Init.PersistenceManager;
 import ServerSide.Models.DTOs.PacienteDTO;
+import ServerSide.Models.Entities.Doctor;
 import ServerSide.Models.Entities.EpisodioDolor;
 import ServerSide.Models.Entities.Paciente;
 import com.google.gson.Gson;
@@ -17,7 +20,6 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -26,6 +28,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  *
@@ -75,9 +79,35 @@ public class PacienteServices {
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registrarPaciente(PacienteDTO paciente){
-        return null;
-        
+    public Response registrarPaciente(PacienteDTO paciente) throws JSONException{
+        Paciente p = PacienteConverter.dtoToEntity(paciente);
+        JSONObject respuesta = new JSONObject();
+        try{
+           entityManager.getTransaction().begin();
+           
+           entityManager.persist(p);
+           Doctor doc = this.entityManager.find( Doctor.class, paciente.getDoctorid() );
+           doc.getPacientes().add( p );
+           
+           entityManager.getTransaction().commit();
+           entityManager.refresh(p);
+           respuesta.put("New_paciente_id", p.getCedula() );
+       }
+       catch(Throwable t){
+          t.printStackTrace();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+          p=null;  
+          respuesta.put( "Exception message", t.getMessage() );
+          return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(respuesta).build();
+       }
+       finally{
+           entityManager.clear();
+           entityManager.close();
+       }
+       
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(respuesta).build();
     }
     
     //--------------------------------------------------------------------------
@@ -89,13 +119,10 @@ public class PacienteServices {
      * @param cedula el numero de cedula del paciente
      * @return la informacion de paciente con el numero de cedula dado
      */
-    @GET
     @Path("/{id}")
     public Response findById( @PathParam("cedula") Long cedula ){
-        Query q = entityManager.createQuery("SELECT u FROM Paciente u WHERE u.cedula = :cedula");
-        q.setParameter("cedula", cedula);
-        Paciente paciente = (Paciente)q.getSingleResult();
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(paciente).build();
+        Paciente paciente = entityManager.find(Paciente.class, cedula);
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( PacienteConverter.entityToDto(paciente) ).build();
     }
     
     /**
@@ -104,9 +131,9 @@ public class PacienteServices {
      */
     @GET
     public Response getAll(){
-       Query q = entityManager.createQuery("SELECT u FROM Paciente u order by u.cedula ASC");
-        List<Paciente> pacientes = q.getResultList();
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(pacientes).build();
+       Query q = entityManager.createQuery("SELECT u FROM Paciente u");
+       List<Paciente> pacientes = q.getResultList();
+       return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( PacienteConverter.entityToDtoList(pacientes) ).build();
         
     }
     
@@ -122,7 +149,7 @@ public class PacienteServices {
         Query q = entityManager.createQuery("SELECT u FROM EpisodioDolor u WHERE u.paciente.cedula = :cedula");
         q.setParameter("cedula", cedula);
         List<EpisodioDolor> episodios = q.getResultList();
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodios).build();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( EpisodioDolorConverter.entityToDtoList(episodios) ).build();
         
     }
     

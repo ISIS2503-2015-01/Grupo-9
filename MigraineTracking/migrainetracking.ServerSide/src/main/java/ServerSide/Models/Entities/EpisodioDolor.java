@@ -8,6 +8,7 @@ package ServerSide.Models.Entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class EpisodioDolor implements Serializable {
     // Attributes
     //-------------------------------------------------------------------------
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Temporal(TemporalType.DATE)
@@ -56,7 +57,9 @@ public class EpisodioDolor implements Serializable {
     //-------------------------------------------------------------------------
     // Constructor
     //-------------------------------------------------------------------------
-    public EpisodioDolor(){}
+    public EpisodioDolor(){
+        this.id = UUID.randomUUID().getLeastSignificantBits();
+    }
     
     //-------------------------------------------------------------------------
     // Getters and Setters

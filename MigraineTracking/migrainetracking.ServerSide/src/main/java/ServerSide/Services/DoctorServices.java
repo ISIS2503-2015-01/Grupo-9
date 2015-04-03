@@ -6,11 +6,17 @@
 
 package ServerSide.Services;
 
+import ServerSide.Converters.DoctorConverter;
 import ServerSide.Init.PersistenceManager;
+
+import ServerSide.Models.DTOs.DoctorDTO;
+import ServerSide.Models.DTOs.EpisodioDolorDTO;
+
 import ServerSide.Models.DTOs.DoctorDTO;
 import ServerSide.Models.Entities.Doctor;
 import com.google.gson.Gson;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +29,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 /**
@@ -73,10 +80,10 @@ public class DoctorServices {
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registrarDoctor(DoctorDTO doctor){
+    public Response registrarDoctor(DoctorDTO doctor) throws JSONException{
         JSONObject respuesta = new JSONObject();
         Doctor doctorEntity = new Doctor();
-        doctorEntity.setId(doctor.getId());
+        
         doctorEntity.setName(doctor.getName());
         try{
             entityManager.getTransaction().begin();
@@ -92,6 +99,8 @@ public class DoctorServices {
                 entityManager.getTransaction().rollback();
             }
             doctorEntity=null;
+            respuesta.put( "Exception message", t.getMessage() );
+            return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(respuesta).build();
         }
         finally{
             entityManager.clear();
@@ -114,11 +123,8 @@ public class DoctorServices {
     @GET
     @Path("/{id}")
     public Response findById( @PathParam("id") Long id ){
-        Query q = entityManager.createQuery("SELECT u FROM Doctor u WHERE u.id = :id");
-        q.setParameter("id", id);
-        Doctor doctor = (Doctor)q.getSingleResult();
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctor).build();
-        
+        Doctor doctor = entityManager.find(Doctor.class, id);
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( DoctorConverter.entityToDto(doctor) ).build();
     }
     
     /**
@@ -127,16 +133,17 @@ public class DoctorServices {
      */
     @GET
     public Response findAll(){
-        Query q = entityManager.createQuery("select u from Doctor u order by u.id ASC");
+        Query q = entityManager.createQuery("select u from Doctor u ");
         List<Doctor> doctors = q.getResultList();
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(doctors).build();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( DoctorConverter.entityToDtoList(doctors) ).build() ;
         
     }
+
     
     //--------------------------------------------------------------------------
     // Metodos Complementarios
     //--------------------------------------------------------------------------
-    
+
     /**
      * Convierte una lista a JSON
      * @param lista una lista con objetos

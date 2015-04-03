@@ -24,6 +24,7 @@ public class PacienteDTO {
     
     private Date birthdate;
     
+    private Long doctorid; // Solo se usa para agregar el paciente
     
     public PacienteDTO(){
         
@@ -68,5 +69,12 @@ public class PacienteDTO {
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
-    
+
+    public Long getDoctorid() {
+        return doctorid;
+    }
+
+    public void setDoctorid(Long doctorid) {
+        this.doctorid = doctorid;
+    }
 }

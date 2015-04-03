@@ -20,6 +20,7 @@ public class PacienteConverter {
      public static Paciente dtoToEntity(PacienteDTO dto){
         
        Paciente entity = new Paciente();
+       entity.setCedula( dto.getCedula() );
        entity.setName( dto.getName() );
        entity.setPassword( dto.getPassword() );
        entity.setUsername( dto.getUsername() );
@@ -30,6 +31,7 @@ public class PacienteConverter {
     
     public static PacienteDTO entityToDto(Paciente entity ){
         PacienteDTO dto = new PacienteDTO();
+        dto.setCedula(entity.getCedula());
         dto.setName( entity.getName() );
         dto.setPassword( entity.getPassword() );
         dto.setUsername( entity.getUsername() );
@@ -40,7 +42,7 @@ public class PacienteConverter {
     public static List<PacienteDTO> entityToDtoList(List<Paciente> entities) {
         List<PacienteDTO> dtos = new ArrayList<PacienteDTO>();
         for (int i = 0; i < entities.size(); i++) {
-            dtos.add( entityToDto( entities.get(0) ) );
+            dtos.add( entityToDto( entities.get(i) ) );
         }
         return dtos;
     }

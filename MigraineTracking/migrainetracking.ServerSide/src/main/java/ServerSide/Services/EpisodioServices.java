@@ -6,13 +6,16 @@
 
 package ServerSide.Services;
 
+import ServerSide.Converters.EpisodioDolorConverter;
 import ServerSide.Init.PersistenceManager;
+import ServerSide.Models.DTOs.CatalizadorDTO;
 import ServerSide.Models.DTOs.EpisodioDolorDTO;
+import ServerSide.Models.DTOs.SintomaDTO;
 import ServerSide.Models.Entities.EpisodioDolor;
+import ServerSide.Models.Entities.Paciente;
 import com.google.gson.Gson;
 import java.util.Date;
 import java.util.List;
-import org.codehaus.jettison.json.JSONObject;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +28,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.eclipse.persistence.internal.core.helper.CoreClassConstants;
 
 /**
  *
@@ -72,32 +78,36 @@ public class EpisodioServices {
      * Registra un nuevo episodio
      * La listas de sintomas, medicamentos y catalizadores se convierten en json para ser persistidas
      * @param episodio un dto con todos los atributos 
-     * @return 
+     * @return La lista de sugerencias al paciente segun el analisis del episodio 
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registrarEpisodio(EpisodioDolorDTO episodio){
+    public Response registrarEpisodio(EpisodioDolorDTO episodio) throws JSONException{
         
        JSONObject respuesta = new JSONObject();
        EpisodioDolor episodioEntity = new EpisodioDolor();
        episodioEntity.setFecha(episodio.getFecha());
        episodioEntity.setHoursSlept(episodio.getHoursSlept());
-       episodioEntity.setId(episodio.getId());
        episodioEntity.setIntensidad(episodio.getIntensidad());
        episodioEntity.setLocalizacion(episodio.getLocalizacion());
        episodioEntity.setCatalizadores(toJson(episodio.getCatalizadores()));
        episodioEntity.setMedicamentos(toJson(episodio.getMedicamentos()));
-       episodioEntity.setSintomas(toJson(episodio.getSintomas()));
-       //Hace falta asignar el paciente 
+       episodioEntity.setSintomas(toJson(episodio.getSintomas())); 
        
        
        try{
            entityManager.getTransaction().begin();
+           
            entityManager.persist(episodioEntity);
+           Paciente p = entityManager.find( Paciente.class, episodio.getCedulaPaciente() );
+           p.getEpisodios().add(episodioEntity);
+           episodioEntity.setPaciente(p);
+           
            entityManager.getTransaction().commit();
            entityManager.refresh(episodioEntity);
-           respuesta.put("episodio_dolor_id", episodioEntity.getId());
            
+           // Analisis
+           respuesta.put("Mensaje", this.analizarEpisodio(episodio) );
        }
        catch(Throwable t){
           t.printStackTrace();
@@ -105,13 +115,15 @@ public class EpisodioServices {
                 entityManager.getTransaction().rollback();
             }
           episodioEntity=null;  
+          respuesta.put( "Exception message", t.getMessage() );
+          return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(respuesta).build();
        }
        finally{
            entityManager.clear();
            entityManager.close();
        }
        
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(respuesta).build();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( this.analizarEpisodio(episodio) ).build();
         
     }
  
@@ -127,11 +139,8 @@ public class EpisodioServices {
     @GET
     @Path("/{id}")
     public Response getDetalles(@PathParam("id")Long id){
-        Query q = entityManager.createQuery("SELECT u FROM EpisodioDolor u WHERE u.id = :id");
-        q.setParameter("id", id);
-        EpisodioDolor episodio = (EpisodioDolor)q.getSingleResult();
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(episodio).build();
-       // Mandar el List<EpisodioDolorDTO> con todo vacio excpeto las listas de catalizadores,sintomas, y medicamentos ...
+        EpisodioDolor episodio = entityManager.find(EpisodioDolor.class, id) ;
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( EpisodioDolorConverter.entityDetailToDto(episodio) ).build();
     }
     
     /**
@@ -143,14 +152,66 @@ public class EpisodioServices {
      */
     @GET
     @Path("/{id}/{fecha1}/{fecha2}")
-    public Response getBetweenFechas( @PathParam("id") Long id , @PathParam("fecha1") String fecha1 , @PathParam("fecha2") String fecha2 ){
-        return null;
-        
+    public Response getBetweenFechas( @PathParam("id") Long cedula , @PathParam("fecha1") String fecha1 , @PathParam("fecha2") String fecha2 ){
+        Date f1 = new Date( Long.parseLong(fecha1) );
+        Date f2 = new Date( Long.parseLong(fecha2) );
+        Query q = entityManager.createQuery( "SELECT e FROM EpisodioDolor e WHERE e.paciente.cedula=:ced AND :date1 <= e.fecha AND e.fecha <= :date2" );
+        q.setParameter("date1", f1);
+        q.setParameter("date2", f2);
+        q.setParameter("ced", cedula);
+        List<EpisodioDolor> eps = q.getResultList();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( EpisodioDolorConverter.entityToDtoList(eps) ).build();
     }
     
     //--------------------------------------------------------------------------
     // Metodos Complementarios
     //--------------------------------------------------------------------------
+    
+    /**
+     * Analiza un episodio de dolor
+     * @param episodio - Episodio a analizar
+     * @return Un mensaje con las recomendaciones.
+     */
+    private String analizarEpisodio(EpisodioDolorDTO episodio){
+        
+        String[] recomendaciones ={
+                                   "Utilice una toalla pequeña empapada con agua caliente, una almohada térmica o tome un baño de tina con agua tibia. Aplique calor sobre el área por 20 a 30 minutos cada 2 horas por los días indicado por su proveedor de salud. Alterne entre el calor y el hielo.",
+                                   "Acuéstese en una posición cómoda y cierre sus ojos. Relaje sus músculos lentamente. Comience por los dedos de los pies y avance hacia arriba al resto de su cuerpo.",
+                                   "Comuniquese con su Doctor inmediatamente.",
+                                   "Dirigase a una sala de emergencias para recibir atencion inmediata"
+                                   };
+        
+        String msj = "Se le recomienda realizar las siguientes acciones: \n %1$s \n\n Su dolor se pudo aumentar porque consumio,reliazo, o estuvo expuesto a lo siguientes: %2$s \n";
+        
+        String r = "";
+        String e = "";
+        String[] s_specs = SintomaDTO.ESPECIFICACIONES_RECOMENDADAS;
+        String[] c_specs = CatalizadorDTO.ESPECIFICACIONES_RECOMENDADAS;
+        
+        if(  episodio.getIntensidad() > 3 && episodio.getSintomas().contains( new SintomaDTO("Vomito") ) )
+        {
+            r=recomendaciones[2];
+        }
+        else if( episodio.getIntensidad() > 6 || ( episodio.getIntensidad()>3 && episodio.getIntensidad()<7 && episodio.getSintomas().contains(new SintomaDTO( s_specs[8] )) ) )
+        {
+            r=recomendaciones[3];
+        }
+        else if ( episodio.getIntensidad() < 4 )
+        {
+            r+=recomendaciones[0]+"\n"+recomendaciones[1];
+        }
+        
+        for( int i = 0 ; i < c_specs.length ; i++ )
+        {
+            String tmp = c_specs[i];
+            if( episodio.getCatalizadores().contains( new CatalizadorDTO( tmp ) ) )
+            {
+                e += " - "+tmp+"\n";
+            }
+        }
+        
+        return String.format(msj,r,e);
+    }
     
     /**
      * Convierte una lista a JSON

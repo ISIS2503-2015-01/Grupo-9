@@ -1,29 +1,25 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package ServerSide.Init;
-
-
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
  *
- * This class launches the web application in an embedded Jetty container.
- * This is the entry point to your application. The Java command that is used for
- * launching should fire this main method.
- *
+ * @author Personal
  */
-public class Main {
-
-    /**
-     * @param args
-     */
+public class Main{
     public static void main(String[] args) throws Exception{
         String webappDirLocation = "src/main/webapp/";
-
+        
         // The port that we should run on can be set into an environment variable
         // Look for that variable and default to 8080 if it isn't there.
         String webPort = System.getenv("PORT");
@@ -53,7 +49,7 @@ public class Main {
         server.join();
     }
     
-    @PersistenceContext(unitName = "competitorsPU")
+     @PersistenceContext(unitName = "myPU")
     static EntityManager entityManager; 
 
     @PostConstruct
