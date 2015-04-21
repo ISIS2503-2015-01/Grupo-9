@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <Button
         android:text="Ver Pacientes"
@@ -18,11 +19,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fecha 1"
-        android:onClick="showDatePickerDialog"/>
+        android:layout_weight="0.05">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha 1"
+                android:onClick="showDatePickerDialog"
+                android:layout_column="4" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha 2"
+                android:onClick="showDatePickerDialog"
+                android:layout_gravity="center_horizontal"
+                android:layout_column="5" />
+        </TableRow>
+    </TableLayout>
 
     <Button
         android:text="Episodios entre fechas"

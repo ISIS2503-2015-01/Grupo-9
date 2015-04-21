@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
+       // new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
     }
 
 

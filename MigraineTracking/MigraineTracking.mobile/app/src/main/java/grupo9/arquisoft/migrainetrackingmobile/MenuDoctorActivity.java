@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
@@ -59,10 +60,10 @@ public class MenuDoctorActivity extends ActionBarActivity
         }
     }
 
-    public void showDatePickerDialog()
+    public void showDatePickerDialog(View v)
     {
-        DialogFragment newFragment = new DatePickerFragment();
-        //newFragment.show(getSupportFragmentManager(),"DatePicker");
+        DialogFragment picker = new DatePickerFragment();
+        picker.show(getFragmentManager(),"datePicker");
     }
 
 
