@@ -22,6 +22,7 @@ import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
 public class MainActivity extends ActionBarActivity {
 
     public final static String EXTRA_USUARIO = "grupo9.arquisoft.migrainetrackingmobile.USUARIO";
+    public final static String TAG="grupo9.migraintracking";
 
 
     @Override
@@ -32,6 +33,8 @@ public class MainActivity extends ActionBarActivity {
         perfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //spinner.setAdapter(perfiles);
         setContentView(R.layout.activity_main);
+
+        new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
     }
 
 
@@ -65,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    private class LoadFilmTask extends AsyncTask<String, Long, String> {
+    private class EjecutarUrl extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
             try {
                 return HttpRequest.get(urls[0]).accept("application/json")
@@ -76,7 +79,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
         protected void onPostExecute(String response) {
-            Log.i("hola", response);
+            Log.i(TAG, response);
         }
     }
 }
