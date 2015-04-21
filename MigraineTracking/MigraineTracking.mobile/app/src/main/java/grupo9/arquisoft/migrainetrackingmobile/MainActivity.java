@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
     private class EjecutarUrl extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
             try {
-                return HttpRequest.get(urls[0]).accept("application/json").body();
+                return HttpRequest.get(urls[0]).accept("application/json").contentType();
             } catch (HttpRequest.HttpRequestException exception) {
                 return null;
             }

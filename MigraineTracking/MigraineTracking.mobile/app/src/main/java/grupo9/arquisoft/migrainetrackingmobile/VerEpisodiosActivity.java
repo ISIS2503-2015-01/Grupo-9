@@ -37,7 +37,17 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         String id=bundle.getString("id");
 
         //Si viene de un paciente
+        if(tipo.equals("PACIENTE"))
+        {
+            ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
 
+            new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios/pacientes/"+id);
+
+            ExpListItems = SetStandardGroups();
+            ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
+            ExpandList.setAdapter(ExpAdapter);
+            ExpandList.setOnChildClickListener(ExpandList_ItemClicked);
+        }
 
         //Si son todos
         if(tipo.equals("TODOS"))

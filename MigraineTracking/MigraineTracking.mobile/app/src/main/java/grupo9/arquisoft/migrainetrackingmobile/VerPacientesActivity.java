@@ -41,7 +41,7 @@ public class VerPacientesActivity extends ActionBarActivity
 
             Intent intent= new Intent(VerPacientesActivity.this, VerEpisodiosActivity.class);
             Bundle b = new Bundle();
-            b.putString("tipo","EPISODIO");
+            b.putString("tipo","PACIENTE");
             b.putString("id",ch.getName());
 
             intent.putExtras(b);
