@@ -34,7 +34,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-<<<<<<< HEAD
         RestClient restClient= new RestClient("https://migraine-services.herokuapp.com/poblar");
         restClient.AddHeader("content-type","application/json");
 
@@ -49,9 +48,9 @@ public class MainActivity extends ActionBarActivity {
 
         TextView texto= (TextView)findViewById(R.id.texto);
         texto.setText(restClient.getResponse());
-=======
+
        // new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
->>>>>>> origin/master
+
     }
 
 
