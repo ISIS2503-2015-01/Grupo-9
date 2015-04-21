@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new poblar().execute("https://migraine-services.herokuapp.com/poblar");
+        //new poblar().execute("https://migraine-services.herokuapp.com/poblar");
 
 
        //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
@@ -106,7 +106,7 @@ public class MainActivity extends ActionBarActivity {
 
         protected void onPostExecute(String response) {
             TextView texto = (TextView) findViewById(R.id.texto);
-            texto.setText(response);
+            //texto.setText(response);
         }
     }
 }

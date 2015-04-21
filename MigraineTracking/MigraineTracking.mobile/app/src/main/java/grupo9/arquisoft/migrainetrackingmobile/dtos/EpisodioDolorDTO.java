@@ -27,7 +27,7 @@ public class EpisodioDolorDTO {
     /**
      * Fecha en la que ocurrio el episodio de dolor
      */
-    private Date fecha;
+    private String fecha;
     
     /**
      * La localizacion del episodio de dolor
@@ -37,12 +37,12 @@ public class EpisodioDolorDTO {
     /**
      * La intensidad del dolor del episodio
      */
-    private int intensidadDolor;
+    private int intensidad;
     
     /**
      *Aproximado de las horas diarias promdedio que el paciente durmio en los ultimos 3 dias previos. 
      */
-    private int horasDeSueño;
+    private int hoursSlept;
     
     /**
      * La lista de sintomas que presenta el episodio de dolor
@@ -57,9 +57,12 @@ public class EpisodioDolorDTO {
     /**
      * La lista de medicamentos que el paciente esta tomando en el momento del episodio de dolor
      */
-    private List<MedicamentoDTO> medicamentosActuales;
-    
-    private int pacienteId;
+    private List<MedicamentoDTO> medicamentos;
+
+    /**
+     * La cedula del paciente
+     */
+    private int cedulaPaciente;
     
     //-----------------------------------------------
     //Constructor
@@ -79,14 +82,14 @@ public class EpisodioDolorDTO {
      * @param horasDeSueño las horas de sueno que se tienen durante el espisodio de sueno
      * @param intensidadDolor la intensidad del dolor del episodio
      */
-    public EpisodioDolorDTO( Date fecha, String localizacion, int horasDeSueño, int intensidadDolor) {
+    public EpisodioDolorDTO( String fecha, String localizacion, int horasDeSueño, int intensidadDolor) {
         this.fecha = fecha;
         this.localizacion = localizacion; 
-        this.intensidadDolor = intensidadDolor;
-        this.horasDeSueño = horasDeSueño;
+        this.intensidad = intensidadDolor;
+        this.hoursSlept = horasDeSueño;
         sintomas = new ArrayList<SintomaDTO>();
         catalizadores = new ArrayList<CatalizadorDTO>();
-        medicamentosActuales = new ArrayList<MedicamentoDTO>();
+        medicamentos = new ArrayList<MedicamentoDTO>();
     }
 
     //-----------------------------------------------
@@ -113,7 +116,7 @@ public class EpisodioDolorDTO {
      * Metodo que retorna la fecha del episodio de dolor
      * @return la fecha del episodio de dolor
      */
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
@@ -121,7 +124,7 @@ public class EpisodioDolorDTO {
      * Metodo que cambia la fecha del episodio por la fecha dada como parametro
      * @param fecha la nueva fecha del episodio
      */
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -130,7 +133,7 @@ public class EpisodioDolorDTO {
      * @return la intensidad del dolor
      */
     public int getIntensidadDolor() {
-        return intensidadDolor;
+        return intensidad;
     }
 
     /**
@@ -138,7 +141,7 @@ public class EpisodioDolorDTO {
      * @param intensidadDolor la nueva intensidad del dolor
      */
     public void setIntensidadDolor(int intensidadDolor) {
-        this.intensidadDolor = intensidadDolor;
+        this.intensidad = intensidadDolor;
     }
     
     /**
@@ -178,7 +181,7 @@ public class EpisodioDolorDTO {
      * @return la lista de los medicamentos que actualmente esta tomando el paciente
      */
     public List<MedicamentoDTO> getMedicamentosActuales() {
-        return medicamentosActuales;
+        return medicamentos;
     }
 
     /**
@@ -186,7 +189,7 @@ public class EpisodioDolorDTO {
      * @param medicamentosActuales la nueva lista de los medicamentos
      */
     public void setMedicamentosActuales(List<MedicamentoDTO> medicamentosActuales) {
-        this.medicamentosActuales = medicamentosActuales;
+        this.medicamentos = medicamentosActuales;
     }
 
     /**
@@ -210,7 +213,7 @@ public class EpisodioDolorDTO {
      * @return las horas de sueno
      */
     public int getHorasDeSueño() {
-        return horasDeSueño;
+        return hoursSlept;
     }
 
     /**
@@ -218,14 +221,14 @@ public class EpisodioDolorDTO {
      * @param horasDeSueño las nuevas horas de sueno relacionadas con el episodio de dolor
      */
     public void setHorasDeSueño(int horasDeSueño) {
-        this.horasDeSueño = horasDeSueño;
+        this.hoursSlept = horasDeSueño;
     }
 
     public int getPacienteId() {
-        return pacienteId;
+        return cedulaPaciente;
     }
 
     public void setPacienteId(int pacienteId) {
-        this.pacienteId = pacienteId;
+        this.cedulaPaciente = pacienteId;
     }
 }

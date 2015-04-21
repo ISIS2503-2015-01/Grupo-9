@@ -80,7 +80,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
             fecha.setYear(Integer.parseInt(fech.getText().toString().substring(0, 3)));
             fecha.setMonth(Integer.parseInt(fech.getText().toString().substring(5, 6)));
             fecha.setDate(Integer.parseInt(fech.getText().toString().substring(8, 9)));
-            EpisodioDolorDTO nuevo = new EpisodioDolorDTO(fecha, localizacion, horasSueno, intensidad);
+            //EpisodioDolorDTO nuevo = new EpisodioDolorDTO(fecha, localizacion, horasSueno, intensidad);
         }
         catch(Exception e)
         {
@@ -116,7 +116,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
             fecha.setYear(Integer.parseInt(fech.getText().toString().substring(0, 3)));
             fecha.setMonth(Integer.parseInt(fech.getText().toString().substring(5, 6)));
             fecha.setDate(Integer.parseInt(fech.getText().toString().substring(8, 9)));
-            EpisodioDolorDTO nuevo = new EpisodioDolorDTO(fecha, localizacion, horasSueno, intensidad);
+            //EpisodioDolorDTO nuevo = new EpisodioDolorDTO(fecha, localizacion, horasSueno, intensidad);
         }
         catch(Exception e)
         {

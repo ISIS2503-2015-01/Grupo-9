@@ -33,4 +33,10 @@
         android:text="@string/verEpisodiosButton"
         android:onClick="verEpisodios"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ver pacientes"
+        android:onClick="verPacientes"/>
+
 </LinearLayout>
