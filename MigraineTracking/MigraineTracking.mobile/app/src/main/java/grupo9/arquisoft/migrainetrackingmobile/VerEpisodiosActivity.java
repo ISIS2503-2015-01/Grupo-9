@@ -150,7 +150,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         protected String doInBackground(String... urls) {
             try {
                 return HttpRequest.get(urls[0]).accept("application/json")
-                        .body();
+                        .contentType();
             } catch (HttpRequest.HttpRequestException exception) {
                 return null;
             }

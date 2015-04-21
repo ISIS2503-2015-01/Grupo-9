@@ -38,16 +38,16 @@ public class VerPacientesActivity extends ActionBarActivity
             //Your code where
 
             //Creación del intent
+            if(ch.getName().startsWith("Identificación:")) {
+                Intent intent = new Intent(VerPacientesActivity.this, VerEpisodiosActivity.class);
+                Bundle b = new Bundle();
+                b.putString("tipo", "PACIENTE");
+                b.putString("id", ch.getName().split(":")[1]);
 
-            Intent intent= new Intent(VerPacientesActivity.this, VerEpisodiosActivity.class);
-            Bundle b = new Bundle();
-            b.putString("tipo","PACIENTE");
-            b.putString("id",ch.getName());
+                intent.putExtras(b);
 
-            intent.putExtras(b);
-
-            startActivity(intent);
-
+                startActivity(intent);
+            }
 
             return false;
         }
