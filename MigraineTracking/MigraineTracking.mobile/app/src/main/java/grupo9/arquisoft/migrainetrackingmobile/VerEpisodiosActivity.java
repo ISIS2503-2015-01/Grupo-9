@@ -1,27 +1,38 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+
+import com.github.kevinsawicki.http.HttpRequest;
 
 import java.util.ArrayList;
 
 
 public class VerEpisodiosActivity extends ActionBarActivity {
 
+    public final static String TAG="grupo9.migraintracking";
+
     private ExpandListAdapter ExpAdapter;
     private ArrayList<ExpandListGroup> ExpListItems;
     private ExpandableListView ExpandList;
+    private ArrayList<ExpandListGroup> list;
+    private ArrayList<ExpandListChild> list2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_episodios);
         ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
+
+        new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios");
+
         ExpListItems = SetStandardGroups();
         ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
         ExpandList.setAdapter(ExpAdapter);
@@ -118,5 +129,20 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class EjecutarUrl extends AsyncTask<String, Long, String> {
+        protected String doInBackground(String... urls) {
+            try {
+                return HttpRequest.get(urls[0]).accept("application/json")
+                        .body();
+            } catch (HttpRequest.HttpRequestException exception) {
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String response) {
+            Log.i(TAG, response);
+        }
     }
 }
