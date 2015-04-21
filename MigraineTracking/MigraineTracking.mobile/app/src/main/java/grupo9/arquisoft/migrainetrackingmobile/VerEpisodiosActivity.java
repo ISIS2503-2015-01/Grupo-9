@@ -10,8 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 
-import com.github.kevinsawicki.http.HttpRequest;
-
 import java.util.ArrayList;
 
 
@@ -41,7 +39,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         {
             ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
 
-            new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios/pacientes/"+id);
+            //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios/pacientes/"+id);
 
             ExpListItems = SetStandardGroups();
             ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
@@ -54,7 +52,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         {
             ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
 
-            new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios");
+            //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios");
 
             ExpListItems = SetStandardGroups();
             ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
@@ -144,20 +142,5 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private class EjecutarUrl extends AsyncTask<String, Long, String> {
-        protected String doInBackground(String... urls) {
-            try {
-                return HttpRequest.get(urls[0]).accept("application/json")
-                        .contentType();
-            } catch (HttpRequest.HttpRequestException exception) {
-                return null;
-            }
-        }
-
-        protected void onPostExecute(String response) {
-            Log.i(TAG, response);
-        }
     }
 }
