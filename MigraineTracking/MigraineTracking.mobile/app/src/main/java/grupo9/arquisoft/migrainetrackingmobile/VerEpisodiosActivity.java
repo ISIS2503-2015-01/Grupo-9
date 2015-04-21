@@ -47,12 +47,9 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         String tipo=bundle.getString("tipo");
         String id=bundle.getString("id");
 
-        //Si viene de un paciente
-        if(tipo.equals("PACIENTE"))
+        if(tipo.equals("CEDULA"))
         {
             ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
-
-            //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios/pacientes/"+id);
             new pedirEpisodios().execute("https://migraine-services.herokuapp.com/pacientes/episodios/"+id);
 
             try {
@@ -66,29 +63,16 @@ public class VerEpisodiosActivity extends ActionBarActivity {
             ExpandList.setAdapter(ExpAdapter);
             ExpandList.setOnChildClickListener(ExpandList_ItemClicked);
         }
+        else if(tipo.equals("CEDULA-FECHAS"))
+        {
 
-        //Si son todos
-        //if(tipo.equals("TODOS"))
-        //{
-            //ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
-            //listaEpisodios= new ArrayList<EpisodioDolorDTO>();
-            //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios");
-            //new pedirEpisodios().execute("https://migraine-services.herokuapp.com/episodios");
-
-            //ExpListItems = SetStandardGroups();
-            //ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
-            //ExpandList.setAdapter(ExpAdapter);
-            //ExpandList.setOnChildClickListener(ExpandList_ItemClicked);
-        //}
+        }
     }
 
     private ExpandableListView.OnChildClickListener ExpandList_ItemClicked =  new ExpandableListView.OnChildClickListener() {
 
         public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
             ExpandListChild ch =  ExpListItems.get(groupPosition).getItems().get(childPosition);
-
-
-
             return false;
         }
 
@@ -178,13 +162,6 @@ public class VerEpisodiosActivity extends ActionBarActivity {
 
 
         }
-    }
-
-    private String prettyfyJSON(String json) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
-        return gson.toJson(element);
     }
 
     private List<EpisodioDolorDTO> obtenerEpisodios(String json)

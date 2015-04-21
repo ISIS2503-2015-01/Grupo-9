@@ -69,14 +69,25 @@ public class MenuDoctorActivity extends ActionBarActivity
     }
 
 
+
     public void verEpisodios(View view){
         Intent intent = new Intent(this, VerEpisodiosActivity.class);
         Bundle b = new Bundle();
-        b.putString("tipo","PACIENTE");
+        b.putString("tipo","CEDULA");
         EditText editText = (EditText) findViewById(R.id.cedula);
         String cedula=editText.getText().toString();
         b.putString("id",cedula);
         intent.putExtras(b);
         startActivity(intent);
+    }
+
+    public void verEpisodiosEntreFechas(View view){
+        Intent intent = new Intent(this, VerEpisodiosActivity.class);
+        Bundle b = new Bundle();
+        b.putString("tipo", "CEDULA");
+        EditText editText = (EditText) findViewById(R.id.cedula);
+        String cedula=editText.getText().toString();
+        b.putString("id",cedula);
+
     }
 }

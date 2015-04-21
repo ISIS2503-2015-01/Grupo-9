@@ -70,10 +70,12 @@ public class MainActivity extends ActionBarActivity {
         if(pacientes.isChecked())
         {
             Intent intent = new Intent(this, MenuPrincipalActivity.class);
+            Bundle bundle=new Bundle();
             EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
             String usuario = usuarioEdit.getText().toString();
-            if(usuario.equals("mp.mancipe10")||usuario.equals("s.abisambra125")||usuario.equals("pa.otoya575")||usuario.equals("hf.vargas10"))
-            intent.putExtra(EXTRA_USUARIO, usuario);
+            //if(usuario.equals("mp.mancipe10")||usuario.equals("s.abisambra125")||usuario.equals("pa.otoya575")||usuario.equals("hf.vargas10"))
+            bundle.putString("USUARIO", usuario);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
         else if (doctores.isChecked())

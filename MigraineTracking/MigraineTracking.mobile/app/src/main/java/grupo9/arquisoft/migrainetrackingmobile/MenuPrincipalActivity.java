@@ -15,15 +15,16 @@ import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
 
 public class MenuPrincipalActivity extends ActionBarActivity {
 
+    private String idUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_USUARIO);
-        TextView usuarioView = new TextView(this);
-        usuarioView.setTextSize(10);
-        usuarioView.setText("Bienvenido, "+message);
+        Bundle bundle=intent.getExtras();
+        idUsuario=bundle.getString("USUARIO");
+        TextView textView=(TextView)findViewById(R.id.textView);
+        textView.setText("Bienvenido, "+idUsuario);
     }
 
 
