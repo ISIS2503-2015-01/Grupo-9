@@ -34,29 +34,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RestClient restClient= new RestClient("https://migraine-services.herokuapp.com/poblar");
-        restClient.AddHeader("Accept","application/json");
+        new poblar().execute("https://migraine-services.herokuapp.com/poblar");
 
-        try
-        {
-            restClient.Execute(RestClient.RequestMethod.GET);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        TextView texto= (TextView)findViewById(R.id.texto);
-        String respuesta = restClient.getResponse();
-        if(respuesta!=null)
-        {
-            Log.d("sadaskldjasd","jsakdaskdja");
-        }
-        else
-        {
-            Log.d("sadaskldjasd","AAAAAAAA");
-        }
-        //texto.setText(restClient.getResponse());
 
        //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
 
@@ -112,4 +91,22 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    private class poblar extends AsyncTask<String, Long, String> {
+        protected String doInBackground(String... urls) {
+            RestClient restClient = new RestClient(urls[0]);
+            restClient.AddHeader("Accept", "application/json");
+            try {
+                restClient.Execute(RestClient.RequestMethod.GET);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println(restClient.getResponse());
+            return restClient.getResponse();
+        }
+
+        protected void onPostExecute(String response) {
+            TextView texto = (TextView) findViewById(R.id.texto);
+            texto.setText(response);
+        }
+    }
 }
