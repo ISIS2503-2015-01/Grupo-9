@@ -11,8 +11,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.github.kevinsawicki.http.HttpRequest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 
@@ -80,6 +85,15 @@ public class MainActivity extends ActionBarActivity {
 
         protected void onPostExecute(String response) {
             Log.i(TAG, response);
+            TextView textView= (TextView) findViewById(R.id.texto);
+            textView.setText(prettyfyJSON(response));
         }
+    }
+
+    private String prettyfyJSON(String json) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(json);
+        return gson.toJson(element);
     }
 }

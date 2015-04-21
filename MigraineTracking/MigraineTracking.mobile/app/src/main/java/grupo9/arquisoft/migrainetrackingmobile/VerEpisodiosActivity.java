@@ -29,30 +29,35 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_episodios);
-        ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
 
-        new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios");
+        Intent intent = getIntent();
+        Bundle bundle=intent.getExtras();
 
-        ExpListItems = SetStandardGroups();
-        ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
-        ExpandList.setAdapter(ExpAdapter);
-        ExpandList.setOnChildClickListener(ExpandList_ItemClicked);
+        String tipo=bundle.getString("tipo");
+        String id=bundle.getString("id");
+
+        //Si viene de un paciente
+
+
+        //Si son todos
+        if(tipo.equals("TODOS"))
+        {
+            ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
+
+            new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios");
+
+            ExpListItems = SetStandardGroups();
+            ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
+            ExpandList.setAdapter(ExpAdapter);
+            ExpandList.setOnChildClickListener(ExpandList_ItemClicked);
+        }
     }
 
     private ExpandableListView.OnChildClickListener ExpandList_ItemClicked =  new ExpandableListView.OnChildClickListener() {
 
         public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
             ExpandListChild ch =  ExpListItems.get(groupPosition).getItems().get(childPosition);
-            //Creación del intent
 
-            Intent intent= new Intent(VerEpisodiosActivity.this, VerAnalisisActivity.class);
-            Bundle b = new Bundle();
-            b.putString("tipo","EPISODIO");
-            b.putString("id",ch.getName());
-
-            intent.putExtras(b);
-
-            startActivity(intent);
 
 
             return false;

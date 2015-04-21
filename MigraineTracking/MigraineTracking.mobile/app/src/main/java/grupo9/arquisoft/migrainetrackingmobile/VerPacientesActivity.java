@@ -37,6 +37,18 @@ public class VerPacientesActivity extends ActionBarActivity
             ExpandListChild ch =  ExpListItems.get(groupPosition).getItems().get(childPosition);
             //Your code where
 
+            //Creación del intent
+
+            Intent intent= new Intent(VerPacientesActivity.this, VerEpisodiosActivity.class);
+            Bundle b = new Bundle();
+            b.putString("tipo","EPISODIO");
+            b.putString("id",ch.getName());
+
+            intent.putExtras(b);
+
+            startActivity(intent);
+
+
             return false;
         }
 

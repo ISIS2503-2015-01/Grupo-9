@@ -76,6 +76,10 @@ public class MenuPrincipalActivity extends ActionBarActivity {
 
     public void verEpisodios(View view){
         Intent intent = new Intent(this, VerEpisodiosActivity.class);
+        Bundle b = new Bundle();
+        b.putString("tipo","TODOS");
+        b.putString("id","");
+        intent.putExtras(b);
         startActivity(intent);
     }
 
