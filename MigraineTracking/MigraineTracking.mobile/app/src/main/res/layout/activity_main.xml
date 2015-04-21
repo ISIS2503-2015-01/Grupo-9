@@ -16,6 +16,11 @@
         android:layout_height="wrap_content"
         android:hint="@string/contrasenia_edit"/>
 
+    <Spinner
+        android:id="@+id/perfiles_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
     <Button android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/entrar_button"

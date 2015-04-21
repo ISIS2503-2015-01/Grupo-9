@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -17,11 +19,14 @@ public class MainActivity extends ActionBarActivity {
 
     public final static String EXTRA_USUARIO = "grupo9.arquisoft.migrainetrackingmobile.USUARIO";
 
-    public static ArrayList<MedicamentoDTO> medicamentos = new ArrayList<MedicamentoDTO>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Spinner spinner = (Spinner) findViewById(R.id.perfiles_spinner);
+        ArrayAdapter<CharSequence> perfiles = ArrayAdapter.createFromResource(this,R.array.perfiles_spinner, android.R.layout.simple_spinner_item);
+        perfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinner.setAdapter(perfiles);
         setContentView(R.layout.activity_main);
     }
 
@@ -55,10 +60,4 @@ public class MainActivity extends ActionBarActivity {
         intent.putExtra(EXTRA_USUARIO, usuario);
         startActivity(intent);
     }
-
-    public ArrayList<MedicamentoDTO> darMedicamentos()
-    {
-        return medicamentos;
-    }
-
 }

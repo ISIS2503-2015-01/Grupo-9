@@ -40,6 +40,11 @@
         <item>3</item>
     </string-array>
 
+    <string-array name="perfiles_spinner">
+        <item>"Paciente"</item>
+        <item>"Doctor"</item>
+    </string-array>
+
     <color name="Black">#000000</color>
     <color name="ExpandChildBackground">#ffafabab</color>
     <color name="ExpandGroupBackground">#ff7c7c7c</color>
