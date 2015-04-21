@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -61,12 +62,31 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     public void login(View view){
-        Intent intent = new Intent(this, MenuPrincipalActivity.class);
-        EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
-        String usuario = usuarioEdit.getText().toString();
-        if(usuario.equals("mp.mancipe10")||usuario.equals("s.abisambra125")||usuario.equals("pa.otoya575")||usuario.equals("hf.vargas10"))
-        intent.putExtra(EXTRA_USUARIO, usuario);
-        startActivity(intent);
+
+        RadioButton pacientes = (RadioButton)findViewById(R.id.pacientesRadio);
+        RadioButton doctores = (RadioButton) findViewById(R.id.doctoresRadio);
+        if(pacientes.isChecked())
+        {
+            Intent intent = new Intent(this, MenuPrincipalActivity.class);
+            EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
+            String usuario = usuarioEdit.getText().toString();
+            if(usuario.equals("mp.mancipe10")||usuario.equals("s.abisambra125")||usuario.equals("pa.otoya575")||usuario.equals("hf.vargas10"))
+            intent.putExtra(EXTRA_USUARIO, usuario);
+            startActivity(intent);
+        }
+        else if (doctores.isChecked())
+        {
+            Intent intent = new Intent(this, MenuDoctorActivity.class);
+            EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
+            String usuario = usuarioEdit.getText().toString();
+            if(usuario.equals("mp.mancipe10")||usuario.equals("s.abisambra125")||usuario.equals("pa.otoya575")||usuario.equals("hf.vargas10"))
+            intent.putExtra(EXTRA_USUARIO, usuario);
+            startActivity(intent);
+        }
+        else
+        {
+
+        }
     }
 
     private class EjecutarUrl extends AsyncTask<String, Long, String> {
