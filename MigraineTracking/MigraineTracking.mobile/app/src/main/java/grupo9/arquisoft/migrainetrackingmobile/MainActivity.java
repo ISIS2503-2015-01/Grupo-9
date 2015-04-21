@@ -47,9 +47,18 @@ public class MainActivity extends ActionBarActivity {
         }
 
         TextView texto= (TextView)findViewById(R.id.texto);
-        texto.setText(restClient.getResponse());
+        String respuesta = restClient.getResponse();
+        if(respuesta!=null)
+        {
+            Log.d("sadaskldjasd","jsakdaskdja");
+        }
+        else
+        {
+            Log.d("sadaskldjasd","AAAAAAAA");
+        }
+        //texto.setText(restClient.getResponse());
 
-       // new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
+       //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
 
     }
 
