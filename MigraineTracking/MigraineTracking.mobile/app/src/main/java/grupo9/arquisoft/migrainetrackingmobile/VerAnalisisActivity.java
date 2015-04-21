@@ -14,6 +14,18 @@ public class VerAnalisisActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_analisis);
         Intent intent = getIntent();
+        Bundle bundle=intent.getExtras();
+
+        String tipo=bundle.getString("tipo");
+        String id=bundle.getString("id");
+
+        //Si es episodio
+
+
+        //Si es doctor
+
+
+        //Si es paciente
     }
 
 

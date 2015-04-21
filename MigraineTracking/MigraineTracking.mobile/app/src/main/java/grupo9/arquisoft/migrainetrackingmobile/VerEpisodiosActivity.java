@@ -31,9 +31,18 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     private ExpandableListView.OnChildClickListener ExpandList_ItemClicked =  new ExpandableListView.OnChildClickListener() {
 
         public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-            // TODO Auto-generated method stub
             ExpandListChild ch =  ExpListItems.get(groupPosition).getItems().get(childPosition);
-            //Your code where
+            //Creación del intent
+
+            Intent intent= new Intent(VerEpisodiosActivity.this, VerAnalisisActivity.class);
+            Bundle b = new Bundle();
+            b.putString("tipo","EPISODIO");
+            b.putString("id",ch.getName());
+
+            intent.putExtras(b);
+
+            startActivity(intent);
+
 
             return false;
         }

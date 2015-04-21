@@ -1,14 +1,18 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.github.kevinsawicki.http.HttpRequest;
 
 import java.util.ArrayList;
 
@@ -59,5 +63,20 @@ public class MainActivity extends ActionBarActivity {
         if(usuario.equals("mp.mancipe10")||usuario.equals("s.abisambra125")||usuario.equals("pa.otoya575")||usuario.equals("hf.vargas10"))
         intent.putExtra(EXTRA_USUARIO, usuario);
         startActivity(intent);
+    }
+
+    private class LoadFilmTask extends AsyncTask<String, Long, String> {
+        protected String doInBackground(String... urls) {
+            try {
+                return HttpRequest.get(urls[0]).accept("application/json")
+                        .body();
+            } catch (HttpRequest.HttpRequestException exception) {
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String response) {
+            Log.i("hola", response);
+        }
     }
 }
