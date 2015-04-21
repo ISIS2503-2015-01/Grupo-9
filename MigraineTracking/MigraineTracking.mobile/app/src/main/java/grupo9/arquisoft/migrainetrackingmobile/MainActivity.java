@@ -35,7 +35,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         RestClient restClient= new RestClient("https://migraine-services.herokuapp.com/poblar");
-        restClient.AddHeader("content-type","application/json");
+        restClient.AddHeader("Accept","application/json");
 
         try
         {
