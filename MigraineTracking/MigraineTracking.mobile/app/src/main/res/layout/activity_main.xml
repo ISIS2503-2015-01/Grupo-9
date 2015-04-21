@@ -4,7 +4,8 @@
     android:paddingRight="16dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <EditText android:id="@+id/usuario_edit"
         android:layout_width="match_parent"
@@ -16,10 +17,25 @@
         android:layout_height="wrap_content"
         android:hint="@string/contrasenia_edit"/>
 
-    <Spinner
-        android:id="@+id/perfiles_spinner"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Escoga su tipo de perfil"/>
+    <RadioGroup
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/pacientesRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paciente"/>
+        <RadioButton
+            android:id="@+id/doctoresRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doctor"/>
+        </RadioGroup>
 
     <Button android:layout_width="100dp"
         android:layout_height="wrap_content"

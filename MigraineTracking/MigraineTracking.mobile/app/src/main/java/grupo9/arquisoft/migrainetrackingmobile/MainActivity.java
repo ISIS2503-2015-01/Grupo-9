@@ -33,13 +33,9 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Spinner spinner = (Spinner) findViewById(R.id.perfiles_spinner);
-        ArrayAdapter<CharSequence> perfiles = ArrayAdapter.createFromResource(this,R.array.perfiles_spinner, android.R.layout.simple_spinner_item);
-        perfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //spinner.setAdapter(perfiles);
         setContentView(R.layout.activity_main);
 
-        new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
+        //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
     }
 
 
@@ -76,8 +72,7 @@ public class MainActivity extends ActionBarActivity {
     private class EjecutarUrl extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
             try {
-                return HttpRequest.get(urls[0]).accept("application/json")
-                        .body();
+                return HttpRequest.get(urls[0]).accept("application/json").body();
             } catch (HttpRequest.HttpRequestException exception) {
                 return null;
             }

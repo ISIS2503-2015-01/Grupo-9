@@ -68,9 +68,9 @@ public class AgregarMedicamentoActivity extends ActionBarActivity {
         try
         {
             MedicamentoDTO nuevo = new MedicamentoDTO(nomb, Integer.parseInt(cantVeces), Integer.parseInt(hor), Integer.parseInt(cant));
-            MainActivity.medicamentos.add(nuevo);
+            //MainActivity.medicamentos.add(nuevo);
             Log.i("MyActivity", nomb);
-            Log.i("MyActivity", MainActivity.medicamentos.size()+ " medicamentos");
+           //Log.i("MyActivity", MainActivity.medicamentos.size()+ " medicamentos");
         }
         catch(Exception e)
         {
