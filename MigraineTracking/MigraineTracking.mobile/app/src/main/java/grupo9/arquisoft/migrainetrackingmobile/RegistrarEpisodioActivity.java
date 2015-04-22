@@ -25,7 +25,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_episodio);
         Intent intent = getIntent();
-        String[] catalizadores = {"Catalizador 1","Catalizador 2","Catalizador 3"};
+        String[] catalizadores = {"Estres","Anticonceptivos","Chocolate","Licor","Endulcolorantes artificiales", "Citricos", "Queso Curado", "Yogourt","Pescado","Salsa de soya","Platanos","Aguacate","Vino tinto","Esfuerzo fisico","Estimulo frio (Ej: helado)","Luces intensas","Tabaco","Olores fuertes"};
         spinCatalizadores = (MultiSelectionSpinner) findViewById(R.id.spinCatalizadores);
         spinCatalizadores.setItems(catalizadores);
         //ArrayList<MedicamentoDTO> medica = MainActivity.medicamentos;
