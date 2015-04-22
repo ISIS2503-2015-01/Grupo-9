@@ -18,28 +18,19 @@ import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
 public class RegistrarEpisodioActivity extends ActionBarActivity {
 
     MultiSelectionSpinner spinCatalizadores;
-    MultiSelectionSpinner spinMedicamentos;
+    MultiSelectionSpinner spinSintomas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_episodio);
         Intent intent = getIntent();
-        String[] catalizadores = {"Estres","Anticonceptivos","Chocolate","Licor","Endulcolorantes artificiales", "Citricos", "Queso Curado", "Yogourt","Pescado","Salsa de soya","Platanos","Aguacate","Vino tinto","Esfuerzo fisico","Estimulo frio (Ej: helado)","Luces intensas","Tabaco","Olores fuertes"};
+        String[] catalizadores = {"Estres","Anticonceptivos","Chocolate","Licor","Endulcolorantes artificiales", "Citricos", "Queso curado", "Yogur","Pescado","Salsa de soja","Platanos","Aguacate","Vino tinto","Esfuerzo fisico","Estimulo frio(Ej: helado)","Luces intensas","Tabaco","Olores fuertes"};
         spinCatalizadores = (MultiSelectionSpinner) findViewById(R.id.spinCatalizadores);
         spinCatalizadores.setItems(catalizadores);
-        //ArrayList<MedicamentoDTO> medica = MainActivity.medicamentos;
-        ArrayList<String> medicamentos = new ArrayList<String>();
-        medicamentos.add("Medicamento 1");
-        medicamentos.add("Medicamento 2");
-        medicamentos.add("Medicamento 3");
-        //for(int i=1;i<medica.size();i++)
-        //{
-        //    String nombre = medica.get(i).getNombre();
-        //    medicamentos.add(nombre);
-        //}
-        spinMedicamentos = (MultiSelectionSpinner) findViewById(R.id.spinMedicamentos);
-        spinMedicamentos.setItems(medicamentos);
+        spinSintomas = (MultiSelectionSpinner) findViewById(R.id.spinSintomas);
+        String[] sintomas = {"Vomito", "Depresion","Palidez y cambios de temperatura en la cabeza","Ansiedad","Insomnio","Fatiga","Palpitaciones","Aura","Confundido y olvidadiso"};
+        spinSintomas.setItems(sintomas);
     }
 
 
@@ -67,25 +58,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
 
     public void agregarSintoma(View view)
     {
-        Intent intent = new Intent(this,AgregarSintomaActivity.class);
-        EditText loca = (EditText) findViewById(R.id.localizacion_edit);
-        EditText fech = (EditText) findViewById(R.id.fecha_edit);
-        EditText horas = (EditText) findViewById(R.id.horas_edit);
-        EditText inten = (EditText) findViewById(R.id.intensidad_edit);
-        String localizacion = loca.getText().toString();
-        try {
-            int horasSueno = Integer.parseInt(horas.getText().toString());
-            int intensidad = Integer.parseInt(inten.getText().toString());
-            Date fecha = new Date();
-            fecha.setYear(Integer.parseInt(fech.getText().toString().substring(0, 3)));
-            fecha.setMonth(Integer.parseInt(fech.getText().toString().substring(5, 6)));
-            fecha.setDate(Integer.parseInt(fech.getText().toString().substring(8, 9)));
-            //EpisodioDolorDTO nuevo = new EpisodioDolorDTO(fecha, localizacion, horasSueno, intensidad);
-        }
-        catch(Exception e)
-        {
-
-        }
+        Intent intent = new Intent(this,AgregarMedicamentoActivity.class);
         startActivity(intent);
     }
 
@@ -97,8 +70,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
 
     public void agregarMedicamentosEpisodioDolor(View view)
     {
-        Intent intent = new Intent(this,AgregarMedicamentosEpisodio.class);
-        startActivity(intent);
+
     }
 
     public void registrarEpisodioDolor(View view)
