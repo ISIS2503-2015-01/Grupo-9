@@ -1,6 +1,7 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,8 +24,8 @@ public class MenuPrincipalActivity extends ActionBarActivity {
         Intent intent = getIntent();
         Bundle bundle=intent.getExtras();
         idUsuario=bundle.getString("USUARIO");
-        TextView textView=(TextView)findViewById(R.id.textView);
-        textView.setText("Bienvenido, "+idUsuario);
+
+        new buscarNombre().execute("https://migraine-services.herokuapp.com/pacientes/"+idUsuario);
     }
 
 
@@ -73,5 +74,24 @@ public class MenuPrincipalActivity extends ActionBarActivity {
     public void verAnalisis(View view){
         Intent intent = new Intent(this, VerAnalisisActivity.class);
         startActivity(intent);
+    }
+
+    private class buscarNombre extends AsyncTask<String, Long, String> {
+        protected String doInBackground(String... urls) {
+            RestClient restClient = new RestClient(urls[0]);
+            restClient.AddHeader("Accept", "application/json");
+            try {
+                restClient.Execute(RestClient.RequestMethod.GET);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println(restClient.getResponse());
+            return restClient.getResponse();
+        }
+
+        protected void onPostExecute(String response) {
+            TextView textView=(TextView)findViewById(R.id.textView);
+            textView.setText("Bienvenido, "+idUsuario);
+        }
     }
 }

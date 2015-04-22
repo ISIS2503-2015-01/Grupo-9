@@ -19,11 +19,15 @@ public class PacienteDTO {
     // Atributos
     //-----------------------------------------------------
     
-    
+    private int doctorid;
     /**
      * El nombre del paciente
      */
     private String nombre;
+
+    private String username;
+
+    private String password;
     
     /**
      * El número de identificación del paciente
@@ -33,7 +37,7 @@ public class PacienteDTO {
     /**
      * Fecha de Nacimiento del Usuario
      */
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
     /**
      * El peso del paciente
@@ -72,12 +76,15 @@ public class PacienteDTO {
      * @param peso el peso del paciente
      * @param estatura la estatura del paciente
      */
-    public PacienteDTO(String nombre, int noIdentificacion, Date fechaNacimiento, int peso, int estatura) {
+    public PacienteDTO(String username, String password,int doctorid,String nombre, int noIdentificacion, String fechaNacimiento, int peso, int estatura) {
        this.nombre = nombre;
         this.noIdentificacion=noIdentificacion;
         this.fechaNacimiento=fechaNacimiento;
         this.peso = peso;
         this.estatura = estatura;
+        this.doctorid=doctorid;
+        this.username=username;
+        this.password=password;
         habitos = new ArrayList<CatalizadorDTO>();
         medicamentosDiarios = new ArrayList<MedicamentoDTO>();
         episodios = new ArrayList<EpisodioDolorDTO>();
@@ -133,7 +140,7 @@ public class PacienteDTO {
      * Metodo que se encarga de retornar la fecha de nacimiento del paciente
      * @return la fecha de nacimiento del paciente
      */
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -141,7 +148,7 @@ public class PacienteDTO {
      * Metodo que se encarga de cambiar la fecha de nacimiento del paciente por la fecha dada como parametro
      * @param fechaNacimiento la nueva fecha de nacimiento
      */
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
     
@@ -225,6 +232,19 @@ public class PacienteDTO {
         this.episodios = episodios;
     }
 
+    public int getDoctorid(){
+        return doctorid;
+    }
+
+    public void setDoctorid(int doctorid)
+    {
+        this.doctorid=doctorid;
+    }
+
+    public String getUsername(){return username;}
+    public void setUsername(String username){this.username=username;}
+
+    public String getPassword(){return password;}
     /**
      * Metodo que se encarga de decidir si dos pacientes son igual o no.
      * @param obj El objeto con el cual se va a comparar el paciente
