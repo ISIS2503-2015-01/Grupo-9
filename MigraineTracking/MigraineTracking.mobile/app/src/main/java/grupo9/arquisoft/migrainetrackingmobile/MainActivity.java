@@ -93,6 +93,12 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    public void crear(View view)
+    {
+        Intent intent=new Intent(this, RegistrarUsuarioActivity.class);
+        startActivity(intent);
+    }
+
     private class poblar extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
             RestClient restClient = new RestClient(urls[0]);

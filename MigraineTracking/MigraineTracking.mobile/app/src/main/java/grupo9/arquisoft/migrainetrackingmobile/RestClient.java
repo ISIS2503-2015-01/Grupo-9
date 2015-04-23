@@ -9,6 +9,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
  */
 public class RestClient {
 
-    private ArrayList<NameValuePair> params;
+    private ArrayList<String> params;
     private ArrayList <NameValuePair> headers;
 
     private String url;
@@ -50,13 +51,13 @@ public class RestClient {
     public RestClient(String url)
     {
         this.url = url;
-        params = new ArrayList<NameValuePair>();
+        params = new ArrayList<String>();
         headers = new ArrayList<NameValuePair>();
     }
 
-    public void AddParam(String name, String value)
+    public void AddParam(String value)
     {
-        params.add(new BasicNameValuePair(name, value));
+        params.add(value);
     }
 
     public void AddHeader(String name, String value)
@@ -73,16 +74,16 @@ public class RestClient {
                 String combinedParams = "";
                 if(!params.isEmpty()){
                     combinedParams += "?";
-                    for(NameValuePair p : params)
+                    for(String p : params)
                     {
-                        String paramString = p.getName() + "=" + URLEncoder.encode(p.getValue(),"UTF - 8");
+                        //String paramString = p.getName() + "=" + URLEncoder.encode(p.getValue(),"UTF - 8");
                         if(combinedParams.length() > 1)
                         {
-                            combinedParams  +=  "&" + paramString;
+                            //combinedParams  +=  "&" + paramString;
                         }
                         else
                         {
-                            combinedParams += paramString;
+                            //combinedParams += paramString;
                         }
                     }
                 }
@@ -109,7 +110,7 @@ public class RestClient {
                 }
 
                 if(!params.isEmpty()){
-                    request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+                    request.setEntity(new StringEntity(params.get(0)));
                 }
 
                 executeRequest(request, url);
