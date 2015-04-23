@@ -1,6 +1,7 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,15 +16,16 @@ import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
 
 public class MenuPrincipalActivity extends ActionBarActivity {
 
+    private String idUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_USUARIO);
-        TextView usuarioView = new TextView(this);
-        usuarioView.setTextSize(10);
-        usuarioView.setText("Bienvenido, "+message);
+        Bundle bundle=intent.getExtras();
+        idUsuario=bundle.getString("USUARIO");
+
+        new buscarNombre().execute("https://migraine-services.herokuapp.com/pacientes/"+idUsuario);
     }
 
 
@@ -74,13 +76,22 @@ public class MenuPrincipalActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void verEpisodios(View view){
-        Intent intent = new Intent(this, VerEpisodiosActivity.class);
-        Bundle b = new Bundle();
-        b.putString("tipo","TODOS");
-        b.putString("id","");
-        intent.putExtras(b);
-        startActivity(intent);
-    }
+    private class buscarNombre extends AsyncTask<String, Long, String> {
+        protected String doInBackground(String... urls) {
+            RestClient restClient = new RestClient(urls[0]);
+            restClient.AddHeader("Accept", "application/json");
+            try {
+                restClient.Execute(RestClient.RequestMethod.GET);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println(restClient.getResponse());
+            return restClient.getResponse();
+        }
 
+        protected void onPostExecute(String response) {
+            TextView textView=(TextView)findViewById(R.id.textView);
+            textView.setText("Bienvenido, "+idUsuario);
+        }
+    }
 }

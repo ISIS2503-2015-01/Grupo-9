@@ -47,4 +47,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/texto"
         android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:text="CREAR"
+        android:id="@+id/nuevo" />
 </LinearLayout>

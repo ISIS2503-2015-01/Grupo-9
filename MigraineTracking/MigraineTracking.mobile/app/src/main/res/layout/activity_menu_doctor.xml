@@ -12,12 +12,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingrese el ID de un episodio"/>
+        android:hint="Ingrese el ID de un episodio"
+        android:id="@+id/cedula" />
 
     <Button
-        android:text="Buscar Episodio Por ID"
+        android:text="Buscar Episodios Por Cédula"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="verEpisodios"/>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -47,10 +49,6 @@
 
     <Button
         android:text="Episodios entre fechas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:text="Ver Episodios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

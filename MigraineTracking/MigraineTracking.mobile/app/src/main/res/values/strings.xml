@@ -48,4 +48,5 @@
     <color name="Black">#000000</color>
     <color name="ExpandChildBackground">#ffafabab</color>
     <color name="ExpandGroupBackground">#ff7c7c7c</color>
+    <string name="title_activity_registrar_usuario">RegistrarUsuarioActivity</string>
 </resources>

@@ -42,7 +42,7 @@ public class VerPacientesActivity extends ActionBarActivity
                 Intent intent = new Intent(VerPacientesActivity.this, VerEpisodiosActivity.class);
                 Bundle b = new Bundle();
                 b.putString("tipo", "PACIENTE");
-                b.putString("id", ch.getName().split(":")[1]);
+                b.putString("id", ch.getName().split(": ")[1]);
 
                 intent.putExtras(b);
 
@@ -64,7 +64,7 @@ public class VerPacientesActivity extends ActionBarActivity
             ch1_1.setTag(null);
             list2.add(ch1_1);
             ExpandListChild ch1_2 = new ExpandListChild();
-            ch1_2.setName("Identificación: 1018488152");
+            ch1_2.setName("Identificación: 875353221");
             ch1_2.setTag(null);
             list2.add(ch1_2);
             ExpandListChild ch1_3 = new ExpandListChild();

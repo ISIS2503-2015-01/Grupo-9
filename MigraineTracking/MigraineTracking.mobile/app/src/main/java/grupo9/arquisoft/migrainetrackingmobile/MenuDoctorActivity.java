@@ -3,12 +3,14 @@ package grupo9.arquisoft.migrainetrackingmobile;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 
 import java.util.Calendar;
 
@@ -67,4 +69,25 @@ public class MenuDoctorActivity extends ActionBarActivity
     }
 
 
+
+    public void verEpisodios(View view){
+        Intent intent = new Intent(this, VerEpisodiosActivity.class);
+        Bundle b = new Bundle();
+        b.putString("tipo","CEDULA");
+        EditText editText = (EditText) findViewById(R.id.cedula);
+        String cedula=editText.getText().toString();
+        b.putString("id",cedula);
+        intent.putExtras(b);
+        startActivity(intent);
+    }
+
+    public void verEpisodiosEntreFechas(View view){
+        Intent intent = new Intent(this, VerEpisodiosActivity.class);
+        Bundle b = new Bundle();
+        b.putString("tipo", "CEDULA");
+        EditText editText = (EditText) findViewById(R.id.cedula);
+        String cedula=editText.getText().toString();
+        b.putString("id",cedula);
+
+    }
 }

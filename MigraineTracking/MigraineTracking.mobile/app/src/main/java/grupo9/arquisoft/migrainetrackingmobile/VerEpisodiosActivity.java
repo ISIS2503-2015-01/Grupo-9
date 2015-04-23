@@ -9,8 +9,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import grupo9.arquisoft.migrainetrackingmobile.dtos.EpisodioDolorDTO;
 
 
 public class VerEpisodiosActivity extends ActionBarActivity {
@@ -22,6 +34,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     private ExpandableListView ExpandList;
     private ArrayList<ExpandListGroup> list;
     private ArrayList<ExpandListChild> list2;
+    private List<EpisodioDolorDTO> listaEpisodios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,30 +47,25 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         String tipo=bundle.getString("tipo");
         String id=bundle.getString("id");
 
-        //Si viene de un paciente
-        if(tipo.equals("PACIENTE"))
+        if(tipo.equals("CEDULA"))
         {
             ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
+            new pedirEpisodios().execute("https://migraine-services.herokuapp.com/pacientes/episodios/"+id);
 
-            //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios/pacientes/"+id);
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             ExpListItems = SetStandardGroups();
             ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
             ExpandList.setAdapter(ExpAdapter);
             ExpandList.setOnChildClickListener(ExpandList_ItemClicked);
         }
-
-        //Si son todos
-        if(tipo.equals("TODOS"))
+        else if(tipo.equals("CEDULA-FECHAS"))
         {
-            ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
 
-            //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/episodios");
-
-            ExpListItems = SetStandardGroups();
-            ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
-            ExpandList.setAdapter(ExpAdapter);
-            ExpandList.setOnChildClickListener(ExpandList_ItemClicked);
         }
     }
 
@@ -65,60 +73,52 @@ public class VerEpisodiosActivity extends ActionBarActivity {
 
         public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
             ExpandListChild ch =  ExpListItems.get(groupPosition).getItems().get(childPosition);
-
-
-
             return false;
         }
 
     };
 
     public ArrayList<ExpandListGroup> SetStandardGroups() {
+
         ArrayList<ExpandListGroup> list = new ArrayList<ExpandListGroup>();
         ArrayList<ExpandListChild> list2 = new ArrayList<ExpandListChild>();
-        ExpandListGroup gru1 = new ExpandListGroup();
-        gru1.setName("Episodio 1");
-        ExpandListChild ch1_1 = new ExpandListChild();
-        ch1_1.setName("Fecha: 22/08/2014 11:29:30");
-        ch1_1.setTag(null);
-        list2.add(ch1_1);
-        ExpandListChild ch1_2 = new ExpandListChild();
-        ch1_2.setName("Localización: Frente");
-        ch1_2.setTag(null);
-        list2.add(ch1_2);
-        ExpandListChild ch1_3 = new ExpandListChild();
-        ch1_3.setName("Intensidad: 5");
-        ch1_3.setTag(null);
-        list2.add(ch1_3);
-        ExpandListChild ch1_4 = new ExpandListChild();
-        ch1_4.setName("Horas de sueño: 5");
-        ch1_4.setTag(null);
-        list2.add(ch1_4);
-        gru1.setItems(list2);
-        list2 = new ArrayList<ExpandListChild>();
+        for(int i=0;i<listaEpisodios.size();i++)
+        {
+            EpisodioDolorDTO actual=listaEpisodios.get(i);
+            ExpandListGroup group = new ExpandListGroup();
+            group.setName("Episodio "+(i+1));
 
-        ExpandListGroup gru2 = new ExpandListGroup();
-        gru2.setName("Episodio 2");
-        ExpandListChild ch2_1 = new ExpandListChild();
-        ch2_1.setName("Fecha: 24/09/2014 07:58:09");
-        ch2_1.setTag(null);
-        list2.add(ch2_1);
-        ExpandListChild ch2_2 = new ExpandListChild();
-        ch2_2.setName("Localización: Nuca");
-        ch2_2.setTag(null);
-        list2.add(ch2_2);
-        ExpandListChild ch2_3 = new ExpandListChild();
-        ch2_3.setName("Intensidad: 8");
-        ch2_3.setTag(null);
-        list2.add(ch2_3);
-        ExpandListChild ch2_4 = new ExpandListChild();
-        ch2_4.setName("Horas de sueño: 7");
-        ch2_4.setTag(null);
-        list2.add(ch2_4);
-        gru2.setItems(list2);
-        list.add(gru1);
-        list.add(gru2);
+            ExpandListChild paciente=new ExpandListChild();
+            paciente.setName("Paciente : " + actual.getPacienteId());
+            paciente.setTag(null);
+            list2.add(paciente);
 
+            ExpandListChild fecha=new ExpandListChild();
+            Date fechita=new Date();
+            fechita.setTime(Long.parseLong(actual.getFecha()));
+            fecha.setName("Fecha: "+fechita.toString());
+            fecha.setTag(null);
+            list2.add(fecha);
+
+            ExpandListChild localizacion=new ExpandListChild();
+            localizacion.setName("Localización : "+actual.getLocalizacion());
+            localizacion.setTag(null);
+            list2.add(localizacion);
+
+            ExpandListChild intensidad=new ExpandListChild();
+            intensidad.setName("Intensidad : " + actual.getIntensidadDolor());
+            intensidad.setTag(null);
+            list2.add(intensidad);
+
+            ExpandListChild horas=new ExpandListChild();
+            horas.setName("Horas de sueño : " + actual.getHorasDeSueño());
+            horas.setTag(null);
+            list2.add(horas);
+
+            group.setItems(list2);
+            list2= new ArrayList<ExpandListChild>();
+            list.add(group);
+        }
         return list;
     }
 
@@ -142,5 +142,32 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class pedirEpisodios extends AsyncTask<String, Long, String> {
+        protected String doInBackground(String... urls) {
+            RestClient restClient = new RestClient(urls[0]);
+            restClient.AddHeader("Accept", "application/json");
+            try {
+                restClient.Execute(RestClient.RequestMethod.GET);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println(restClient.getResponse());
+            listaEpisodios=obtenerEpisodios(restClient.getResponse());
+            return restClient.getResponse();
+        }
+
+        protected void onPostExecute(String response) {
+
+
+        }
+    }
+
+    private List<EpisodioDolorDTO> obtenerEpisodios(String json)
+    {
+        Gson gson = new Gson();
+        Type type=new TypeToken<ArrayList<EpisodioDolorDTO>>(){}.getType();
+        return gson.fromJson(json,type);
     }
 }

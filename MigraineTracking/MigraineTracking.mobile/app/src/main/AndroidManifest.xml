@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="grupo9.arquisoft.migrainetrackingmobile" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -107,11 +109,15 @@
         <activity
             android:name=".MenuDoctorActivity"
             android:label="Menu Doctor"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuDoctorActivity"/>
-            </activity>
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuDoctorActivity" />
+        </activity>
+        <activity
+            android:name=".RegistrarUsuarioActivity"
+            android:label="@string/title_activity_registrar_usuario" >
+        </activity>
     </application>
 
 </manifest>
