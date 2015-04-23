@@ -10,20 +10,20 @@ and open the template in the editor.
     <table class="table">
         <thead>
             <tr>
-                <th>N&uacute;mero de Identificaci&oacute;n del paciente</th>
+                <th>Cedula del paciente</th>
                 <th>Localizaci&oacute;n</th>
                 <th>Intensidad de Dolor</th>
-                <th>Fecha y Hora</th>
+                <th>Fecha </th>
                 <th>Horas de Sueno</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="episodio in this.getEpisodios.episodios | orderBy:'fecha'">
-                <th>{{episodio.pacienteId}}</th>
+                <th>{{episodio.paciente.cedula}}</th>
                 <th>{{episodio.localizacion}}</th>
-                <th>{{episodio.intensidadDolor}}</th>
+                <th>{{episodio.intensidad}}</th>
                 <th>{{episodio.fecha | date}}</th>
-                <th>{{episodio.horasDeSueno}}</th>
+                <th>{{episodio.hoursSlept}}</th>
             </tr>
         </tbody>
     </table>

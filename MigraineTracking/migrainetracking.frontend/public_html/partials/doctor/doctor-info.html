@@ -10,18 +10,14 @@ and open the template in the editor.
     <table class="table">
         <thead>
             <tr>
-                <th>No Identificaci&oacute;n</th>
+                <th>Cedula</th>
                 <th>Nombre</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Especialidad</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="doctor in this.getDoctors.doctors | orderBy:'noIdentificacion'">
-                <th>{{doctor.noIdentificacion}}</th>
-                <th>{{doctor.nombre}}</th>
-                <th>{{doctor.fechaNacimiento | date}}</th>
-                <th>{{doctor.especialidad}}</th>
+            <tr ng-repeat="doctor in this.getDoctors.doctors | orderBy:'id'">
+                <th>{{doctor.id}}</th>
+                <th>{{doctor.name}}</th>
             </tr>
         </tbody>
     </table>

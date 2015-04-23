@@ -15,11 +15,11 @@ and open the template in the editor.
 <div class="panel panel-default ">
     <div class="panel-heading">Informaci&oacute;n del Episodio de dolor</div>
             
-                <h4>N&uacute;mero de Indentificaci&oacute;n:</h4>
+                <h4>Cedula:</h4>
             
-                <h5>{{getEpisodioDetalle.episodio.pacienteId}}</h5>
+                <h5>{{getEpisodioDetalle.episodio.paciente.id}}</h5>
             
-                <h4>Id del episodio</h4>
+                <h4>Id del episodio:</h4>
            
                 <h5>{{getEpisodioDetalle.episodio.id}}</h5>
            
@@ -33,84 +33,42 @@ and open the template in the editor.
         
                 <h4>Intensidad de dolor:</h4>
             
-                <h5>{{getEpisodioDetalle.episodio.intensidadDolor}}</h5>
+                <h5>{{getEpisodioDetalle.episodio.intensidad}}</h5>
             
                 <h4>Horas de sue&ntilde;o:</h4>
             
-                <h5>{{getEpisodioDetalle.episodio.horasDeSueno}}</h5>
+                <h5>{{getEpisodioDetalle.episodio.hoursSlept}}</h5>
             
         <div class="row">
             <div class="col-md-6">
                 <h4>Medicamentos:</h4>
             </div>
         </div>
-        <div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Cantidad de veces</th>
-                        <th>Intervalo de Horas</th>
-                        <th>Miligramos</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="medicamento in getEpisodioDetalle.episodio.medicamentos | orderBy:'fechaRecetado'">
-                        <th>{{medicamento.nombre}}</th>
-                        <th>{{medicamento.cantidadVecesAlDia}}</th>
-                        <th>{{medicamento.intervaloHoras}}</th>
-                        <th>{{medicamento.miligramos}}</th>
-                        <th>{{medicamento.fechaRecetado|date}}</th>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="col-md-6">
+                {{getEpisodioDetalle.episodio.medicamentos}}
+            </div>
         </div>
+        
         <div class="row">
             <div class="col-md-6">
                 <h4>Catalizadores:</h4>
             </div>
         </div>
-        <div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Especificaci&oacute;n</th>
-                        <th>Frecuencia</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="catalizador in getEpisodioDetalle.episodio.catalizadores | orderBy:'tipo'">
-                        <th>{{catalizador.tipo}}</th>
-                        <th>{{catalizador.especificacion}}</th>
-                        <th>{{catalizador.frecuencia}}</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="row">
+                <div class="col-md-6">
+                    {{getEpisodioDetalle.episodio.catalizadores}}
+                </div>
+            </div>
         <div class="row">
             <div class="col-md-6">
                 <h4>Sintomas:</h4>
             </div>
         </div>
-        <div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Localizaci&oacute;n</th>
-                        <th>Intensidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="sintoma in getEpisodioDetalle.episodio.sintomas | orderBy:'nombre'">
-                        <th>{{sintoma.nombre}}</th>
-                        <th>{{sintoma.localizacion}}</th>
-                        <th>{{sintoma.intensidad}}</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="row">
+                <div class="col-md-6">
+                    {{getEpisodioDetalle.episodio.sintomas}}
+                </div>
+            </div>
 </div>
 </div>
