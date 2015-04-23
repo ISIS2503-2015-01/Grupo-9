@@ -29,7 +29,7 @@ and open the template in the editor.
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    {{getPacienteDetalle.paciente.nombre}}
+                    {{getPacienteDetalle.paciente.name}}
                 </div>
             </div>
             <div class="row">
@@ -39,7 +39,7 @@ and open the template in the editor.
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    {{getPacienteDetalle.paciente.noIdentificacion}}
+                    {{getPacienteDetalle.paciente.cedula}}
                 </div>
             </div>
             <div class="row">
@@ -49,30 +49,11 @@ and open the template in the editor.
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    {{getPacienteDetalle.paciente.fechaNacimiento | date}}
+                    {{getPacienteDetalle.paciente.birthdate | date}}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    Peso:
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    {{getPacienteDetalle.paciente.peso}}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    Estatura:
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    {{getPacienteDetalle.paciente.estatura}}
-                </div>
-            </div>
-        <div class="panel panel-default">
+            
+        <!--div class="panel panel-default">
             <div class="panel-heading">Medicamentos</div>
             <div>
                 <table class="table">
@@ -117,6 +98,6 @@ and open the template in the editor.
                     </tbody>
                 </table>
             </div>
-          </div>
+          </div-->
     </div>
 </div>

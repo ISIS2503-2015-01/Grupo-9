@@ -132,6 +132,18 @@ public class EpisodioServices {
     //--------------------------------------------------------------------------
     
     /**
+     * La lista de todos los episodios registrados en la aplicacion
+     * @return todos los doctores registrados
+     */
+    @GET
+    public Response findAll(){
+        Query q = entityManager.createQuery("select u from EpisodioDolor u ");
+        List<EpisodioDolor> episodios = q.getResultList();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( EpisodioDolorConverter.entityToDtoList(episodios) ).build() ;
+        
+    }
+    
+    /**
      * Retorna los detalles de un episodio particular
      * @param id el id del episodio
      * @return un episodio de dolor dado el id

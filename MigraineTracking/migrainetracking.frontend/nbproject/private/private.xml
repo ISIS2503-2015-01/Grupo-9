@@ -19,5 +19,8 @@
             <file>file:/C:/Users/template/Documents/Grupo-9/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/partials/navbar.html</file>
         </group>
         <group name="MigraineTracking-NV"/>
+        <group name="LaSeguridad">
+            <file>file:/C:/Users/template/Documents/Grupo-9/MigraineTracking/migrainetracking.frontend/public_html/partials/paciente/paciente-info.html</file>
+        </group>
     </open-files>
 </project-private>

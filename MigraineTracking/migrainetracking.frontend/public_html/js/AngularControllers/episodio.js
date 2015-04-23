@@ -11,7 +11,7 @@
             controller:['$http',function($http){
                     var self = this;
                     self.episodios = [];
-                    $http.get('http://localhost:8080/migrainetracking.services/webresources/registroepisodios/getAll/EpisodiosDolor').success(function(data){
+                    $http.get('http://localhost:8080/episodios').success(function(data){
                         console.log(data);
                         self.episodios =data;
                     });
@@ -28,7 +28,7 @@
                     self.episodio ={};
                     self.id=0;
                     this.darEpisodioDetalle = function(){
-                    $http.get('http://localhost:8080/migrainetracking.services/webresources/registroepisodios/getEpisodio/episodio_id/'+ self.id).success(function(data){
+                    $http.get('http://localhost:8080/episodios/'+ self.id).success(function(data){
                         self.episodio=data;
                     });
                 };
@@ -47,7 +47,7 @@
                     self.id=0;
                     this.buscarPacienteEpisodios = function( ){
                         console.log(self.id);
-                       $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodios/pacid/'+ self.id).success(function(data){
+                       $http.get('http://localhost:8080/pacientes/episodios/'+ self.id).success(function(data){
                         console.log(data);
                         self.episodios = data;
                        }); 
@@ -71,7 +71,7 @@
                         console.log(self.id);
                         console.log(self.fecha1);
                         console.log(self.fecha2);
-                       $http.get('http://localhost:8080/migrainetracking.services/webresources/revisionepisodios/getEpisodiosByFechas/'+self.id+'_'+self.fecha1+'_'+self.fecha2).success(function(data){
+                       $http.get('http://localhost:8080/'+self.id+'/'+self.fecha1+'/'+self.fecha2).success(function(data){
                         self.episodios = data;
                         console.log(data);
                        }); 
@@ -81,6 +81,7 @@
         };
         
     });
+    //episodios recientes (No esta en uso)
     app1.directive('episodiosRecientes',function(){
         return{
             restrict:'E',
