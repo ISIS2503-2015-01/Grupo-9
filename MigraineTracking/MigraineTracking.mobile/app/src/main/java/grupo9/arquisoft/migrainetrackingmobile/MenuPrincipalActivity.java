@@ -9,9 +9,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import grupo9.arquisoft.migrainetrackingmobile.dtos.EpisodioDolorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
+import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 
 
 public class MenuPrincipalActivity extends ActionBarActivity {
@@ -23,9 +30,10 @@ public class MenuPrincipalActivity extends ActionBarActivity {
         setContentView(R.layout.activity_menu_principal);
         Intent intent = getIntent();
         Bundle bundle=intent.getExtras();
-        idUsuario=bundle.getString("USUARIO");
-
-        new buscarNombre().execute("https://migraine-services.herokuapp.com/pacientes/"+idUsuario);
+        if(bundle!=null) {
+            idUsuario = bundle.getString("USUARIO");
+            new buscarNombre().execute("https://migraine-services.herokuapp.com/pacientes/" + idUsuario);
+        }
     }
 
 
@@ -90,8 +98,16 @@ public class MenuPrincipalActivity extends ActionBarActivity {
         }
 
         protected void onPostExecute(String response) {
+
             TextView textView=(TextView)findViewById(R.id.textView);
-            textView.setText("Bienvenido, "+idUsuario);
+            String nombre=darNombre(response);
+            textView.setText("Bienvenido, "+nombre);
         }
+    }
+
+    private String darNombre(String json)
+    {
+        String[] atributos=json.split("\"");
+        return atributos[17];
     }
 }
