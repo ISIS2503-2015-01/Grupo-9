@@ -1,5 +1,7 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -75,7 +77,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         PacienteDTO nuevo=new PacienteDTO();
         nuevo.setName(nombre);
         nuevo.setUsername(usuario + "");
-        nuevo.setBirthdate(fecha);
+        nuevo.setBirthdate(fecha.getTime());
         nuevo.setCedula(usuario);
         nuevo.setDoctorid(null);
         nuevo.setPassword(contrasenia);
@@ -83,7 +85,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         Gson gson=new Gson();
 
         //jsonRespuesta=gson.toJson(nuevo);
-        jsonRespuesta="{\"doctorid\":"+1+",\"password\":\""+nuevo.getPassword()+"\",\"username\":\""+nuevo.getUsername()+"\",\"cedula\":\""+nuevo.getCedula()+"\",\"birthdate\":"+nuevo.getBirthdate().getTime()+",\"name\":\""+nuevo.getName()+"\"}";
+        jsonRespuesta="{\"doctorid\":"+1+",\"password\":\""+nuevo.getPassword()+"\",\"username\":\""+nuevo.getUsername()+"\",\"cedula\":\""+nuevo.getCedula()+"\",\"birthdate\":"+nuevo.getBirthdate()+",\"name\":\""+nuevo.getName()+"\"}";
         System.out.println(jsonRespuesta);
         new registrar().execute("https://migraine-services.herokuapp.com/pacientes/");
     }

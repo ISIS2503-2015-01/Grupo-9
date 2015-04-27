@@ -60,6 +60,9 @@ public class MenuPrincipalActivity extends ActionBarActivity {
     }
     public void registrarEpisodio(View view){
         Intent intent = new Intent(this, RegistrarEpisodioActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putString("USUARIO",idUsuario);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
     public void grabarEpisodio(View view){
@@ -70,17 +73,13 @@ public class MenuPrincipalActivity extends ActionBarActivity {
         Intent intent = new Intent(this, EscucharGrabacionesActivity.class);
         startActivity(intent);
     }
-    public void agregarMedicamento(View view){
-        Intent intent = new Intent(this, AgregarMedicamentoActivity.class);
-        startActivity(intent);
-    }
-    public void agregarHabito(View view){
-        Intent intent = new Intent(this, AgregarHabitoActivity.class);
-        startActivity(intent);
-    }
-
-    public void verAnalisis(View view){
-        Intent intent = new Intent(this, VerAnalisisActivity.class);
+    public void verEpisodios(View view)
+    {
+        Intent intent = new Intent(this, VerEpisodiosActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putString("tipo","CEDULA");
+        bundle.putString("id",idUsuario);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -101,13 +100,25 @@ public class MenuPrincipalActivity extends ActionBarActivity {
 
             TextView textView=(TextView)findViewById(R.id.textView);
             String nombre=darNombre(response);
-            textView.setText("Bienvenido, "+nombre);
+            textView.setText("Bienvenido (a), "+nombre);
         }
     }
 
     private String darNombre(String json)
     {
-        String[] atributos=json.split("\"");
-        return atributos[17];
+        try {
+            Gson gson = new Gson();
+            PacienteDTO pac = gson.fromJson(json, PacienteDTO.class);
+            return pac.getName();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            String[] atributos = json.split("\"");
+            try {
+                return atributos[17];
+            } catch (Exception es) {
+                return "";
+            }
+        }
     }
 }

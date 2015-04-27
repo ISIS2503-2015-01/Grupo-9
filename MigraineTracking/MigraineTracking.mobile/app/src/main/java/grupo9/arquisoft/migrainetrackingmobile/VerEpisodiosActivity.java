@@ -89,13 +89,13 @@ public class VerEpisodiosActivity extends ActionBarActivity {
             group.setName("Episodio "+(i+1));
 
             ExpandListChild paciente=new ExpandListChild();
-            paciente.setName("Paciente : " + actual.getPacienteId());
+            paciente.setName("Paciente : " + actual.getCedulaPaciente());
             paciente.setTag(null);
             list2.add(paciente);
 
             ExpandListChild fecha=new ExpandListChild();
             Date fechita=new Date();
-            fechita.setTime(Long.parseLong(actual.getFecha()));
+            fechita.setTime(actual.getFecha());
             fecha.setName("Fecha: "+fechita.toString());
             fecha.setTag(null);
             list2.add(fecha);
@@ -106,12 +106,12 @@ public class VerEpisodiosActivity extends ActionBarActivity {
             list2.add(localizacion);
 
             ExpandListChild intensidad=new ExpandListChild();
-            intensidad.setName("Intensidad : " + actual.getIntensidadDolor());
+            intensidad.setName("Intensidad : " + actual.getIntensidad());
             intensidad.setTag(null);
             list2.add(intensidad);
 
             ExpandListChild horas=new ExpandListChild();
-            horas.setName("Horas de sueño : " + actual.getHorasDeSueño());
+            horas.setName("Horas de sueño : " + actual.getHoursSlept());
             horas.setTag(null);
             list2.add(horas);
 

@@ -23,7 +23,7 @@ public class PacienteDTO {
 
     private String name;
 
-    private Date birthdate;
+    private Long birthdate;
 
     private Long doctorid; // Solo se usa para agregar el paciente
 
@@ -63,11 +63,11 @@ public class PacienteDTO {
         this.name = name;
     }
 
-    public Date getBirthdate() {
+    public Long getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(Long birthdate) {
         this.birthdate = birthdate;
     }
 

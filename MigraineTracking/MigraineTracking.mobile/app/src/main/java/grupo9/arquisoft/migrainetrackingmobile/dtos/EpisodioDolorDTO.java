@@ -14,221 +14,110 @@ import java.util.List;
  * @author estudiante
  */
 public class EpisodioDolorDTO {
-    
-    //-----------------------------------------------
-    //Atributos
-    //-----------------------------------------------
-    
-    /**
-     * El numero de identificacion del episodio de dolor
-     */
+
     private Long id;
-    
-    /**
-     * Fecha en la que ocurrio el episodio de dolor
-     */
-    private String fecha;
-    
-    /**
-     * La localizacion del episodio de dolor
-     */
+
+    private Long fecha;
+
     private String localizacion;
-    
-    /**
-     * La intensidad del dolor del episodio
-     */
-    private int intensidad;
-    
-    /**
-     *Aproximado de las horas diarias promdedio que el paciente durmio en los ultimos 3 dias previos. 
-     */
-    private int hoursSlept;
-    
-    /**
-     * La lista de sintomas que presenta el episodio de dolor
-     */
-    private List<SintomaDTO> sintomas; 
-    
-    /**
-     * La lista de catalizadores relacionados con el episodio de dolor
-     */
+
+    // Del 1 al 10...
+    private Integer intensidad;
+
+    private Integer hoursSlept;
+
+    private Long cedulaPaciente;
+
+    // <!-- Ojo: Estas listas se persisten como JSONArray >
+
+    private List<SintomaDTO> sintomas;
+
     private List<CatalizadorDTO> catalizadores;
-    
-    /**
-     * La lista de medicamentos que el paciente esta tomando en el momento del episodio de dolor
-     */
+
     private List<MedicamentoDTO> medicamentos;
 
-    /**
-     * La cedula del paciente
-     */
-    private int cedulaPaciente;
-    
-    //-----------------------------------------------
-    //Constructor
-    //-----------------------------------------------
-    
-    /**
-     * Metodo constructor sin parametros
-     */
-    public EpisodioDolorDTO() {
-        
+    //----------------------------------------------------------------------
+    // Constructor
+    //----------------------------------------------------------------------
+    public EpisodioDolorDTO(){
+
     }
 
-    /**
-     * Metodo constructor con parametros
-     * @param fecha la fecha en la que ocurre el episodio de dolor
-     * @param localizacion la localizacion del episodio de dolor
-     * @param horasDeSueño las horas de sueno que se tienen durante el espisodio de sueno
-     * @param intensidadDolor la intensidad del dolor del episodio
-     */
-    public EpisodioDolorDTO( String fecha, String localizacion, int horasDeSueño, int intensidadDolor) {
-        this.fecha = fecha;
-        this.localizacion = localizacion; 
-        this.intensidad = intensidadDolor;
-        this.hoursSlept = horasDeSueño;
-        sintomas = new ArrayList<SintomaDTO>();
-        catalizadores = new ArrayList<CatalizadorDTO>();
-        medicamentos = new ArrayList<MedicamentoDTO>();
-    }
-
-    //-----------------------------------------------
-    //Metodos
-    //-----------------------------------------------
-    
-    /**
-     * Metodo que retorna el numero id del episodio
-     * @return el id del episodiio de dolor
-     */
+    //----------------------------------------------------------------------
+    // Getters and Setters
+    //----------------------------------------------------------------------
     public Long getId() {
         return id;
     }
 
-    /**
-     * Metodo que modifica el numero de id por el numero dado como parametro
-     * @param id el nuevo id del episodio de dolor
-     */
     public void setId(Long id) {
         this.id = id;
     }
-    
-    /**
-     * Metodo que retorna la fecha del episodio de dolor
-     * @return la fecha del episodio de dolor
-     */
-    public String getFecha() {
+
+    public Long getCedulaPaciente() {
+        return cedulaPaciente;
+    }
+
+    public void setCedulaPaciente(Long cedulaPaciente) {
+        this.cedulaPaciente = cedulaPaciente;
+    }
+
+    public Long getFecha() {
         return fecha;
     }
 
-    /**
-     * Metodo que cambia la fecha del episodio por la fecha dada como parametro
-     * @param fecha la nueva fecha del episodio
-     */
-    public void setFecha(String fecha) {
+    public void setFecha(Long fecha) {
         this.fecha = fecha;
     }
 
-    /**
-     * Metodo que retorna la intensidad del dolor del episodio
-     * @return la intensidad del dolor
-     */
-    public int getIntensidadDolor() {
-        return intensidad;
-    }
-
-    /**
-     * Metodo que cambia la intensidad del dolor por la nueva intensidad dada como parametro
-     * @param intensidadDolor la nueva intensidad del dolor
-     */
-    public void setIntensidadDolor(int intensidadDolor) {
-        this.intensidad = intensidadDolor;
-    }
-    
-    /**
-     * Metodo que retorna la lista de sintomas relacionados con el episodio de dolor
-     * @return los sintomas relacionados con el episodio
-     */
-    public List<SintomaDTO> getSintomas() {
-        return sintomas;
-    }
-
-    /**
-     * Metodo que cambia la lista de sintomas por los sintomas que se dan como parametro
-     * @param sintomas los nuevos sintomas del episodio
-     */
-    public void setSintomas(List<SintomaDTO> sintomas) {
-        this.sintomas = sintomas;
-    }
-
-    /**
-     * Metodo que retorna la lista de los catalizadores relacionados con el episodio de dolor
-     * @return la lista de catalizadores relacionados con el episodio de dolor
-     */
-    public List<CatalizadorDTO> getCatalizadores() {
-        return catalizadores;
-    }
-
-    /**
-     * Metodo que cambia la lista de los catalizadores por la nueva lista dada como parametro
-     * @param catalizadores los nuevos catalizadores del episodio
-     */
-    public void setCatalizadores(List<CatalizadorDTO> catalizadores) {
-        this.catalizadores = catalizadores;
-    }
-
-    /**
-     * Metodo que retorna la lista de los medicamentos que actualmente utiliza el paciente
-     * @return la lista de los medicamentos que actualmente esta tomando el paciente
-     */
-    public List<MedicamentoDTO> getMedicamentosActuales() {
-        return medicamentos;
-    }
-
-    /**
-     * Metodo que cambia la lista de los medicamentos actuales por la lista dada como parametro
-     * @param medicamentosActuales la nueva lista de los medicamentos
-     */
-    public void setMedicamentosActuales(List<MedicamentoDTO> medicamentosActuales) {
-        this.medicamentos = medicamentosActuales;
-    }
-
-    /**
-     * Metodo que retorna la localizacion del dolor
-     * @return la localizacion del dolor
-     */
     public String getLocalizacion() {
         return localizacion;
     }
 
-    /**
-    * Metodo que cambia la localizacion del dolor por la nueva localizacion dada como parametro
-    * @param localizacion la nueva localizacion del dolor
-    */
     public void setLocalizacion(String localizacion) {
         this.localizacion = localizacion;
     }
 
-    /**
-     * Metodo que retorna las horas de sueno del episodio
-     * @return las horas de sueno
-     */
-    public int getHorasDeSueño() {
+    public Integer getIntensidad() {
+        return intensidad;
+    }
+
+    public void setIntensidad(Integer intensidad) {
+        this.intensidad = intensidad;
+    }
+
+    public Integer getHoursSlept() {
         return hoursSlept;
     }
 
-    /**
-     * Metodo que cambia la cantidad de horas de sueno por la cantidad dada como parametro
-     * @param horasDeSueño las nuevas horas de sueno relacionadas con el episodio de dolor
-     */
-    public void setHorasDeSueño(int horasDeSueño) {
-        this.hoursSlept = horasDeSueño;
+    public void setHoursSlept(Integer hoursSlept) {
+        this.hoursSlept = hoursSlept;
     }
 
-    public int getPacienteId() {
-        return cedulaPaciente;
+
+    public List<SintomaDTO> getSintomas() {
+        return sintomas;
     }
 
-    public void setPacienteId(int pacienteId) {
-        this.cedulaPaciente = pacienteId;
+    public void setSintomas(List<SintomaDTO> sintomas) {
+        this.sintomas = sintomas;
     }
+
+    public List<CatalizadorDTO> getCatalizadores() {
+        return catalizadores;
+    }
+
+    public void setCatalizadores(List<CatalizadorDTO> catalizadores) {
+        this.catalizadores = catalizadores;
+    }
+
+    public List<MedicamentoDTO> getMedicamentos() {
+        return medicamentos;
+    }
+
+    public void setMedicamentos(List<MedicamentoDTO> medicamentos) {
+        this.medicamentos = medicamentos;
+    }
+
+
 }

@@ -52,7 +52,7 @@ public class AgregarSintomaActivity extends ActionBarActivity {
             String nomb = nombre.getText().toString();
             String loca = localizacion.getText().toString();
             String inte = intensidad.getText().toString();
-            SintomaDTO nuevo = new SintomaDTO(loca, nomb, Integer.parseInt(inte));
+            SintomaDTO nuevo = new SintomaDTO(nomb);
         }
         catch(Exception e)
         {
@@ -71,7 +71,7 @@ public class AgregarSintomaActivity extends ActionBarActivity {
             String nomb = nombre.getText().toString();
             String loca = localizacion.getText().toString();
             String inte = intensidad.getText().toString();
-            SintomaDTO nuevo = new SintomaDTO(loca, nomb, Integer.parseInt(inte));
+            SintomaDTO nuevo = new SintomaDTO(nomb);
         }
         catch(Exception e)
         {

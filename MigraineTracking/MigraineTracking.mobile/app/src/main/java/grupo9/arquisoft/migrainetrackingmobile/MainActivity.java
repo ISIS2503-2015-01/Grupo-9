@@ -1,5 +1,7 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -73,7 +75,11 @@ public class MainActivity extends ActionBarActivity {
             Bundle bundle=new Bundle();
             EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
             String usuario = usuarioEdit.getText().toString();
-            //if(usuario.equals("mp.mancipe10")||usuario.equals("s.abisambra125")||usuario.equals("pa.otoya575")||usuario.equals("hf.vargas10"))
+            if(usuario.equals(""))
+            {
+                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese un usuario válido").setNeutralButton("Cerrar", null).show();
+                return;
+            }
             bundle.putString("USUARIO", usuario);
             intent.putExtras(bundle);
             startActivity(intent);
@@ -86,10 +92,6 @@ public class MainActivity extends ActionBarActivity {
             if(usuario.equals("mp.mancipe10")||usuario.equals("s.abisambra125")||usuario.equals("pa.otoya575")||usuario.equals("hf.vargas10"))
             intent.putExtra(EXTRA_USUARIO, usuario);
             startActivity(intent);
-        }
-        else
-        {
-
         }
     }
 

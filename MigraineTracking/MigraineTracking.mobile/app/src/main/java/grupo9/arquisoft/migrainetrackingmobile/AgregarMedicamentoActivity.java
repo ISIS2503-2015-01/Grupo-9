@@ -67,7 +67,7 @@ public class AgregarMedicamentoActivity extends ActionBarActivity {
         String cant = cantidad.getText().toString();
         try
         {
-            MedicamentoDTO nuevo = new MedicamentoDTO(nomb, Integer.parseInt(cantVeces), Integer.parseInt(hor), Integer.parseInt(cant));
+            MedicamentoDTO nuevo = new MedicamentoDTO(nomb,null);
             //MainActivity.medicamentos.add(nuevo);
             Log.i("MyActivity", nomb);
            //Log.i("MyActivity", MainActivity.medicamentos.size()+ " medicamentos");
