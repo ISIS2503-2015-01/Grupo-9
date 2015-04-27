@@ -84,9 +84,9 @@ public class MainActivity extends ActionBarActivity {
             }
             EditText claveEdit = (EditText) findViewById(R.id.usuario_edit);
             new buscarClave().execute("https://migraine-services.herokuapp.com/pacientes/" + usuario);
-            if(!claveEdit.getText().equals(password))
+            if(password!=null && !claveEdit.getText().equals(password))
             {
-                new AlertDialog.Builder(this).setTitle("Error de autenticacion").setMessage("El usuario y/0 clave son erradas").setNeutralButton("Cerrar",null).show();
+               new AlertDialog.Builder(this).setTitle("Error de autenticacion").setMessage("El usuario y/0 clave son erradas").setNeutralButton("Cerrar",null).show();
                 return;
             }
             bundle.putString("USUARIO", usuario);
