@@ -23,12 +23,14 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
+import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 
 
 public class MainActivity extends ActionBarActivity {
 
     public final static String EXTRA_USUARIO = "grupo9.arquisoft.migrainetrackingmobile.USUARIO";
     public final static String TAG="grupo9.migraintracking";
+    private String password;
 
 
     @Override
@@ -80,6 +82,13 @@ public class MainActivity extends ActionBarActivity {
                 new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese un usuario válido").setNeutralButton("Cerrar", null).show();
                 return;
             }
+            EditText claveEdit = (EditText) findViewById(R.id.usuario_edit);
+            new buscarClave().execute("https://migraine-services.herokuapp.com/pacientes/" + usuario);
+            if(!claveEdit.getText().equals(password))
+            {
+                new AlertDialog.Builder(this).setTitle("Error de autenticacion").setMessage("El usuario y/0 clave son erradas").setNeutralButton("Cerrar",null).show();
+                return;
+            }
             bundle.putString("USUARIO", usuario);
             intent.putExtras(bundle);
             startActivity(intent);
@@ -119,4 +128,53 @@ public class MainActivity extends ActionBarActivity {
             //texto.setText(response);
         }
     }
+
+    private class buscarClave extends AsyncTask<String, Long, String>
+    {
+        protected String doInBackground(String... urls)
+        {
+            RestClient client = new RestClient(urls[0]);
+            client.AddHeader("Accept", "application/json");
+            try
+            {
+                client.Execute(RestClient.RequestMethod.GET);
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            System.out.println(client.getResponse());
+            return client.getResponse();
+        }
+
+        protected void onPostExecute(String response)
+        {
+            String clave = darClave(response);
+        }
+    }
+
+    public String darClave(String json)
+    {
+        try
+        {
+            Gson gson = new Gson();
+            PacienteDTO pac = gson.fromJson(json, PacienteDTO.class);
+            password = pac.getPassword();
+            return pac.getPassword();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            String[] atributos = json.split("\"");
+            try
+            {
+                return atributos[17];
+            }
+            catch(Exception e1)
+            {
+                return "";
+            }
+        }
+    }
+
 }
