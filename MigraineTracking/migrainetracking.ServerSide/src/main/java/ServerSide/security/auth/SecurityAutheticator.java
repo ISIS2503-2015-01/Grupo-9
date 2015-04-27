@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.isis2503.security;
+package ServerSide.security.auth;
 
-import co.edu.uniandes.csw.isis2503.jwt.api.JwtToken;
-import co.edu.uniandes.csw.isis2503.jwt.api.VerifyToken;
-import co.edu.uniandes.csw.isis2503.logic.dto.UserDTO;
+import ServerSide.Models.DTOs.UserDTO;
+import ServerSide.security.jwt.api.JwtToken;
+import ServerSide.security.jwt.api.VerifyToken;
 import com.stormpath.sdk.api.ApiKey;
 import com.stormpath.sdk.api.ApiKeys;
 import com.stormpath.sdk.application.Application;
@@ -32,11 +32,8 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
  *
  * @author estudiante
  */
-public class SecurityAuthenticator implements Authenticator {
- 
- 
-    @Override
-    public AuthenticationInfo authenticate(AuthenticationToken at) throws AuthenticationException {
+public class SecurityAutheticator implements Authenticator{
+  public AuthenticationInfo authenticate(AuthenticationToken at) throws AuthenticationException {
         JwtToken authToken = (JwtToken) at;
         if (authToken.getToken() != null) {
             if (!authToken.getToken().equals("")) {
@@ -67,7 +64,7 @@ public class SecurityAuthenticator implements Authenticator {
     public boolean validarToken(UserDTO user) {
  
         boolean result = false;
-        String path = "C:\\Users\\template\\Documents\\Grupo-9\\MigraineTracking\\migrainetracking.ServerSide\\apiKey.properties";//Colocar la Ubicacion de su archivo apiKey.properties
+        String path = "C:\\Users\\Jj.alarcon10\\Documents\\apiKey.properties";//Colocar la Ubicacion de su archivo apiKey.properties
         ApiKey apiKey = ApiKeys.builder().setFileLocation(path).build();
         Client client = Clients.builder().setApiKey(apiKey).build();
  
@@ -85,6 +82,5 @@ public class SecurityAuthenticator implements Authenticator {
         }
         return result;
  
-    }
- 
+    }  
 }

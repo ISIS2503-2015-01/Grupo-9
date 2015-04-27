@@ -110,6 +110,7 @@ public class PacienteServices {
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(respuesta).build();
     }
     
+    
     //--------------------------------------------------------------------------
     // GET
     //--------------------------------------------------------------------------
