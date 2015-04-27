@@ -35,7 +35,6 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 public class SecurityAuthenticator implements Authenticator {
  
  
-    @Override
     public AuthenticationInfo authenticate(AuthenticationToken at) throws AuthenticationException {
         JwtToken authToken = (JwtToken) at;
         if (authToken.getToken() != null) {
