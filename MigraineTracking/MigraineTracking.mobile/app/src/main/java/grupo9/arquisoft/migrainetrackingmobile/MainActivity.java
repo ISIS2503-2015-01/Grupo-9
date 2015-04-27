@@ -82,16 +82,23 @@ public class MainActivity extends ActionBarActivity {
                 new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese un usuario válido").setNeutralButton("Cerrar", null).show();
                 return;
             }
-            EditText claveEdit = (EditText) findViewById(R.id.usuario_edit);
+            EditText claveEdit = (EditText) findViewById(R.id.contrasenia_edit);
+            String claveapp = claveEdit.getText().toString();
             new buscarClave().execute("https://migraine-services.herokuapp.com/pacientes/" + usuario);
-            if(password!=null && !claveEdit.getText().equals(password))
+            if(password!=null)
             {
-               new AlertDialog.Builder(this).setTitle("Error de autenticacion").setMessage("El usuario y/0 clave son erradas").setNeutralButton("Cerrar",null).show();
+                Log.d("No es null",password);
+            }
+            if(claveapp.equalsIgnoreCase(password) || (password==null && claveapp.equals("")))
+            {
+                bundle.putString("USUARIO", usuario);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+            else{
+                new AlertDialog.Builder(this).setTitle("Error de autenticacion").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar",null).show();
                 return;
             }
-            bundle.putString("USUARIO", usuario);
-            intent.putExtras(bundle);
-            startActivity(intent);
         }
         else if (doctores.isChecked())
         {
