@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ServerSide.Services;
 
 import ServerSide.Converters.DoctorConverter;
@@ -19,6 +18,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.ws.rs.Consumes;
@@ -39,120 +39,119 @@ import org.codehaus.jettison.json.JSONObject;
 @Path("/doctores")
 @Produces(MediaType.APPLICATION_JSON)
 public class DoctorServices {
-   
+
     //--------------------------------------------------------------------------
     // Atributos
     //--------------------------------------------------------------------------
-    
     /**
-     * Atributo del entity manager
-     * Unidad de persistencia, "myPU"
+     * Atributo del entity manager Unidad de persistencia, "myPU"
      */
     @PersistenceContext(unitName = "myPU")
-    EntityManager entityManager; 
-    
+    EntityManager entityManager;
+
     //--------------------------------------------------------------------------
     // INIT
     //--------------------------------------------------------------------------
-
-     /**
+    /**
      * Inicializa el entity manager
      */
     @PostConstruct
-    public void init(){
-        try{
+    public void init() {
+        try {
             entityManager = PersistenceManager.getInstance().getEntityManagerFactory().createEntityManager();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("No se incializo correctamente!!!");
         }
     }
-    
+
     //--------------------------------------------------------------------------
     // POST
     //--------------------------------------------------------------------------
-    
     /**
      * Registra un doctor en la aplicacion
+     *
      * @param doctor la informacion del doctor
-     * @return 
+     * @return
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registrarDoctor(DoctorDTO doctor) throws JSONException{
+    public Response registrarDoctor(DoctorDTO doctor) throws JSONException {
         JSONObject respuesta = new JSONObject();
         Doctor doctorEntity = new Doctor();
         
+        //#Jetty
+        EntityTransaction tran = entityManager.getTransaction();
+        //#Glassfish
+        //UserTransaction tran = Utils.loadUtx();
+        
         doctorEntity.setName(doctor.getName());
-        try{
-            entityManager.getTransaction().begin();
+        try {
+            tran.begin();
+            //#Glassfish
+            //entityManager.joinTransaction();
+
             entityManager.persist(doctor);
-            entityManager.getTransaction().commit();
+
+            tran.commit();
             entityManager.refresh(doctorEntity);
             respuesta.put("doctor_id", doctorEntity.getId());
-            
-        }    
-        catch(Throwable t){
+
+        } catch (Throwable t) {
             t.printStackTrace();
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-            doctorEntity=null;
-            respuesta.put( "Exception message", t.getMessage() );
+            doctorEntity = null;
+            respuesta.put("Exception message", t.getMessage());
             return Response.status(500).header("Access-Control-Allow-Origin", "*").entity(respuesta).build();
-        }
-        finally{
+        } finally {
             entityManager.clear();
             entityManager.close();
         }
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(respuesta).build();
     }
-   
-    
-    
+
     //--------------------------------------------------------------------------
     // GET
     //--------------------------------------------------------------------------
-    
     /**
      * Los detalles de un doctor
+     *
      * @param id el numero de cedula del doctor
      * @return la informacion de un doctor en particular
      */
     @GET
     @Path("/{id}")
-    public Response findById( @PathParam("id") Long id ){
+    public Response findById(@PathParam("id") Long id) {
         Doctor doctor = entityManager.find(Doctor.class, id);
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( DoctorConverter.entityToDto(doctor) ).build();
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(DoctorConverter.entityToDto(doctor)).build();
     }
-    
+
     /**
      * La lista de todos los doctores registrados en la aplicacion
+     *
      * @return todos los doctores registrados
      */
     @GET
-    public Response findAll(){
+    public Response findAll() {
         Query q = entityManager.createQuery("select u from Doctor u ");
         List<Doctor> doctors = q.getResultList();
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( DoctorConverter.entityToDtoList(doctors) ).build() ;
-        
+        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(DoctorConverter.entityToDtoList(doctors)).build();
+
     }
 
-    
     //--------------------------------------------------------------------------
     // Metodos Complementarios
     //--------------------------------------------------------------------------
-
     /**
      * Convierte una lista a JSON
+     *
      * @param lista una lista con objetos
      * @return un string con el json de la lista que entra por parametro
      */
-    public String toJson(List lista){
+    public String toJson(List lista) {
         return new Gson().toJson(lista);
     }
-    
 
-    
 }

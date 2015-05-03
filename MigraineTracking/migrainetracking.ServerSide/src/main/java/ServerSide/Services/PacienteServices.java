@@ -19,6 +19,7 @@ import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.ws.rs.Consumes;
@@ -83,17 +84,24 @@ public class PacienteServices {
     public Response registrarPaciente(PacienteDTO paciente) throws JSONException{
         Paciente p = PacienteConverter.dtoToEntity(paciente);
         JSONObject respuesta = new JSONObject();
-        try{
-           entityManager.getTransaction().begin();
-           
-           entityManager.persist(p);
-           Doctor doc = this.entityManager.find( Doctor.class, paciente.getDoctorid() );
-           doc.getPacientes().add( p );
-           
-           entityManager.getTransaction().commit();
-           entityManager.refresh(p);
-           respuesta.put("New_paciente_id", p.getCedula() );
-       }
+        //#Jetty
+        EntityTransaction tran = entityManager.getTransaction();
+        
+        //#Glassfish
+        //UserTransaction tran = Utils.loadUtx();
+        try {
+            tran.begin();
+            //#Glassfish
+            //entityManager.joinTransaction();
+
+            entityManager.persist(p);
+            Doctor doc = this.entityManager.find(Doctor.class, paciente.getDoctorid());
+            doc.getPacientes().add(p);
+
+            tran.commit();
+            entityManager.refresh(p);
+            respuesta.put("New_paciente_id", p.getCedula());
+        }
        catch(Throwable t){
           t.printStackTrace();
             if (entityManager.getTransaction().isActive()) {
