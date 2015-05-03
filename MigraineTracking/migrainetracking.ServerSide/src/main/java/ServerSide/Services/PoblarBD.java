@@ -43,9 +43,9 @@ import org.fluttercode.datafactory.impl.DataFactory;
 public class PoblarBD {
     
     // Numero de datos
-    static final int num_pacientes = 13000;
-    static final int num_doctores = 150;
-    static final int num_episodios = 39000;
+    static final int num_pacientes = 130;
+    static final int num_doctores = 10;
+    static final int num_episodios = 390;
     
     
     @PersistenceContext(unitName = "myPU")
@@ -109,7 +109,7 @@ public class PoblarBD {
             entityManager.persist(p);
             
             //entityManager.getTransaction().commit();
-            if(i==1000){entityManager.flush();}
+            if(i==100){entityManager.flush();}
             Utils.printf("Poblando pacientes : "+i+" / "+num_pacientes , "green");
             
         }
@@ -184,7 +184,7 @@ public class PoblarBD {
             p.getEpisodios().add(e);
             
             //entityManager.getTransaction().commit();
-            if(i==1000){entityManager.flush();}
+            if(i==100){entityManager.flush();}
             Utils.printf("Poblando episodios : "+i+" / "+num_episodios , "red");
             
         }

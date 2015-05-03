@@ -13,6 +13,7 @@ import ServerSide.Models.DTOs.EpisodioDolorDTO;
 import ServerSide.Models.DTOs.SintomaDTO;
 import ServerSide.Models.Entities.EpisodioDolor;
 import ServerSide.Models.Entities.Paciente;
+import ServerSide.Utils.Utils;
 import com.google.gson.Gson;
 import java.util.Date;
 import java.util.List;
@@ -105,8 +106,8 @@ public class EpisodioServices {
            
            entityManager.getTransaction().commit();
            entityManager.refresh(episodioEntity);
-           
-           // Analisis
+           Utils.printf("(!) BD peristence >> Entity : Episodio [id="+episodioEntity.getId()+"]" , "green");
+         
            respuesta.put("Mensaje", this.analizarEpisodio(episodio) );
        }
        catch(Throwable t){
@@ -132,18 +133,6 @@ public class EpisodioServices {
     //--------------------------------------------------------------------------
     
     /**
-     * La lista de todos los episodios registrados en la aplicacion
-     * @return todos los doctores registrados
-     */
-    @GET
-    public Response findAll(){
-        Query q = entityManager.createQuery("select u from EpisodioDolor u ");
-        List<EpisodioDolor> episodios = q.getResultList();
-        return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( EpisodioDolorConverter.entityToDtoList(episodios) ).build() ;
-        
-    }
-    
-    /**
      * Retorna los detalles de un episodio particular
      * @param id el id del episodio
      * @return un episodio de dolor dado el id
@@ -157,6 +146,7 @@ public class EpisodioServices {
     
     /**
      * Retorna los episodios de dolor de un paciente en particular, entre dos fechas
+     * @param cedula
      * @param id La cedula del paciente
      * @param fecha1 La fecha inicial del intervalo, se pasa de string a date para ejecutar el query
      * @param fecha2 La fecha final del intervalo, se pasa de string a date para ejecutar el query
@@ -164,9 +154,9 @@ public class EpisodioServices {
      */
     @GET
     @Path("/{id}/{fecha1}/{fecha2}")
-    public Response getBetweenFechas( @PathParam("id") Long cedula , @PathParam("fecha1") String fecha1 , @PathParam("fecha2") String fecha2 ){
-        Date f1 = new Date( Long.parseLong(fecha1) );
-        Date f2 = new Date( Long.parseLong(fecha2) );
+    public Response getBetweenFechas( @PathParam("id") Long cedula , @PathParam("fecha1") Long fecha1 , @PathParam("fecha2") Long fecha2 ){
+        Date f1 = new Date( fecha1 );
+        Date f2 = new Date( fecha2 );
         Query q = entityManager.createQuery( "SELECT e FROM EpisodioDolor e WHERE e.paciente.cedula=:ced AND :date1 <= e.fecha AND e.fecha <= :date2" );
         q.setParameter("date1", f1);
         q.setParameter("date2", f2);
@@ -193,7 +183,7 @@ public class EpisodioServices {
                                    "Dirigase a una sala de emergencias para recibir atencion inmediata"
                                    };
         
-        String msj = "Se le recomienda realizar las siguientes acciones: \n %1$s \n\n Su dolor se pudo aumentar porque consumio,reliazo, o estuvo expuesto a lo siguientes: %2$s \n";
+        String msj = "Se le recomienda realizar las siguientes acciones: \n %1$s \n\nEs posible que su dolor se haya aumentado al consumir,realizar, o verse expuesto a las siguientes:\n %2$s ";
         
         String r = "";
         String e = "";

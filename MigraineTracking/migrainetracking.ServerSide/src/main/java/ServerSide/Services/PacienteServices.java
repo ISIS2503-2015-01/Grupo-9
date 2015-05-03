@@ -13,6 +13,7 @@ import ServerSide.Models.DTOs.PacienteDTO;
 import ServerSide.Models.Entities.Doctor;
 import ServerSide.Models.Entities.EpisodioDolor;
 import ServerSide.Models.Entities.Paciente;
+import ServerSide.Utils.Utils;
 import com.google.gson.Gson;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 import java.util.List;
@@ -121,8 +122,8 @@ public class PacienteServices {
      */
     @Path("/{id}")
     @GET
-    public Response findById( @PathParam("id") Long id ){
-        Paciente paciente = entityManager.find(Paciente.class, id);
+    public Response findById( @PathParam("id") Long cedula ){
+        Paciente paciente = entityManager.find(Paciente.class, cedula);
         return Response.status(200).header("Access-Control-Allow-Origin", "*").entity( PacienteConverter.entityToDto(paciente) ).build();
     }
     
