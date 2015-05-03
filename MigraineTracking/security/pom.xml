@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>paotoya</groupId>
+    <groupId>PMC</groupId>
     <artifactId>security</artifactId>
-    <version>1.3</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,23 +36,16 @@
         <dependency>
             <groupId>com.stormpath.sdk</groupId>
             <artifactId>stormpath-sdk-api</artifactId>
-            <version>1.0.RC4.2</version>
-        </dependency>
+            <version>1.0.RC2</version>
+        </dependency> 
+ 
         <dependency>
             <groupId>com.stormpath.sdk</groupId>
             <artifactId>stormpath-sdk-httpclient</artifactId>
-            <version>1.0.RC4.2</version>
+            <version>1.0.RC2</version>
             <scope>runtime</scope>
-        </dependency>
-        <!-- This next runtime dependency is only necessary if you have
-        a REST API and you want to secure it with OAuth: -->
-        <dependency>
-            <groupId>com.stormpath.sdk</groupId>
-            <artifactId>stormpath-sdk-oauth</artifactId>
-            <version>1.0.RC4.2</version>
-            <scope>runtime</scope>
-        </dependency>
-        
+        </dependency> 
+ 
         <!-- Utils JWT -->
         <dependency>
             <groupId>commons-codec</groupId>
@@ -72,11 +65,11 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>6.0</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
             <type>jar</type>
         </dependency>
     </dependencies>
-    <description>Filtros y auth en el paquete =&gt; co.uniandes.csw.isis2503.security</description>
+    
 </project>
