@@ -60,7 +60,7 @@ public class UserService {
             userStorm.setName(account.getFullName());
             userStorm.setUsername(account.getUsername());
             userStorm.setPassword(user.getPassword());
-            userStorm.setLevelAccess("administradores");
+            userStorm.setLevelAccess(user.getLevelAccess());
             token = new Gson().toJson(JsonWebToken.encode(userStorm, "Un14nd3s2014@", JwtHashAlgorithm.HS256));
             status = 200;
 
