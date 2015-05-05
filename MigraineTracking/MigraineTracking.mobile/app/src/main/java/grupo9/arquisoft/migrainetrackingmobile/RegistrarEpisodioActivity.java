@@ -85,7 +85,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
 
     public void agregarMedicamento(View view)
     {
-        final Dialog dialog = new Dialog(context);
+        final Dialog dialog = new Dialog(context,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         dialog.setContentView(R.layout.custom);
         dialog.setTitle("Agregar Un Medicamento");
 
@@ -121,16 +121,19 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         String fec=findViewById(R.id.fecha_edit).toString();
         String horas=findViewById(R.id.horasSueno_edit).toString();
         String intensi=findViewById(R.id.intensidad_edit).toString();
-        String localizacion=findViewById(R.id.localizacion_edit).toString();
+        String local=findViewById(R.id.local).toString();
+        String cedula=findViewById(R.id.cedula_edit).toString();
         int hora=0;
         int intensidad=0;
         Date fecha=new Date();
+        Long ced=null;
         try
         {
             DateFormat dateFormat=new SimpleDateFormat("YYYY-MM-DD");
             fecha=dateFormat.parse(fec);
             hora=Integer.parseInt(horas);
             intensidad=Integer.parseInt(intensi);
+            ced= Long.parseLong(cedula);
         }
         catch (Exception e)
         {
@@ -140,19 +143,18 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         episodio.setId(null);
         episodio.setCatalizadores(catalizadores);
         episodio.setFecha(fecha.getTime());
-        if(idUsuario!=null)
-        episodio.setCedulaPaciente(Long.parseLong(idUsuario));
+        episodio.setCedulaPaciente(ced);
         episodio.setHoursSlept(hora);
         episodio.setMedicamentos(medicamentos);
         episodio.setSintomas(sintomas);
         episodio.setIntensidad(intensidad);
-        episodio.setLocalizacion(localizacion);
+        episodio.setLocalizacion(local);
 
         Gson gson=new Gson();
         jsonRespuesta=gson.toJson(episodio);
         System.out.println(jsonRespuesta);
 
-        new registrar().execute("https://migraine-services.herokuapp.com/episodios");
+        new registrar().execute("https://migraine-services.herokuapp.com/webresources/episodios");
     }
 
     public void llenarListas()
@@ -177,6 +179,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         protected String doInBackground(String... urls) {
             RestClient restClient = new RestClient(urls[0]);
             restClient.AddHeader("Content-Type", "application/json");
+            restClient.AddHeader("x_rest_user", token);
             restClient.AddParam(jsonRespuesta);
             try {
                 restClient.Execute(RestClient.RequestMethod.POST);
