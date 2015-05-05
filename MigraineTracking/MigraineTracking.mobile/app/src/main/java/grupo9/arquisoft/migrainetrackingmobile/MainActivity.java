@@ -39,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        password=false;
     }
 
 
@@ -143,12 +143,16 @@ public class MainActivity extends ActionBarActivity {
                 RestClient client = gson.fromJson(response, RestClient.class);
                 if (client != null)
                 {
-                    if(client.getResponseCode()!=401)
+                    if(client.getResponseCode()==200)
                     {
                         SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
                         editor.putString("token", client.getResponse());
                         editor.commit();
                         password=true;
+                    }
+                    else
+                    {
+                        password=false;
                     }
                 }
             }
