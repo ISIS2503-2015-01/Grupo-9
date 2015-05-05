@@ -15,7 +15,8 @@
     <EditText android:id="@+id/contrasenia_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/contrasenia_edit"/>
+        android:hint="@string/contrasenia_edit"
+        android:password="true"/>
 
     <TextView
         android:layout_width="wrap_content"
