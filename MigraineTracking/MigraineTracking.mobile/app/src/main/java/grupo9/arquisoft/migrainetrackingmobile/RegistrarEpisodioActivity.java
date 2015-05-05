@@ -118,10 +118,15 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
     public void registrarEpisodioDolor(View view)
     {
         llenarListas();
-        String fec=findViewById(R.id.fecha_edit).toString();
-        String horas=findViewById(R.id.horasSueno_edit).toString();
-        String intensi=findViewById(R.id.intensidad_edit).toString();
-        String local=findViewById(R.id.local).toString();
+        EditText fech=(EditText)findViewById(R.id.fecha_edit);
+        String fec=fech.getText().toString();
+        EditText hor=(EditText)findViewById(R.id.horasSueno_edit);
+        String horas=hor.getText().toString();
+        EditText inten=(EditText)findViewById(R.id.intensidad_edit);
+        String intensi=inten.getText().toString();
+        EditText local = (EditText)findViewById(R.id.localizacion_edit);
+        String localizacion=local.getText().toString();
+        System.out.println(local);
         String cedula=findViewById(R.id.cedula_edit).toString();
         int hora=0;
         int intensidad=0;
@@ -129,7 +134,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         Long ced=null;
         try
         {
-            DateFormat dateFormat=new SimpleDateFormat("YYYY-MM-DD");
+            DateFormat dateFormat=new SimpleDateFormat("yyyy-mm-dd");
             fecha=dateFormat.parse(fec);
             hora=Integer.parseInt(horas);
             intensidad=Integer.parseInt(intensi);
@@ -148,7 +153,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         episodio.setMedicamentos(medicamentos);
         episodio.setSintomas(sintomas);
         episodio.setIntensidad(intensidad);
-        episodio.setLocalizacion(local);
+        episodio.setLocalizacion(localizacion);
 
         Gson gson=new Gson();
         jsonRespuesta=gson.toJson(episodio);
