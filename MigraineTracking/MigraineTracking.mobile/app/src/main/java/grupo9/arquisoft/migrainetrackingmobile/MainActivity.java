@@ -3,6 +3,7 @@ package grupo9.arquisoft.migrainetrackingmobile;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -30,18 +31,14 @@ public class MainActivity extends ActionBarActivity {
 
     public final static String EXTRA_USUARIO = "grupo9.arquisoft.migrainetrackingmobile.USUARIO";
     public final static String TAG="grupo9.migraintracking";
-    private String password;
+    private boolean password;
+    private String jsonLogin;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //new poblar().execute("https://migraine-services.herokuapp.com/poblar");
-
-
-       //new EjecutarUrl().execute("https://migraine-services.herokuapp.com/poblar");
 
     }
 
@@ -67,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void login(View view){
+    public void login(View view) throws InterruptedException {
 
         RadioButton pacientes = (RadioButton)findViewById(R.id.pacientesRadio);
         RadioButton doctores = (RadioButton) findViewById(R.id.doctoresRadio);
@@ -84,20 +81,22 @@ public class MainActivity extends ActionBarActivity {
             }
             EditText claveEdit = (EditText) findViewById(R.id.contrasenia_edit);
             String claveapp = claveEdit.getText().toString();
-            new buscarClave().execute("https://migraine-services.herokuapp.com/pacientes/" + usuario);
-            if(password!=null)
-            {
-                Log.d("No es null",password);
+            Gson gson=new Gson();
+            PacienteDTO pacienteDTO=new PacienteDTO();
+            pacienteDTO.setUsername(usuario);
+            pacienteDTO.setPassword(claveapp);
+            jsonLogin =gson.toJson(pacienteDTO);
+            new obtenerToken().execute("https://migraine-services.herokuapp.com/webresources/auth/login");
+            Thread.sleep(1000);
+            if(!password) {
+                new AlertDialog.Builder(this).setTitle("Error de autenticacion").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar", null).show();
+                return;
             }
-            if(claveapp.equalsIgnoreCase(password) || (password==null && claveapp.equals("")))
+            else
             {
                 bundle.putString("USUARIO", usuario);
                 intent.putExtras(bundle);
                 startActivity(intent);
-            }
-            else{
-                new AlertDialog.Builder(this).setTitle("Error de autenticacion").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar",null).show();
-                return;
             }
         }
         else if (doctores.isChecked())
@@ -117,69 +116,45 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    private class poblar extends AsyncTask<String, Long, String> {
-        protected String doInBackground(String... urls) {
-            RestClient restClient = new RestClient(urls[0]);
-            restClient.AddHeader("Accept", "application/json");
-            try {
-                restClient.Execute(RestClient.RequestMethod.GET);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            System.out.println(restClient.getResponse());
-            return restClient.getResponse();
-        }
-
-        protected void onPostExecute(String response) {
-            TextView texto = (TextView) findViewById(R.id.texto);
-            //texto.setText(response);
-        }
-    }
-
-    private class buscarClave extends AsyncTask<String, Long, String>
+    private class obtenerToken extends AsyncTask<String, Long, String>
     {
         protected String doInBackground(String... urls)
         {
             RestClient client = new RestClient(urls[0]);
             client.AddHeader("Accept", "application/json");
+            client.AddParam(jsonLogin);
             try
             {
-                client.Execute(RestClient.RequestMethod.GET);
+                client.Execute(RestClient.RequestMethod.POST);
             }
             catch(Exception e)
             {
                 e.printStackTrace();
             }
             System.out.println(client.getResponse());
-            return client.getResponse();
+            Gson gson=new Gson();
+            return gson.toJson(client);
         }
 
         protected void onPostExecute(String response)
         {
-            String clave = darClave(response);
-        }
-    }
-
-    public String darClave(String json)
-    {
-        try
-        {
-            Gson gson = new Gson();
-            PacienteDTO pac = gson.fromJson(json, PacienteDTO.class);
-            password = pac.getPassword();
-            return pac.getPassword();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            String[] atributos = json.split("\"");
-            try
-            {
-                return atributos[17];
+            try {
+                Gson gson = new Gson();
+                RestClient client = gson.fromJson(response, RestClient.class);
+                if (client != null)
+                {
+                    if(client.getResponseCode()!=401)
+                    {
+                        SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
+                        editor.putString("token", client.getResponse());
+                        editor.commit();
+                        password=true;
+                    }
+                }
             }
-            catch(Exception e1)
+            catch (Exception e)
             {
-                return "";
+                e.printStackTrace();
             }
         }
     }
