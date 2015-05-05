@@ -29,7 +29,6 @@ import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 
 public class MainActivity extends ActionBarActivity {
 
-    public final static String EXTRA_USUARIO = "grupo9.arquisoft.migrainetrackingmobile.USUARIO";
     public final static String TAG="grupo9.migraintracking";
     private boolean password;
     private String jsonLogin;
@@ -39,7 +38,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        password=false;
     }
 
 
@@ -71,7 +69,6 @@ public class MainActivity extends ActionBarActivity {
         if(pacientes.isChecked())
         {
             Intent intent = new Intent(this, MenuPrincipalActivity.class);
-            Bundle bundle=new Bundle();
             EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
             String usuario = usuarioEdit.getText().toString();
             if(usuario.equals(""))
@@ -86,16 +83,16 @@ public class MainActivity extends ActionBarActivity {
             pacienteDTO.setUsername(usuario);
             pacienteDTO.setPassword(claveapp);
             jsonLogin =gson.toJson(pacienteDTO);
+            System.out.println(jsonLogin);
             new obtenerToken().execute("https://migraine-services.herokuapp.com/webresources/auth/login");
-            Thread.sleep(1000);
-            if(!password) {
-                new AlertDialog.Builder(this).setTitle("Error de autenticacion").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar", null).show();
+            Thread.sleep(6000);
+            System.out.println("Password: "+password);
+            if(password==false) {
+                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar", null).show();
                 return;
             }
             else
             {
-                bundle.putString("USUARIO", usuario);
-                intent.putExtras(bundle);
                 startActivity(intent);
             }
         }
@@ -105,7 +102,6 @@ public class MainActivity extends ActionBarActivity {
             EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
             String usuario = usuarioEdit.getText().toString();
             if(usuario.equals("mp.mancipe10")||usuario.equals("s.abisambra125")||usuario.equals("pa.otoya575")||usuario.equals("hf.vargas10"))
-            intent.putExtra(EXTRA_USUARIO, usuario);
             startActivity(intent);
         }
     }
@@ -121,7 +117,7 @@ public class MainActivity extends ActionBarActivity {
         protected String doInBackground(String... urls)
         {
             RestClient client = new RestClient(urls[0]);
-            client.AddHeader("Accept", "application/json");
+            client.AddHeader("Content-Type", "application/json");
             client.AddParam(jsonLogin);
             try
             {
@@ -131,31 +127,40 @@ public class MainActivity extends ActionBarActivity {
             {
                 e.printStackTrace();
             }
-            System.out.println(client.getResponse());
-            Gson gson=new Gson();
-            return gson.toJson(client);
+            if(client.getResponseCode()==200)
+            {
+                password=true;
+            }
+            System.out.println("Resp: "+client.getResponse());
+            String tok=client.getResponse().split("\"")[1];
+            return client.getResponseCode()+":"+tok;
         }
 
         protected void onPostExecute(String response)
         {
             try {
-                Gson gson = new Gson();
-                RestClient client = gson.fromJson(response, RestClient.class);
-                if (client != null)
-                {
-                    if(client.getResponseCode()==200)
+                System.out.println(response);
+                String tok=response.split(":")[1];
+                String resp=response.split(":")[0];
+                    if(resp.equals("200"))
                     {
-                        SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
-                        editor.putString("token", client.getResponse());
-                        editor.commit();
                         password=true;
+                        System.out.println("entró");
+                        SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
+                        //String token=client.getResponse().split("\"")[0];
+                        editor.putString("token", tok);
+                        System.out.println(tok);
+                        EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
+                        String usuario = usuarioEdit.getText().toString();
+                        String login=usuario.split("@")[0];
+                        editor.putString("USUARIO",login);
+                        System.out.println(editor.commit());
                     }
                     else
                     {
                         password=false;
                     }
                 }
-            }
             catch (Exception e)
             {
                 e.printStackTrace();

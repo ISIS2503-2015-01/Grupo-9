@@ -1,6 +1,7 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -24,16 +25,17 @@ import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 public class MenuPrincipalActivity extends ActionBarActivity {
 
     private String idUsuario;
+    private String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
         Intent intent = getIntent();
-        Bundle bundle=intent.getExtras();
-        if(bundle!=null) {
-            idUsuario = bundle.getString("USUARIO");
-            new buscarNombre().execute("https://migraine-services.herokuapp.com/pacientes/" + idUsuario);
-        }
+        TextView textView=(TextView)findViewById(R.id.textView);
+        SharedPreferences prefs=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
+        idUsuario=prefs.getString("USUARIO","");
+        textView.setText("Bienvenido (a), "+idUsuario);
+        token=prefs.getString("token","");
     }
 
 
@@ -81,44 +83,5 @@ public class MenuPrincipalActivity extends ActionBarActivity {
         bundle.putString("id",idUsuario);
         intent.putExtras(bundle);
         startActivity(intent);
-    }
-
-    private class buscarNombre extends AsyncTask<String, Long, String> {
-        protected String doInBackground(String... urls) {
-            RestClient restClient = new RestClient(urls[0]);
-            restClient.AddHeader("Accept", "application/json");
-            try {
-                restClient.Execute(RestClient.RequestMethod.GET);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            System.out.println(restClient.getResponse());
-            return restClient.getResponse();
-        }
-
-        protected void onPostExecute(String response) {
-
-            TextView textView=(TextView)findViewById(R.id.textView);
-            String nombre=darNombre(response);
-            textView.setText("Bienvenido (a), "+nombre);
-        }
-    }
-
-    private String darNombre(String json)
-    {
-        try {
-            Gson gson = new Gson();
-            PacienteDTO pac = gson.fromJson(json, PacienteDTO.class);
-            return pac.getName();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            String[] atributos = json.split("\"");
-            try {
-                return atributos[17];
-            } catch (Exception es) {
-                return "";
-            }
-        }
     }
 }

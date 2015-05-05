@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
     MultiSelectionSpinner spinCatalizadores;
     MultiSelectionSpinner spinSintomas;
     private String idUsuario;
+    private String token;
     private ArrayList<MedicamentoDTO> medicamentos;
     private ArrayList<CatalizadorDTO> catalizadores;
     private ArrayList<SintomaDTO> sintomas;
@@ -47,8 +49,9 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         medicamentos= new ArrayList<MedicamentoDTO>();
         setContentView(R.layout.activity_registrar_episodio);
         Intent intent = getIntent();
-        Bundle extras=intent.getExtras();
-        idUsuario=extras.getString("USUARIO");
+        SharedPreferences preferences=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
+        idUsuario=preferences.getString("USUARIO","");
+        token=preferences.getString("token","");
         String[] catalizadores = {"Estres","Anticonceptivos","Chocolate","Licor","Endulcolorantes artificiales", "Citricos", "Queso curado", "Yogur","Pescado","Salsa de soja","Platanos","Aguacate","Vino tinto","Esfuerzo fisico","Estimulo frio(Ej: helado)","Luces intensas","Tabaco","Olores fuertes"};
         spinCatalizadores = (MultiSelectionSpinner) findViewById(R.id.spinCatalizadores);
         spinCatalizadores.setItems(catalizadores);

@@ -87,7 +87,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         //jsonRespuesta=gson.toJson(nuevo);
         jsonRespuesta="{\"doctorid\":"+1+",\"password\":\""+nuevo.getPassword()+"\",\"username\":\""+nuevo.getUsername()+"\",\"cedula\":\""+nuevo.getCedula()+"\",\"birthdate\":"+nuevo.getBirthdate()+",\"name\":\""+nuevo.getName()+"\"}";
         System.out.println(jsonRespuesta);
-        new registrar().execute("https://migraine-services.herokuapp.com/pacientes/");
+        new registrar().execute("https://migraine-services.herokuapp.com/webresources/auth/new/paciente");
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
