@@ -59,7 +59,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         TextView txtNombre= (TextView)findViewById(R.id.editText);
         String nombre=txtNombre.getText().toString();
         TextView txtUsuario= (TextView)findViewById(R.id.editText2);
-        long usuario=Long.parseLong(txtUsuario.getText().toString());
+        String usuario=txtUsuario.getText().toString();
         TextView txtFecha= (TextView)findViewById(R.id.editText3);
         Date fecha= new Date();
         try {
@@ -67,16 +67,16 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        TextView txtEstatura=(TextView)findViewById(R.id.editText5);
-        int estatura=Integer.parseInt(txtEstatura.getText().toString());
+        TextView txtCedula=(TextView)findViewById(R.id.editText5);
+        long cedula=Long.parseLong(txtCedula.getText().toString());
         TextView txtContrasenia=(TextView)findViewById(R.id.editText6);
         String contrasenia=txtContrasenia.getText().toString();
 
         PacienteDTO nuevo=new PacienteDTO();
         nuevo.setName(nombre);
-        nuevo.setUsername(usuario + "");
+        nuevo.setUsername(usuario);
         nuevo.setBirthdate(fecha.getTime());
-        nuevo.setCedula(usuario);
+        nuevo.setCedula(cedula);
         nuevo.setDoctorid(null);
         nuevo.setPassword(contrasenia);
 
