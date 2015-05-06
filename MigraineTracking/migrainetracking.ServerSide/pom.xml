@@ -9,6 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+
         <!-- Jetty Libreria-->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
@@ -18,8 +19,19 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
-            
             <version>7.6.0.v20120127</version>
+        </dependency>
+
+        <!-- Jersey -->
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.13</version>
         </dependency>
 
         <!-- Shiro -->
@@ -52,18 +64,6 @@
             <scope>runtime</scope>
         </dependency> 
      
-        <!-- Jersey -->
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
-            <version>2.13</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
-            <version>2.13</version>
-        </dependency>
-
         <!-- jUnit -->
         <dependency>
             <groupId>junit</groupId>
@@ -82,6 +82,7 @@
             <version>2.5.0</version>
             <type>jar</type>
         </dependency>
+        
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -93,41 +94,81 @@
             <artifactId>json-simple</artifactId>
             <version>1.1</version>
         </dependency>
+        
+        <!-- Database Drivers -->
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derbyclient</artifactId>
             <version>10.11.1.1</version>
         </dependency>
-              <dependency>
-                     <groupId>org.codehaus.jackson</groupId>
-                     <artifactId>jackson-mapper-asl</artifactId>
-                     <version>1.9.11</version>
-                     <type>jar</type>
-              </dependency>
-              <dependency>
-                     <groupId>org.codehaus.jettison</groupId>
-                     <artifactId>jettison</artifactId>
-                     <version>1.1</version>
-                     <type>jar</type>
-              </dependency>
-              <dependency>
-                     <groupId>org.fluttercode.datafactory</groupId>
-                     <artifactId>datafactory</artifactId>
-                     <version>0.8</version>
-                     <type>jar</type>
-              </dependency>
-              <dependency>
-                     <groupId>PMC</groupId>
-                     <artifactId>security</artifactId>
-                     <version>1.0-SNAPSHOT</version>
-              </dependency>
+        
         <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901-1.jdbc4</version>
+        </dependency>
+        
+        <!--JSON mappers-->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.11</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jettison</groupId>
+            <artifactId>jettison</artifactId>
+            <version>1.1</version>
+            <type>jar</type>
+        </dependency>
+        
+        
+        <!--Test data generator-->
+        <dependency>
+            <groupId>org.fluttercode.datafactory</groupId>
+            <artifactId>datafactory</artifactId>
+            <version>0.8</version>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.4.0</version>
+            <type>jar</type>
+        </dependency>
+       
+        <!--        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
             <type>jar</type>
         </dependency>
+        -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.9</version>
+            <type>jar</type>
+        </dependency>
+    
+        <dependency>
+            <groupId>PMC</groupId>
+            <artifactId>security</artifactId>
+            <version>3.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+    
     </dependencies>
+    
+    
+    <repositories>
+        <repository>
+            <id>project.local</id>
+            <name>project</name>
+            <url>file:${project.basedir}/repo</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
