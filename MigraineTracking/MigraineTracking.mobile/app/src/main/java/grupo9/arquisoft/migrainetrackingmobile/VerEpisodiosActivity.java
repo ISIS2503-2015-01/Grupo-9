@@ -51,6 +51,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
 
         String tipo=bundle.getString("tipo");
         String id=bundle.getString("id");
+        System.out.println(id);
 
         if(tipo.equals("CEDULA"))
         {
@@ -154,7 +155,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
             RestClient restClient = new RestClient(urls[0]);
             restClient.AddHeader("Accept", "application/json");
             restClient.AddHeader("x_rest_user",token);
-            restClient.AddParam(idUsuario);
+            restClient.AddHeader("x_id_user",idUsuario);
             System.out.println(idUsuario);
             System.out.println(token);
             try {
