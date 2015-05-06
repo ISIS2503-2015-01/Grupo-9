@@ -154,6 +154,8 @@ public class VerEpisodiosActivity extends ActionBarActivity {
             RestClient restClient = new RestClient(urls[0]);
             restClient.AddHeader("Accept", "application/json");
             restClient.AddHeader("x_rest_user",token);
+            restClient.AddParam(idUsuario);
+            System.out.println(idUsuario);
             System.out.println(token);
             try {
                 restClient.Execute(RestClient.RequestMethod.GET);

@@ -95,6 +95,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
             RestClient restClient = new RestClient(urls[0]);
             restClient.AddHeader("Content-Type", "application/json");
             restClient.AddParam(jsonRespuesta);
+            System.out.println(jsonRespuesta);
             try {
                 restClient.Execute(RestClient.RequestMethod.POST);
             } catch (Exception e) {
