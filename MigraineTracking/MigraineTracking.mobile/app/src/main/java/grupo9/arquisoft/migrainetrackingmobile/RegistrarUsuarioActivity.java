@@ -67,8 +67,6 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        TextView txtPeso=(TextView)findViewById(R.id.editText4);
-        int peso=Integer.parseInt(txtPeso.getText().toString());
         TextView txtEstatura=(TextView)findViewById(R.id.editText5);
         int estatura=Integer.parseInt(txtEstatura.getText().toString());
         TextView txtContrasenia=(TextView)findViewById(R.id.editText6);

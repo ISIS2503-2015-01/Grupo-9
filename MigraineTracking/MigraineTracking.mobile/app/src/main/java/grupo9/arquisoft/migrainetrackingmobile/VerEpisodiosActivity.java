@@ -1,6 +1,7 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -35,12 +36,16 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     private ArrayList<ExpandListGroup> list;
     private ArrayList<ExpandListChild> list2;
     private List<EpisodioDolorDTO> listaEpisodios;
+    private String idUsuario;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_episodios);
-
+        SharedPreferences preferences=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
+        idUsuario=preferences.getString("USUARIO","");
+        token=preferences.getString("token","");
         Intent intent = getIntent();
         Bundle bundle=intent.getExtras();
 
@@ -148,6 +153,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         protected String doInBackground(String... urls) {
             RestClient restClient = new RestClient(urls[0]);
             restClient.AddHeader("Accept", "application/json");
+            restClient.AddHeader("x_rest_user",token);
             try {
                 restClient.Execute(RestClient.RequestMethod.GET);
             } catch (Exception e) {

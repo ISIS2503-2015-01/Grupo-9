@@ -2,12 +2,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context="grupo9.arquisoft.migrainetrackingmobile.RegistrarUsuarioActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Introduzca su nombre"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -18,14 +23,24 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Introduzca un Usuario. Debe ser un correo electronico, y contener un numero"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText2"
-        android:hint="Cédula de Ciudadania / Usuario"
+        android:hint="Usuario"
         android:layout_below="@+id/editText3"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha de nacimiento (dd/mm/yyyy)"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -38,21 +53,23 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText5"
-        android:hint="Estatura"
-        android:layout_below="@+id/editText4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Documento de Identidad"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText4"
-        android:hint="Peso"
-        android:layout_below="@+id/editText2" />
+        android:id="@+id/editText5"
+        android:hint="Cedula"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Introduzca una contraseña. Debe tener una mayuscula y un numero"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -73,5 +90,5 @@
         android:layout_alignParentStart="true"
         android:onClick="registrarUsuario"/>
 
-</RelativeLayout>
+</LinearLayout>
 </ScrollView>
