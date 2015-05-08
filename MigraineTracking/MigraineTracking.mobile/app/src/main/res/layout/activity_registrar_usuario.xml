@@ -69,7 +69,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Introduzca una contraseña. Debe tener una mayuscula y un numero"/>
+        android:text="Introduzca una contraseña. Debe tener una mayúscula, un número y tener más de nueve caracteres"/>
 
     <EditText
         android:layout_width="match_parent"

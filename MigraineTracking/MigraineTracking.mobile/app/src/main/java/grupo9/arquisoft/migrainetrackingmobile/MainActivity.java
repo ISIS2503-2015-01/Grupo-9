@@ -83,8 +83,8 @@ public class MainActivity extends ActionBarActivity {
             Gson gson=new Gson();
             PacienteDTO pacienteDTO=new PacienteDTO();
 
-            usuario=md5(usuario);
-            claveapp=md5(claveapp);
+            //usuario=md5(usuario);
+            //claveapp=md5(claveapp);
 
             pacienteDTO.setUsername(usuario);
             pacienteDTO.setPassword(claveapp);

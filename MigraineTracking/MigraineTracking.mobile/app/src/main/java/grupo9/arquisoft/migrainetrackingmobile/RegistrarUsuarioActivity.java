@@ -63,16 +63,27 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         TextView txtUsuario= (TextView)findViewById(R.id.editText2);
         String usuario=txtUsuario.getText().toString();
         TextView txtFecha= (TextView)findViewById(R.id.editText3);
-        Date fecha= new Date();
-        try {
-            fecha=new SimpleDateFormat("dd/mm/yyyy").parse(txtFecha.getText().toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         TextView txtCedula=(TextView)findViewById(R.id.editText5);
-        long cedula=Long.parseLong(txtCedula.getText().toString());
+        long cedula=0;
         TextView txtContrasenia=(TextView)findViewById(R.id.editText6);
         String contrasenia=txtContrasenia.getText().toString();
+        Date fecha= new Date();
+        try
+        {
+            cedula=Long.parseLong(txtCedula.getText().toString());
+            fecha=new SimpleDateFormat("dd/mm/yyyy").parse(txtFecha.getText().toString());
+            if(!usuario.contains("@")||!usuario.contains("."))
+                throw new Exception();
+            if(contrasenia.length()<9)
+                throw new Exception();
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Los campos no son correctos").setNeutralButton("Cerrar", null).show();
+            return;
+        }
+
 
         PacienteDTO nuevo=new PacienteDTO();
         nuevo.setName(nombre);
@@ -80,14 +91,19 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         nuevo.setCedula(cedula);
         nuevo.setDoctorid(null);
 
-        usuario=md5(usuario);
+        //usuario=md5(usuario);
         nuevo.setUsername(usuario);
 
-        contrasenia=md5(contrasenia);
+        //contrasenia=md5(contrasenia);
         nuevo.setPassword(contrasenia);
 
         //jsonRespuesta=gson.toJson(nuevo);
-        jsonRespuesta="{\"doctorid\":"+1+",\"password\":\""+nuevo.getPassword()+"\",\"username\":\""+nuevo.getUsername()+"\",\"cedula\":\""+nuevo.getCedula()+"\",\"birthdate\":"+nuevo.getBirthdate()+",\"name\":\""+nuevo.getName()+"\"}";
+        jsonRespuesta="{\"cedula\":"+nuevo.getCedula()+"," +
+                "\"username\":\""+nuevo.getUsername()+"\"," +
+                "\"password\":\""+nuevo.getPassword()+"\"," +
+                "\"name\":\""+nuevo.getName()+"\"," +
+                "\"birthdate\":"+nuevo.getBirthdate()+"," +
+                "\"doctorid\":"+1+"}";
         System.out.println(jsonRespuesta);
         new registrar().execute("https://migraine-services.herokuapp.com/webresources/auth/new/paciente");
         Intent intent = new Intent(this,MainActivity.class);
@@ -122,10 +138,10 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
     private class registrar extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
             RestClient restClient = new RestClient(urls[0]);
-            restClient.AddHeader("Content-Type", "application/json");
+            restClient.AddHeader("Accept", "application/json");
             restClient.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonRespuesta));
             restClient.AddParam(jsonRespuesta);
-            System.out.println(jsonRespuesta);
+            System.out.println(DataSecurity.hashCryptoCode(jsonRespuesta));
             try {
                 restClient.Execute(RestClient.RequestMethod.POST);
             } catch (Exception e) {

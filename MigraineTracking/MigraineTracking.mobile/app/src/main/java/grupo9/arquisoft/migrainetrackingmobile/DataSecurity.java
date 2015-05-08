@@ -5,12 +5,13 @@
  */
 package grupo9.arquisoft.migrainetrackingmobile;
 
+import android.util.Base64;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.util.Scanner;
-import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -32,7 +33,7 @@ public class DataSecurity {
             ByteArrayOutputStream data = new ByteArrayOutputStream();
             data.write(datosJSON.getBytes("UTF-8"));
             byte[] bytes = data.toByteArray();
-            final byte[] rawHmac = md.digest(bytes);
+            byte[] rawHmac = md.digest(bytes);
             return transformar(rawHmac);
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,8 +79,8 @@ public class DataSecurity {
      * @return EL string construido con la representacion de bytes como Base64.
      * @throws UnsupportedEncodingException
      */
-    private static String transformar(final byte[] b) throws UnsupportedEncodingException {
-        return Base64.encodeBase64String(b);
+    private static String transformar(byte[] b) throws UnsupportedEncodingException {
+        return Base64.encodeToString(b,Base64.DEFAULT);
     }
 
     /**
@@ -90,7 +91,7 @@ public class DataSecurity {
      * @throws Exception
      */
     private static byte[] destransformar(String ss) {
-        return Base64.decodeBase64(ss);
+        return Base64.decode(ss,Base64.DEFAULT);
     }
 
 }
