@@ -21,6 +21,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
@@ -80,6 +82,8 @@ public class MainActivity extends ActionBarActivity {
             String claveapp = claveEdit.getText().toString();
             Gson gson=new Gson();
             PacienteDTO pacienteDTO=new PacienteDTO();
+
+
             pacienteDTO.setUsername(usuario);
             pacienteDTO.setPassword(claveapp);
             jsonLogin =gson.toJson(pacienteDTO);
@@ -98,11 +102,8 @@ public class MainActivity extends ActionBarActivity {
         }
         else if (doctores.isChecked())
         {
-            Intent intent = new Intent(this, MenuDoctorActivity.class);
-            EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
-            String usuario = usuarioEdit.getText().toString();
-            if(usuario.equals("mp.mancipe10")||usuario.equals("s.abisambra125")||usuario.equals("pa.otoya575")||usuario.equals("hf.vargas10"))
-            startActivity(intent);
+            new AlertDialog.Builder(this).setTitle("No diponible").setMessage("El login de doctor no está disponible").setNeutralButton("Cerrar", null).show();
+            return;
         }
     }
 
@@ -168,4 +169,28 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    public static final String md5(final String s) {
+        final String MD5 = "MD5";
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance(MD5);
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 }
