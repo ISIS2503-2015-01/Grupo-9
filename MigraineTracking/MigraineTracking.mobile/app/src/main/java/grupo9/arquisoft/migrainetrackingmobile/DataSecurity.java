@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServerSide.Utils;
+package grupo9.arquisoft.migrainetrackingmobile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -32,7 +32,7 @@ public class DataSecurity {
             ByteArrayOutputStream data = new ByteArrayOutputStream();
             data.write(datosJSON.getBytes("UTF-8"));
             byte[] bytes = data.toByteArray();
-            byte[] rawHmac = md.digest(bytes);
+            final byte[] rawHmac = md.digest(bytes);
             return transformar(rawHmac);
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,7 +48,7 @@ public class DataSecurity {
      * Metodo que verifica que un codigo HMAC corresponda con un mensaje dado.
      *
      * @param datosJSON String con del JSON de los datos.
-     * @param hash_String Hash de los datosJSON. (Bytes + {Encoding base64} =
+     * @param data_hash Hash de los datosJSON. (Bytes + {Encoding base64} =
      * String)
      * @return La verificacion de que el mensaje y el codigo hmac coincidan.
      * @throws Exception Si hubo un error al generar un mensaje HMAC.
@@ -78,8 +78,8 @@ public class DataSecurity {
      * @return EL string construido con la representacion de bytes como Base64.
      * @throws UnsupportedEncodingException
      */
-    private static String transformar(byte[] b) throws UnsupportedEncodingException {
-        return org.apache.commons.codec.binary.Base64.encodeBase64String(b);
+    private static String transformar(final byte[] b) throws UnsupportedEncodingException {
+        return Base64.encodeBase64String(b);
     }
 
     /**
@@ -87,8 +87,7 @@ public class DataSecurity {
      *
      * @param ss El string con los enteros a transformar.
      * @return Los bytes en su representacion real.
-     * @throws Base64DecodingException
-     * @throws UnsupportedEncodingException
+     * @throws Exception
      */
     private static byte[] destransformar(String ss) {
         return Base64.decodeBase64(ss);

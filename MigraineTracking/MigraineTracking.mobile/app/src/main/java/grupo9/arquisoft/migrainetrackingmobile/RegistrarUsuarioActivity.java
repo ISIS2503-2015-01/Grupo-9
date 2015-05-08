@@ -123,6 +123,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         protected String doInBackground(String... urls) {
             RestClient restClient = new RestClient(urls[0]);
             restClient.AddHeader("Content-Type", "application/json");
+            restClient.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonRespuesta));
             restClient.AddParam(jsonRespuesta);
             System.out.println(jsonRespuesta);
             try {

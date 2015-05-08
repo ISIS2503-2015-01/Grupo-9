@@ -83,6 +83,8 @@ public class MainActivity extends ActionBarActivity {
             Gson gson=new Gson();
             PacienteDTO pacienteDTO=new PacienteDTO();
 
+            usuario=md5(usuario);
+            claveapp=md5(claveapp);
 
             pacienteDTO.setUsername(usuario);
             pacienteDTO.setPassword(claveapp);
@@ -119,6 +121,7 @@ public class MainActivity extends ActionBarActivity {
         {
             RestClient client = new RestClient(urls[0]);
             client.AddHeader("Content-Type", "application/json");
+            client.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonLogin));
             client.AddParam(jsonLogin);
             try
             {
