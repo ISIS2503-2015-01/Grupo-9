@@ -91,7 +91,7 @@ public class MainActivity extends ActionBarActivity {
             jsonLogin =gson.toJson(pacienteDTO);
             System.out.println(jsonLogin);
             new obtenerToken().execute("https://migraine-services.herokuapp.com/webresources/auth/login");
-            Thread.sleep(6000);
+            Thread.sleep(8000);
             System.out.println("Password: "+password);
             if(password==false) {
                 new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar", null).show();
@@ -121,8 +121,8 @@ public class MainActivity extends ActionBarActivity {
         protected String doInBackground(String... urls)
         {
             RestClient client = new RestClient(urls[0],MainActivity.this);
-            client.AddHeader("Content-Type", "application/json");
             client.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonLogin));
+            client.AddHeader("Accept", "application/json");
             client.AddParam(jsonLogin);
             try
             {

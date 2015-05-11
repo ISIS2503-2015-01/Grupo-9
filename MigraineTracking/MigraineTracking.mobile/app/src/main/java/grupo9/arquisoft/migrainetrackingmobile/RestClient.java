@@ -21,6 +21,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
@@ -28,7 +29,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.KeyStore;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 
 /**
@@ -45,6 +48,7 @@ public class RestClient {
     private String message;
 
     private String response;
+    private Context context;
 
     public String getResponse() {
         return response;
@@ -63,6 +67,7 @@ public class RestClient {
         this.url = url;
         params = new ArrayList<String>();
         headers = new ArrayList<NameValuePair>();
+        this.context=context;
     }
 
     public void AddParam(String value)
@@ -198,18 +203,47 @@ public class RestClient {
         POST
     }
 
-    public static HttpClient createHttpClient() throws Exception
+    public HttpClient createHttpClient() throws Exception
     {
-        HttpParams params = new BasicHttpParams();
-        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-        HttpProtocolParams.setContentCharset(params, HTTP.DEFAULT_CONTENT_CHARSET);
-        HttpProtocolParams.setUseExpectContinue(params, true);
+        HttpParams httpParameters = new BasicHttpParams();
+        // Set the timeout in milliseconds until a connection is established.
+        int timeoutConnection = 10000;
+        HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+        // Set the default socket timeout (SO_TIMEOUT)
+        // in milliseconds which is the timeout for waiting for data.
+        int timeoutSocket = 10000;
+        HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-        SchemeRegistry schReg = new SchemeRegistry();
-        schReg.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-        schReg.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
-        ClientConnectionManager conMgr = new ThreadSafeClientConnManager(params, schReg);
+        // Instantiate the custom HttpClient
+        HttpClient client = new MyHttpClient(httpParameters, context);
 
-        return new DefaultHttpClient(conMgr, params);
+        return client;
+    }
+
+    private SSLSocketFactory newSslSocketFactory() {
+        try {
+            // Get an instance of the Bouncy Castle KeyStore format
+            KeyStore trusted = KeyStore.getInstance("BKS");
+            // Get the raw resource, which contains the keystore with
+            // your trusted certificates (root and any intermediate certs)
+            InputStream in = context.getResources().openRawResource(R.raw.serv);
+            try {
+                // Initialize the keystore with the provided trusted certificates
+                // Also provide the password of the keystore
+                trusted.load(in, "mysecret".toCharArray());
+                System.out.println("Entró");
+            } finally {
+                in.close();
+            }
+            // Pass the keystore to the SSLSocketFactory. The factory is responsible
+            // for the verification of the server certificate.
+            SSLSocketFactory sf = new SSLSocketFactory(trusted);
+            // Hostname verification from certificate
+            // http://hc.apache.org/httpcomponents-client-ga/tutorial/html/connmgmt.html#d4e506
+            sf.setHostnameVerifier(SSLSocketFactory.STRICT_HOSTNAME_VERIFIER);
+            return sf;
+        } catch (Exception e) {
+            throw new AssertionError(e);
+        }
     }
 }
