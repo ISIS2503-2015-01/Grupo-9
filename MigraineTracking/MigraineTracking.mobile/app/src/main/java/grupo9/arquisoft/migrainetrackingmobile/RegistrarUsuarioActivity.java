@@ -91,13 +91,10 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         nuevo.setCedula(cedula);
         nuevo.setDoctorid(null);
 
-        //usuario=md5(usuario);
         nuevo.setUsername(usuario);
 
-        //contrasenia=md5(contrasenia);
         nuevo.setPassword(contrasenia);
 
-        //jsonRespuesta=gson.toJson(nuevo);
         jsonRespuesta="{\"cedula\":"+nuevo.getCedula()+"," +
                 "\"username\":\""+nuevo.getUsername()+"\"," +
                 "\"password\":\""+nuevo.getPassword()+"\"," +
@@ -110,35 +107,10 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public static final String md5(final String s) {
-        final String MD5 = "MD5";
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuilder hexString = new StringBuilder();
-            for (byte aMessageDigest : messageDigest) {
-                String h = Integer.toHexString(0xFF & aMessageDigest);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
-            }
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
     private class registrar extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
             RestClient restClient = new RestClient(urls[0],RegistrarUsuarioActivity.this);
-            restClient.AddHeader("Accept", "application/json");
+            //restClient.AddHeader("Content-Type", "application/json");
             restClient.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonRespuesta));
             restClient.AddParam(jsonRespuesta);
             System.out.println(DataSecurity.hashCryptoCode(jsonRespuesta));
@@ -147,13 +119,13 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            System.out.println(restClient.getErrorMessage());
             System.out.println(restClient.getResponse());
             return restClient.getResponse();
         }
 
         protected void onPostExecute(String response) {
-            Intent intent=new Intent(RegistrarUsuarioActivity.this,MainActivity.class);
-            startActivity(intent);
+
         }
     }
 }

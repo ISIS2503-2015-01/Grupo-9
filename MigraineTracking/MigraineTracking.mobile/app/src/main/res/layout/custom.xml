@@ -13,11 +13,12 @@
         android:layout_alignParentStart="true" />
     />
 
+    <TextView android:text="El formato de la fecha es dd/mm/yyyy" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
     <EditText
         android:id="@+id/fecha_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Fecha (YYYY-MM-DD)"
+        android:hint="Fecha (dd/mm/yyyy)"
         android:layout_above="@+id/dialogButtonOK"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

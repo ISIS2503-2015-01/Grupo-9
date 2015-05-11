@@ -35,7 +35,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
 
     MultiSelectionSpinner spinCatalizadores;
     MultiSelectionSpinner spinSintomas;
-    private String idUsuario;
+    private long idUsuario;
     private String token;
     private ArrayList<MedicamentoDTO> medicamentos;
     private ArrayList<CatalizadorDTO> catalizadores;
@@ -50,7 +50,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         setContentView(R.layout.activity_registrar_episodio);
         Intent intent = getIntent();
         SharedPreferences preferences=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
-        idUsuario=preferences.getString("USUARIO","");
+        idUsuario=preferences.getLong("CEDULA",0);
         token=preferences.getString("token","");
         String[] catalizadores = {"Estres","Anticonceptivos","Chocolate","Licor","Endulcolorantes artificiales", "Citricos", "Queso curado", "Yogur","Pescado","Salsa de soja","Platanos","Aguacate","Vino tinto","Esfuerzo fisico","Estimulo frio(Ej: helado)","Luces intensas","Tabaco","Olores fuertes"};
         spinCatalizadores = (MultiSelectionSpinner) findViewById(R.id.spinCatalizadores);
@@ -94,12 +94,14 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nombre=dialog.findViewById(R.id.nombre_edit).toString();
-                String fecha=dialog.findViewById(R.id.fecha_edit).toString();
+                EditText nom=(EditText)dialog.findViewById(R.id.nombre_edit);
+                EditText fec=(EditText)dialog.findViewById(R.id.fecha_edit);
+                String nombre=nom.getText().toString();
+                String fecha=fec.getText().toString();
                 Date fechal=new Date();
                 try
                 {
-                    DateFormat dateFormat=new SimpleDateFormat("YYYY-MM-DD");
+                    DateFormat dateFormat=new SimpleDateFormat("dd/mm/yyyy");
                     fechal=dateFormat.parse(fecha);
                 }
                 catch (Exception e)
@@ -126,37 +128,73 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         String intensi=inten.getText().toString();
         EditText local = (EditText)findViewById(R.id.localizacion_edit);
         String localizacion=local.getText().toString();
-        System.out.println(local);
-        String cedula=findViewById(R.id.cedula_edit).toString();
         int hora=0;
         int intensidad=0;
         Date fecha=new Date();
-        Long ced=null;
         try
         {
-            DateFormat dateFormat=new SimpleDateFormat("yyyy-mm-dd");
+            DateFormat dateFormat=new SimpleDateFormat("dd/mm/yyyy");
             fecha=dateFormat.parse(fec);
             hora=Integer.parseInt(horas);
             intensidad=Integer.parseInt(intensi);
-            ced= Long.parseLong(cedula);
         }
         catch (Exception e)
         {
             e.printStackTrace();
+            new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Los campos no son correctos").setNeutralButton("Cerrar", null).show();
+            return;
         }
         EpisodioDolorDTO episodio=new EpisodioDolorDTO();
         episodio.setId(null);
         episodio.setCatalizadores(catalizadores);
         episodio.setFecha(fecha.getTime());
-        episodio.setCedulaPaciente(ced);
+        episodio.setCedulaPaciente(idUsuario);
         episodio.setHoursSlept(hora);
         episodio.setMedicamentos(medicamentos);
         episodio.setSintomas(sintomas);
         episodio.setIntensidad(intensidad);
         episodio.setLocalizacion(localizacion);
 
-        Gson gson=new Gson();
-        jsonRespuesta=gson.toJson(episodio);
+        jsonRespuesta="{\"id\":"+"null"+"," +
+                "\"fecha\":"+episodio.getFecha()+"," +
+                "\"localizacion\":\""+episodio.getLocalizacion()+"\"," +
+                "\"intensidad\":"+episodio.getIntensidad()+"," +
+                "\"hoursSlept\":"+episodio.getHoursSlept()+"," +
+                "\"cedulaPaciente\":"+episodio.getCedulaPaciente()+ "," +
+                "\"sintomas\":[";
+                for(int i=0;i<sintomas.size();i++)
+                {
+                    if(i!=0)
+                    {
+                        jsonRespuesta+=",";
+                    }
+                    SintomaDTO sin=sintomas.get(i);
+                    jsonRespuesta+="{\"especificacion\":\""+sin.getEspecificacion()+"\"}";
+                }
+                jsonRespuesta+="],";
+                jsonRespuesta+="\"catalizadores\":[";
+                for(int i=0;i<catalizadores.size();i++)
+                {
+                    if(i!=0)
+                    {
+                        jsonRespuesta+=",";
+                    }
+                    CatalizadorDTO cat=catalizadores.get(i);
+                    jsonRespuesta+="{\"especificacion\":\""+cat.getEspecificacion()+"\"}";
+                }
+                jsonRespuesta+="],";
+                jsonRespuesta+="\"medicamentos\":[";
+                for (int i=0;i<medicamentos.size();i++)
+                {
+                    if(i!=0)
+                    {
+                        jsonRespuesta+=",";
+                    }
+                    MedicamentoDTO med=medicamentos.get(i);
+                    jsonRespuesta+="{\"referencia\":\""+med.getReferencia()+"\"," +
+                            "\"fechaDePrescripcion\":"+med.getFechaDePrescripcion().getTime()+"}";
+                }
+                jsonRespuesta+="]}";
         System.out.println(jsonRespuesta);
 
         new registrar().execute("https://migraine-services.herokuapp.com/webresources/episodios");
@@ -185,6 +223,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
             RestClient restClient = new RestClient(urls[0],RegistrarEpisodioActivity.this);
             restClient.AddHeader("Content-Type", "application/json");
             restClient.AddHeader("x_rest_user", token);
+            restClient.AddHeader("data_hash",DataSecurity.hashCryptoCode(jsonRespuesta));
             restClient.AddParam(jsonRespuesta);
             try {
                 restClient.Execute(RestClient.RequestMethod.POST);
@@ -200,9 +239,6 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent=new Intent(RegistrarEpisodioActivity.this,MenuPrincipalActivity.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putString("USUARIO", idUsuario);
-                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             }).show();

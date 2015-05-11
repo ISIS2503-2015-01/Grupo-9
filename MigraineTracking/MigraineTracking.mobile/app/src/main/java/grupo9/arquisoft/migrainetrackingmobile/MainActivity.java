@@ -82,10 +82,6 @@ public class MainActivity extends ActionBarActivity {
             String claveapp = claveEdit.getText().toString();
             Gson gson=new Gson();
             PacienteDTO pacienteDTO=new PacienteDTO();
-
-            //usuario=md5(usuario);
-            //claveapp=md5(claveapp);
-
             pacienteDTO.setUsername(usuario);
             pacienteDTO.setPassword(claveapp);
             jsonLogin =gson.toJson(pacienteDTO);
@@ -121,8 +117,8 @@ public class MainActivity extends ActionBarActivity {
         protected String doInBackground(String... urls)
         {
             RestClient client = new RestClient(urls[0],MainActivity.this);
-            client.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonLogin));
-            client.AddHeader("Accept", "application/json");
+            //client.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonLogin));
+            client.AddHeader("Content-Type", "application/json");
             client.AddParam(jsonLogin);
             try
             {
@@ -152,13 +148,16 @@ public class MainActivity extends ActionBarActivity {
                         password=true;
                         System.out.println("entró");
                         SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
-                        //String token=client.getResponse().split("\"")[0];
                         editor.putString("token", tok);
                         System.out.println(tok);
                         EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
                         String usuario = usuarioEdit.getText().toString();
                         String login=usuario.split("@")[0];
                         editor.putString("USUARIO",login);
+                        EditText cedulaEdit=(EditText) findViewById(R.id.cedula_edit);
+                        String cedula=cedulaEdit.getText().toString();
+                        long ced=Long.parseLong(cedula);
+                        editor.putLong("CEDULA",ced);
                         System.out.println(editor.commit());
                     }
                     else
@@ -171,30 +170,5 @@ public class MainActivity extends ActionBarActivity {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static final String md5(final String s) {
-        final String MD5 = "MD5";
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuilder hexString = new StringBuilder();
-            for (byte aMessageDigest : messageDigest) {
-                String h = Integer.toHexString(0xFF & aMessageDigest);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
-            }
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 }

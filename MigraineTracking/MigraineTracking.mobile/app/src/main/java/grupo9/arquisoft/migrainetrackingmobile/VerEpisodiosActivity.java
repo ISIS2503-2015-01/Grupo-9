@@ -36,7 +36,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     private ArrayList<ExpandListGroup> list;
     private ArrayList<ExpandListChild> list2;
     private List<EpisodioDolorDTO> listaEpisodios;
-    private String idUsuario;
+    private long idUsuario;
     private String token;
 
     @Override
@@ -44,24 +44,28 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_episodios);
         SharedPreferences preferences=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
-        idUsuario=preferences.getString("USUARIO","");
+        idUsuario=preferences.getLong("CEDULA",0);
         token=preferences.getString("token","");
         Intent intent = getIntent();
         Bundle bundle=intent.getExtras();
 
         String tipo=bundle.getString("tipo");
-        String id=bundle.getString("id");
-        System.out.println(id);
 
         if(tipo.equals("CEDULA"))
         {
             ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
-            new pedirEpisodios().execute("https://migraine-services.herokuapp.com/pacientes/episodios/"+id);
+            new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/pacientes/episodios/"+idUsuario);
 
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            while(listaEpisodios==null)
+            {
+                try
+                {
+                    Thread.sleep(500);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
             }
 
             ExpListItems = SetStandardGroups();
@@ -153,9 +157,9 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     private class pedirEpisodios extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
             RestClient restClient = new RestClient(urls[0],VerEpisodiosActivity.this);
-            restClient.AddHeader("Accept", "application/json");
-            restClient.AddHeader("x_rest_user",token);
-            restClient.AddHeader("x_id_user",idUsuario);
+            restClient.AddHeader("Content-Type", "application/json");
+            restClient.AddHeader("x_rest_user", token);
+
             System.out.println(idUsuario);
             System.out.println(token);
             try {
@@ -164,7 +168,11 @@ public class VerEpisodiosActivity extends ActionBarActivity {
                 e.printStackTrace();
             }
             System.out.println(restClient.getResponse());
-            listaEpisodios=obtenerEpisodios(restClient.getResponse());
+            List<EpisodioDolorDTO> resp=obtenerEpisodios(restClient.getResponse());
+            if(resp!=null)
+            listaEpisodios=resp;
+            else
+            listaEpisodios=new ArrayList<EpisodioDolorDTO>();
             return restClient.getResponse();
         }
 
@@ -178,6 +186,15 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     {
         Gson gson = new Gson();
         Type type=new TypeToken<ArrayList<EpisodioDolorDTO>>(){}.getType();
-        return gson.fromJson(json,type);
+        try
+        {
+            List<EpisodioDolorDTO> resp = gson.fromJson(json, type);
+            return resp;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error en gson");
+        }
+        return null;
     }
 }

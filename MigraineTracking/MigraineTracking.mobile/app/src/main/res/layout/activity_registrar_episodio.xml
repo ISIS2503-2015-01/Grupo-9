@@ -13,20 +13,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cedula_edit"
-        android:hint="Cédula" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/localizacion_edit"
         android:hint="Ubicación del dolor"/>
 
-    <TextView android:text="El formato es YYYY-MM-DD" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+    <TextView android:text="El formato es dd/mm/yyyy" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
     <EditText android:id="@+id/fecha_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Fecha (YYYY-MM-DD)"/>
+        android:hint="Fecha (dd/mm/yyyy)"/>
 
     <EditText android:id="@+id/horasSueno_edit"
         android:layout_width="match_parent"
