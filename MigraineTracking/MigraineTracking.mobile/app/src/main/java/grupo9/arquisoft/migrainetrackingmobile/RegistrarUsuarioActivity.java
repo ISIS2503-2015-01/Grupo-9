@@ -137,7 +137,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
 
     private class registrar extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
-            RestClient restClient = new RestClient(urls[0]);
+            RestClient restClient = new RestClient(urls[0],RegistrarUsuarioActivity.this);
             restClient.AddHeader("Accept", "application/json");
             restClient.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonRespuesta));
             restClient.AddParam(jsonRespuesta);

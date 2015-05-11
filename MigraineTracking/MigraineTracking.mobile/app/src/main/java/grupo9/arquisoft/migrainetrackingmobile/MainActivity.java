@@ -117,9 +117,10 @@ public class MainActivity extends ActionBarActivity {
 
     private class obtenerToken extends AsyncTask<String, Long, String>
     {
+
         protected String doInBackground(String... urls)
         {
-            RestClient client = new RestClient(urls[0]);
+            RestClient client = new RestClient(urls[0],MainActivity.this);
             client.AddHeader("Content-Type", "application/json");
             client.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonLogin));
             client.AddParam(jsonLogin);

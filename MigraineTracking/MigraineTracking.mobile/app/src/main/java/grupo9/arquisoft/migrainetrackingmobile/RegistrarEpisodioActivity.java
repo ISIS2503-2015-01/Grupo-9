@@ -182,7 +182,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
 
     private class registrar extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
-            RestClient restClient = new RestClient(urls[0]);
+            RestClient restClient = new RestClient(urls[0],RegistrarEpisodioActivity.this);
             restClient.AddHeader("Content-Type", "application/json");
             restClient.AddHeader("x_rest_user", token);
             restClient.AddParam(jsonRespuesta);

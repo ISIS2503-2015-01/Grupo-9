@@ -152,7 +152,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
 
     private class pedirEpisodios extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
-            RestClient restClient = new RestClient(urls[0]);
+            RestClient restClient = new RestClient(urls[0],VerEpisodiosActivity.this);
             restClient.AddHeader("Accept", "application/json");
             restClient.AddHeader("x_rest_user",token);
             restClient.AddHeader("x_id_user",idUsuario);
