@@ -107,7 +107,7 @@ public class UserService {
             userStorm.setName(account.getFullName());
             userStorm.setUsername(account.getUsername());
             userStorm.setPassword(user.getPassword());
-            userStorm.setLevelAccess(user.getLevelAccess());
+            userStorm.setLevelAccess("administradores");
             token = new Gson().toJson(JsonWebToken.encode(userStorm, "Un14nd3s2014@", JwtHashAlgorithm.HS256));
             status = 200;
 
@@ -115,7 +115,7 @@ public class UserService {
             System.out.println(ex.getStatus() + " " + ex.getMessage());
         }
 
-        return Response.status(status).entity(token).build();
+        return Response.status(status).header("Access-Control-Allow-Origin", "*").entity(token).build();
     }
 
     /**

@@ -20,6 +20,9 @@ and open the template in the editor.
         <script type="text/javascript" src="js/AngularControllers/doctor.js"></script>
         <script type="text/javascript" src="js/AngularControllers/episodio.js"></script>
         <script type="text/javascript" src="js/AngularControllers/paciente.js"></script>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/core-min.js"></script>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha512.js"></script>
         <div class="container theme-showcase" role="main">
             <div>
                 <div class="fixed">
@@ -27,7 +30,7 @@ and open the template in the editor.
                     <navbar></navbar>
                 </div>
                 <div class="flex-item">
-                    <div ng-if="navbar.isSelected(0)">
+                    <div ng-show="navbar.isSelected(0)">
                         <div class="row featurette">
                             <div class="col-md-5">
                                 <img src="images/cerebro.jpg" class="img-responsive" alt="500x500" data-holder-rendered="true">
@@ -40,7 +43,13 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
-                    <div ng-if="navbar.isSelected(1)">
+                    <div ng-show="navbar.isSelected(61)">
+                        <doctor-sesion></doctor-sesion>
+                    </div>
+                    <div ng-show="navbar.isSelected(62)">
+                        
+                    </div>
+                    <div ng-show="navbar.isSelected(1)">
                         <div class="row featurette">
                             <div class="col-md-5">
                                 <img src="images/pacientes.jpg" class="img-responsive" alt="500x500" data-holder-rendered="true">
@@ -53,7 +62,7 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
-                    <div ng-if="navbar.isSelected(11)">
+                    <div ng-show="navbar.isSelected(11)">
                         <paciente-info></paciente-info>
                     </div>
                     <div ng-show="navbar.isSelected(14)">

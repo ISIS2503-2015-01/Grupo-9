@@ -11,9 +11,22 @@
             controller:['$http',function($http){
                     var self = this;
                     self.pacientes =[];
-                    $http.get('http://localhost:8080/pacientes').success(function(data){
+                    var token = localStorage.getItem("token");
+                    $http({
+                        method: 'GET',
+                        url: 'https://migraine-services.herokuapp.com/webresources/pacientes',
+                        headers:{
+                           'Content-Type': 'application/json',
+                           'x_rest_user':token
+                        }
+                    }).success(function(data, status, headers, config){
                         self.pacientes =data;
+                    }).error(function(data, status, headers, config){
+                        alert("Hubo un error en la transacción");
                     });
+                    //$http.get('http://localhost:8080/pacientes').success(function(data){
+                        
+                   // });
             }],
             controllerAs:'getPacientes'
         };
@@ -26,10 +39,23 @@
                 var self = this;
                 self.paciente={};
                 self.id=0;
-                this.buscarPacienteDetalle = function(){
-                    $http.get('http://localhost:8080/pacientes/'+self.id).success(function(data){
-                    self.paciente=data;
-                });};
+                var token = localStorage.getItem("token");
+                $http({
+                        method: 'GET',
+                        url: 'https://migraine-services.herokuapp.com/webresources/pacientes/'+ self.id,
+                        headers:{
+                           'Content-Type': 'application/json',
+                           'x_rest_user':token
+                        }
+                    }).success(function(data, status, headers, config){
+                        self.paciente =data;
+                    }).error(function(data, status, headers, config){
+                        alert("Hubo un error en la transacción");
+                    });
+                //this.buscarPacienteDetalle = function(){
+                    //$http.get('http://localhost:8080/pacientes/'+self.id).success(function(data){
+                   // self.paciente=data;
+                //});};
                 
             }],
             controllerAs:'getPacienteDetalle'
