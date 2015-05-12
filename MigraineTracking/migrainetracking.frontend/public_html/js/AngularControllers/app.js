@@ -3,61 +3,70 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-(function(){var app = angular.module('migraineTracking',['doctorDirectives','episodioDirectives', 'pacienteDirectives']);
-    app.directive('navbar', function(){
+(function () {
+    var app = angular.module('migraineTracking', ['doctorDirectives', 'episodioDirectives', 'pacienteDirectives']);
+ 
+    app.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+]);
+    app.directive('navbar', function () {
         return{
-            restrict:'E',
+            restrict: 'E',
             templateUrl: 'partials/navbar.html',
-            controller:function(){
-                this.tab=0;
-                this.selectTab=function(setTab){
-                    this.tab=setTab;
+            controller: function () {
+                this.tab = 0;
+                this.selectTab = function (setTab) {
+                    this.tab = setTab;
                 };
-                this.isSelected=function(tabParam){
-                    return this.tab===tabParam;
+                this.isSelected = function (tabParam) {
+                    return this.tab === tabParam;
                 };
             },
-            controllerAs:'navbar'
+            controllerAs: 'navbar'
         };
     });
-    app.directive('doctorSesion', function(){
+    app.directive('doctorSesion', function () {
         return{
-            restrict:'E',
-            templateUrl:'partials/doctor/doctor-sesion.html',
-            controller: ['$http',function($http){
-                var self=this;
-                self.user={};
-                console.log(JSON.stringify(self.user));
-                this.iniciarSesion=function(){
-                    $http.post('http://migraine-services.herokuapp.com/webresources/auth/login', JSON.stringify(self.user)).success(function(data){
-                        self.user={};
-                        alert(data);
-                        alert("Inicio sesion correctamente");
-                        localStorage.setItem("token",data);
-                        console.log(data);
-                    }).error(function(data){
-                        alert("Hubo un error iniciando la sesion");
-                    });
-                };
-            }],
-                controllerAs:'inicio'
+            restrict: 'E',
+            templateUrl: 'partials/doctor/doctor-sesion.html',
+            controller: ['$http', function ($http) {
+                    var self = this;
+                    self.user = {};
+                    this.iniciarSesion = function () {
+                        $http.post('http://migraine-services.herokuapp.com/webresources/auth/login', JSON.stringify(self.user)).success(function (data) {
+                            self.user = {};
+                            alert(data);
+                            alert("Inicio sesion correctamente");
+                            localStorage.setItem("token", data);
+                            console.log(data);
+                        }).error(function (data) {
+                            console.log(JSON.stringify(self.user));
+                            alert("Hubo un error iniciando la sesion");
+                        });
+                    };
+                }],
+            controllerAs: 'inicio'
         };
     });
-    function hash_message( data ){
-	var hash  = CryptoJS.SHA512( data ) ;
-	var string_bytes  = CryptoJS.enc.Base64.stringify(hash);
-	console.log( string_bytes );
-	return string_bytes;
-    };
-		
+    function hash_message(data) {
+        var hash = CryptoJS.SHA512(data);
+        var string_bytes = CryptoJS.enc.Base64.stringify(hash);
+        console.log(string_bytes);
+        return string_bytes;
+    }
+    ;
+
     //Integrity verification for Sha512
-    function verifyIntegrity( data , data_hash ){
-        var new_message_hash = hash_message( data );
-        if(new_message_hash === data_hash)
-                return true;
+    function verifyIntegrity(data, data_hash) {
+        var new_message_hash = hash_message(data);
+        if (new_message_hash === data_hash)
+            return true;
         else
-                return false;
-    };
+            return false;
+    }
+    ;
 })();
 
 
