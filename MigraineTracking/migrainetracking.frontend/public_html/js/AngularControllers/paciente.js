@@ -12,6 +12,7 @@
                     var self = this;
                     self.pacientes =[];
                     var token = localStorage.getItem("token");
+                    console.log(localStorage.getItem("token"));
                     $http({
                         method: 'GET',
                         url: 'https://migraine-services.herokuapp.com/webresources/pacientes',
@@ -21,6 +22,8 @@
                         }
                     }).success(function(data, status, headers, config){
                         self.pacientes =data;
+                        var data_hash =headers.data_hash;
+                        console.log(verifyIntegrity(data, data_hash));
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
                     });
@@ -49,6 +52,8 @@
                         }
                     }).success(function(data, status, headers, config){
                         self.paciente =data;
+                        var data_hash =headers.data_hash;
+                        console.log(verifyIntegrity(data, data_hash));
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
                     });
@@ -61,6 +66,14 @@
             controllerAs:'getPacienteDetalle'
         };
     });
+    
+    function verifyIntegrity(data, data_hash) {
+        var new_message_hash = hash_message(data);
+        if (new_message_hash === data_hash)
+            return true;
+        else
+            return false;
+    };
     
 })();
 

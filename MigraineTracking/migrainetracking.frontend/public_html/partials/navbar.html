@@ -17,12 +17,6 @@ and open the template in the editor.
                         <h5>Iniciar Sesión</h5>
                     </a>
                 </li>
-                
-                <li role="presentation" ng-class="{active:navbar.isSelected(62)}">
-                    <a href="#" ng-click="navbar.selectTab(62)">
-                        <h5>Registrarse</h5>
-                    </a>
-                </li>
             </ul>
         </li>
         <li role="presentation" ng-class="{active:navbar.isSelected(1)}">
@@ -50,11 +44,7 @@ and open the template in the editor.
             </a>
             <!--Opciones de los episodios-->
             <ul class="nav nav-pills nav-stacked" ng-show="navbar.isSelected(2)|| navbar.isSelected(21) || navbar.isSelected(22) || navbar.isSelected(23)|| navbar.isSelected(24)|| navbar.isSelected(25)" >
-                <li role="presentation" ng-class="{active:navbar.isSelected(21)}">
-                    <a href="#" ng-click="navbar.selectTab(21)" >
-                        <h5>Ver todos los episodios</h5>
-                    </a>
-                </li>
+                
                 <li role="presentation" ng-class="{active:navbar.isSelected(22)}">
                     <a href="#" ng-click="navbar.selectTab(22)">
                         <h5>Ver los episodios de un paciente</h5>
@@ -67,11 +57,6 @@ and open the template in the editor.
                 </li>
                 <li role="presentation" ng-class="{active:navbar.isSelected(24)}">
                     <a href="#" ng-click="navbar.selectTab(24)">
-                        <h5>Analizar un episodio</h5>
-                    </a>
-                </li>
-                <li role="presentation" ng-class="{active:navbar.isSelected(25)}">
-                    <a href="#" ng-click="navbar.selectTab(25)">
                         <h5>Ver detalle de un episodio</h5>
                     </a>
                 </li>

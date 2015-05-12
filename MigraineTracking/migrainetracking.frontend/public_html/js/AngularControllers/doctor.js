@@ -37,6 +37,8 @@
                         }
                     }).success(function(data, status, headers, config){
                         self.doctors =data;
+                        var data_hash =headers.data_hash;
+                        console.log(verifyIntegrity(data, data_hash));
                         
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
@@ -62,13 +64,15 @@
                     this.buscarDoctorDetalle = function( ){
                         $http({
                         method: 'GET',
-                        url: 'https://migraine-services.herokuapp.com/webresources/doctores'+self.id,
+                        url: 'https://migraine-services.herokuapp.com/webresources/doctores/'+self.id,
                         headers:{
                            'Content-Type': 'application/json',
                            'x_rest_user':token
                         }
                     }).success(function(data, status, headers, config){
                         self.doctor =data;
+                        var data_hash =headers.data_hash;
+                        console.log(verifyIntegrity(data, data_hash));
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
                     });
@@ -99,4 +103,11 @@
 //            controllerAs:'getDoctorPacientes'
 //        };
 //    });
+function verifyIntegrity(data, data_hash) {
+        var new_message_hash = hash_message(data);
+        if (new_message_hash === data_hash)
+            return true;
+        else
+            return false;
+    };
 })();

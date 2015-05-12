@@ -15,60 +15,25 @@ and open the template in the editor.
 <div class="panel panel-default ">
     <div class="panel-heading">Informaci&oacute;n del Episodio de dolor</div>
             
-                <h4>Cedula:</h4>
-            
-                <h5>{{getEpisodioDetalle.episodio.paciente.id}}</h5>
-            
                 <h4>Id del episodio:</h4>
            
-                <h5>{{getEpisodioDetalle.episodio.id}}</h5>
+                <h5>{{this.getEpisodioDetalle.episodio.id}}</h5>
            
                 <h4>Fecha:</h4>
             
-                <h5>{{getEpisodioDetalle.episodio.fecha | date}}</h5>
+                <h5>{{this.getEpisodioDetalle.episodio.fecha | date}}</h5>
             
                 <h4>Localizaci&oacute;n:</h4>
        
-                <h5>{{getEpisodioDetalle.episodio.localizacion}}</h5>
+                <h5>{{this.getEpisodioDetalle.episodio.localizacion}}</h5>
         
                 <h4>Intensidad de dolor:</h4>
             
-                <h5>{{getEpisodioDetalle.episodio.intensidad}}</h5>
+                <h5>{{this.getEpisodioDetalle.episodio.intensidad}}</h5>
             
                 <h4>Horas de sue&ntilde;o:</h4>
             
-                <h5>{{getEpisodioDetalle.episodio.hoursSlept}}</h5>
+                <h5>{{this.getEpisodioDetalle.episodio.hoursSlept}}</h5>
             
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Medicamentos:</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                {{getEpisodioDetalle.episodio.medicamentos}}
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Catalizadores:</h4>
-            </div>
-        </div>
-        <div class="row">
-                <div class="col-md-6">
-                    {{getEpisodioDetalle.episodio.catalizadores}}
-                </div>
-            </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Sintomas:</h4>
-            </div>
-        </div>
-        <div class="row">
-                <div class="col-md-6">
-                    {{getEpisodioDetalle.episodio.sintomas}}
-                </div>
-            </div>
-</div>
+    </div>
 </div>

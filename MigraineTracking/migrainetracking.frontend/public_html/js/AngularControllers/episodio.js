@@ -4,54 +4,56 @@
  * and open the template in the editor.
  */
 (function(){var app1 = angular.module('episodioDirectives',[]);
-    app1.directive('episodioInfo',function(){
-        return{
-            restrict:'E',
-            templateUrl:'partials/episodio/episodio-info.html',
-            controller:['$http',function($http){
-                    var self = this;
-                    self.episodios = [];
-                    var token = localStorage.getItem("token");
-                    $http({
-                        method: 'GET',
-                        url: 'https://migraine-services.herokuapp.com/webresources/episodios',
-                        headers:{
-                           'Content-Type': 'application/json',
-                           'x_rest_user':token
-                        }
-                    }).success(function(data, status, headers, config){
-                        self.episodios =data;
-                    }).error(function(data, status, headers, config){
-                        alert("Hubo un error en la transacción");
-                    });
-                    
-//                    $http.get('http://localhost:8080/episodios').success(function(data){
-//                        console.log(data);
+//    app1.directive('episodioInfo',function(){
+//        return{
+//            restrict:'E',
+//            templateUrl:'partials/episodio/episodio-info.html',
+//            controller:['$http',function($http){
+//                    var self = this;
+//                    self.episodios = [];
+//                    var token = localStorage.getItem("token");
+//                    $http({
+//                        method: 'GET',
+//                        url: 'https://migraine-services.herokuapp.com/webresources/episodios',
+//                        headers:{
+//                           'Content-Type':'application/json',
+//                           'x_rest_user':token
+//                        }
+//                    }).success(function(data, status, headers, config){
 //                        self.episodios =data;
+//                    }).error(function(data, status, headers, config){
+//                        alert("Hubo un error en la transacción");
 //                    });
-            }],
-            controllerAs:'getEpisodios'
-        };
-    });
+//                    
+////                    $http.get('http://localhost:8080/episodios').success(function(data){
+////                        console.log(data);
+////                        self.episodios =data;
+////                    });
+//            }],
+//            controllerAs:'getEpisodios'
+//        };
+//    });
     app1.directive('episodioDetalle',function(){
         return{
             restrict:'E',
             templateUrl:'partials/episodio/episodio-detalle.html',
             controller:['$http',function($http){
                     var self = this;
-                    self.episodio ={};
+                    self.episodio = {};
                     self.id=0;
                     var token = localStorage.getItem("token");
                     this.darEpisodioDetalle = function(){  
                     $http({
                     method: 'GET',
-                    url: 'https://migraine-services.herokuapp.com/webresources/episodios'+self.id,
+                    url: 'https://migraine-services.herokuapp.com/webresources/episodios/'+self.id,
                     headers:{
                        'Content-Type': 'application/json',
                        'x_rest_user':token
                     }
                     }).success(function(data, status, headers, config){
-                        self.pacientes =data;
+                        self.episodio = data;
+                        var data_hash =headers.data_hash;
+                        console.log(verifyIntegrity(data, data_hash));
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
                     });
@@ -85,6 +87,8 @@
                         }
                     }).success(function(data, status, headers, config){
                         self.episodios =data;
+                        var data_hash =headers.data_hash;
+                        console.log(verifyIntegrity(data, data_hash));
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
                     });
@@ -115,15 +119,24 @@
                         console.log(self.fecha1);
                         console.log(self.fecha2);
                         
+                        var date1 = new Date(self.fecha1);
+                        var date2 = new Date(self.fecha2);
+                        var millis1 = date1.getMilliseconds();
+                        var millis2 = date2.getMilliseconds();
+                        console.log(millis1);
+                        console.log(millis2);
+
                         $http({
                         method: 'GET',
-                        url: 'https://migraine-services.herokuapp.com/webresources/episodios/'+self.id+'/'+self.fecha1+'/'+self.fecha2,
+                        url: 'https://migraine-services.herokuapp.com/webresources/episodios/'+self.id+'/'+millis1+'/'+millis2,
                         headers:{
                            'Content-Type': 'application/json',
                            'x_rest_user':token
                         }
                     }).success(function(data, status, headers, config){
                         self.episodios =data;
+                        var data_hash =headers.data_hash;
+                        console.log(verifyIntegrity(data, data_hash));
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
                     });
@@ -154,5 +167,14 @@
 //            controllerAs:'getEpisodiosRecientes'
 //        };
 //    });
+
+ function verifyIntegrity(data, data_hash) {
+        var new_message_hash = hash_message(data);
+        if (new_message_hash === data_hash)
+            return true;
+        else
+            return false;
+    };
+
 })();
 
