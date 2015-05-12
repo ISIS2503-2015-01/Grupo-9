@@ -17,7 +17,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
@@ -155,30 +158,34 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     }
 
     private class pedirEpisodios extends AsyncTask<String, Long, String> {
+
         protected String doInBackground(String... urls) {
-            RestClient restClient = new RestClient(urls[0],VerEpisodiosActivity.this);
-            restClient.AddHeader("Content-Type", "application/json");
-            restClient.AddHeader("x_rest_user", token);
 
             System.out.println(idUsuario);
             System.out.println(token);
-            try {
-                restClient.Execute(RestClient.RequestMethod.GET);
-            } catch (Exception e) {
-                e.printStackTrace();
+            try
+            {
+                HttpResponse<String> response= Unirest.get(urls[0])
+                        .header("Content-Type", "application/json")
+                        .header("x_rest_user", token)
+                        .asString();
+
+                System.out.println(response.getBody());
+                List<EpisodioDolorDTO> resp=obtenerEpisodios(response.getBody());
+                if(resp!=null)
+                    listaEpisodios=resp;
+                else
+                    listaEpisodios=new ArrayList<EpisodioDolorDTO>();
+                return response.getBody();
             }
-            System.out.println(restClient.getResponse());
-            List<EpisodioDolorDTO> resp=obtenerEpisodios(restClient.getResponse());
-            if(resp!=null)
-            listaEpisodios=resp;
-            else
-            listaEpisodios=new ArrayList<EpisodioDolorDTO>();
-            return restClient.getResponse();
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                return null;
+            }
         }
 
         protected void onPostExecute(String response) {
-
-
         }
     }
 

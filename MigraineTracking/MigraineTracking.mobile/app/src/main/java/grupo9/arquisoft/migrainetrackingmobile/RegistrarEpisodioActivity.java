@@ -17,6 +17,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.mashape.unirest.http.Headers;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
 
 import java.lang.reflect.Array;
 import java.text.DateFormat;
@@ -219,19 +222,23 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
     }
 
     private class registrar extends AsyncTask<String, Long, String> {
-        protected String doInBackground(String... urls) {
-            RestClient restClient = new RestClient(urls[0],RegistrarEpisodioActivity.this);
-            restClient.AddHeader("Content-Type", "application/json");
-            restClient.AddHeader("x_rest_user", token);
-            restClient.AddHeader("data_hash",DataSecurity.hashCryptoCode(jsonRespuesta));
-            restClient.AddParam(jsonRespuesta);
-            try {
-                restClient.Execute(RestClient.RequestMethod.POST);
-            } catch (Exception e) {
-                e.printStackTrace();
+        protected String doInBackground(String... urls)
+        {
+            try
+            {
+                HttpResponse<String> response= Unirest.post(urls[0])
+                        .header("Content-Type", "application/json")
+                        .header("x_rest_user", token)
+                        .header("data_hash",DataSecurity.hashCryptoCode(jsonRespuesta))
+                        .body(jsonRespuesta)
+                        .asString();
+                return response.getBody();
             }
-            System.out.println(restClient.getResponse());
-            return restClient.getResponse();
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                return "No se conectó al servidor";
+            }
         }
 
         protected void onPostExecute(String response) {

@@ -1,31 +1,22 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.TextView;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-
-import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 
 
@@ -116,25 +107,31 @@ public class MainActivity extends ActionBarActivity {
 
         protected String doInBackground(String... urls)
         {
-            RestClient client = new RestClient(urls[0],MainActivity.this);
-            //client.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonLogin));
-            client.AddHeader("Content-Type", "application/json");
-            client.AddParam(jsonLogin);
+            HttpResponse<String> jsonResponse=null;
             try
             {
-                client.Execute(RestClient.RequestMethod.POST);
+                jsonResponse=Unirest.post(urls[0])
+                        .header("Content-Type","application/json")
+                        .body(jsonLogin)
+                        .asString();
+                if(jsonResponse.getCode()==200)
+                {
+                    password=true;
+                }
+
+                System.out.println("Resp: " + jsonResponse.getBody().toString());
+                if(password==true){
+                    String tok = jsonResponse.getBody().toString().split("\"")[1];
+                    return jsonResponse.getCode() + ":" + tok;
+                }
+                else
+                    return jsonResponse.getCode()+":"+jsonResponse.getBody();
             }
-            catch(Exception e)
+            catch(UnirestException e)
             {
                 e.printStackTrace();
+                return null;
             }
-            if(client.getResponseCode()==200)
-            {
-                password=true;
-            }
-            System.out.println("Resp: "+client.getResponse());
-            String tok=client.getResponse().split("\"")[1];
-            return client.getResponseCode()+":"+tok;
         }
 
         protected void onPostExecute(String response)

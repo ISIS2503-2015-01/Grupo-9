@@ -2,6 +2,13 @@ package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.content.Context;
 
+import com.mashape.relocation.conn.ssl.SSLConnectionSocketFactory;
+import com.mashape.relocation.conn.ssl.SSLContexts;
+import com.mashape.relocation.conn.ssl.TrustSelfSignedStrategy;
+import com.mashape.relocation.impl.client.CloseableHttpClient;
+import com.mashape.relocation.impl.client.HttpClients;
+
+import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -12,6 +19,10 @@ import org.apache.http.impl.conn.SingleClientConnManager;
 
 import java.io.InputStream;
 import java.security.KeyStore;
+import java.util.Enumeration;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 
 /**
  * Created by henryfvargas on 11/05/15.
@@ -57,6 +68,43 @@ public class MyHttpClientSimple extends DefaultHttpClient {
             return sf;
         } catch (Exception e) {
             throw new AssertionError(e);
+        }
+    }
+
+    public CloseableHttpClient makeClient()
+    {
+        try
+        {
+            KeyStore trusted = KeyStore.getInstance("BKS");
+            InputStream in = context.getResources().openRawResource(R.raw.mykeystore);
+            try {
+                // Initialize the keystore with the provided trusted certificates
+                // Also provide the password of the keystore
+                trusted.load(in, "mysecret".toCharArray());
+                Enumeration<String> e=trusted.aliases();
+                while(e.hasMoreElements())
+                {
+                    System.out.println(e.nextElement());
+                }
+            } finally {
+                in.close();
+            }
+            String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+            tmf.init(trusted);
+            SSLContext scontext = SSLContext.getInstance("TLS");
+            scontext.init(null, tmf.getTrustManagers(), null);
+
+            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(scontext);
+            CloseableHttpClient httpclient = HttpClients.custom()
+                    .setSSLSocketFactory(sslsf)
+                    .build();
+            return httpclient;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
         }
     }
 }

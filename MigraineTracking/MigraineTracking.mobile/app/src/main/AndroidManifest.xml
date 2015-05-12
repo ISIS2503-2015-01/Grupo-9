@@ -8,8 +8,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="MyApp">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -52,68 +51,12 @@
                 android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
         </activity>
         <activity
-            android:name=".AgregarMedicamentoActivity"
-            android:label="@string/title_activity_agregar_medicamento"
-            android:parentActivityName=".MenuPrincipalActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
-        </activity>
-        <activity
-            android:name=".AgregarHabitoActivity"
-            android:label="@string/title_activity_agregar_habito"
-            android:parentActivityName=".MenuPrincipalActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
-        </activity>
-        <activity
-            android:name=".VerAnalisisActivity"
-            android:label="@string/title_activity_ver_analisis"
-            android:parentActivityName=".MenuPrincipalActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
-        </activity>
-        <activity
             android:name=".VerEpisodiosActivity"
             android:label="@string/title_activity_ver_episodios"
             android:parentActivityName=".MenuPrincipalActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
-        </activity>
-        <activity
-            android:name=".AgregarSintomaActivity"
-            android:label="@string/title_activity_agregar_sintoma"
-            android:parentActivityName=".RegistrarEpisodioActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.RegistrarEpisodioActivity" />
-        </activity>
-        <activity
-            android:name=".AgregarCatalizadorActivity"
-            android:label="@string/title_activity_agregar_catalizador"
-            android:parentActivityName=".RegistrarEpisodioActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.RegistrarEpisodioActivity" />
-        </activity>
-        <activity
-            android:name=".AgregarMedicamentosEpisodio"
-            android:label="@string/title_activity_agregar_medicamentos_episodio"
-            android:parentActivityName=".RegistrarEpisodioActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.RegistrarEpisodioActivity" />
-        </activity>
-        <activity
-            android:name=".MenuDoctorActivity"
-            android:label="Menu Doctor"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuDoctorActivity" />
         </activity>
         <activity
             android:name=".RegistrarUsuarioActivity"

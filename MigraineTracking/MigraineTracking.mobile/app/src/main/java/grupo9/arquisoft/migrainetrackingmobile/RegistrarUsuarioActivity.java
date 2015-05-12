@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -109,19 +111,22 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
 
     private class registrar extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
-            RestClient restClient = new RestClient(urls[0],RegistrarUsuarioActivity.this);
-            //restClient.AddHeader("Content-Type", "application/json");
-            restClient.AddHeader("data_hash", DataSecurity.hashCryptoCode(jsonRespuesta));
-            restClient.AddParam(jsonRespuesta);
-            System.out.println(DataSecurity.hashCryptoCode(jsonRespuesta));
-            try {
-                restClient.Execute(RestClient.RequestMethod.POST);
-            } catch (Exception e) {
-                e.printStackTrace();
+            try
+            {
+                HttpResponse<String> httpResponse= Unirest.post(urls[0])
+                        .header("Content-Type", "application/json")
+                        .header("data_hash", DataSecurity.hashCryptoCode(jsonRespuesta))
+                        .body(jsonRespuesta)
+                        .asString();
+                System.out.println(httpResponse.getCode());
+                System.out.println(httpResponse.getBody());
+                return httpResponse.getBody();
             }
-            System.out.println(restClient.getErrorMessage());
-            System.out.println(restClient.getResponse());
-            return restClient.getResponse();
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                return null;
+            }
         }
 
         protected void onPostExecute(String response) {
