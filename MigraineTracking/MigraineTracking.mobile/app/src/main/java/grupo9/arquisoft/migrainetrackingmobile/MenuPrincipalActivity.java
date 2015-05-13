@@ -2,25 +2,12 @@ package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
-import grupo9.arquisoft.migrainetrackingmobile.dtos.EpisodioDolorDTO;
-import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
-import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
-
 
 public class MenuPrincipalActivity extends ActionBarActivity {
 

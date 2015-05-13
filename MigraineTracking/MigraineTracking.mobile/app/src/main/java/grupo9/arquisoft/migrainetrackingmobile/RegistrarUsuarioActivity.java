@@ -106,9 +106,10 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
             try
             {
                 String hash=DataSecurity.hashCryptoCode(jsonRespuesta);
+                String hashNoSpaces=hash.replaceAll("\\s+", "");
                 Map<String, String> heads= new HashMap<String,String>();
                 heads.put("Content-Type", "application/json");
-                heads.put("Data_Hash", hash);
+                heads.put("Data_hash", hashNoSpaces);
                 heads.put("Accept","application/json");
                 Response response=new PostHttp().run(urls[0],jsonRespuesta,heads);
                 String resp=response.body().string();
@@ -125,17 +126,26 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         protected void onPostExecute(String response)
         {
             String code=response.split(":")[0];
-            String body=response.split(":")[1];
             if(code=="500")
             {
-                new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Error de creación").setMessage("No se pudo crear el usuario").setNeutralButton("Cerrar", null).show();
+                new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Error de creación").setMessage("No se pudo crear el usuario").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent=new Intent(RegistrarUsuarioActivity.this,MainActivity.class);
+                        startActivity(intent);
+                    }
+                }).show();
 
             }
             else
             {
-                new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido correctamente").setMessage("Se agregó el usuario").setNeutralButton("Cerrar", null).show();
+                new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido correctamente").setMessage("Se agregó el usuario").setNeutralButton("Cerrar", new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent=new Intent(RegistrarUsuarioActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }
+            }).show();
             }
-            Intent intent = new Intent(RegistrarUsuarioActivity.this,MainActivity.class);
-            startActivity(intent);
     }
 }}

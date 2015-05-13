@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,26 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import com.google.gson.Gson;
 import com.squareup.okhttp.Response;
-
-import org.apache.http.HttpRequest;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import grupo9.arquisoft.migrainetrackingmobile.dtos.CatalizadorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.EpisodioDolorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
@@ -208,7 +195,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         System.out.println(jsonRespuesta);
 
         new registrar().execute("https://migraine-services.herokuapp.com/webresources/episodios");
-        //new registrar().execute("http://httpbin.org/post");
+        //new registrar().execute("http://requestb.in/1f30pj01");
     }
 
     public void llenarListas()
@@ -235,10 +222,10 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
             try
             {
                 String hash=DataSecurity.hashCryptoCode(jsonRespuesta);
-                System.out.println(hash);
+                String hashNoSpace=hash.replaceAll("\\s+","");
                 Map<String, String> headers=new HashMap<String,String>();
-                headers.put("X_Rest_User", token);
-                headers.put("Data_Hash",hash);
+                headers.put("X_rest_user", token);
+                headers.put("Data_hash",hashNoSpace);
                 headers.put("Content-Type", "application/json");
                 headers.put("Accept", "application/json");
 

@@ -12,13 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import com.google.gson.Gson;
-import com.squareup.okhttp.Response;
-import com.squareup.okhttp.ResponseBody;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.io.Reader;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 

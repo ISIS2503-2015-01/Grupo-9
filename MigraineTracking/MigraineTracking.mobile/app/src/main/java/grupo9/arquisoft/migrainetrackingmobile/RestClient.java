@@ -13,9 +13,6 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +34,6 @@ public class RestClient {
     private String message;
 
     private String response;
-    private Context context;
 
     public String getResponse() {
         return response;
@@ -55,7 +51,6 @@ public class RestClient {
         this.url = url;
         params = new ArrayList<String>();
         headers = new ArrayList<NameValuePair>();
-        this.context = context;
     }
 
     public void AddParam(String value) {
@@ -114,7 +109,7 @@ public class RestClient {
     private void executeRequest(HttpUriRequest request, String url) {
         HttpClient client = new DefaultHttpClient();
         try {
-            client = createHttpClient();
+            client = new DefaultHttpClient();
             System.out.println("ssl");
         } catch (Exception e) {
             System.out.println("falló ssl");
@@ -175,19 +170,5 @@ public class RestClient {
         POST
     }
 
-    public HttpClient createHttpClient() throws Exception {
-        HttpParams httpParameters = new BasicHttpParams();
-        // Set the timeout in milliseconds until a connection is established.
-        int timeoutConnection = 10000;
-        HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-        // Set the default socket timeout (SO_TIMEOUT)
-        // in milliseconds which is the timeout for waiting for data.
-        int timeoutSocket = 10000;
-        HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-        // Instantiate the custom HttpClient
-        HttpClient client = new DefaultHttpClient();
-
-        return client;
-    }
 }

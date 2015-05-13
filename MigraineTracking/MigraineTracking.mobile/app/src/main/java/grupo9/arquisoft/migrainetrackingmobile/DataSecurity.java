@@ -6,12 +6,8 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.util.Base64;
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.util.Scanner;
 
 /**
  *
