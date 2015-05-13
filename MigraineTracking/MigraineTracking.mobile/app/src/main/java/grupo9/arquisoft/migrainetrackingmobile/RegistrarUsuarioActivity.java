@@ -86,9 +86,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         nuevo.setBirthdate(fecha.getTime());
         nuevo.setCedula(cedula);
         nuevo.setDoctorid(null);
-
         nuevo.setUsername(usuario);
-
         nuevo.setPassword(contrasenia);
 
         jsonRespuesta="{\"cedula\":"+nuevo.getCedula()+"," +

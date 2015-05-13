@@ -61,20 +61,41 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(this, MenuPrincipalActivity.class);
             EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
             String usuario = usuarioEdit.getText().toString();
-            if(usuario.equals(""))
+            if(usuario.equals("")||!usuario.contains("@")||!usuario.contains("."))
             {
                 new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese un usuario válido").setNeutralButton("Cerrar", null).show();
                 return;
             }
             EditText claveEdit = (EditText) findViewById(R.id.contrasenia_edit);
             String claveapp = claveEdit.getText().toString();
+            if(claveapp.equals(""))
+            {
+                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese una contraseña válida").setNeutralButton("Cerrar", null).show();
+                return;
+            }
+            EditText cedulaEdit= (EditText) findViewById(R.id.cedula_edit);
+            String cedula=cedulaEdit.getText().toString();
+            try
+            {
+                if(cedula.equals(""))
+                {
+                    new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese una cédula válida").setNeutralButton("Cerrar", null).show();
+                    return;
+                }
+                long ced=Long.parseLong(cedula);
+            }
+            catch (Exception e)
+            {
+                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese una cédula válida").setNeutralButton("Cerrar", null).show();
+                return;
+            }
             PacienteDTO pacienteDTO=new PacienteDTO();
             pacienteDTO.setUsername(usuario);
             pacienteDTO.setPassword(claveapp);
             jsonLogin =gson.toJson(pacienteDTO);
             System.out.println(jsonLogin);
             new obtenerToken().execute("https://migraine-services.herokuapp.com/webresources/auth/signIn");
-            Thread.sleep(8000);
+            Thread.sleep(8500);
             System.out.println("Password: " + password);
             if(password==false) {
                 new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar", null).show();
@@ -109,9 +130,7 @@ public class MainActivity extends ActionBarActivity {
                 RestClient client = new RestClient(urls[0],MainActivity.this);
                 client.AddHeader("Content-Type", "application/json");
                 client.AddParam(jsonLogin);
-
-
-                    client.Execute(RestClient.RequestMethod.POST);
+                client.Execute(RestClient.RequestMethod.POST);
 
                 if(client.getResponseCode()==200)
                 {

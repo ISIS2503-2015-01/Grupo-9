@@ -31,11 +31,13 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     private List<EpisodioDolorDTO> listaEpisodios;
     private long idUsuario;
     private String token;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_episodios);
+        gson = new Gson();
         SharedPreferences preferences=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
         idUsuario=preferences.getLong("CEDULA",0);
         token=preferences.getString("token","");
@@ -174,7 +176,6 @@ public class VerEpisodiosActivity extends ActionBarActivity {
 
     private List<EpisodioDolorDTO> obtenerEpisodios(String json)
     {
-        Gson gson = new Gson();
         Type type=new TypeToken<ArrayList<EpisodioDolorDTO>>(){}.getType();
         try
         {
