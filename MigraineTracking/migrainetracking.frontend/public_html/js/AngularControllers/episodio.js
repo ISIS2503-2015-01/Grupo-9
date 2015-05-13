@@ -150,8 +150,8 @@
                         //Aqui es donde esta el error
                         var date1 = new Date(self.fecha1);
                         var date2 = new Date(self.fecha2);
-                        var millis1 = date1.getMilliseconds();
-                        var millis2 = date2.getMilliseconds();
+                        var millis1 = date1.getTime();
+                        var millis2 = date2.getTime();
                         console.log(millis1);
                         console.log(millis2);
 
