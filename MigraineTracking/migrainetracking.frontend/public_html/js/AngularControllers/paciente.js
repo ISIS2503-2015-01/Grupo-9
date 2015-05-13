@@ -4,6 +4,19 @@
  * and open the template in the editor.
  */
 (function(){var app2 = angular.module('pacienteDirectives',[]);
+   function verifyIntegrity(data, data_hash) {
+        var new_message_hash = hash_message(data);
+        if (new_message_hash === data_hash)
+            return true;
+        else
+            return false;
+    };
+    function hash_message(data) {
+        var hash = CryptoJS.SHA512(data);
+        var string_bytes = CryptoJS.enc.Base64.stringify(hash);
+        console.log(string_bytes);
+        return string_bytes;
+    };
     app2.directive('pacienteInfo',function(){
         return{
             restrict:'E',
@@ -21,9 +34,17 @@
                            'x_rest_user':token
                         }
                     }).success(function(data, status, headers, config){
-                        self.pacientes =data;
-                        var data_hash =headers.data_hash;
-                        console.log(verifyIntegrity(data, data_hash));
+                         self.pacientes =data;
+                        var data_hash = headers('Data_hash');
+                        var integridad = verifyIntegrity(JSON.stringify(data), data_hash);
+                        console.log(integridad);
+                        if( integridad === true )
+                        {
+                            alert("La integridad de la informacion fue comprobada");
+                        }else{
+                            alert("Hubo un problema con la integridad de los datos")
+                        }
+                        
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
                     });
@@ -52,8 +73,15 @@
                         }
                     }).success(function(data, status, headers, config){
                         self.paciente =data;
-                        var data_hash =headers.data_hash;
-                        console.log(verifyIntegrity(data, data_hash));
+                        var data_hash = headers('Data_hash');
+                        var integridad = verifyIntegrity(JSON.stringify(data), data_hash);
+                        console.log(integridad);
+                        if( integridad === true )
+                        {                         
+                            alert("La integridad de la informacion fue comprobada");
+                        }else{
+                            alert("Hubo un problema con la integridad de los datos")
+                        }
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
                     });
@@ -67,13 +95,6 @@
         };
     });
     
-    function verifyIntegrity(data, data_hash) {
-        var new_message_hash = hash_message(data);
-        if (new_message_hash === data_hash)
-            return true;
-        else
-            return false;
-    };
     
 })();
 

@@ -8,7 +8,7 @@
     function hash_message( data ){
 	var hash  = CryptoJS.SHA512( data ) ;
 	var string_bytes  = CryptoJS.enc.Base64.stringify(hash);
-	console.log( string );
+	console.log( string_bytes );
 	return string_bytes;
     };
 		
@@ -37,8 +37,16 @@
                         }
                     }).success(function(data, status, headers, config){
                         self.doctors =data;
-                        var data_hash =headers.data_hash;
-                        console.log(verifyIntegrity(data, data_hash));
+                        var data_hash = headers('Data_hash');
+                        var integridad = verifyIntegrity(JSON.stringify(data), data_hash);
+                        console.log(integridad);
+                        if( integridad === true )
+                        {
+                           self.doctors =data;
+                            alert("La integridad de la informacion fue comprobada");
+                        }else{
+                            alert("Hubo un problema con la integridad de los datos")
+                        }
                         
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
@@ -70,9 +78,17 @@
                            'x_rest_user':token
                         }
                     }).success(function(data, status, headers, config){
-                        self.doctor =data;
-                        var data_hash =headers.data_hash;
-                        console.log(verifyIntegrity(data, data_hash));
+                         self.doctor =data;
+                        var data_hash = headers('Data_hash');
+                        var integridad = verifyIntegrity(JSON.stringify(data), data_hash);
+                        console.log(integridad);
+                        if( integridad === true )
+                        {
+                           self.doctor =data;
+                            alert("La integridad de la informacion fue comprobada");
+                        }else{
+                            alert("Hubo un problema con la integridad de los datos")
+                        }
                     }).error(function(data, status, headers, config){
                         alert("Hubo un error en la transacción");
                     });
@@ -103,11 +119,4 @@
 //            controllerAs:'getDoctorPacientes'
 //        };
 //    });
-function verifyIntegrity(data, data_hash) {
-        var new_message_hash = hash_message(data);
-        if (new_message_hash === data_hash)
-            return true;
-        else
-            return false;
-    };
 })();
