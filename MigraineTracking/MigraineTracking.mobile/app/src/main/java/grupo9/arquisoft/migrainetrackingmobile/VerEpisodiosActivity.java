@@ -17,14 +17,15 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
+import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.EpisodioDolorDTO;
 
@@ -59,16 +60,10 @@ public class VerEpisodiosActivity extends ActionBarActivity {
             ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
             new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/pacientes/episodios/"+idUsuario);
 
-            while(listaEpisodios==null)
-            {
-                try
-                {
-                    Thread.sleep(500);
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
             ExpListItems = SetStandardGroups();
@@ -165,18 +160,16 @@ public class VerEpisodiosActivity extends ActionBarActivity {
             System.out.println(token);
             try
             {
-                HttpResponse<String> response= Unirest.get(urls[0])
-                        .header("Content-Type", "application/json")
-                        .header("x_rest_user", token)
-                        .asString();
-
-                System.out.println(response.getBody());
-                List<EpisodioDolorDTO> resp=obtenerEpisodios(response.getBody());
+                Map<String, String> headers=new HashMap<String,String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("x_rest_user", token);
+                Response response=new GetHttp().run(urls[0],headers);
+                List<EpisodioDolorDTO> resp=obtenerEpisodios(response.body().string());
                 if(resp!=null)
-                    listaEpisodios=resp;
+                   listaEpisodios=resp;
                 else
-                    listaEpisodios=new ArrayList<EpisodioDolorDTO>();
-                return response.getBody();
+                   listaEpisodios=new ArrayList<EpisodioDolorDTO>();
+                return response.body().string();
             }
             catch (Exception e)
             {

@@ -60,7 +60,11 @@
         </activity>
         <activity
             android:name=".RegistrarUsuarioActivity"
-            android:label="@string/title_activity_registrar_usuario" >
+            android:label="@string/title_activity_registrar_usuario"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.RegistrarUsuarioActivity"/>
         </activity>
     </application>
 

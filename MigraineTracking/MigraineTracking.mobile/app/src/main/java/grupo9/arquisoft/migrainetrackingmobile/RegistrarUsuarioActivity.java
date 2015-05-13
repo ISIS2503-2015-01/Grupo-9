@@ -12,8 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
+import com.squareup.okhttp.Response;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +20,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 
@@ -105,22 +106,19 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                 "\"doctorid\":"+1+"}";
         System.out.println(jsonRespuesta);
         new registrar().execute("https://migraine-services.herokuapp.com/webresources/auth/new/paciente");
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
     }
 
     private class registrar extends AsyncTask<String, Long, String> {
         protected String doInBackground(String... urls) {
             try
             {
-                HttpResponse<String> httpResponse= Unirest.post(urls[0])
-                        .header("Content-Type", "application/json")
-                        .header("data_hash", DataSecurity.hashCryptoCode(jsonRespuesta))
-                        .body(jsonRespuesta)
-                        .asString();
-                System.out.println(httpResponse.getCode());
-                System.out.println(httpResponse.getBody());
-                return httpResponse.getBody();
+                String hash=DataSecurity.hashCryptoCode(jsonRespuesta);
+                Map<String, String> heads= new HashMap<String,String>();
+                heads.put("Content-Type", "application/json");
+                heads.put("data_hash", hash);
+                heads.put("Accept","application/json");
+                Response response=new PostHttp().run(urls[0],jsonRespuesta,heads);
+                return response.code()+":"+response.body().string();
             }
             catch (Exception e)
             {
@@ -129,8 +127,21 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
             }
         }
 
-        protected void onPostExecute(String response) {
-
-        }
+        protected void onPostExecute(String response)
+        {
+            String code=response.split(":")[0];
+            String body=response.split(":")[1];
+            if(code=="200")
+            {
+                new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Error de creación").setMessage("No se pudo crear el usuario").setNeutralButton("Cerrar", null).show();
+                Intent intent = new Intent(RegistrarUsuarioActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+            else
+            {
+                new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido correctamente").setMessage("Se agregó el usuario").setNeutralButton("Cerrar", null).show();
+                Intent intent = new Intent(RegistrarUsuarioActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
     }
-}
+}}

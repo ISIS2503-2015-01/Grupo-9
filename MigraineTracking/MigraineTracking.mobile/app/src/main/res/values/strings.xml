@@ -19,20 +19,15 @@
     <string name="verEpisodiosButton">Lista de episodios registrados</string>
 
     <!--Titulos de las Actividades-->
-    <string name="title_activity_menu_principal">Menu</string>
+    <string name="title_activity_menu_principal">Menú</string>
     <string name="title_activity_registrar_episodio">Registra un episodio</string>
     <string name="title_activity_grabar_episodio">Graba un episodio</string>
     <string name="title_activity_escuchar_grabaciones">Escucha tus grabaciones</string>
-    <string name="title_activity_agregar_medicamento">Agrega un medicamento</string>
-    <string name="title_activity_agregar_habito">Agrega un habito</string>
     <string name="title_activity_ver_analisis">Analisis de episodios</string>
     <string name="title_activity_ver_episodios">Lista de Episodios de Dolor</string>
-    <string name="title_activity_agregar_sintoma">Agregar Sintoma</string>
+    <string name="title_activity_registrar_usuario">Registra un usuario</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_agregar_catalizador">"Agregar Catalizador "</string>
-    <string name="title_activity_agregar_medicamentos_episodio">Agregar Medicamento</string>
-
+    <!--Listas Especiales-->
     <string name="listaCatalizadores">Seleccione un catalizador</string>
     <string-array name="cat">
         <item>1</item>
@@ -45,8 +40,7 @@
         <item>"Doctor"</item>
     </string-array>
 
-    <color name="Black">#000000</color>
+    <color name="Black">#ffffff</color>
     <color name="ExpandChildBackground">#ffafabab</color>
     <color name="ExpandGroupBackground">#ff7c7c7c</color>
-    <string name="title_activity_registrar_usuario">RegistrarUsuarioActivity</string>
 </resources>

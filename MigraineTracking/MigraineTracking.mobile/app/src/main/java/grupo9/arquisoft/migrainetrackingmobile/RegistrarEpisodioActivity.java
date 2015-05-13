@@ -17,16 +17,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.mashape.unirest.http.Headers;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
+import com.squareup.okhttp.Response;
 
+import org.apache.http.HttpRequest;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.CatalizadorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.EpisodioDolorDTO;
@@ -201,6 +207,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         System.out.println(jsonRespuesta);
 
         new registrar().execute("https://migraine-services.herokuapp.com/webresources/episodios");
+        //new registrar().execute("http://httpbin.org/post");
     }
 
     public void llenarListas()
@@ -226,13 +233,15 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         {
             try
             {
-                HttpResponse<String> response= Unirest.post(urls[0])
-                        .header("Content-Type", "application/json")
-                        .header("x_rest_user", token)
-                        .header("data_hash",DataSecurity.hashCryptoCode(jsonRespuesta))
-                        .body(jsonRespuesta)
-                        .asString();
-                return response.getBody();
+                String hash=DataSecurity.hashCryptoCode(jsonRespuesta);
+                Map<String, String> headers=new HashMap<String,String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("data_hash",hash);
+                headers.put("x_rest_user", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImluZG9Ac29tZW1hMWwuYml6IiwicGFzc3dvcmQiOiJDaGFuZ2VtZTg2NDkwNzIzNiIsImVtYWlsIjoiaW5kb0Bzb21lbWExbC5iaXoiLCJuYW1lIjoiQnJldHQgV3JpZ2h0IEJyZXR0IFdyaWdodCJ9.lgvude5ccxG9L291gayJvMd2xrqTHB4dckfzOapSvws");
+                headers.put("Accept", "application/json");
+                Response response=new PostHttp().run(urls[0],jsonRespuesta,headers);
+                System.out.println(response.code());
+                return response.body().string();
             }
             catch (Exception e)
             {

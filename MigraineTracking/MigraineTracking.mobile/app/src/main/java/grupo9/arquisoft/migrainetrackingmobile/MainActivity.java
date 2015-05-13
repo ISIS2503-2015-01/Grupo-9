@@ -12,10 +12,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import com.google.gson.Gson;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import com.squareup.okhttp.Response;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 
@@ -25,12 +26,13 @@ public class MainActivity extends ActionBarActivity {
     public final static String TAG="grupo9.migraintracking";
     private boolean password;
     private String jsonLogin;
-
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        gson=new Gson();
     }
 
 
@@ -71,7 +73,6 @@ public class MainActivity extends ActionBarActivity {
             }
             EditText claveEdit = (EditText) findViewById(R.id.contrasenia_edit);
             String claveapp = claveEdit.getText().toString();
-            Gson gson=new Gson();
             PacienteDTO pacienteDTO=new PacienteDTO();
             pacienteDTO.setUsername(usuario);
             pacienteDTO.setPassword(claveapp);
@@ -79,7 +80,7 @@ public class MainActivity extends ActionBarActivity {
             System.out.println(jsonLogin);
             new obtenerToken().execute("https://migraine-services.herokuapp.com/webresources/auth/login");
             Thread.sleep(8000);
-            System.out.println("Password: "+password);
+            System.out.println("Password: " + password);
             if(password==false) {
                 new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar", null).show();
                 return;
@@ -107,27 +108,37 @@ public class MainActivity extends ActionBarActivity {
 
         protected String doInBackground(String... urls)
         {
-            HttpResponse<String> jsonResponse=null;
+
             try
             {
-                jsonResponse=Unirest.post(urls[0])
-                        .header("Content-Type","application/json")
-                        .body(jsonLogin)
-                        .asString();
-                if(jsonResponse.getCode()==200)
+                Map<String, String> headers=new HashMap<String,String>();
+                headers.put("Content-Type","application/json");
+                headers.put("Accept","application/json");
+                Response response=new PostHttp().run(urls[0],jsonLogin,headers);
+                if(response.code()==200)
                 {
-                    password=true;
+                    if(!response.body().string().startsWith("User"))
+                    {
+                        password=true;
+                    }
+                    else
+                    {
+                        password=false;
+                    }
                 }
-
-                System.out.println("Resp: " + jsonResponse.getBody().toString());
-                if(password==true){
-                    String tok = jsonResponse.getBody().toString().split("\"")[1];
-                    return jsonResponse.getCode() + ":" + tok;
+                System.out.println("Fue correcto? " + (response.isSuccessful() ? "Si" : "No"));
+                System.out.println(response.code());
+                String resp= Arrays.toString(response.body().bytes());
+                System.out.println("Resp: " + resp);
+                if(password==true)
+                {
+                    String tok = resp.split("\"")[1];
+                    return 200 + ":" + tok;
                 }
                 else
-                    return jsonResponse.getCode()+":"+jsonResponse.getBody();
+                    return 500+":"+resp;
             }
-            catch(UnirestException e)
+            catch(Exception e)
             {
                 e.printStackTrace();
                 return null;
@@ -154,7 +165,7 @@ public class MainActivity extends ActionBarActivity {
                         EditText cedulaEdit=(EditText) findViewById(R.id.cedula_edit);
                         String cedula=cedulaEdit.getText().toString();
                         long ced=Long.parseLong(cedula);
-                        editor.putLong("CEDULA",ced);
+                        editor.putLong("CEDULA", ced);
                         System.out.println(editor.commit());
                     }
                     else
