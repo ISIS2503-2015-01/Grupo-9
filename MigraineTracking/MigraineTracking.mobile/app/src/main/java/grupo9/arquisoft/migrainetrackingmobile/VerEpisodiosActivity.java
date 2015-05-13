@@ -160,16 +160,17 @@ public class VerEpisodiosActivity extends ActionBarActivity {
             System.out.println(token);
             try
             {
-                Map<String, String> headers=new HashMap<String,String>();
-                headers.put("Content-Type", "application/json");
-                headers.put("x_rest_user", token);
-                Response response=new GetHttp().run(urls[0],headers);
-                List<EpisodioDolorDTO> resp=obtenerEpisodios(response.body().string());
+                RestClient restClient = new RestClient(urls[0],VerEpisodiosActivity.this);
+                restClient.AddHeader("Content-Type", "application/json");
+                restClient.AddHeader("x_rest_user", token);
+                restClient.Execute(RestClient.RequestMethod.GET);
+                System.out.println(restClient.getResponse());
+                List<EpisodioDolorDTO> resp=obtenerEpisodios(restClient.getResponse());
                 if(resp!=null)
                    listaEpisodios=resp;
                 else
                    listaEpisodios=new ArrayList<EpisodioDolorDTO>();
-                return response.body().string();
+                return restClient.getResponse();
             }
             catch (Exception e)
             {

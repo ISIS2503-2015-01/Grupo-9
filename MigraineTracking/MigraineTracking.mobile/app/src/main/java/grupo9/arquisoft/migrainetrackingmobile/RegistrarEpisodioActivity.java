@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -234,11 +235,13 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
             try
             {
                 String hash=DataSecurity.hashCryptoCode(jsonRespuesta);
+                System.out.println(hash);
                 Map<String, String> headers=new HashMap<String,String>();
+                headers.put("X_Rest_User", token);
+                headers.put("Data_Hash",hash);
                 headers.put("Content-Type", "application/json");
-                headers.put("data_hash",hash);
-                headers.put("x_rest_user", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImluZG9Ac29tZW1hMWwuYml6IiwicGFzc3dvcmQiOiJDaGFuZ2VtZTg2NDkwNzIzNiIsImVtYWlsIjoiaW5kb0Bzb21lbWExbC5iaXoiLCJuYW1lIjoiQnJldHQgV3JpZ2h0IEJyZXR0IFdyaWdodCJ9.lgvude5ccxG9L291gayJvMd2xrqTHB4dckfzOapSvws");
                 headers.put("Accept", "application/json");
+
                 Response response=new PostHttp().run(urls[0],jsonRespuesta,headers);
                 System.out.println(response.code());
                 return response.body().string();

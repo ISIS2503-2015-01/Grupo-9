@@ -13,10 +13,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Response;
+import com.squareup.okhttp.ResponseBody;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.Reader;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 
@@ -78,7 +80,7 @@ public class MainActivity extends ActionBarActivity {
             pacienteDTO.setPassword(claveapp);
             jsonLogin =gson.toJson(pacienteDTO);
             System.out.println(jsonLogin);
-            new obtenerToken().execute("https://migraine-services.herokuapp.com/webresources/auth/login");
+            new obtenerToken().execute("https://migraine-services.herokuapp.com/webresources/auth/signIn");
             Thread.sleep(8000);
             System.out.println("Password: " + password);
             if(password==false) {
@@ -111,13 +113,16 @@ public class MainActivity extends ActionBarActivity {
 
             try
             {
-                Map<String, String> headers=new HashMap<String,String>();
-                headers.put("Content-Type","application/json");
-                headers.put("Accept","application/json");
-                Response response=new PostHttp().run(urls[0],jsonLogin,headers);
-                if(response.code()==200)
+                RestClient client = new RestClient(urls[0],MainActivity.this);
+                client.AddHeader("Content-Type", "application/json");
+                client.AddParam(jsonLogin);
+
+
+                    client.Execute(RestClient.RequestMethod.POST);
+
+                if(client.getResponseCode()==200)
                 {
-                    if(!response.body().string().startsWith("User"))
+                    if(!client.getResponse().startsWith("User"))
                     {
                         password=true;
                     }
@@ -126,17 +131,13 @@ public class MainActivity extends ActionBarActivity {
                         password=false;
                     }
                 }
-                System.out.println("Fue correcto? " + (response.isSuccessful() ? "Si" : "No"));
-                System.out.println(response.code());
-                String resp= Arrays.toString(response.body().bytes());
-                System.out.println("Resp: " + resp);
                 if(password==true)
                 {
-                    String tok = resp.split("\"")[1];
+                    String tok = client.getResponse().split("\"")[1];
                     return 200 + ":" + tok;
                 }
                 else
-                    return 500+":"+resp;
+                    return 500+":"+client.getResponse();
             }
             catch(Exception e)
             {

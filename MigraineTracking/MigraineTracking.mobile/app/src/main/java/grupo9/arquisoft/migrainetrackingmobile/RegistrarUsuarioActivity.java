@@ -10,14 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 import com.squareup.okhttp.Response;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -115,10 +108,12 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                 String hash=DataSecurity.hashCryptoCode(jsonRespuesta);
                 Map<String, String> heads= new HashMap<String,String>();
                 heads.put("Content-Type", "application/json");
-                heads.put("data_hash", hash);
+                heads.put("Data_Hash", hash);
                 heads.put("Accept","application/json");
                 Response response=new PostHttp().run(urls[0],jsonRespuesta,heads);
-                return response.code()+":"+response.body().string();
+                String resp=response.body().string();
+                System.out.println(resp);
+                return response.code()+":"+resp;
             }
             catch (Exception e)
             {
@@ -131,17 +126,16 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         {
             String code=response.split(":")[0];
             String body=response.split(":")[1];
-            if(code=="200")
+            if(code=="500")
             {
                 new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Error de creación").setMessage("No se pudo crear el usuario").setNeutralButton("Cerrar", null).show();
-                Intent intent = new Intent(RegistrarUsuarioActivity.this,MainActivity.class);
-                startActivity(intent);
+
             }
             else
             {
                 new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido correctamente").setMessage("Se agregó el usuario").setNeutralButton("Cerrar", null).show();
-                Intent intent = new Intent(RegistrarUsuarioActivity.this,MainActivity.class);
-                startActivity(intent);
             }
+            Intent intent = new Intent(RegistrarUsuarioActivity.this,MainActivity.class);
+            startActivity(intent);
     }
 }}

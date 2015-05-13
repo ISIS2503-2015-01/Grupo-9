@@ -30,15 +30,16 @@ public class DataSecurity {
         String algoritmo = "SHA-512";
         try {
             MessageDigest md = MessageDigest.getInstance(algoritmo);
-            ByteArrayOutputStream data = new ByteArrayOutputStream();
-            data.write(datosJSON.getBytes("UTF-8"));
-            byte[] bytes = data.toByteArray();
-            byte[] rawHmac = md.digest(bytes);
-            return transformar(rawHmac);
+            md.update(datosJSON.getBytes());
+            byte byteData[] =md.digest();
+            String base64 = Base64.encodeToString(byteData,Base64.DEFAULT);
+            return base64;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+
+
     }
 
    // ----------------------------------------------------------------------------------------
