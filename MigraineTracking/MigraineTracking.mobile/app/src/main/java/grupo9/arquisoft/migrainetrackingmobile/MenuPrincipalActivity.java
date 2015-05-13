@@ -1,5 +1,6 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -54,13 +55,14 @@ public class MenuPrincipalActivity extends ActionBarActivity {
         intent.putExtras(bundle);
         startActivity(intent);
     }
-    public void grabarEpisodio(View view){
-        Intent intent = new Intent(this, GrabarEpisodioActivity.class);
-        startActivity(intent);
+    public void grabarEpisodio(View view)
+    {
+        new AlertDialog.Builder(this).setTitle("No diponible").setMessage("Grabar un episodio no está disponible").setNeutralButton("Cerrar", null).show();
+        return;
     }
     public void escucharGrabaciones(View view){
-        Intent intent = new Intent(this, EscucharGrabacionesActivity.class);
-        startActivity(intent);
+        new AlertDialog.Builder(this).setTitle("No diponible").setMessage("Escuchar grabaciones no está disponible").setNeutralButton("Cerrar", null).show();
+        return;
     }
     public void verEpisodios(View view)
     {

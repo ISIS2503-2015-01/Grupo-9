@@ -16,23 +16,17 @@ public class MedicamentoDTO {
     //-----------------------------------------------
     //Atributos
     //-----------------------------------------------
-    
-    /**
-     * El nombre del medicamento
-     */
+
     private String referencia;
 
-    /**
-     * La fecha en que fue recetado el medicamento. En caso de no ser recetado por un medico es null.
-     */
-    private Date fechaDePrescripcion;
+    private String fechaDePrescripcion;
 
     //-----------------------------------------------
     //Constructor
     //-----------------------------------------------
     
 
-    public MedicamentoDTO(String referencia, Date fechaDePrescripcion) {
+    public MedicamentoDTO(String referencia, String fechaDePrescripcion) {
        this.referencia=referencia;
         this.fechaDePrescripcion=fechaDePrescripcion;
     }
@@ -51,7 +45,7 @@ public class MedicamentoDTO {
 
     public String getReferencia(){return referencia;}
 
-    public void setFechaDePrescripcion(Date fechaDePrescripcion){this.fechaDePrescripcion=fechaDePrescripcion;}
+    public void setFechaDePrescripcion(String fechaDePrescripcion){this.fechaDePrescripcion=fechaDePrescripcion;}
 
-    public Date getFechaDePrescripcion(){return fechaDePrescripcion;}
+    public String getFechaDePrescripcion(){return fechaDePrescripcion;}
 }

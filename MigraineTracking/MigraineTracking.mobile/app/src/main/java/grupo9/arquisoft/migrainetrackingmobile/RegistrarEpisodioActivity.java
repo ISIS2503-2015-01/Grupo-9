@@ -105,7 +105,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
                 {
                     e.printStackTrace();
                 }
-                MedicamentoDTO medicamentoDTO=new MedicamentoDTO(nombre,fechal);
+                MedicamentoDTO medicamentoDTO=new MedicamentoDTO(nombre,fechal+"");
                 medicamentos.add(medicamentoDTO);
                 dialog.dismiss();
             }
@@ -189,13 +189,11 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
                     }
                     MedicamentoDTO med=medicamentos.get(i);
                     jsonRespuesta+="{\"referencia\":\""+med.getReferencia()+"\"," +
-                            "\"fechaDePrescripcion\":"+med.getFechaDePrescripcion().getTime()+"}";
+                            "\"fechaDePrescripcion\":\""+med.getFechaDePrescripcion()+"\"}";
                 }
                 jsonRespuesta+="]}";
         System.out.println(jsonRespuesta);
-
         new registrar().execute("https://migraine-services.herokuapp.com/webresources/episodios");
-        //new registrar().execute("http://requestb.in/1f30pj01");
     }
 
     public void llenarListas()

@@ -1,3 +1,7 @@
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingLeft="16dp"
@@ -28,7 +32,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Escoga su tipo de perfil"/>
+        android:text="Escoja su tipo de perfil"/>
     <RadioGroup
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -50,16 +54,18 @@
         android:text="@string/entrar_button"
         android:onClick="login"/>
 
+    <Button
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:text="CREAR"
+        android:id="@+id/nuevo"
+        android:onClick="crear" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/texto"
         android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="99dp"
-        android:layout_height="wrap_content"
-        android:text="CREAR"
-        android:id="@+id/nuevo"
-        android:onClick="crear"/>
 </LinearLayout>
+</ScrollView>

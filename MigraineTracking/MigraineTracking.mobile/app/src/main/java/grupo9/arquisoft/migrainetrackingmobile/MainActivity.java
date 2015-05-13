@@ -111,12 +111,32 @@ public class MainActivity extends ActionBarActivity {
             new AlertDialog.Builder(this).setTitle("No diponible").setMessage("El login de doctor no está disponible").setNeutralButton("Cerrar", null).show();
             return;
         }
+        else
+        {
+            new AlertDialog.Builder(this).setTitle("Error").setMessage("Seleccione un tipo de perfil").setNeutralButton("Cerrar", null).show();
+            return;
+        }
     }
 
     public void crear(View view)
     {
-        Intent intent=new Intent(this, RegistrarUsuarioActivity.class);
-        startActivity(intent);
+        RadioButton pacientes = (RadioButton)findViewById(R.id.pacientesRadio);
+        RadioButton doctores = (RadioButton) findViewById(R.id.doctoresRadio);
+        if(pacientes.isChecked())
+        {
+            Intent intent=new Intent(this, RegistrarUsuarioActivity.class);
+            startActivity(intent);
+        }
+        else if(doctores.isChecked())
+        {
+            new AlertDialog.Builder(this).setTitle("No diponible").setMessage("Crear un doctor no está disponible").setNeutralButton("Cerrar", null).show();
+            return;
+        }
+        else
+        {
+            new AlertDialog.Builder(this).setTitle("Error").setMessage("Seleccione un tipo de perfil").setNeutralButton("Cerrar", null).show();
+            return;
+        }
     }
 
     private class obtenerToken extends AsyncTask<String, Long, String>
