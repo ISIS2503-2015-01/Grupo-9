@@ -32,12 +32,7 @@ public class PostHttp
             i.remove();
         }
         Request request=builder.build();
-        System.out.println("Req: "+request.toString());
-        Headers a=request.headers();
-        for(int h=0;h<a.size();h++)
-        {
-            System.out.println(a.value(h));
-        }
+
         Response response = client.newCall(request).execute();
         return response;
     }

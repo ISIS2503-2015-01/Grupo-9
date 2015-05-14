@@ -13,17 +13,15 @@ import android.widget.TextView;
 public class MenuPrincipalActivity extends ActionBarActivity {
 
     private String idUsuario;
-    private String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
-        Intent intent = getIntent();
         TextView textView=(TextView)findViewById(R.id.textView);
         SharedPreferences prefs=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
         idUsuario=prefs.getString("USUARIO","");
         textView.setText("Bienvenido (a), "+idUsuario);
-        token=prefs.getString("token","");
     }
 
 
@@ -48,29 +46,26 @@ public class MenuPrincipalActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void registrarEpisodio(View view){
+    public void registrarEpisodio(View view)
+    {
         Intent intent = new Intent(this, RegistrarEpisodioActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putString("USUARIO",idUsuario);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
     public void grabarEpisodio(View view)
     {
+        //Intent intent = new Intent(this, GrabarEpisodioActivity.class);
+        //startActivity(intent);
         new AlertDialog.Builder(this).setTitle("No diponible").setMessage("Grabar un episodio no está disponible").setNeutralButton("Cerrar", null).show();
         return;
     }
-    public void escucharGrabaciones(View view){
+    public void escucharGrabaciones(View view)
+    {
         new AlertDialog.Builder(this).setTitle("No diponible").setMessage("Escuchar grabaciones no está disponible").setNeutralButton("Cerrar", null).show();
         return;
     }
     public void verEpisodios(View view)
     {
         Intent intent = new Intent(this, VerEpisodiosActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putString("tipo","CEDULA");
-        bundle.putString("id",idUsuario);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

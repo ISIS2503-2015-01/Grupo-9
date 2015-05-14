@@ -95,7 +95,6 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                 "\"name\":\""+nuevo.getName()+"\"," +
                 "\"birthdate\":"+nuevo.getBirthdate()+"," +
                 "\"doctorid\":"+1+"}";
-        System.out.println(jsonRespuesta);
         new registrar().execute("https://migraine-services.herokuapp.com/webresources/auth/new/paciente");
     }
 
@@ -111,7 +110,6 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                 heads.put("Accept","application/json");
                 Response response=new PostHttp().run(urls[0],jsonRespuesta,heads);
                 String resp=response.body().string();
-                System.out.println(resp);
                 return response.code()+":"+resp;
             }
             catch (Exception e)

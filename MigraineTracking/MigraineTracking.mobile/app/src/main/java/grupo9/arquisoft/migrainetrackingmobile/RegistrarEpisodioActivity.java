@@ -45,7 +45,6 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         medicamentos= new ArrayList<MedicamentoDTO>();
         setContentView(R.layout.activity_registrar_episodio);
-        Intent intent = getIntent();
         SharedPreferences preferences=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
         idUsuario=preferences.getLong("CEDULA",0);
         token=preferences.getString("token","");
@@ -192,11 +191,10 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
                             "\"fechaDePrescripcion\":\""+med.getFechaDePrescripcion()+"\"}";
                 }
                 jsonRespuesta+="]}";
-        System.out.println(jsonRespuesta);
         new registrar().execute("https://migraine-services.herokuapp.com/webresources/episodios");
     }
 
-    public void llenarListas()
+    private void llenarListas()
     {
         List<String> cat=spinCatalizadores.getSelectedStrings();
         catalizadores=new ArrayList<CatalizadorDTO>();
@@ -228,7 +226,6 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
                 headers.put("Accept", "application/json");
 
                 Response response=new PostHttp().run(urls[0],jsonRespuesta,headers);
-                System.out.println(response.code());
                 return response.body().string();
             }
             catch (Exception e)
