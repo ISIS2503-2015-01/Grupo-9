@@ -15,21 +15,54 @@ import java.util.List;
  */
 public class PacienteDTO {
 
+    //------------------------------
+    //Atributos
+    //-----------------------------
+
+    /**
+     * La cedula del paciente
+     */
     private Long cedula;
 
+    /**
+     * El nombre de usuario del paciente
+     */
     private String username;
 
+    /**
+     * La clave del paciente
+     */
     private String password;
 
+    /**
+     * El nombre del paciente
+     */
     private String name;
 
+    /**
+     * La fecha de nacimientos del paciente
+     */
     private Long birthdate;
 
+    /**
+     * El id del doctor que atiende el paciente
+     */
     private Long doctorid; // Solo se usa para agregar el paciente
 
+    //---------------
+    //Constructor
+    //----------------------
+
+    /**
+     * Metodo constructor sin argumentos
+     */
     public PacienteDTO(){
 
     }
+
+    //------------------------------
+    //GETTERS AND SETTERS
+    //------------------------------
 
     public Long getCedula() {
         return cedula;

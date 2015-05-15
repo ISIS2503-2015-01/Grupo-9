@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import com.google.gson.Gson;
 
+import grupo9.arquisoft.migrainetrackingmobile.dtos.DoctorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 
 
@@ -108,6 +109,38 @@ public class MainActivity extends ActionBarActivity {
         }
         else if (doctores.isChecked())
         {
+            Intent intent = new Intent(this,MenuDoctor.class);
+            EditText usuarioEdit = (EditText) findViewById(R.id.usuario_edit);
+            EditText passswordEdit = (EditText) findViewById(R.id.contrasenia_edit);
+            EditText cedulaEdit = (EditText) findViewById(R.id.cedula_edit);
+            String claveapp = passswordEdit.toString();
+            String usuario = usuarioEdit.toString();
+            String cedula=cedulaEdit.getText().toString();
+            if(usuario.equals("")||!usuario.contains("@")||!usuario.contains("."))
+            {
+                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese un usuario válido").setNeutralButton("Cerrar", null).show();
+                return;
+            }
+            if(claveapp.equals(""))
+            {
+                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese una contraseña válida").setNeutralButton("Cerrar", null).show();
+                return;
+            }
+            try
+            {
+                if(cedula.equals(""))
+                {
+                    new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese una cédula válida").setNeutralButton("Cerrar", null).show();
+                    return;
+                }
+                long ced=Long.parseLong(cedula);
+            }
+            catch (Exception e)
+            {
+                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese una cédula válida").setNeutralButton("Cerrar", null).show();
+                return;
+            }
+            DoctorDTO doctorDTO = new DoctorDTO();
             new AlertDialog.Builder(this).setTitle("No diponible").setMessage("El login de doctor no está disponible").setNeutralButton("Cerrar", null).show();
             return;
         }

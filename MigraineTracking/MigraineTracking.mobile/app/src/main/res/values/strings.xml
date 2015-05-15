@@ -43,4 +43,7 @@
     <color name="Black">#ffffff</color>
     <color name="ExpandChildBackground">#ffafabab</color>
     <color name="ExpandGroupBackground">#ff7c7c7c</color>
+    <string name="title_activity_menu_doctor">MenuDoctor</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

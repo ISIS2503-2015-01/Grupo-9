@@ -26,7 +26,10 @@ public class CatalizadorDTO {
     public CatalizadorDTO() {
     }
 
-
+    /**
+     * Constructor de la clase con especificacion
+     * @param especificacion
+     */
     public CatalizadorDTO(String especificacion) {
 
         this.especificacion = especificacion;
@@ -36,8 +39,6 @@ public class CatalizadorDTO {
      //-----------------------------------------------------
     // Metodos
     //-----------------------------------------------------
-
-
 
     /**
      * Devuelve la especificacion del catalizador
