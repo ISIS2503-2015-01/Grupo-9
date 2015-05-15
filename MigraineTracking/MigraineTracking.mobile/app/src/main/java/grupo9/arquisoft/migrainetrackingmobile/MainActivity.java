@@ -113,9 +113,10 @@ public class MainActivity extends ActionBarActivity {
             EditText usuarioEdit = (EditText) findViewById(R.id.usuario_edit);
             EditText passswordEdit = (EditText) findViewById(R.id.contrasenia_edit);
             EditText cedulaEdit = (EditText) findViewById(R.id.cedula_edit);
-            String claveapp = passswordEdit.toString();
-            String usuario = usuarioEdit.toString();
+            String claveapp = passswordEdit.getText().toString();
+            String usuario = usuarioEdit.getText().toString();
             String cedula=cedulaEdit.getText().toString();
+            System.out.println(usuario);
             if(usuario.equals("")||!usuario.contains("@")||!usuario.contains("."))
             {
                 new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese un usuario válido").setNeutralButton("Cerrar", null).show();
@@ -141,8 +142,21 @@ public class MainActivity extends ActionBarActivity {
                 return;
             }
             DoctorDTO doctorDTO = new DoctorDTO();
-            new AlertDialog.Builder(this).setTitle("No diponible").setMessage("El login de doctor no está disponible").setNeutralButton("Cerrar", null).show();
-            return;
+            doctorDTO.setUsername(usuario);
+            doctorDTO.setPassword(claveapp);
+            jsonLogin = gson.toJson(doctorDTO);
+            System.out.println(jsonLogin);
+            new obtenerToken().execute("https://migraine-services.herokuapp.com/webresources/auth/signIn");
+            Thread.sleep(8500);
+            System.out.println("Password:" + password);
+            if(password==false) {
+                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar", null).show();
+                return;
+            }
+            else
+            {
+                startActivity(intent);
+            }
         }
         else
         {
@@ -187,6 +201,7 @@ public class MainActivity extends ActionBarActivity {
 
                 if(client.getResponseCode()==200)
                 {
+                    System.out.println(client.getResponse());
                     if(!client.getResponse().startsWith("User"))
                     {
                         password=true;
