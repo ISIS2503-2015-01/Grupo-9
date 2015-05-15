@@ -24,8 +24,11 @@ public class SintomaDTO {
     //-----------------------------------------------------
     // Constructor
     //-----------------------------------------------------
-    
 
+    /**
+     * Metodo constructor con especificacion
+     * @param esp
+     */
     public SintomaDTO(String esp) {
        especificacion=esp;
     }
@@ -36,7 +39,19 @@ public class SintomaDTO {
     public SintomaDTO() {
     }
 
+    //--------------------------
+    //GETTERS AND SETTERS
+    //---------------------------
+
+    /**
+     * Metodo que cambia la especificacion del sintoma
+     * @param especificacion
+     */
     public void setEspecificacion(String especificacion){this.especificacion=especificacion;}
 
+    /**
+     * Metodo que retorna la especificacion del sintoma
+     * @return la especificacion del sintoma
+     */
     public String getEspecificacion(){return especificacion;}
 }
