@@ -93,6 +93,7 @@ public class MainActivity extends ActionBarActivity {
             pacienteDTO.setUsername(usuario);
             pacienteDTO.setPassword(claveapp);
             jsonLogin =gson.toJson(pacienteDTO);
+            System.out.println("---------------------");
             System.out.println(jsonLogin);
             new obtenerToken().execute("https://migraine-services.herokuapp.com/webresources/auth/signIn");
             Thread.sleep(8500);
