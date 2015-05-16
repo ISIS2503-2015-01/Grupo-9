@@ -63,6 +63,7 @@ public class MenuPacienteActivity extends ActionBarActivity {
     public void verEpisodios(View view)
     {
         Intent intent = new Intent(this, VerEpisodiosActivity.class);
+        intent.putExtra("tipo","CEDULA");
         startActivity(intent);
     }
 }

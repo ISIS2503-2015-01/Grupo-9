@@ -24,6 +24,7 @@ import java.util.Map;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.DoctorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
+import grupo9.arquisoft.migrainetrackingmobile.extras.GetHttp;
 import grupo9.arquisoft.migrainetrackingmobile.extras.PostHttp;
 
 
@@ -33,8 +34,9 @@ public class MainActivity extends ActionBarActivity {
     private String jsonLogin;
     private Gson gson;
     ProgressDialog dialogo;
-    private String id;
     private EditText idEdit;
+    private DoctorDTO doctorDTO;
+    private PacienteDTO pacienteDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +49,9 @@ public class MainActivity extends ActionBarActivity {
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId==R.id.doctoresRadio)
-                {
+                if (checkedId == R.id.doctoresRadio) {
                     idEdit.setVisibility(View.VISIBLE);
-                }
-                else
-                {
+                } else {
                     idEdit.setVisibility(View.INVISIBLE);
                 }
             }
@@ -117,7 +116,7 @@ public class MainActivity extends ActionBarActivity {
         String id=idEdit.getText().toString();
         if(pacientes.isChecked())
         {
-            PacienteDTO pacienteDTO=new PacienteDTO();
+            pacienteDTO=new PacienteDTO();
             pacienteDTO.setUsername(usuario);
             pacienteDTO.setPassword(claveapp);
             jsonLogin =gson.toJson(pacienteDTO);
@@ -139,7 +138,7 @@ public class MainActivity extends ActionBarActivity {
                 new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese un id válido").setNeutralButton("Cerrar", null).show();
                 return;
             }
-            DoctorDTO doctorDTO = new DoctorDTO();
+            doctorDTO = new DoctorDTO();
             doctorDTO.setUsername(usuario);
             doctorDTO.setPassword(claveapp);
             doctorDTO.setId(ids);
@@ -160,6 +159,7 @@ public class MainActivity extends ActionBarActivity {
         if(pacientes.isChecked())
         {
             Intent intent=new Intent(this, RegistrarUsuarioActivity.class);
+            intent.putExtra("tipo","paciente");
             startActivity(intent);
         }
         else if(doctores.isChecked())
@@ -198,13 +198,49 @@ public class MainActivity extends ActionBarActivity {
                 Response response=new PostHttp().run(urls[0],jsonLogin,headers);
                 String respuesta=response.body().string();
                 int cod=response.code();
+                if(paciente)
+                {
+                    if(cod==200 && !respuesta.startsWith("User"))
+                    {
+                        String tok = respuesta.split("\"")[1];
+                        Map<String, String> headers1 = new HashMap<>();
+                        headers1.put("X_rest_user",tok);
+                        Response response1 = new GetHttp().run("https://migraine-services.herokuapp.com/webresources/pacientes/"+idEdit.getText().toString(),headers1);
+                        int cod1=response1.code();
+                        System.out.println(cod1);
+                        if(cod1==200)
+                        cod=200;
+                    }
+                    else
+                    {
+                        cod=500;
+                    }
+                }
+                else
+                {
+                    if(cod==200 && !respuesta.startsWith("User"))
+                    {
+                        String tok = respuesta.split("\"")[1];
+                        Map<String, String> headers1 = new HashMap<>();
+                        headers1.put("X_rest_user",tok);
+                        Response response1 = new GetHttp().run("https://migraine-services.herokuapp.com/webresources/doctores/"+idEdit.getText().toString(),headers1);
+                        int cod1=response1.code();
+                        System.out.println(cod1);
+                        if(cod1==200)
+                            cod=200;
+                    }
+                    else
+                    {
+                        cod=500;
+                    }
+                }
                 if(cod==200)
                 {
                     String tok = respuesta.split("\"")[1];
                     return 200 + ":" + tok;
                 }
                 else
-                    return 500+":"+respuesta;
+                    return 500 + ":" + respuesta;
             }
             catch(Exception e)
             {
@@ -231,15 +267,18 @@ public class MainActivity extends ActionBarActivity {
                         String cedula=cedulaEdit.getText().toString();
                         long ced=Long.parseLong(cedula);
                         editor.putLong("CEDULA", ced);
-                        editor.commit();
                         dialogo.dismiss();
                         if(paciente)
                         {
+                            editor.commit();
                             Intent intent = new Intent(MainActivity.this, MenuPacienteActivity.class);
                             startActivity(intent);
                         }
                         else
                         {
+                            String id=idEdit.getText().toString();
+                            editor.putLong("ID",Long.parseLong(id));
+                            editor.commit();
                             Intent intent = new Intent(MainActivity.this, MenuDoctorActivity.class);
                             startActivity(intent);
                         }
@@ -247,7 +286,7 @@ public class MainActivity extends ActionBarActivity {
                     else
                     {
                         dialogo.dismiss();
-                        new AlertDialog.Builder(MainActivity.this).setTitle("Error de autenticación").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar", null).show();
+                        new AlertDialog.Builder(MainActivity.this).setTitle("Error de autenticación").setMessage("El usuario y/o clave y/o cédula están errado(s)").setNeutralButton("Cerrar", null).show();
                         return;
                     }
                 }

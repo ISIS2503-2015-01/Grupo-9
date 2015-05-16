@@ -48,7 +48,7 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/editText3"
-        android:hint="@string/hint_fecha"
+        android:hint="@string/registrar_usuario_fecha_edit"
         android:layout_below="@+id/editText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -76,6 +76,21 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText6"
         android:hint="@string/registrar_usuario_contrasenia_edit"
+        android:layout_below="@+id/editText5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/registrar_usuario_id_label"
+        android:id="@+id/textView3" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText4"
+        android:hint="@string/registrar_usuario_id_edit"
         android:layout_below="@+id/editText5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

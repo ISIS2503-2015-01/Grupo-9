@@ -29,17 +29,11 @@
         android:hint="@string/main_activity_cedula_edit"
         android:password="false" />
 
-    <EditText
-        android:id="@+id/id_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/main_activity_id_edit"
-        android:password="false" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_activity_perfil_label"/>
+
     <RadioGroup
         android:id="@+id/groupRadio"
         android:layout_width="fill_parent"
@@ -56,6 +50,13 @@
             android:layout_height="wrap_content"
             android:text="@string/doctor"/>
     </RadioGroup>
+
+    <EditText
+        android:id="@+id/id_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/main_activity_id_edit"
+        android:password="false" />
 
     <Button android:layout_width="100dp"
         android:layout_height="wrap_content"

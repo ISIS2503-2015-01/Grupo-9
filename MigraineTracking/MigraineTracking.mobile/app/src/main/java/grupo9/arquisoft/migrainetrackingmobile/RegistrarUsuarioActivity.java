@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.squareup.okhttp.Response;
 import java.text.SimpleDateFormat;
@@ -16,6 +17,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import grupo9.arquisoft.migrainetrackingmobile.dtos.DoctorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 import grupo9.arquisoft.migrainetrackingmobile.extras.DataSecurity;
 import grupo9.arquisoft.migrainetrackingmobile.extras.PostHttp;
@@ -24,11 +26,29 @@ import grupo9.arquisoft.migrainetrackingmobile.extras.PostHttp;
 public class RegistrarUsuarioActivity extends ActionBarActivity {
 
     private String jsonRespuesta;
+    private String tipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_usuario);
+        Intent intent=getIntent();
+        Bundle bundle=intent.getExtras();
+        tipo=bundle.getString("tipo","");
+        if(tipo.equals("paciente"))
+        {
+            EditText editId=(EditText)findViewById(R.id.editText4);
+            TextView labelId=(TextView)findViewById(R.id.textView3);
+            editId.setVisibility(View.VISIBLE);
+            labelId.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            EditText editId=(EditText)findViewById(R.id.editText4);
+            TextView labelId=(TextView)findViewById(R.id.textView3);
+            editId.setVisibility(View.INVISIBLE);
+            labelId.setVisibility(View.INVISIBLE);
+        }
     }
 
 
@@ -82,26 +102,48 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
             return;
         }
 
+        if(tipo.equals("paciente"))
+        {
+            PacienteDTO nuevo = new PacienteDTO();
+            nuevo.setName(nombre);
+            nuevo.setBirthdate(fecha.getTime());
+            nuevo.setCedula(cedula);
+            nuevo.setDoctorid(null);
+            nuevo.setUsername(usuario);
+            nuevo.setPassword(contrasenia);
 
-        PacienteDTO nuevo=new PacienteDTO();
-        nuevo.setName(nombre);
-        nuevo.setBirthdate(fecha.getTime());
-        nuevo.setCedula(cedula);
-        nuevo.setDoctorid(null);
-        nuevo.setUsername(usuario);
-        nuevo.setPassword(contrasenia);
+            jsonRespuesta = "{\"cedula\":" + nuevo.getCedula() + "," +
+                    "\"username\":\"" + nuevo.getUsername() + "\"," +
+                    "\"password\":\"" + nuevo.getPassword() + "\"," +
+                    "\"name\":\"" + nuevo.getName() + "\"," +
+                    "\"birthdate\":" + nuevo.getBirthdate() + "," +
+                    "\"doctorid\":" + 1 + "}";
+            System.out.println(jsonRespuesta);
+            new registrar(true).execute("https://migraine-services.herokuapp.com/webresources/auth/new/paciente");
+        }
+        else
+        {
+            DoctorDTO nuevo=new DoctorDTO();
+            nuevo.setName(nombre);
+            nuevo.setPassword(contrasenia);
+            nuevo.setUsername(usuario);
 
-        jsonRespuesta="{\"cedula\":"+nuevo.getCedula()+"," +
-                "\"username\":\""+nuevo.getUsername()+"\"," +
-                "\"password\":\""+nuevo.getPassword()+"\"," +
-                "\"name\":\""+nuevo.getName()+"\"," +
-                "\"birthdate\":"+nuevo.getBirthdate()+"," +
-                "\"doctorid\":"+1+"}";
-        System.out.println(jsonRespuesta);
-        new registrar().execute("https://migraine-services.herokuapp.com/webresources/auth/new/paciente");
+            jsonRespuesta = "{\"id\":" + null + "," +
+                    "\"username\":\"" + nuevo.getUsername() + "\"," +
+                    "\"password\":\"" + nuevo.getPassword() + "\"," +
+                    "\"name\":\"" + nuevo.getName() + "\""+ "}";
+            System.out.println(jsonRespuesta);
+            new registrar(true).execute("https://migraine-services.herokuapp.com/webresources/auth/new/paciente");
+        }
     }
 
     private class registrar extends AsyncTask<String, Long, String> {
+        private boolean paciente;
+        public registrar(boolean paciente)
+        {
+            this.paciente=paciente;
+        }
+
         protected String doInBackground(String... urls) {
             try
             {
@@ -126,6 +168,8 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         protected void onPostExecute(String response)
         {
             String code=response.split(":")[0];
+            String resp=response.split(":")[1];
+            String id=resp.split(":")[1];
             if(code=="500")
             {
                 new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Error de creación").setMessage("No se pudo crear el usuario").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
@@ -139,13 +183,25 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
             }
             else
             {
-                new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido correctamente").setMessage("Se agregó el usuario").setNeutralButton("Cerrar", new DialogInterface.OnClickListener(){
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent=new Intent(RegistrarUsuarioActivity.this,MainActivity.class);
-                    startActivity(intent);
+                if(paciente) {
+                    new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido paciente correctamente").setMessage("Se agregó el paciente").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(RegistrarUsuarioActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    }).show();
                 }
-            }).show();
+                else
+                {
+                    new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido doctor correctamente").setMessage("Su identificador es: "+id).setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(RegistrarUsuarioActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    }).show();
+                }
             }
     }
 }}

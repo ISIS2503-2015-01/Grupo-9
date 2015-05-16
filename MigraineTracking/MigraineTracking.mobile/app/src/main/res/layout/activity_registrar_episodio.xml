@@ -61,7 +61,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="@string/registrar_episodio_agregarEpisodio_button"
         android:onClick="registrarEpisodioDolor"/>
 
 </LinearLayout>

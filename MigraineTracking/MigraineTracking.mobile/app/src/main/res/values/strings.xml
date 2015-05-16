@@ -9,7 +9,7 @@
     <string name="title_activity_ver_analisis">Analisis de episodios</string>
     <string name="title_activity_ver_episodios">Lista de episodios de dolor</string>
     <string name="title_activity_registrar_usuario">Registra un usuario</string>
-    <string name="title_activity_menu_doctor">MenuDoctor</string>
+    <string name="title_activity_menu_doctor">Menú</string>
 
     <!--Actividad Principal-->
     <string name="main_activity_usuario_label">Usuario</string>
@@ -37,7 +37,7 @@
     <string name="registrar_episodio_catalizadores_label">Escoja los catalizadores</string>
     <string name="registrar_episodio_sintomas_label">Escoja los síntomas</string>
 
-    <!--Actividad Registrar Episodio-->
+    <!--Actividad Registrar Usuario-->
     <string name="registrar_usuario_nombre_label">Introduzca su nombre</string>
     <string name="registrar_usuario_nombre_edit">Nombre completo</string>
     <string name="registrar_usuario_usuario_label">Introduzca un usuario. Debe ser un correo electronico y contener un número</string>
@@ -47,6 +47,9 @@
     <string name="registrar_usuario_contrasenia_label">Introduzca una contraseña. Debe tener una mayúscula, un número y tener más de nueve caracteres</string>
     <string name="registrar_usuario_contrasenia_edit">Contraseña</string>
     <string name="registrar_usuario_registrar_button">Crear usuario</string>
+    <string name="registrar_usuario_fecha_edit">Fecha de nacimiento</string>
+    <string name="registrar_usuario_id_label">Ingrese un identificador de doctor. Debe ser un número</string>
+    <string name="registrar_usuario_id_edit">Identificador</string>
 
     <!--Dialogo Agregar Medicamento-->
     <string name="dialogo_medicamento_nombre_edit">Nombre medicamento</string>
@@ -77,4 +80,7 @@
     <color name="Black">#ffffff</color>
     <color name="ExpandChildBackground">#ffafabab</color>
     <color name="ExpandGroupBackground">#ff7c7c7c</color>
+    <string name="title_activity_ver_episodios_pacientes">VerEpisodiosPacientesActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_ver_episodios_doctor">VerEpisodiosDoctor</string>
 </resources>

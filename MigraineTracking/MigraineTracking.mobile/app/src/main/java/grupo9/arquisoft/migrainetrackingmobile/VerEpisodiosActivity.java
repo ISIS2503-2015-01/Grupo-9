@@ -1,5 +1,6 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -39,6 +40,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     private long idUsuario;
     private String token;
     private Gson gson;
+    ProgressDialog dialogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,22 +53,11 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         Intent intent = getIntent();
         Bundle bundle=intent.getExtras();
         String tipo=bundle.getString("tipo");
+        ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
 
         if(tipo.equals("CEDULA"))
         {
-            ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
-            new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/pacientes/episodios/"+idUsuario);
-
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            ExpListItems = SetStandardGroups();
-            ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
-            ExpandList.setAdapter(ExpAdapter);
-            ExpandList.setOnChildClickListener(ExpandList_ItemClicked);
+            new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/pacientes/episodios/" + idUsuario);
         }
         else if(tipo.equals("CEDULA-FECHAS"))
         {
@@ -83,7 +74,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
 
     };
 
-    public ArrayList<ExpandListGroup> SetStandardGroups() {
+    private ArrayList<ExpandListGroup> SetStandardGroups() {
 
         ArrayList<ExpandListGroup> list = new ArrayList<ExpandListGroup>();
         ArrayList<ExpandListChild> list2 = new ArrayList<ExpandListChild>();
@@ -149,8 +140,15 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class pedirEpisodios extends AsyncTask<String, Long, String> {
-
+    private class pedirEpisodios extends AsyncTask<String, Long, String>
+    {
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            dialogo=ProgressDialog.show(VerEpisodiosActivity.this,"Espera un momento...","Cargando...",true);
+            dialogo.setCancelable(true);
+        }
         protected String doInBackground(String... urls)
         {
             try
@@ -175,7 +173,14 @@ public class VerEpisodiosActivity extends ActionBarActivity {
             }
         }
 
-        protected void onPostExecute(String response) {
+        @Override
+        protected void onPostExecute(String s)
+        {
+            ExpListItems = SetStandardGroups();
+            ExpAdapter = new ExpandListAdapter(VerEpisodiosActivity.this, ExpListItems);
+            ExpandList.setAdapter(ExpAdapter);
+            ExpandList.setOnChildClickListener(ExpandList_ItemClicked);
+            dialogo.dismiss();
         }
     }
 

@@ -2,6 +2,7 @@ package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,7 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.squareup.okhttp.Response;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,6 +45,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
     private ArrayList<SintomaDTO> sintomas;
     final Context context = this;
     private String jsonRespuesta;
+    ProgressDialog dialogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,7 +224,15 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         }
     }
 
-    private class registrar extends AsyncTask<String, Long, String> {
+    private class registrar extends AsyncTask<String, Long, String>
+    {
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            dialogo= ProgressDialog.show(RegistrarEpisodioActivity.this, "Espera un momento...", "Cargando...", true);
+            dialogo.setCancelable(true);
+        }
         protected String doInBackground(String... urls)
         {
             try
@@ -243,8 +255,12 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
             }
         }
 
-        protected void onPostExecute(String response) {
-            new AlertDialog.Builder(RegistrarEpisodioActivity.this).setTitle("Análisis").setMessage(response).setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
+        protected void onPostExecute(String response)
+        {
+            String res=response.split("\"")[3];
+            String resp=res.replaceAll("\\s+","");
+            dialogo.dismiss();
+            new AlertDialog.Builder(RegistrarEpisodioActivity.this).setTitle("Análisis").setMessage(resp).setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent=new Intent(RegistrarEpisodioActivity.this,MenuPacienteActivity.class);
