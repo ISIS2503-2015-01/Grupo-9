@@ -180,6 +180,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
             String resp=response.split("-")[1];
             if(code=="500")
             {
+                dialogo.dismiss();
                 new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Error de creación").setMessage("No se pudo crear el usuario").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -191,6 +192,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
             else
             {
                 String id=resp.split("\":")[2];
+                id=id.replace("}","");
                 dialogo.dismiss();
                 if(paciente) {
                     new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido paciente correctamente").setMessage("Se agregó el paciente").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {

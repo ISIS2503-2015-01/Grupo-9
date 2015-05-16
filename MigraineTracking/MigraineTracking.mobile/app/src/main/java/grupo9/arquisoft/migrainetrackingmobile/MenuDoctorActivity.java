@@ -1,5 +1,6 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,10 +9,14 @@ import android.view.MenuItem;
 
 public class MenuDoctorActivity extends ActionBarActivity {
 
+    private long id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_doctor);
+        Intent intent=getIntent();
+        Bundle extras=intent.getExtras();
+        id=Long.parseLong(extras.getString("ID","1"));
     }
 
 
