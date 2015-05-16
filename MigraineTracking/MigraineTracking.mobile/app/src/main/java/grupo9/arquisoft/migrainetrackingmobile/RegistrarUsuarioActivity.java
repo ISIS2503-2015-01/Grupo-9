@@ -1,6 +1,7 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -27,6 +28,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
 
     private String jsonRespuesta;
     private String tipo;
+    ProgressDialog dialogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +135,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                     "\"password\":\"" + nuevo.getPassword() + "\"," +
                     "\"name\":\"" + nuevo.getName() + "\""+ "}";
             System.out.println(jsonRespuesta);
-            new registrar(true).execute("https://migraine-services.herokuapp.com/webresources/auth/new/paciente");
+            new registrar(false).execute("https://migraine-services.herokuapp.com/webresources/auth/new/doctor");
         }
     }
 
@@ -144,6 +146,13 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
             this.paciente=paciente;
         }
 
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            dialogo=ProgressDialog.show(RegistrarUsuarioActivity.this,"Espera un momento...","Cargando...",true);
+            dialogo.setCancelable(true);
+        }
         protected String doInBackground(String... urls) {
             try
             {
@@ -156,7 +165,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                 Response response=new PostHttp().run(urls[0],jsonRespuesta,heads);
                 String resp=response.body().string();
                 System.out.println(resp);
-                return response.code()+":"+resp;
+                return response.code()+"-"+resp;
             }
             catch (Exception e)
             {
@@ -167,9 +176,8 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
 
         protected void onPostExecute(String response)
         {
-            String code=response.split(":")[0];
-            String resp=response.split(":")[1];
-            String id=resp.split(":")[1];
+            String code=response.split("-")[0];
+            String resp=response.split("-")[1];
             if(code=="500")
             {
                 new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Error de creación").setMessage("No se pudo crear el usuario").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
@@ -179,10 +187,11 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                         startActivity(intent);
                     }
                 }).show();
-
             }
             else
             {
+                String id=resp.split("\":")[2];
+                dialogo.dismiss();
                 if(paciente) {
                     new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido paciente correctamente").setMessage("Se agregó el paciente").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
                         @Override

@@ -164,8 +164,9 @@ public class MainActivity extends ActionBarActivity {
         }
         else if(doctores.isChecked())
         {
-            new AlertDialog.Builder(this).setTitle("No diponible").setMessage("Crear un doctor no está disponible").setNeutralButton("Cerrar", null).show();
-            return;
+            Intent intent=new Intent(this, RegistrarUsuarioActivity.class);
+            intent.putExtra("tipo","doctor");
+            startActivity(intent);
         }
         else
         {
