@@ -18,6 +18,7 @@
     <string name="main_activity_contrasenia_edit">Ingrese su contraseña</string>
     <string name="main_activity_cedula_edit">Ingrese su cédula</string>
     <string name="main_activity_perfil_label">Escoja su tipo de perfil</string>
+    <string name="main_activity_id_edit">Ingrese su ID</string>
     <string name="main_activity_entrar_button">Entrar</string>
     <string name="main_activity_crear_button">Crear</string>
 

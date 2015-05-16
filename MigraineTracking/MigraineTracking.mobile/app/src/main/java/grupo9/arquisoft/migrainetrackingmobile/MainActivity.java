@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
 import com.google.gson.Gson;
 import com.squareup.okhttp.Response;
 
@@ -32,12 +34,29 @@ public class MainActivity extends ActionBarActivity {
     private Gson gson;
     ProgressDialog dialogo;
     private String id;
+    private EditText idEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         gson=new Gson();
+        RadioGroup group=(RadioGroup)findViewById(R.id.groupRadio);
+        idEdit=(EditText)findViewById(R.id.id_edit);
+        idEdit.setVisibility(View.INVISIBLE);
+        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId==R.id.doctoresRadio)
+                {
+                    idEdit.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    idEdit.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 
 
@@ -86,8 +105,7 @@ public class MainActivity extends ActionBarActivity {
         {
             if(cedula.equals(""))
             {
-                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese una cédula válida").setNeutralButton("Cerrar", null).show();
-                return;
+                throw new Exception();
             }
             long ced=Long.parseLong(cedula);
         }
@@ -96,6 +114,7 @@ public class MainActivity extends ActionBarActivity {
             new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese una cédula válida").setNeutralButton("Cerrar", null).show();
             return;
         }
+        String id=idEdit.getText().toString();
         if(pacientes.isChecked())
         {
             PacienteDTO pacienteDTO=new PacienteDTO();
@@ -106,23 +125,10 @@ public class MainActivity extends ActionBarActivity {
         }
         else if (doctores.isChecked())
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Ingrese su ID");
-            final EditText input = new EditText(this);
-            input.setInputType(InputType.TYPE_CLASS_TEXT);
-            builder.setView(input);
-            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    id = input.getText().toString();
-                }
-            });
-            builder.show();
-
             long ids;
             try
             {
-                if(id==""|id==null)
+                if(id==null||id.equals(""))
                 {
                     throw new Exception();
                 }
@@ -130,10 +136,9 @@ public class MainActivity extends ActionBarActivity {
             }
             catch(Exception e)
             {
-                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese una ID válido").setNeutralButton("Cerrar", null).show();
+                new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("Ingrese un id válido").setNeutralButton("Cerrar", null).show();
                 return;
             }
-
             DoctorDTO doctorDTO = new DoctorDTO();
             doctorDTO.setUsername(usuario);
             doctorDTO.setPassword(claveapp);
