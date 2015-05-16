@@ -13,6 +13,7 @@
     <string name="title_activity_ver_doctores">VerDoctoresActivity</string>
     <string name="title_activity_episodios_doctor">EpisodiosDoctorActivity</string>
     <string name="title_activity_ver_pacientes">VerPacientesActivity</string>
+    <string name="title_activity_ver_episodios_doctor">EpisodiosDoctorActivity</string>
 
     <!--Actividad Principal-->
     <string name="main_activity_usuario_label">Usuario</string>
