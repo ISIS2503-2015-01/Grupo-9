@@ -1,6 +1,8 @@
-package grupo9.arquisoft.migrainetrackingmobile;
+package grupo9.arquisoft.migrainetrackingmobile.extras;
 
 import java.util.ArrayList;
+
+import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListChild;
 
 /**
  * Created by henryfvargas on 30/03/15.

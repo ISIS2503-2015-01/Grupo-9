@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package grupo9.arquisoft.migrainetrackingmobile;
+package grupo9.arquisoft.migrainetrackingmobile.extras;
 
 import android.util.Base64;
 import java.io.UnsupportedEncodingException;

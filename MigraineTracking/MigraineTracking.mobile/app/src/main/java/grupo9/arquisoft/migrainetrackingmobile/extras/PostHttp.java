@@ -1,5 +1,6 @@
-package grupo9.arquisoft.migrainetrackingmobile;
+package grupo9.arquisoft.migrainetrackingmobile.extras;
 
+import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -13,11 +14,12 @@ import java.util.Map;
 /**
  * Created by henryfvargas on 12/05/15.
  */
-public class PostLogin {
+public class PostHttp
+{
     OkHttpClient client = new OkHttpClient();
-    public static final MediaType JSON=MediaType.parse("text/plain; charset=utf-8");
+    public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
 
-    Response run(String url, String body, Map<String, String> headers) throws IOException
+    public Response run(String url, String body, Map<String, String> headers) throws IOException
     {
         Request.Builder builder = new Request.Builder()
                 .url(url)

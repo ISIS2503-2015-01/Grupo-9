@@ -19,8 +19,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MenuPrincipalActivity"
-            android:label="@string/title_activity_menu_principal"
+            android:name=".MenuPacienteActivity"
+            android:label="@string/title_activity_menu"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -29,34 +29,34 @@
         <activity
             android:name=".RegistrarEpisodioActivity"
             android:label="@string/title_activity_registrar_episodio"
-            android:parentActivityName=".MenuPrincipalActivity" >
+            android:parentActivityName=".MenuPacienteActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+                android:value=".MenuPacienteActivity" />
         </activity>
         <activity
             android:name=".GrabarEpisodioActivity"
             android:label="@string/title_activity_grabar_episodio"
-            android:parentActivityName=".MenuPrincipalActivity" >
+            android:parentActivityName=".MenuPacienteActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+                android:value=".MenuPacienteActivity" />
         </activity>
         <activity
             android:name=".EscucharGrabacionesActivity"
             android:label="@string/title_activity_escuchar_grabaciones"
-            android:parentActivityName=".MenuPrincipalActivity" >
+            android:parentActivityName=".MenuPacienteActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+                android:value=".MenuPacienteActivity" />
         </activity>
         <activity
             android:name=".VerEpisodiosActivity"
             android:label="@string/title_activity_ver_episodios"
-            android:parentActivityName=".MenuPrincipalActivity" >
+            android:parentActivityName=".MenuPacienteActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuPrincipalActivity" />
+                android:value=".MenuPacienteActivity" />
         </activity>
         <activity
             android:name=".RegistrarUsuarioActivity"
@@ -67,7 +67,7 @@
                 android:value="grupo9.arquisoft.migrainetrackingmobile.RegistrarUsuarioActivity" />
         </activity>
         <activity
-            android:name=".MenuDoctor"
+            android:name=".MenuDoctorActivity"
             android:label="@string/title_activity_menu_doctor" >
         </activity>
     </application>

@@ -11,12 +11,21 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.okhttp.Response;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.EpisodioDolorDTO;
+import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListAdapter;
+import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListChild;
+import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListGroup;
+import grupo9.arquisoft.migrainetrackingmobile.extras.GetHttp;
+import grupo9.arquisoft.migrainetrackingmobile.extras.RestClient;
 
 
 public class VerEpisodiosActivity extends ActionBarActivity {
@@ -43,7 +52,6 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         token=preferences.getString("token","");
         Intent intent = getIntent();
         Bundle bundle=intent.getExtras();
-
         String tipo=bundle.getString("tipo");
 
         if(tipo.equals("CEDULA"))
@@ -145,23 +153,22 @@ public class VerEpisodiosActivity extends ActionBarActivity {
 
     private class pedirEpisodios extends AsyncTask<String, Long, String> {
 
-        protected String doInBackground(String... urls) {
-
-            System.out.println(idUsuario);
-            System.out.println(token);
+        protected String doInBackground(String... urls)
+        {
             try
             {
-                RestClient restClient = new RestClient(urls[0],VerEpisodiosActivity.this);
-                restClient.AddHeader("Content-Type", "application/json");
-                restClient.AddHeader("x_rest_user", token);
-                restClient.Execute(RestClient.RequestMethod.GET);
-                System.out.println(restClient.getResponse());
-                List<EpisodioDolorDTO> resp=obtenerEpisodios(restClient.getResponse());
+                Map<String, String> headers=new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                headers.put("X_rest_user", token);
+                headers.put("Accept", "application/json");
+                Response response=new GetHttp().run(urls[0],headers);
+                String respuesta=response.body().string();
+                List<EpisodioDolorDTO> resp=obtenerEpisodios(respuesta);
                 if(resp!=null)
                    listaEpisodios=resp;
                 else
                    listaEpisodios=new ArrayList<EpisodioDolorDTO>();
-                return restClient.getResponse();
+                return respuesta;
             }
             catch (Exception e)
             {
@@ -184,7 +191,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         }
         catch(Exception e)
         {
-            System.out.println("Error en gson");
+            e.printStackTrace();
         }
         return null;
     }

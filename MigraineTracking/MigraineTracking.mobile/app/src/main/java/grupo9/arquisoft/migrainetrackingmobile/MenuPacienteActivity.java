@@ -10,20 +10,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class MenuPrincipalActivity extends ActionBarActivity {
+public class MenuPacienteActivity extends ActionBarActivity {
 
     private String idUsuario;
-    private String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_principal);
-        Intent intent = getIntent();
+        setContentView(R.layout.activity_menu_paciente);
         TextView textView=(TextView)findViewById(R.id.textView);
         SharedPreferences prefs=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
         idUsuario=prefs.getString("USUARIO","");
         textView.setText("Bienvenido (a), "+idUsuario);
-        token=prefs.getString("token","");
     }
 
 
@@ -48,11 +46,9 @@ public class MenuPrincipalActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void registrarEpisodio(View view){
+    public void registrarEpisodio(View view)
+    {
         Intent intent = new Intent(this, RegistrarEpisodioActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putString("USUARIO",idUsuario);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
     public void grabarEpisodio(View view)
@@ -67,10 +63,6 @@ public class MenuPrincipalActivity extends ActionBarActivity {
     public void verEpisodios(View view)
     {
         Intent intent = new Intent(this, VerEpisodiosActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putString("tipo","CEDULA");
-        bundle.putString("id",idUsuario);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

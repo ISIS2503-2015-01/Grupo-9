@@ -7,18 +7,18 @@
         android:id="@+id/nombre_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre: "
+        android:hint="@string/dialogo_medicamento_nombre_edit"
         android:layout_above="@+id/fecha_edit"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     />
 
-    <TextView android:text="El formato de la fecha es dd/mm/yyyy" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+    <TextView android:text="@string/formato_fecha" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
     <EditText
         android:id="@+id/fecha_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Fecha (dd/mm/yyyy)"
+        android:hint="@string/dialogo_medicamento_fecha_edit"
         android:layout_above="@+id/dialogButtonOK"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -28,7 +28,7 @@
         android:id="@+id/dialogButtonOK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" Agregar "
+        android:text="@string/dialogo_medicamento_agregar_button"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

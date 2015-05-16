@@ -1,4 +1,4 @@
-package grupo9.arquisoft.migrainetrackingmobile;
+package grupo9.arquisoft.migrainetrackingmobile.extras;
 
 /**
  * Created by henryfvargas on 30/03/15.

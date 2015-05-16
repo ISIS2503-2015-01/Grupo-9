@@ -14,36 +14,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/localizacion_edit"
-        android:hint="Ubicación del dolor"/>
+        android:hint="@string/registrar_episodio_localizacion_edit"/>
 
-    <TextView android:text="El formato es dd/mm/yyyy" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+    <TextView android:text="@string/formato_fecha" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
     <EditText android:id="@+id/fecha_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Fecha (dd/mm/yyyy)"/>
+        android:hint="@string/hint_fecha"/>
 
     <EditText android:id="@+id/horasSueno_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Cuántas horas ha dormido?"/>
+        android:hint="@string/registrar_episodio_horasSueno_edit"/>
 
     <EditText android:id="@+id/intensidad_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Intensidad de 1 a 10"/>
+        android:hint="@string/registrar_episodio_intensidad_edit"/>
 
-    <TextView android:text="Escoga los catalizadores" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+    <TextView android:text="@string/registrar_episodio_catalizadores_label" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 
-    <grupo9.arquisoft.migrainetrackingmobile.MultiSelectionSpinner
+    <grupo9.arquisoft.migrainetrackingmobile.extras.MultiSelectionSpinner
         android:id="@+id/spinCatalizadores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TextView android:text="Escoga los sintomas" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+    <TextView android:text="@string/registrar_episodio_sintomas_label" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 
 
-
-    <grupo9.arquisoft.migrainetrackingmobile.MultiSelectionSpinner
+    <grupo9.arquisoft.migrainetrackingmobile.extras.MultiSelectionSpinner
         android:id="@+id/spinSintomas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -55,14 +54,14 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Agregar Medicamento"
+            android:text="@string/registrar_episodio_agregarMedicamento_button"
             android:onClick="agregarMedicamento"/>
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registrar Episodio"
+        android:text=""
         android:onClick="registrarEpisodioDolor"/>
 
 </LinearLayout>

@@ -12,9 +12,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import com.google.gson.Gson;
+import com.squareup.okhttp.Response;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.DoctorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
+import grupo9.arquisoft.migrainetrackingmobile.extras.PostHttp;
+import grupo9.arquisoft.migrainetrackingmobile.extras.RestClient;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -59,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
         RadioButton doctores = (RadioButton) findViewById(R.id.doctoresRadio);
         if(pacientes.isChecked())
         {
-            Intent intent = new Intent(this, MenuPrincipalActivity.class);
+            Intent intent = new Intent(this, MenuPacienteActivity.class);
             EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
             String usuario = usuarioEdit.getText().toString();
             if(usuario.equals("")||!usuario.contains("@")||!usuario.contains("."))
@@ -94,10 +100,8 @@ public class MainActivity extends ActionBarActivity {
             pacienteDTO.setUsername(usuario);
             pacienteDTO.setPassword(claveapp);
             jsonLogin =gson.toJson(pacienteDTO);
-            System.out.println(jsonLogin);
             new obtenerToken().execute("https://migraine-services.herokuapp.com/webresources/auth/signIn");
             Thread.sleep(8500);
-            System.out.println("Password: " + password);
             if(password==false) {
                 new AlertDialog.Builder(this).setTitle("Error de autenticación").setMessage("El usuario y/o clave son erradas").setNeutralButton("Cerrar", null).show();
                 return;
@@ -109,7 +113,7 @@ public class MainActivity extends ActionBarActivity {
         }
         else if (doctores.isChecked())
         {
-            Intent intent = new Intent(this,MenuDoctor.class);
+            Intent intent = new Intent(this,MenuDoctorActivity.class);
             EditText usuarioEdit = (EditText) findViewById(R.id.usuario_edit);
             EditText passswordEdit = (EditText) findViewById(R.id.contrasenia_edit);
             EditText cedulaEdit = (EditText) findViewById(R.id.cedula_edit);
@@ -188,36 +192,30 @@ public class MainActivity extends ActionBarActivity {
 
     private class obtenerToken extends AsyncTask<String, Long, String>
     {
-
         protected String doInBackground(String... urls)
         {
-
             try
             {
-                RestClient client = new RestClient(urls[0],MainActivity.this);
-                client.AddHeader("Content-Type", "application/json");
-                client.AddParam(jsonLogin);
-                client.Execute(RestClient.RequestMethod.POST);
-
-                if(client.getResponseCode()==200)
+                Map<String,String> headers=new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept","text/plain");
+                Response response=new PostHttp().run(urls[0],jsonLogin,headers);
+                String respuesta=response.body().string();
+                int cod=response.code();
+                if(cod==200)
                 {
-                    System.out.println(client.getResponse());
-                    if(!client.getResponse().startsWith("User"))
+                    if(!respuesta.startsWith("User"))
                     {
                         password=true;
-                    }
-                    else
-                    {
-                        password=false;
                     }
                 }
                 if(password==true)
                 {
-                    String tok = client.getResponse().split("\"")[1];
+                    String tok = respuesta.split("\"")[1];
                     return 200 + ":" + tok;
                 }
                 else
-                    return 500+":"+client.getResponse();
+                    return 500+":"+respuesta;
             }
             catch(Exception e)
             {
@@ -235,10 +233,8 @@ public class MainActivity extends ActionBarActivity {
                     if(resp.equals("200"))
                     {
                         password=true;
-                        System.out.println("entró");
                         SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
                         editor.putString("token", tok);
-                        System.out.println(tok);
                         EditText usuarioEdit = (EditText)findViewById(R.id.usuario_edit);
                         String usuario = usuarioEdit.getText().toString();
                         String login=usuario.split("@")[0];
@@ -247,7 +243,7 @@ public class MainActivity extends ActionBarActivity {
                         String cedula=cedulaEdit.getText().toString();
                         long ced=Long.parseLong(cedula);
                         editor.putLong("CEDULA", ced);
-                        System.out.println(editor.commit());
+                        editor.commit();
                     }
                     else
                     {

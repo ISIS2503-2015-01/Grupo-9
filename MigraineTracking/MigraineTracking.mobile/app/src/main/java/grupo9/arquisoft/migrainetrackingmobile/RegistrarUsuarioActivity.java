@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
+import grupo9.arquisoft.migrainetrackingmobile.extras.DataSecurity;
+import grupo9.arquisoft.migrainetrackingmobile.extras.PostHttp;
 
 
 public class RegistrarUsuarioActivity extends ActionBarActivity {
@@ -103,7 +105,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         protected String doInBackground(String... urls) {
             try
             {
-                String hash=DataSecurity.hashCryptoCode(jsonRespuesta);
+                String hash= DataSecurity.hashCryptoCode(jsonRespuesta);
                 String hashNoSpaces=hash.replaceAll("\\s+", "");
                 Map<String, String> heads= new HashMap<String,String>();
                 heads.put("Content-Type", "application/json");

@@ -1,31 +1,63 @@
 <resources>
     <string name="app_name">Migraine Tracking</string>
 
-    <!--Main Activity-->
-    <string name="usuario_label">Usuario</string>
-    <string name="contrasenia_label">Contraseña</string>
-    <string name="usuario_edit">Ingrese su usuario</string>
-    <string name="contrasenia_edit">Ingrese su contraseña</string>
-    <string name="entrar_button">Entrar</string>
-    <string name="action_settings">Settings</string>
-
-    <!--Actividad Menu Principal-->
-    <string name="registrarEpisodioButton">Registrar episodio de dolor</string>
-    <string name="grabarEpisodioButton">Grabar episodio de dolor</string>
-    <string name="registrarMedicamentoButton">Registrar medicamentos diarios</string>
-    <string name="registrarHabitoButton">Registrar habitos</string>
-    <string name="verAnalisisButton">Ver analisis de episodios</string>
-    <string name="escucharGrabacionesButton">Escuchar grabaciones</string>
-    <string name="verEpisodiosButton">Lista de episodios registrados</string>
-
     <!--Titulos de las Actividades-->
-    <string name="title_activity_menu_principal">Menú</string>
+    <string name="title_activity_menu">Menú</string>
     <string name="title_activity_registrar_episodio">Registra un episodio</string>
     <string name="title_activity_grabar_episodio">Graba un episodio</string>
     <string name="title_activity_escuchar_grabaciones">Escucha tus grabaciones</string>
     <string name="title_activity_ver_analisis">Analisis de episodios</string>
-    <string name="title_activity_ver_episodios">Lista de Episodios de Dolor</string>
+    <string name="title_activity_ver_episodios">Lista de episodios de dolor</string>
     <string name="title_activity_registrar_usuario">Registra un usuario</string>
+    <string name="title_activity_menu_doctor">MenuDoctor</string>
+
+    <!--Actividad Principal-->
+    <string name="main_activity_usuario_label">Usuario</string>
+    <string name="main_activity_contrasenia_label">Contraseña</string>
+    <string name="main_activity_usuario_edit">Ingrese su usuario</string>
+    <string name="main_activity_contrasenia_edit">Ingrese su contraseña</string>
+    <string name="main_activity_cedula_edit">Ingrese su cédula</string>
+    <string name="main_activity_perfil_label">Escoja su tipo de perfil</string>
+    <string name="main_activity_entrar_button">Entrar</string>
+    <string name="main_activity_crear_button">Crear</string>
+
+    <!--Actividad Menu Paciente-->
+    <string name="menu_paciente_registrarEpisodioButton">Registrar episodio de dolor</string>
+    <string name="menu_paciente_grabarEpisodioButton">Grabar episodio de dolor</string>
+    <string name="menu_paciente_escucharGrabacionesButton">Escuchar grabaciones</string>
+    <string name="menu_paciente_verEpisodiosButton">Lista de episodios registrados</string>
+
+    <!--Actividad Registrar Episodio-->
+    <string name="registrar_episodio_localizacion_edit">Ubicación del dolor</string>
+    <string name="registrar_episodio_horasSueno_edit">¿Cuántas horas ha dormido?</string>
+    <string name="registrar_episodio_intensidad_edit">Intensidad de 1 a 10</string>
+    <string name="registrar_episodio_agregarMedicamento_button">Agregar un medicamento</string>
+    <string name="registrar_episodio_agregarEpisodio_button">Registrar episodio</string>
+    <string name="registrar_episodio_catalizadores_label">Escoja los catalizadores</string>
+    <string name="registrar_episodio_sintomas_label">Escoja los síntomas</string>
+
+    <!--Actividad Registrar Episodio-->
+    <string name="registrar_usuario_nombre_label">Introduzca su nombre</string>
+    <string name="registrar_usuario_nombre_edit">Nombre completo</string>
+    <string name="registrar_usuario_usuario_label">Introduzca un usuario. Debe ser un correo electronico y contener un número</string>
+    <string name="registrar_usuario_usuario_edit">Usuario</string>
+    <string name="registrar_usuario_cedula_label">Documento de identidad</string>
+    <string name="registrar_usuario_cedula_edit">Cédula</string>
+    <string name="registrar_usuario_contrasenia_label">Introduzca una contraseña. Debe tener una mayúscula, un número y tener más de nueve caracteres</string>
+    <string name="registrar_usuario_contrasenia_edit">Contraseña</string>
+    <string name="registrar_usuario_registrar_button">Crear usuario</string>
+
+    <!--Dialogo Agregar Medicamento-->
+    <string name="dialogo_medicamento_nombre_edit">Nombre medicamento</string>
+    <string name="dialogo_medicamento_fecha_edit">Fecha de consumo</string>
+    <string name="dialogo_medicamento_agregar_button">Agregar</string>
+
+    <!--Generales-->
+    <string name="paciente">Paciente</string>
+    <string name="doctor">Doctor</string>
+    <string name="formato_fecha">El formato es dd/mm/yyyy</string>
+    <string name="hint_fecha">Fecha (dd/mm/yyyy)</string>
+    <string name="action_settings">Ajustes</string>
 
     <!--Listas Especiales-->
     <string name="listaCatalizadores">Seleccione un catalizador</string>
@@ -40,10 +72,8 @@
         <item>"Doctor"</item>
     </string-array>
 
+    <!--Colores-->
     <color name="Black">#ffffff</color>
     <color name="ExpandChildBackground">#ffafabab</color>
     <color name="ExpandGroupBackground">#ff7c7c7c</color>
-    <string name="title_activity_menu_doctor">MenuDoctor</string>
-
-    <string name="hello_world">Hello world!</string>
 </resources>

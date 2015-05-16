@@ -26,6 +26,9 @@ import grupo9.arquisoft.migrainetrackingmobile.dtos.CatalizadorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.EpisodioDolorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.SintomaDTO;
+import grupo9.arquisoft.migrainetrackingmobile.extras.DataSecurity;
+import grupo9.arquisoft.migrainetrackingmobile.extras.MultiSelectionSpinner;
+import grupo9.arquisoft.migrainetrackingmobile.extras.PostHttp;
 
 
 public class RegistrarEpisodioActivity extends ActionBarActivity {
@@ -45,7 +48,6 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         medicamentos= new ArrayList<MedicamentoDTO>();
         setContentView(R.layout.activity_registrar_episodio);
-        Intent intent = getIntent();
         SharedPreferences preferences=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
         idUsuario=preferences.getLong("CEDULA",0);
         token=preferences.getString("token","");
@@ -83,11 +85,11 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
     public void agregarMedicamento(View view)
     {
         final Dialog dialog = new Dialog(context,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        dialog.setContentView(R.layout.custom);
+        dialog.setContentView(R.layout.dialog_agregar_medicamento);
         dialog.setTitle("Agregar Un Medicamento");
 
         Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-        // if button is clicked, close the custom dialog
+        // if button is clicked, close the dialog_agregar_medicamento dialog
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +136,10 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
             fecha=dateFormat.parse(fec);
             hora=Integer.parseInt(horas);
             intensidad=Integer.parseInt(intensi);
+            if(intensidad>10 || intensidad<0)
+            {
+                throw new Exception();
+            }
         }
         catch (Exception e)
         {
@@ -196,7 +202,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         new registrar().execute("https://migraine-services.herokuapp.com/webresources/episodios");
     }
 
-    public void llenarListas()
+    private void llenarListas()
     {
         List<String> cat=spinCatalizadores.getSelectedStrings();
         catalizadores=new ArrayList<CatalizadorDTO>();
@@ -219,7 +225,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         {
             try
             {
-                String hash=DataSecurity.hashCryptoCode(jsonRespuesta);
+                String hash= DataSecurity.hashCryptoCode(jsonRespuesta);
                 String hashNoSpace=hash.replaceAll("\\s+","");
                 Map<String, String> headers=new HashMap<String,String>();
                 headers.put("X_rest_user", token);
@@ -228,7 +234,6 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
                 headers.put("Accept", "application/json");
 
                 Response response=new PostHttp().run(urls[0],jsonRespuesta,headers);
-                System.out.println(response.code());
                 return response.body().string();
             }
             catch (Exception e)
@@ -242,7 +247,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
             new AlertDialog.Builder(RegistrarEpisodioActivity.this).setTitle("Análisis").setMessage(response).setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent=new Intent(RegistrarEpisodioActivity.this,MenuPrincipalActivity.class);
+                    Intent intent=new Intent(RegistrarEpisodioActivity.this,MenuPacienteActivity.class);
                     startActivity(intent);
                 }
             }).show();

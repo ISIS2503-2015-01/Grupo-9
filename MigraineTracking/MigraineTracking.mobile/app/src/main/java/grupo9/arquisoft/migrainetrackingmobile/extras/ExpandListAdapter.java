@@ -1,4 +1,4 @@
-package grupo9.arquisoft.migrainetrackingmobile;
+package grupo9.arquisoft.migrainetrackingmobile.extras;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import grupo9.arquisoft.migrainetrackingmobile.R;
 
 /**
  * Created by henryfvargas on 30/03/15.

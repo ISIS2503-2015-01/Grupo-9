@@ -1,10 +1,7 @@
-package grupo9.arquisoft.migrainetrackingmobile;
+package grupo9.arquisoft.migrainetrackingmobile.extras;
 
-import com.squareup.okhttp.Headers;
-import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
@@ -14,16 +11,15 @@ import java.util.Map;
 /**
  * Created by henryfvargas on 12/05/15.
  */
-public class PostHttp
+public class GetHttp
 {
     OkHttpClient client = new OkHttpClient();
-    public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
 
-    Response run(String url, String body, Map<String, String> headers) throws IOException
+    public Response run(String url, Map<String, String> headers) throws IOException
     {
         Request.Builder builder = new Request.Builder()
                 .url(url)
-                .post(RequestBody.create(JSON, body));
+                .get();
         Iterator i=headers.entrySet().iterator();
         while(i.hasNext())
         {
@@ -32,12 +28,7 @@ public class PostHttp
             i.remove();
         }
         Request request=builder.build();
-        System.out.println("Req: "+request.toString());
-        Headers a=request.headers();
-        for(int h=0;h<a.size();h++)
-        {
-            System.out.println(a.value(h));
-        }
+
         Response response = client.newCall(request).execute();
         return response;
     }

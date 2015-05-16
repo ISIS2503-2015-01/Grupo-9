@@ -15,25 +15,25 @@
 
     <Button android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/registrarEpisodioButton"
+        android:text="@string/menu_paciente_registrarEpisodioButton"
         android:onClick="registrarEpisodio"
     />
 
     <Button android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/grabarEpisodioButton"
+        android:text="@string/menu_paciente_grabarEpisodioButton"
         android:onClick="grabarEpisodio"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/escucharGrabacionesButton"
+        android:text="@string/menu_paciente_escucharGrabacionesButton"
         android:onClick="escucharGrabaciones"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/verEpisodiosButton"
+        android:text="@string/menu_paciente_verEpisodiosButton"
         android:onClick="verEpisodios"/>
 
 </LinearLayout>
