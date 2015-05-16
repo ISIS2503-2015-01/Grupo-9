@@ -25,8 +25,6 @@ import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListAdapter;
 import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListChild;
 import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListGroup;
 import grupo9.arquisoft.migrainetrackingmobile.extras.GetHttp;
-import grupo9.arquisoft.migrainetrackingmobile.extras.RestClient;
-
 
 public class VerEpisodiosActivity extends ActionBarActivity {
 
