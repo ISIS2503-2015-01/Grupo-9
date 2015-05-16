@@ -10,6 +10,9 @@
     <string name="title_activity_ver_episodios">Lista de episodios de dolor</string>
     <string name="title_activity_registrar_usuario">Registra un usuario</string>
     <string name="title_activity_menu_doctor">Menú</string>
+    <string name="title_activity_ver_doctores">VerDoctoresActivity</string>
+    <string name="title_activity_episodios_doctor">EpisodiosDoctorActivity</string>
+    <string name="title_activity_ver_pacientes">VerPacientesActivity</string>
 
     <!--Actividad Principal-->
     <string name="main_activity_usuario_label">Usuario</string>
@@ -56,6 +59,17 @@
     <string name="dialogo_medicamento_fecha_edit">Fecha de consumo</string>
     <string name="dialogo_medicamento_agregar_button">Agregar</string>
 
+    <!--Actividad Menu Doctor-->
+    <string name="menu_doctor_colegas_button">Ver colegas</string>
+    <string name="menu_doctor_episodios_button">Ver episodios de un paciente</string>
+    <string name="menu_doctor_pacientes_button">Ver todos los pacientes</string>
+    <string name="menu_doctor_pacientes_doctor_button">Ver mis pacientes</string>
+
+    <!--Actividad Episodios Doctor-->
+    <string name="episodios_doctor_paciente_label">Ingrese la cédula del paciente. Debe ser una cédula válida</string>
+    <string name="episodios_doctor_paciente_edit">Cédula</string>
+    <string name="episodios_doctor_buscar_button">Buscar</string>
+
     <!--Generales-->
     <string name="paciente">Paciente</string>
     <string name="doctor">Doctor</string>
@@ -80,7 +94,5 @@
     <color name="Black">#ffffff</color>
     <color name="ExpandChildBackground">#ffafabab</color>
     <color name="ExpandGroupBackground">#ff7c7c7c</color>
-    <string name="title_activity_ver_episodios_pacientes">VerEpisodiosPacientesActivity</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_ver_episodios_doctor">VerEpisodiosDoctor</string>
 </resources>

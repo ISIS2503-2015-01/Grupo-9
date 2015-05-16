@@ -52,7 +52,7 @@
         </activity>
         <activity
             android:name=".VerEpisodiosActivity"
-            android:label="@string/title_activity_ver_episodios">
+            android:label="@string/title_activity_ver_episodios" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuPacienteActivity" />
@@ -76,6 +76,26 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="grupo9.arquisoft.migrainetrackingmobile.MenuDoctorActivity" />
+        </activity>
+        <activity
+            android:name=".extras.VerDoctoresActivity"
+            android:label="@string/title_activity_ver_doctores"
+            android:parentActivityName=".MenuDoctorActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuDoctorActivity" />
+        </activity>
+        <activity
+            android:name=".EpisodiosDoctorActivity"
+            android:label="@string/title_activity_episodios_doctor"
+            android:parentActivityName=".MenuDoctorActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuDoctorActivity" />
+        </activity>
+        <activity
+            android:name=".VerPacientesActivity"
+            android:label="@string/title_activity_ver_pacientes" >
         </activity>
     </application>
 

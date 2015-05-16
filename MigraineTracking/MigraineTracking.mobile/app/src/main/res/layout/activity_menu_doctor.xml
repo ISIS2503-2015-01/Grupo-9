@@ -9,18 +9,45 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView2"
+        android:id="@+id/bienvenido_label"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button2"
-        android:layout_below="@+id/textView2"
+        android:text="@string/menu_doctor_colegas_button"
+        android:id="@+id/colegas_button"
+        android:layout_below="@+id/bienvenido_label"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="verColegas"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_doctor_episodios_button"
+        android:id="@+id/episodios_button"
+        android:layout_below="@+id/colegas_button"
+        android:layout_centerHorizontal="true"
+        android:onClick="verEpisodiosPaciente"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_doctor_pacientes_button"
+        android:id="@+id/pacientes_button"
+        android:layout_below="@+id/episodios_button"
+        android:layout_centerHorizontal="true"
+        android:onClick="verTodosPacientes"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_doctor_pacientes_doctor_button"
+        android:id="@+id/pacientes_doctor_button"
+        android:layout_below="@+id/pacientes_button"
+        android:layout_centerHorizontal="true"
+        android:onClick="verMisPacientes"/>
 
 </RelativeLayout>

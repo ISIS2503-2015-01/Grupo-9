@@ -1,15 +1,21 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import grupo9.arquisoft.migrainetrackingmobile.extras.VerDoctoresActivity;
 
 
 public class MenuDoctorActivity extends ActionBarActivity {
 
     private long id;
+    private String idUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +23,10 @@ public class MenuDoctorActivity extends ActionBarActivity {
         Intent intent=getIntent();
         Bundle extras=intent.getExtras();
         id=Long.parseLong(extras.getString("ID","1"));
+        TextView textView=(TextView)findViewById(R.id.textView);
+        SharedPreferences prefs=getSharedPreferences(MainActivity.TAG, MODE_PRIVATE);
+        idUsuario=prefs.getString("USUARIO","");
+        textView.setText("Bienvenido (a), "+idUsuario);
     }
 
 
@@ -40,5 +50,29 @@ public class MenuDoctorActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void verColegas(View view)
+    {
+        Intent intent= new Intent(this, VerDoctoresActivity.class);
+        startActivity(intent);
+    }
+
+    public void verEpisodiosPaciente(View view)
+    {
+        Intent intent= new Intent(this, EpisodiosDoctorActivity.class);
+        startActivity(intent);
+    }
+
+    public void verTodosPacientes(View view)
+    {
+        Intent intent=new Intent(this, VerPacientesActivity.class);
+        startActivity(intent);
+    }
+
+    public void verMisPacientes(View view)
+    {
+        Intent intent=new Intent(this, VerPacientesActivity.class);
+        startActivity(intent);
     }
 }

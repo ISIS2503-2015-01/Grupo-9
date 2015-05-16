@@ -1,23 +1,24 @@
-package grupo9.arquisoft.migrainetrackingmobile;
+package grupo9.arquisoft.migrainetrackingmobile.extras;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import grupo9.arquisoft.migrainetrackingmobile.R;
 
-public class VerEpisodiosDoctor extends ActionBarActivity {
+public class VerDoctoresActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_episodios_doctor);
+        setContentView(R.layout.activity_ver_doctores);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_ver_episodios_doctor, menu);
+        getMenuInflater().inflate(R.menu.menu_ver_doctores, menu);
         return true;
     }
 
