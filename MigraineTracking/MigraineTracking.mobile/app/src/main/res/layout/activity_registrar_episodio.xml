@@ -17,20 +17,42 @@
         android:hint="@string/registrar_episodio_localizacion_edit"/>
 
     <TextView android:text="@string/formato_fecha" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:columnCount="3"
+        android:rowCount="2">
+        
+        </GridLayout>
+
     <EditText android:id="@+id/fecha_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_fecha"/>
 
-    <EditText android:id="@+id/horasSueno_edit"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/registrar_episodio_horasSueno_edit"/>
+        android:text="@string/registrar_episodio_horasSueno_edit"/>
 
-    <EditText android:id="@+id/intensidad_edit"
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/registrar_episodio_intensidad_edit"/>
+        android:entries="@array/numeros"
+        android:id="@+id/spinnerhoras"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Que intensidad le pondria al dolor"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/numeros"
+        android:id="@+id/spinnerintensidad"/>
 
     <TextView android:text="@string/registrar_episodio_catalizadores_label" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 

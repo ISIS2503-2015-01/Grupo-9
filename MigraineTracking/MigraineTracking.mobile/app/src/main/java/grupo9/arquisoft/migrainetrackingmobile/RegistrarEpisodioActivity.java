@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.squareup.okhttp.Response;
 
@@ -125,25 +126,23 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         llenarListas();
         EditText fech=(EditText)findViewById(R.id.fecha_edit);
         String fec=fech.getText().toString();
-        EditText hor=(EditText)findViewById(R.id.horasSueno_edit);
-        String horas=hor.getText().toString();
-        EditText inten=(EditText)findViewById(R.id.intensidad_edit);
-        String intensi=inten.getText().toString();
+        Spinner spinnerSueno = (Spinner) findViewById(R.id.spinnerhoras);
+        int hora = spinnerSueno.getSelectedItemPosition() + 1;
+        Spinner spinnerIntensidad = (Spinner) findViewById(R.id.spinnerintensidad);
+        int intensidad = spinnerIntensidad.getSelectedItemPosition()+1;
         EditText local = (EditText)findViewById(R.id.localizacion_edit);
         String localizacion=local.getText().toString();
-        int hora=0;
-        int intensidad=0;
         Date fecha=new Date();
         try
         {
             DateFormat dateFormat=new SimpleDateFormat("dd/mm/yyyy");
             fecha=dateFormat.parse(fec);
-            hora=Integer.parseInt(horas);
-            intensidad=Integer.parseInt(intensi);
-            if(intensidad>10 || intensidad<0)
-            {
-                throw new Exception();
-            }
+            //hora=Integer.parseInt(horas);
+            //intensidad=Integer.parseInt(intensi);
+            //if(intensidad>10 || intensidad<0)
+            //{
+            //    throw new Exception();
+            //}
         }
         catch (Exception e)
         {
