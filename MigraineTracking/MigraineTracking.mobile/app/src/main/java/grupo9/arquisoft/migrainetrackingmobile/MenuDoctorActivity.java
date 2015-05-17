@@ -22,8 +22,8 @@ public class MenuDoctorActivity extends ActionBarActivity {
         setContentView(R.layout.activity_menu_doctor);
         Intent intent=getIntent();
         Bundle extras=intent.getExtras();
-        id=Long.parseLong(extras.getString("ID","1"));
-        TextView textView=(TextView)findViewById(R.id.textView);
+        //id=Long.parseLong(extras.getString("ID","1"));
+        TextView textView=(TextView)findViewById(R.id.bienvenido_label);
         SharedPreferences prefs=getSharedPreferences(MainActivity.TAG, MODE_PRIVATE);
         idUsuario=prefs.getString("USUARIO","");
         textView.setText("Bienvenido (a), "+idUsuario);

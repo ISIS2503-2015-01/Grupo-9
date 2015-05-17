@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -159,6 +160,8 @@ public class VerEpisodiosActivity extends ActionBarActivity {
                 headers.put("Accept", "application/json");
                 Response response=new GetHttp().run(urls[0],headers);
                 String respuesta=response.body().string();
+                System.out.println(respuesta);
+                System.out.println("-------------------");
                 List<EpisodioDolorDTO> resp=obtenerEpisodios(respuesta);
                 if(resp!=null)
                    listaEpisodios=resp;
