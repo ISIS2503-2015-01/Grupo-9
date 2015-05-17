@@ -31,5 +31,6 @@
         android:id="@+id/buscar_button"
         android:layout_below="@+id/paciente_edit"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="buscar"/>
 </RelativeLayout>

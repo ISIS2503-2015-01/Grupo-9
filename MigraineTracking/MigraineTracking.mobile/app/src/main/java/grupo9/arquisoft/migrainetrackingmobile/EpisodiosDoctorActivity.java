@@ -1,12 +1,19 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class EpisodiosDoctorActivity extends ActionBarActivity {
+
+    String cedula;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +41,23 @@ public class EpisodiosDoctorActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void buscar(View v)
+    {
+        EditText info = (EditText) findViewById(R.id.paciente_edit);
+        cedula = info.getText().toString();
+        try
+        {
+            Long.parseLong(cedula);
+        }
+        catch (Exception e)
+        {
+            new AlertDialog.Builder(this).setTitle("Error").setMessage("Ingrese una cédula válida").setNeutralButton("Cerrar", null).show();
+            return;
+        }
+        Intent intent = new Intent(this,EpisodiosPaciente.class);
+        intent.putExtra("identificacion",cedula);
+        startActivity(intent);
     }
 }

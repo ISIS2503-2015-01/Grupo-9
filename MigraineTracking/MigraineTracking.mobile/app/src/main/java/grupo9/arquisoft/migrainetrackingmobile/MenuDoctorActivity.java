@@ -1,5 +1,8 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +10,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import grupo9.arquisoft.migrainetrackingmobile.extras.VerDoctoresActivity;
@@ -16,6 +21,10 @@ public class MenuDoctorActivity extends ActionBarActivity {
 
     private long id;
     private String idUsuario;
+    final Context context = this;
+    String cedulaS;
+    long ced;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
