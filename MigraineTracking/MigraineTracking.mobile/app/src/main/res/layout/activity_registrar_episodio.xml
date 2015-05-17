@@ -21,11 +21,36 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:columnCount="3"
-        android:rowCount="2">
-        
-        </GridLayout>
+        android:columnCount="19"
+        android:rowCount="3">
+
+        <TextView android:text="Dia"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_width="120dp" />
+
+        <TextView android:text="Mes"
+            android:layout_row="0"
+            android:layout_column="17"
+            android:layout_width="120dp" />
+
+        <TextView android:text="Año"
+            android:layout_width="120dp"
+            android:layout_row="0"
+            android:layout_column="18" />
+
+        <Spinner android:entries="@array/numeros"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <Spinner android:entries="@array/numeros"
+            android:layout_row="1"
+            android:layout_column="17" />
+
+        <Spinner android:entries="@array/numeros"
+            android:layout_row="1"
+            android:layout_column="18" />
+    </GridLayout>
 
     <EditText android:id="@+id/fecha_edit"
         android:layout_width="match_parent"
