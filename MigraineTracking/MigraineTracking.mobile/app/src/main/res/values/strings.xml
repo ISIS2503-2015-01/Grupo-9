@@ -40,6 +40,7 @@
     <string name="registrar_episodio_agregarEpisodio_button">Registrar episodio</string>
     <string name="registrar_episodio_catalizadores_label">Escoja los catalizadores</string>
     <string name="registrar_episodio_sintomas_label">Escoja los síntomas</string>
+    <string name="registrar_episodio_fecha_label">Introduzca la fecha en que ocurrio el episodio</string>
 
     <!--Actividad Registrar Usuario-->
     <string name="registrar_usuario_nombre_label">Introduzca su nombre</string>

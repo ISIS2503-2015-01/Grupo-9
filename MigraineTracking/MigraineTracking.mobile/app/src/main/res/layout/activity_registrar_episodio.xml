@@ -16,7 +16,7 @@
         android:id="@+id/localizacion_edit"
         android:hint="@string/registrar_episodio_localizacion_edit"/>
 
-    <TextView android:text="@string/formato_fecha" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+    <TextView android:text="@string/registrar_episodio_fecha_label" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 
     <GridLayout
         android:layout_width="match_parent"
@@ -42,23 +42,22 @@
         <Spinner android:entries="@array/dias"
             android:layout_row="1"
             android:layout_column="0"
-            android:layout_width="119dp" />
+            android:layout_width="119dp"
+            android:id="@+id/spindias"/>
 
         <Spinner android:entries="@array/Meses"
             android:layout_row="1"
             android:layout_column="17"
-            android:layout_width="120dp" />
+            android:layout_width="120dp"
+            android:id="@+id/spinmeses"/>
 
         <Spinner android:entries="@array/Anios"
             android:layout_row="1"
             android:layout_column="18"
-            android:layout_width="100dp" />
+            android:layout_width="100dp"
+            android:id="@+id/spinanios"
+            android:layout_height="52dp" />
     </GridLayout>
-
-    <EditText android:id="@+id/fecha_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_fecha"/>
 
     <TextView
         android:layout_width="match_parent"

@@ -126,6 +126,12 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         llenarListas();
         EditText fech=(EditText)findViewById(R.id.fecha_edit);
         String fec=fech.getText().toString();
+        Spinner spinnerDias = (Spinner) findViewById(R.id.spindias);
+        int dia = spinnerDias.getSelectedItemPosition()+1;
+        Spinner spinnerMeses = (Spinner) findViewById(R.id.spinmeses);
+        int mes = spinnerMeses.getSelectedItemPosition()+1;
+        Spinner spinnerAnios = (Spinner) findViewById(R.id.spinanios);
+        int anio = spinnerAnios.getSelectedItemPosition() + 2013;
         Spinner spinnerSueno = (Spinner) findViewById(R.id.spinnerhoras);
         int hora = spinnerSueno.getSelectedItemPosition() + 1;
         Spinner spinnerIntensidad = (Spinner) findViewById(R.id.spinnerintensidad);
@@ -133,23 +139,14 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         EditText local = (EditText)findViewById(R.id.localizacion_edit);
         String localizacion=local.getText().toString();
         Date fecha=new Date();
-        try
+        if(((mes==4 || mes==6 || mes==9 || mes==11) && dia>30) || (mes==2&&dia>29))
         {
-            DateFormat dateFormat=new SimpleDateFormat("dd/mm/yyyy");
-            fecha=dateFormat.parse(fec);
-            //hora=Integer.parseInt(horas);
-            //intensidad=Integer.parseInt(intensi);
-            //if(intensidad>10 || intensidad<0)
-            //{
-            //    throw new Exception();
-            //}
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
             new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Los campos no son correctos").setNeutralButton("Cerrar", null).show();
             return;
         }
+        fecha.setDate(dia);
+        fecha.setMonth(mes);
+        fecha.setYear(anio);
         EpisodioDolorDTO episodio=new EpisodioDolorDTO();
         episodio.setId(null);
         episodio.setCatalizadores(catalizadores);
