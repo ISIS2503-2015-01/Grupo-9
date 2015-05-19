@@ -104,6 +104,76 @@
         <item>10</item>
     </string-array>
 
+    <string-array name="dias">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+
+    <string-array name="Meses">
+    <item>Enero</item>
+    <item>Febrero</item>
+    <item>Marzo</item>
+    <item>Abril</item>
+    <item>Mayo</item>
+    <item>Junio</item>
+    <item>Julio</item>
+    <item>Agosto</item>
+    <item>Septiembre</item>
+    <item>Octubre</item>
+    <item>Noviembre</item>
+    <item>Diciembre</item>
+    </string-array>
+
+    <string-array name="Anios">
+        <item>2013</item>
+        <item>2014</item>
+        <item>2015</item>
+        <item>2016</item>
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+        <item>2028</item>
+        <item>2029</item>
+        <item>2030</item>
+    </string-array>
+
     <!--Colores-->
     <color name="Black">#ffffff</color>
     <color name="ExpandChildBackground">#ffafabab</color>

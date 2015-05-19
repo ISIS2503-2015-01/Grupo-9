@@ -39,17 +39,20 @@
             android:layout_row="0"
             android:layout_column="18" />
 
-        <Spinner android:entries="@array/numeros"
+        <Spinner android:entries="@array/dias"
             android:layout_row="1"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:layout_width="119dp" />
 
-        <Spinner android:entries="@array/numeros"
+        <Spinner android:entries="@array/Meses"
             android:layout_row="1"
-            android:layout_column="17" />
+            android:layout_column="17"
+            android:layout_width="120dp" />
 
-        <Spinner android:entries="@array/numeros"
+        <Spinner android:entries="@array/Anios"
             android:layout_row="1"
-            android:layout_column="18" />
+            android:layout_column="18"
+            android:layout_width="100dp" />
     </GridLayout>
 
     <EditText android:id="@+id/fecha_edit"
