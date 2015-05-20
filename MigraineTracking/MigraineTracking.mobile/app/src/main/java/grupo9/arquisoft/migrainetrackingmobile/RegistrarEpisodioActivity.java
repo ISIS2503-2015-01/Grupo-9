@@ -26,12 +26,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.SSLSocketFactory;
+
 import grupo9.arquisoft.migrainetrackingmobile.dtos.CatalizadorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.EpisodioDolorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.MedicamentoDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.SintomaDTO;
 import grupo9.arquisoft.migrainetrackingmobile.extras.DataSecurity;
 import grupo9.arquisoft.migrainetrackingmobile.extras.MultiSelectionSpinner;
+import grupo9.arquisoft.migrainetrackingmobile.extras.Pinning;
 import grupo9.arquisoft.migrainetrackingmobile.extras.PostHttp;
 
 
@@ -47,10 +51,13 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
     final Context context = this;
     private String jsonRespuesta;
     ProgressDialog dialogo;
+    private SSLSocketFactory ssl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Pinning pin=new Pinning(RegistrarEpisodioActivity.this);
+        ssl=pin.getPinnedCertSslSocketFactory();
         medicamentos= new ArrayList<MedicamentoDTO>();
         setContentView(R.layout.activity_registrar_episodio);
         SharedPreferences preferences=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
@@ -259,7 +266,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
                 headers.put("Content-Type", "application/json");
                 headers.put("Accept", "application/json");
 
-                Response response=new PostHttp().run(urls[0],jsonRespuesta,headers);
+                Response response=new PostHttp().run(urls[0],jsonRespuesta,headers,null);
                 return response.body().string();
             }
             catch (Exception e)

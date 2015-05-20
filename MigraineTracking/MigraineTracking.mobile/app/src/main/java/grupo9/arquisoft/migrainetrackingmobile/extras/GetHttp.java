@@ -8,15 +8,32 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.net.ssl.SSLSocketFactory;
+
 /**
  * Created by henryfvargas on 12/05/15.
  */
 public class GetHttp
 {
-    OkHttpClient client = new OkHttpClient();
+    private static OkHttpClient client = new OkHttpClient();
 
-    public Response run(String url, Map<String, String> headers) throws IOException
+    private static PostHttp instancia;
+
+    public static PostHttp createInstance()
     {
+        if(instancia==null)
+        {
+            instancia=new PostHttp();
+        }
+        return instancia;
+    }
+
+    public static Response run(String url, Map<String, String> headers, SSLSocketFactory ssl) throws IOException
+    {
+        if(ssl!=null)
+        {
+            client.setSslSocketFactory(ssl);
+        }
         Request.Builder builder = new Request.Builder()
                 .url(url)
                 .get();

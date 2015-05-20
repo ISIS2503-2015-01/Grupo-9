@@ -18,9 +18,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.net.ssl.SSLSocketFactory;
+
 import grupo9.arquisoft.migrainetrackingmobile.dtos.DoctorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 import grupo9.arquisoft.migrainetrackingmobile.extras.DataSecurity;
+import grupo9.arquisoft.migrainetrackingmobile.extras.Pinning;
 import grupo9.arquisoft.migrainetrackingmobile.extras.PostHttp;
 
 
@@ -29,10 +32,13 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
     private String jsonRespuesta;
     private String tipo;
     ProgressDialog dialogo;
+    private SSLSocketFactory ssl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Pinning pin=new Pinning(RegistrarUsuarioActivity.this);
+        ssl=pin.getPinnedCertSslSocketFactory();
         setContentView(R.layout.activity_registrar_usuario);
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
@@ -162,7 +168,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                 heads.put("Content-Type", "application/json");
                 heads.put("Data_hash", hashNoSpaces);
                 heads.put("Accept","application/json");
-                Response response=new PostHttp().run(urls[0],jsonRespuesta,heads);
+                Response response=new PostHttp().run(urls[0],jsonRespuesta,heads,null);
                 String resp=response.body().string();
                 System.out.println(resp);
                 return response.code()+"-"+resp;

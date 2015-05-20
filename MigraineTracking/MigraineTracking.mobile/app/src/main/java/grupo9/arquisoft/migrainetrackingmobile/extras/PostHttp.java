@@ -11,16 +11,33 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.net.ssl.SSLSocketFactory;
+
 /**
  * Created by henryfvargas on 12/05/15.
  */
 public class PostHttp
 {
-    OkHttpClient client = new OkHttpClient();
+    private static OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
 
-    public Response run(String url, String body, Map<String, String> headers) throws IOException
+    private static PostHttp instancia;
+
+    public static PostHttp createInstance()
     {
+        if(instancia==null)
+        {
+            instancia=new PostHttp();
+        }
+        return instancia;
+    }
+
+    public static Response run(String url, String body, Map<String, String> headers, SSLSocketFactory ssl) throws IOException
+    {
+        if(ssl!=null)
+        {
+            client.setSslSocketFactory(ssl);
+        }
         Request.Builder builder = new Request.Builder()
                 .url(url)
                 .post(RequestBody.create(JSON, body));

@@ -21,11 +21,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.SSLSocketFactory;
+
 import grupo9.arquisoft.migrainetrackingmobile.dtos.DoctorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListAdapter;
 import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListChild;
 import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListGroup;
 import grupo9.arquisoft.migrainetrackingmobile.extras.GetHttp;
+import grupo9.arquisoft.migrainetrackingmobile.extras.Pinning;
 
 public class VerDoctoresActivity extends ActionBarActivity {
 
@@ -36,10 +39,13 @@ public class VerDoctoresActivity extends ActionBarActivity {
     private List<DoctorDTO> listaDoctores;
     ProgressDialog dialogo;
     private ExpandListAdapter ExpAdapter;
+    private SSLSocketFactory ssl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Pinning pin=new Pinning(VerDoctoresActivity.this);
+        ssl=pin.getPinnedCertSslSocketFactory();
         setContentView(R.layout.activity_ver_doctores);
         gson = new Gson();
         SharedPreferences preferences = getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
@@ -124,7 +130,7 @@ public class VerDoctoresActivity extends ActionBarActivity {
                 headers.put("Content-Type", "application/json");
                 headers.put("x_rest_user",token);
                 //headers.put("Accept", "aplication/json");
-                Response response = new GetHttp().run(urls[0],headers);
+                Response response = new GetHttp().run(urls[0],headers,null);
                 String respuesta = response.body().string();
                 System.out.println(respuesta);
                 System.out.println("-------------------");

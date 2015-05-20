@@ -22,9 +22,12 @@ import com.squareup.okhttp.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.net.ssl.SSLSocketFactory;
+
 import grupo9.arquisoft.migrainetrackingmobile.dtos.DoctorDTO;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.PacienteDTO;
 import grupo9.arquisoft.migrainetrackingmobile.extras.GetHttp;
+import grupo9.arquisoft.migrainetrackingmobile.extras.Pinning;
 import grupo9.arquisoft.migrainetrackingmobile.extras.PostHttp;
 
 
@@ -37,12 +40,17 @@ public class MainActivity extends ActionBarActivity {
     private EditText idEdit;
     private DoctorDTO doctorDTO;
     private PacienteDTO pacienteDTO;
+    private SSLSocketFactory ssl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PostHttp.createInstance();
+        GetHttp.createInstance();
         gson=new Gson();
+        Pinning pin=new Pinning(MainActivity.this);
+        ssl=pin.getPinnedCertSslSocketFactory();
         RadioGroup group=(RadioGroup)findViewById(R.id.groupRadio);
         idEdit=(EditText)findViewById(R.id.id_edit);
         idEdit.setVisibility(View.INVISIBLE);
@@ -196,7 +204,7 @@ public class MainActivity extends ActionBarActivity {
                 Map<String,String> headers=new HashMap<>();
                 headers.put("Content-Type", "application/json");
                 headers.put("Accept","text/plain");
-                Response response=new PostHttp().run(urls[0],jsonLogin,headers);
+                Response response=PostHttp.run(urls[0], jsonLogin, headers, null);
                 String respuesta=response.body().string();
                 int cod=response.code();
                 if(paciente)
@@ -206,7 +214,7 @@ public class MainActivity extends ActionBarActivity {
                         String tok = respuesta.split("\"")[1];
                         Map<String, String> headers1 = new HashMap<>();
                         headers1.put("X_rest_user",tok);
-                        Response response1 = new GetHttp().run("https://migraine-services.herokuapp.com/webresources/pacientes/"+idEdit.getText().toString(),headers1);
+                        Response response1 = GetHttp.run("https://migraine-services.herokuapp.com/webresources/pacientes/"+idEdit.getText().toString(),headers1,null);
                         int cod1=response1.code();
                         System.out.println(cod1);
                         if(cod1==200)
@@ -224,7 +232,7 @@ public class MainActivity extends ActionBarActivity {
                         String tok = respuesta.split("\"")[1];
                         Map<String, String> headers1 = new HashMap<>();
                         headers1.put("X_rest_user",tok);
-                        Response response1 = new GetHttp().run("https://migraine-services.herokuapp.com/webresources/doctores/"+idEdit.getText().toString(),headers1);
+                        Response response1 = GetHttp.run("https://migraine-services.herokuapp.com/webresources/doctores/"+idEdit.getText().toString(),headers1,null);
                         int cod1=response1.code();
                         System.out.println(cod1);
                         if(cod1==200)
