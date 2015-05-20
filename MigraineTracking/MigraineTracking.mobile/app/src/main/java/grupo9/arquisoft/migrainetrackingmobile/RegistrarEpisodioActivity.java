@@ -125,11 +125,21 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
     {
         llenarListas();
         Spinner spinnerDias = (Spinner) findViewById(R.id.spindias);
-        int dia = spinnerDias.getSelectedItemPosition()+1;
+        String dia = (String) spinnerDias.getSelectedItem();
+        int diaI = spinnerDias.getSelectedItemPosition()+1;
         Spinner spinnerMeses = (Spinner) findViewById(R.id.spinmeses);
-        int mes = spinnerMeses.getSelectedItemPosition()+1;
+        int mesI = spinnerMeses.getSelectedItemPosition()+1;
+        String mes= "";
+        if(mesI<10)
+        {
+            mes = "0"+mesI;
+        }
+        else
+        {
+            mes=mesI+"";
+        }
         Spinner spinnerAnios = (Spinner) findViewById(R.id.spinanios);
-        int anio = spinnerAnios.getSelectedItemPosition() + 2013;
+        String anio = (String) spinnerAnios.getSelectedItem();
         Spinner spinnerSueno = (Spinner) findViewById(R.id.spinnerhoras);
         int hora = spinnerSueno.getSelectedItemPosition() + 1;
         Spinner spinnerIntensidad = (Spinner) findViewById(R.id.spinnerintensidad);
@@ -137,12 +147,13 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         EditText local = (EditText)findViewById(R.id.localizacion_edit);
         String localizacion=local.getText().toString();
         Date fecha=new Date();
-        if(((mes==4 || mes==6 || mes==9 || mes==11) && dia>30) || (mes==2&&dia>29))
+        if(((mesI==4 || mesI==6 || mesI==9 || mesI==11) && diaI>30) || (mesI==2&&diaI>29))
         {
-            new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Ha introducido una fecha infactible").setNeutralButton("Cerrar", null).show();
+            new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Ha introducido222 una fecha infactible").setNeutralButton("Cerrar", null).show();
             return;
         }
         String fech = dia+"/"+mes+"/"+anio;
+        System.out.println(fech);
         DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
         try
         {
