@@ -45,11 +45,25 @@ public class EpisodiosPaciente extends ActionBarActivity {
         setContentView(R.layout.activity_episodios_paciente);
         Bundle bundle = getIntent().getExtras();
         String cedula = bundle.getString("identificacion");
+        boolean fechas = bundle.getBoolean("fechas");
         ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
         gson = new Gson();
         SharedPreferences preferences=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
         token=preferences.getString("token","");
-        new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/pacientes/episodios/" + cedula);
+        if(fechas)
+        {
+            long fecha1 = bundle.getLong("fecha1");
+            long fecha2 = bundle.getLong("fecha2");
+            System.out.print("-------------");
+            System.out.print(fecha1+" ");
+            System.out.print(fecha2+" ");
+            System.out.print("-------------");
+            new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/episodios/" + cedula + "/" + fecha1 + "/" + fecha2);
+        }
+        else
+        {
+            new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/pacientes/episodios/" + cedula);
+        }
     }
 
     private ExpandableListView.OnChildClickListener ExpandList_ItemClicked =  new ExpandableListView.OnChildClickListener() {

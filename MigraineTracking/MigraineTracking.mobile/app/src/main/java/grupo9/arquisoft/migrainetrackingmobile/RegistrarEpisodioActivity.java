@@ -124,8 +124,6 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
     public void registrarEpisodioDolor(View view)
     {
         llenarListas();
-        EditText fech=(EditText)findViewById(R.id.fecha_edit);
-        String fec=fech.getText().toString();
         Spinner spinnerDias = (Spinner) findViewById(R.id.spindias);
         int dia = spinnerDias.getSelectedItemPosition()+1;
         Spinner spinnerMeses = (Spinner) findViewById(R.id.spinmeses);
@@ -141,12 +139,21 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         Date fecha=new Date();
         if(((mes==4 || mes==6 || mes==9 || mes==11) && dia>30) || (mes==2&&dia>29))
         {
-            new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Los campos no son correctos").setNeutralButton("Cerrar", null).show();
+            new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Ha introducido una fecha infactible").setNeutralButton("Cerrar", null).show();
             return;
         }
-        fecha.setDate(dia);
-        fecha.setMonth(mes);
-        fecha.setYear(anio);
+        String fech = dia+"/"+mes+"/"+anio;
+        DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+        try
+        {
+            fecha=format.parse(fech);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Ha introducido una fecha infactible").setNeutralButton("Cerrar", null).show();
+            return;
+        }
         EpisodioDolorDTO episodio=new EpisodioDolorDTO();
         episodio.setId(null);
         episodio.setCatalizadores(catalizadores);
