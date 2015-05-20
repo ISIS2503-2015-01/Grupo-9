@@ -38,12 +38,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Si quieres una busqueda por fechas!!"/>
+        android:text="@string/episodios_doctor_fechas_label"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="La fecha de inicio de la busqueda"/>
+        android:text="@string/episodios_doctor_fecha_inicio_label"/>
 
     <GridLayout
         android:layout_width="match_parent"
@@ -51,17 +51,17 @@
         android:columnCount="19"
         android:rowCount="3">
 
-        <TextView android:text="Dia"
+        <TextView android:text="@string/dia"
             android:layout_row="0"
             android:layout_column="0"
             android:layout_width="120dp" />
 
-        <TextView android:text="Mes"
+        <TextView android:text="@string/mes"
             android:layout_row="0"
             android:layout_column="17"
             android:layout_width="120dp" />
 
-        <TextView android:text="Año"
+        <TextView android:text="@string/anio"
             android:layout_width="120dp"
             android:layout_row="0"
             android:layout_column="18" />
@@ -89,7 +89,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="La fecha de fin de la busqueda"/>
+        android:text="@string/episodios_doctor_fecha_fin_label"/>
 
     <GridLayout
         android:layout_width="match_parent"
@@ -97,17 +97,17 @@
         android:columnCount="19"
         android:rowCount="3">
 
-        <TextView android:text="Dia"
+        <TextView android:text="@string/dia"
             android:layout_row="0"
             android:layout_column="0"
             android:layout_width="120dp" />
 
-        <TextView android:text="Mes"
+        <TextView android:text="@string/mes"
             android:layout_row="0"
             android:layout_column="17"
             android:layout_width="120dp" />
 
-        <TextView android:text="Año"
+        <TextView android:text="@string/anio"
             android:layout_width="120dp"
             android:layout_row="0"
             android:layout_column="18" />
