@@ -70,15 +70,7 @@
             android:label="@string/title_activity_menu_doctor" >
         </activity>
         <activity
-            android:name=".VerEpisodiosDoctor"
-            android:label="@string/title_activity_ver_episodios_doctor"
-            android:parentActivityName=".MenuDoctorActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="grupo9.arquisoft.migrainetrackingmobile.MenuDoctorActivity" />
-        </activity>
-        <activity
-            android:name=".extras.VerDoctoresActivity"
+            android:name=".VerDoctoresActivity"
             android:label="@string/title_activity_ver_doctores"
             android:parentActivityName=".MenuDoctorActivity" >
             <meta-data

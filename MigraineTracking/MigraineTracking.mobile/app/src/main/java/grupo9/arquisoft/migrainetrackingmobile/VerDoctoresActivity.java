@@ -1,4 +1,4 @@
-package grupo9.arquisoft.migrainetrackingmobile.extras;
+package grupo9.arquisoft.migrainetrackingmobile;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -21,9 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import grupo9.arquisoft.migrainetrackingmobile.MainActivity;
-import grupo9.arquisoft.migrainetrackingmobile.R;
 import grupo9.arquisoft.migrainetrackingmobile.dtos.DoctorDTO;
+import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListAdapter;
+import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListChild;
+import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListGroup;
+import grupo9.arquisoft.migrainetrackingmobile.extras.GetHttp;
 
 public class VerDoctoresActivity extends ActionBarActivity {
 
