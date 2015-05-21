@@ -37,6 +37,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PostHttp.createInstance();
         Pinning pin=new Pinning(RegistrarUsuarioActivity.this);
         ssl=pin.getPinnedCertSslSocketFactory();
         setContentView(R.layout.activity_registrar_usuario);
@@ -168,7 +169,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                 heads.put("Content-Type", "application/json");
                 heads.put("Data_hash", hashNoSpaces);
                 heads.put("Accept","application/json");
-                Response response=new PostHttp().run(urls[0],jsonRespuesta,heads,null);
+                Response response=PostHttp.run(urls[0],jsonRespuesta,heads,null);
                 String resp=response.body().string();
                 System.out.println(resp);
                 return response.code()+"-"+resp;

@@ -44,6 +44,7 @@ public class VerDoctoresActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GetHttp.createInstance();
         Pinning pin=new Pinning(VerDoctoresActivity.this);
         ssl=pin.getPinnedCertSslSocketFactory();
         setContentView(R.layout.activity_ver_doctores);
@@ -130,7 +131,7 @@ public class VerDoctoresActivity extends ActionBarActivity {
                 headers.put("Content-Type", "application/json");
                 headers.put("x_rest_user",token);
                 //headers.put("Accept", "aplication/json");
-                Response response = new GetHttp().run(urls[0],headers,null);
+                Response response = GetHttp.run(urls[0],headers,null);
                 String respuesta = response.body().string();
                 System.out.println(respuesta);
                 System.out.println("-------------------");

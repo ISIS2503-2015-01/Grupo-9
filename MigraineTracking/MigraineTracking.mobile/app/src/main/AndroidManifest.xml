@@ -35,22 +35,6 @@
                 android:value=".MenuPacienteActivity" />
         </activity>
         <activity
-            android:name=".GrabarEpisodioActivity"
-            android:label="@string/title_activity_grabar_episodio"
-            android:parentActivityName=".MenuPacienteActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuPacienteActivity" />
-        </activity>
-        <activity
-            android:name=".EscucharGrabacionesActivity"
-            android:label="@string/title_activity_escuchar_grabaciones"
-            android:parentActivityName=".MenuPacienteActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuPacienteActivity" />
-        </activity>
-        <activity
             android:name=".VerEpisodiosActivity"
             android:label="@string/title_activity_ver_episodios" >
             <meta-data

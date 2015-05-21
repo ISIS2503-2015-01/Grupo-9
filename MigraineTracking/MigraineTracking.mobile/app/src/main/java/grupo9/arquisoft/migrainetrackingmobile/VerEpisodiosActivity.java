@@ -51,6 +51,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_episodios);
+        GetHttp.createInstance();
         Pinning pin=new Pinning(VerEpisodiosActivity.this);
         ssl=pin.getPinnedCertSslSocketFactory();
         gson = new Gson();
@@ -164,7 +165,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
                 headers.put("Content-Type", "application/json");
                 headers.put("X_rest_user", token);
                 headers.put("Accept", "application/json");
-                Response response=new GetHttp().run(urls[0],headers,null);
+                Response response=GetHttp.run(urls[0],headers,null);
                 String respuesta=response.body().string();
                 System.out.println(respuesta);
                 System.out.println("-------------------");

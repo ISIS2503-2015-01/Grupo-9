@@ -56,6 +56,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PostHttp.createInstance();
         Pinning pin=new Pinning(RegistrarEpisodioActivity.this);
         ssl=pin.getPinnedCertSslSocketFactory();
         medicamentos= new ArrayList<MedicamentoDTO>();
@@ -266,7 +267,7 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
                 headers.put("Content-Type", "application/json");
                 headers.put("Accept", "application/json");
 
-                Response response=new PostHttp().run(urls[0],jsonRespuesta,headers,null);
+                Response response=PostHttp.run(urls[0],jsonRespuesta,headers,null);
                 return response.body().string();
             }
             catch (Exception e)

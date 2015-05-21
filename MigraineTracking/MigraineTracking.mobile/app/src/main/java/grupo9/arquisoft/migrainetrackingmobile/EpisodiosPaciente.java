@@ -47,6 +47,7 @@ public class EpisodiosPaciente extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episodios_paciente);
+        GetHttp.createInstance();
         Pinning pin=new Pinning(EpisodiosPaciente.this);
         ssl=pin.getPinnedCertSslSocketFactory();
         Bundle bundle = getIntent().getExtras();
@@ -165,7 +166,7 @@ public class EpisodiosPaciente extends ActionBarActivity {
                 headers.put("Content-Type", "application/json");
                 headers.put("X_rest_user", token);
                 headers.put("Accept", "application/json");
-                Response response=new GetHttp().run(urls[0],headers,null);
+                Response response=GetHttp.run(urls[0],headers,null);
                 String respuesta=response.body().string();
                 System.out.println(respuesta);
                 System.out.println("-------------------");
