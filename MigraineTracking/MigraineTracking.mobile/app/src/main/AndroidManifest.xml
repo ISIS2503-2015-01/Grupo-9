@@ -73,10 +73,6 @@
             android:name=".VerPacientesActivity"
             android:label="@string/title_activity_ver_pacientes" >
         </activity>
-        <activity
-            android:name=".EpisodiosPaciente"
-            android:label="@string/title_activity_episodios_paciente" >
-        </activity>
     </application>
 
 </manifest>

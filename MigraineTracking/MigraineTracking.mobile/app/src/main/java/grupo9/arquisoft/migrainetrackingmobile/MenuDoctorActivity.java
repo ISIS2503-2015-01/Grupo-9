@@ -13,19 +13,13 @@ import android.widget.TextView;
 
 public class MenuDoctorActivity extends ActionBarActivity {
 
-    private long id;
     private String idUsuario;
-    final Context context = this;
-    String cedulaS;
-    long ced;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_doctor);
         Intent intent=getIntent();
-        Bundle extras=intent.getExtras();
-        //id=Long.parseLong(extras.getString("ID","1"));
         TextView textView=(TextView)findViewById(R.id.bienvenido_label);
         SharedPreferences prefs=getSharedPreferences(MainActivity.TAG, MODE_PRIVATE);
         idUsuario=prefs.getString("USUARIO","");
@@ -70,12 +64,14 @@ public class MenuDoctorActivity extends ActionBarActivity {
     public void verTodosPacientes(View view)
     {
         Intent intent=new Intent(this, VerPacientesActivity.class);
+        intent.putExtra("todos",true);
         startActivity(intent);
     }
 
     public void verMisPacientes(View view)
     {
         Intent intent=new Intent(this, VerPacientesActivity.class);
+        intent.putExtra("todos",false);
         startActivity(intent);
     }
 }

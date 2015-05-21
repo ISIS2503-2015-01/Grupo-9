@@ -130,7 +130,6 @@ public class VerDoctoresActivity extends ActionBarActivity {
                 Map<String,String> headers = new HashMap<>();
                 headers.put("Content-Type", "application/json");
                 headers.put("x_rest_user",token);
-                //headers.put("Accept", "aplication/json");
                 Response response = GetHttp.run(urls[0],headers,null);
                 String respuesta = response.body().string();
                 System.out.println(respuesta);

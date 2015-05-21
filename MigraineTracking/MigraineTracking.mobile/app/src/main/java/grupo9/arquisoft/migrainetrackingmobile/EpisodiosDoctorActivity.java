@@ -59,7 +59,7 @@ public class EpisodiosDoctorActivity extends ActionBarActivity {
             new AlertDialog.Builder(this).setTitle("Error").setMessage("Ingrese una cédula válida").setNeutralButton("Cerrar", null).show();
             return;
         }
-        Intent intent = new Intent(this,EpisodiosPaciente.class);
+        Intent intent = new Intent(this,VerEpisodiosActivity.class);
         intent.putExtra("identificacion",cedula);
         intent.putExtra("fechas",false);
         startActivity(intent);
@@ -116,7 +116,7 @@ public class EpisodiosDoctorActivity extends ActionBarActivity {
         System.out.println(fecha2.getDate());
         System.out.println(fecha2.getMonth());
         System.out.println(fecha2.getYear());
-        Intent intent = new Intent(this,EpisodiosPaciente.class);
+        Intent intent = new Intent(this,VerEpisodiosActivity.class);
         intent.putExtra("identificacion",cedula);
         intent.putExtra("fechas",true);
         intent.putExtra("fecha1",fecha.getTime());

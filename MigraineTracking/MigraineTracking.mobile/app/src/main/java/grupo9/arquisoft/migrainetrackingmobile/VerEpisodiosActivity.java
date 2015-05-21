@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,8 +37,6 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     private ExpandListAdapter ExpAdapter;
     private ArrayList<ExpandListGroup> ExpListItems;
     private ExpandableListView ExpandList;
-    private ArrayList<ExpandListGroup> list;
-    private ArrayList<ExpandListChild> list2;
     private List<EpisodioDolorDTO> listaEpisodios;
     private long idUsuario;
     private String token;
@@ -60,16 +57,26 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         token=preferences.getString("token","");
         Intent intent = getIntent();
         Bundle bundle=intent.getExtras();
-        String tipo=bundle.getString("tipo");
+        boolean fechas = bundle.getBoolean("fechas");
         ExpandList = (ExpandableListView) findViewById(R.id.expandableListView);
-
-        if(tipo.equals("CEDULA"))
+        String cedula=bundle.getString("identificacion");
+        if(cedula!=null)
+        {
+            idUsuario=Long.parseLong(cedula);
+        }
+        if(!fechas)
         {
             new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/pacientes/episodios/" + idUsuario);
         }
-        else if(tipo.equals("CEDULA-FECHAS"))
+        else if(fechas)
         {
-
+            long fecha1 = bundle.getLong("fecha1");
+            long fecha2 = bundle.getLong("fecha2");
+            System.out.print("-------------");
+            System.out.print(fecha1+" ");
+            System.out.print(fecha2+" ");
+            System.out.print("-------------");
+            new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/episodios/" + idUsuario + "/" + fecha1 + "/" + fecha2);
         }
     }
 
