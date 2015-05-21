@@ -46,7 +46,7 @@ public class VerDoctoresActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         GetHttp.createInstance();
         Pinning pin=new Pinning(VerDoctoresActivity.this);
-        ssl=pin.getPinnedCertSslSocketFactory();
+        //ssl=pin.getPinnedCertSslSocketFactory();
         setContentView(R.layout.activity_ver_doctores);
         gson = new Gson();
         SharedPreferences preferences = getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);

@@ -69,10 +69,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="grupo9.arquisoft.migrainetrackingmobile.MenuDoctorActivity" />
         </activity>
-        <activity
-            android:name=".VerPacientesActivity"
-            android:label="@string/title_activity_ver_pacientes" >
-        </activity>
     </application>
 
 </manifest>

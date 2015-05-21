@@ -33,22 +33,4 @@
         android:layout_centerHorizontal="true"
         android:onClick="verEpisodiosPaciente"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/menu_doctor_pacientes_button"
-        android:id="@+id/pacientes_button"
-        android:layout_below="@+id/episodios_button"
-        android:layout_centerHorizontal="true"
-        android:onClick="verTodosPacientes"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/menu_doctor_pacientes_doctor_button"
-        android:id="@+id/pacientes_doctor_button"
-        android:layout_below="@+id/pacientes_button"
-        android:layout_centerHorizontal="true"
-        android:onClick="verMisPacientes"/>
-
 </RelativeLayout>

@@ -10,9 +10,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.squareup.okhttp.Response;
+
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,24 +46,31 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         PostHttp.createInstance();
         Pinning pin=new Pinning(RegistrarUsuarioActivity.this);
-        ssl=pin.getPinnedCertSslSocketFactory();
+        //ssl=pin.getPinnedCertSslSocketFactory();
         setContentView(R.layout.activity_registrar_usuario);
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
         tipo=bundle.getString("tipo","");
-        if(tipo.equals("paciente"))
+        if(!tipo.equals("paciente"))
         {
             EditText editId=(EditText)findViewById(R.id.editText4);
+            EditText editCed=(EditText)findViewById(R.id.editText5);
+            EditText editFecha=(EditText)findViewById(R.id.editText3);
             TextView labelId=(TextView)findViewById(R.id.textView3);
-            editId.setVisibility(View.VISIBLE);
-            labelId.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            EditText editId=(EditText)findViewById(R.id.editText4);
-            TextView labelId=(TextView)findViewById(R.id.textView3);
-            editId.setVisibility(View.INVISIBLE);
-            labelId.setVisibility(View.INVISIBLE);
+            TextView labelFecha=(TextView)findViewById(R.id.textView2);
+            TextView labelCed=(TextView)findViewById(R.id.textView4);
+            editId.setVisibility(View.GONE);
+            labelId.setVisibility(View.GONE);
+            editCed.setVisibility(View.GONE);
+            editFecha.setVisibility(View.GONE);
+            labelCed.setVisibility(View.GONE);
+            labelFecha.setVisibility(View.GONE);
+
+            RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            p.addRule(RelativeLayout.BELOW, R.id.editText6);
+            p.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            Button botonCrear=(Button)findViewById(R.id.button);
+            botonCrear.setLayoutParams(p);
         }
     }
 
@@ -85,19 +99,22 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
 
     public void registrarUsuario(View view)
     {
-        TextView txtNombre= (TextView)findViewById(R.id.editText);
+        EditText txtNombre= (EditText)findViewById(R.id.editText);
         String nombre=txtNombre.getText().toString();
-        TextView txtUsuario= (TextView)findViewById(R.id.editText2);
+        EditText txtUsuario= (EditText)findViewById(R.id.editText2);
         String usuario=txtUsuario.getText().toString();
-        TextView txtFecha= (TextView)findViewById(R.id.editText3);
-        TextView txtCedula=(TextView)findViewById(R.id.editText5);
+        EditText txtFecha= (EditText)findViewById(R.id.editText3);
+        EditText txtId=(EditText)findViewById(R.id.editText4);
+        EditText txtCedula=(EditText)findViewById(R.id.editText5);
         long cedula=0;
-        TextView txtContrasenia=(TextView)findViewById(R.id.editText6);
+        long id=0;
+        EditText txtContrasenia=(EditText)findViewById(R.id.editText6);
         String contrasenia=txtContrasenia.getText().toString();
         Date fecha= new Date();
         try
         {
             cedula=Long.parseLong(txtCedula.getText().toString());
+            id=Long.parseLong(txtId.getText().toString());
             fecha=new SimpleDateFormat("dd/mm/yyyy").parse(txtFecha.getText().toString());
             if(!usuario.contains("@")||!usuario.contains("."))
                 throw new Exception();
@@ -117,7 +134,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
             nuevo.setName(nombre);
             nuevo.setBirthdate(fecha.getTime());
             nuevo.setCedula(cedula);
-            nuevo.setDoctorid(null);
+            nuevo.setDoctorid(id);
             nuevo.setUsername(usuario);
             nuevo.setPassword(contrasenia);
 
@@ -126,7 +143,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                     "\"password\":\"" + nuevo.getPassword() + "\"," +
                     "\"name\":\"" + nuevo.getName() + "\"," +
                     "\"birthdate\":" + nuevo.getBirthdate() + "," +
-                    "\"doctorid\":" + 1 + "}";
+                    "\"doctorid\":" + nuevo.getDoctorid()+ "}";
             System.out.println(jsonRespuesta);
             new registrar(true).execute("https://migraine-services.herokuapp.com/webresources/auth/new/paciente");
         }
@@ -201,14 +218,27 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
                 String id=resp.split("\":")[2];
                 id=id.replace("}","");
                 dialogo.dismiss();
-                if(paciente) {
-                    new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido paciente correctamente").setMessage("Se agregó el paciente").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(RegistrarUsuarioActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                    }).show();
+                if(paciente)
+                {
+                    if(resp.startsWith("{\"Exception Message\":null"))
+                    {
+                        new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("No se pudo añadir el paciente").setMessage("No existe el ID del doctor suministrado").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(RegistrarUsuarioActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }).show();
+                    }
+                    else {
+                        new AlertDialog.Builder(RegistrarUsuarioActivity.this).setTitle("Añadido paciente correctamente").setMessage("Se agregó el paciente").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(RegistrarUsuarioActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }).show();
+                    }
                 }
                 else
                 {

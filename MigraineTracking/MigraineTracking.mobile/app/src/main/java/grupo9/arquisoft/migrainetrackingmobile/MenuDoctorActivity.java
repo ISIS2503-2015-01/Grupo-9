@@ -60,18 +60,4 @@ public class MenuDoctorActivity extends ActionBarActivity {
         Intent intent= new Intent(this, EpisodiosDoctorActivity.class);
         startActivity(intent);
     }
-
-    public void verTodosPacientes(View view)
-    {
-        Intent intent=new Intent(this, VerPacientesActivity.class);
-        intent.putExtra("todos",true);
-        startActivity(intent);
-    }
-
-    public void verMisPacientes(View view)
-    {
-        Intent intent=new Intent(this, VerPacientesActivity.class);
-        intent.putExtra("todos",false);
-        startActivity(intent);
-    }
 }

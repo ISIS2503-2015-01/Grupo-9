@@ -1,10 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:orientation="vertical"
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
     tools:context="grupo9.arquisoft.migrainetrackingmobile.EpisodiosDoctorActivity">
 
     <TextView
@@ -13,8 +17,7 @@
         android:text="@string/episodios_doctor_paciente_label"
         android:id="@+id/paciente_label"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="match_parent"
@@ -22,120 +25,147 @@
         android:hint="@string/episodios_doctor_paciente_edit"
         android:id="@+id/paciente_edit"
         android:layout_below="@+id/paciente_label"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/episodios_doctor_buscar_button"
-        android:id="@+id/buscar_button"
-        android:layout_below="@+id/paciente_edit"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="buscar"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/episodios_doctor_buscar_button"
+            android:id="@+id/button2"
+            android:layout_below="@+id/paciente_edit"
+            android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/episodios_doctor_fechas_label"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/episodios_doctor_fechas_label"
+            android:id="@+id/textView5"
+            android:layout_below="@+id/button2"
+            android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/episodios_doctor_fecha_inicio_label"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/episodios_doctor_fecha_inicio_label"
+            android:id="@+id/textView6"
+            android:layout_below="@+id/textView5"
+            android:layout_centerHorizontal="true" />
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnCount="19"
-        android:rowCount="3">
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/grid1"
+            android:columnCount="19"
+            android:rowCount="3"
+            android:layout_below="@+id/textView6"
+            android:layout_centerHorizontal="true" >
 
-        <TextView android:text="@string/dia"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_width="120dp" />
+            <TextView android:text="Dia"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_width="120dp" />
 
-        <TextView android:text="@string/mes"
-            android:layout_row="0"
-            android:layout_column="17"
-            android:layout_width="120dp" />
+            <TextView android:text="Mes"
+                android:layout_row="0"
+                android:layout_column="17"
+                android:layout_width="120dp" />
 
-        <TextView android:text="@string/anio"
-            android:layout_width="120dp"
-            android:layout_row="0"
-            android:layout_column="18" />
+            <TextView android:text="Año"
+                android:layout_width="120dp"
+                android:layout_row="0"
+                android:layout_column="18" />
 
-        <Spinner android:entries="@array/dias"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:layout_width="119dp"
-            android:id="@+id/spindias"/>
+            <Spinner android:entries="@array/dias"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_width="119dp"
+                android:id="@+id/spindias"/>
 
-        <Spinner android:entries="@array/Meses"
-            android:layout_row="1"
-            android:layout_column="17"
-            android:layout_width="120dp"
-            android:id="@+id/spinmeses"/>
+            <Spinner android:entries="@array/Meses"
+                android:layout_row="1"
+                android:layout_column="17"
+                android:layout_width="120dp"
+                android:id="@+id/spinmeses"/>
 
-        <Spinner android:entries="@array/Anios"
-            android:layout_row="1"
-            android:layout_column="18"
-            android:layout_width="100dp"
-            android:id="@+id/spinanios"
-            android:layout_height="52dp" />
-    </GridLayout>
+            <Spinner android:entries="@array/Anios"
+                android:layout_row="1"
+                android:layout_column="18"
+                android:layout_width="100dp"
+                android:id="@+id/spinanios"
+                android:layout_height="52dp" />
+        </GridLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/episodios_doctor_fecha_fin_label"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/episodios_doctor_fecha_fin_label"
+            android:id="@+id/textView7"
+            android:layout_below="@+id/grid1"
+            android:layout_centerHorizontal="true" />
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnCount="19"
-        android:rowCount="3">
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/gridLayout"
+            android:columnCount="19"
+            android:rowCount="3"
+            android:layout_below="@+id/textView7"
+            android:layout_centerHorizontal="true">
 
-        <TextView android:text="@string/dia"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_width="120dp" />
+            <Spinner
+                android:entries="@array/dias"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_width="119dp"
+                android:id="@+id/spinner"
+                android:layout_height="wrap_content" />
 
-        <TextView android:text="@string/mes"
-            android:layout_row="0"
-            android:layout_column="17"
-            android:layout_width="120dp" />
+            <Spinner
+                android:entries="@array/Meses"
+                android:layout_row="1"
+                android:layout_column="17"
+                android:layout_width="120dp"
+                android:id="@+id/spinner2"
+                android:layout_height="wrap_content" />
 
-        <TextView android:text="@string/anio"
-            android:layout_width="120dp"
-            android:layout_row="0"
-            android:layout_column="18" />
+            <TextView
+                android:text="Dia"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content" />
 
-        <Spinner android:entries="@array/dias"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:layout_width="119dp"
-            android:id="@+id/spindias2"/>
+            <TextView
+                android:text="Mes"
+                android:layout_row="0"
+                android:layout_column="17"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content" />
 
-        <Spinner android:entries="@array/Meses"
-            android:layout_row="1"
-            android:layout_column="17"
-            android:layout_width="120dp"
-            android:id="@+id/spinmeses2"/>
+            <TextView
+                android:text="Año"
+                android:layout_width="120dp"
+                android:layout_row="0"
+                android:layout_column="18"
+                android:layout_height="wrap_content" />
 
-        <Spinner android:entries="@array/Anios"
-            android:layout_row="1"
-            android:layout_column="18"
-            android:layout_width="100dp"
-            android:id="@+id/spinanios2"
-            android:layout_height="52dp" />
-    </GridLayout>
+            <Spinner
+                android:entries="@array/Anios"
+                android:layout_row="1"
+                android:layout_column="18"
+                android:layout_width="100dp"
+                android:id="@+id/spinner3"
+                android:layout_height="52dp" />
+        </GridLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buscar por fechas"
-        android:onClick="buscarFechas"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/episodios_doctor_buscarFechas_button"
+            android:id="@+id/button3"
+            android:layout_below="@+id/gridLayout"
+            android:layout_centerHorizontal="true" />
 
-</LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

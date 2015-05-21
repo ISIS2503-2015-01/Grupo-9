@@ -93,11 +93,11 @@ public class EpisodiosDoctorActivity extends ActionBarActivity {
         fecha.setDate(dia);
         fecha.setMonth(mes);
         fecha.setYear(anio);
-        Spinner spinnerDias2 = (Spinner) findViewById(R.id.spindias2);
+        Spinner spinnerDias2 = (Spinner) findViewById(R.id.spinner);
         int dia2 = spinnerDias2.getSelectedItemPosition()+1;
-        Spinner spinnerMeses2 = (Spinner) findViewById(R.id.spinmeses2);
+        Spinner spinnerMeses2 = (Spinner) findViewById(R.id.spinner2);
         int mes2 = spinnerMeses2.getSelectedItemPosition()+1;
-        Spinner spinnerAnios2 = (Spinner) findViewById(R.id.spinanios2);
+        Spinner spinnerAnios2 = (Spinner) findViewById(R.id.spinner3);
         int anio2 = spinnerAnios2.getSelectedItemPosition() + 2013;
         Date fecha2=new Date();
         if(((mes2==4 || mes2==6 || mes2==9 || mes2==11) && dia2>30) || (mes2==2&&dia2>29))

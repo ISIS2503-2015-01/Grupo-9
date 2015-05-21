@@ -21,7 +21,7 @@
     <string name="main_activity_contrasenia_label">Contraseña</string>
     <string name="main_activity_usuario_edit">Ingrese su usuario</string>
     <string name="main_activity_contrasenia_edit">Ingrese su contraseña</string>
-    <string name="main_activity_cedula_edit">Ingrese su cédula</string>
+    <string name="main_activity_cedula_edit">Ingrese su identificación</string>
     <string name="main_activity_perfil_label">Escoja su tipo de perfil</string>
     <string name="main_activity_id_edit">Ingrese su ID</string>
     <string name="main_activity_entrar_button">Entrar</string>
@@ -72,9 +72,10 @@
     <string name="episodios_doctor_paciente_label">Ingrese la cédula del paciente. Debe ser una cédula válida</string>
     <string name="episodios_doctor_paciente_edit">Cédula</string>
     <string name="episodios_doctor_buscar_button">Buscar</string>
-    <string name="episodios_doctor_fechas_label">Si desea realizar una búsqueda por fechas</string>
-    <string name="episodios_doctor_fecha_inicio_label">La fecha de inicio de la búsqueda</string>
-    <string name="episodios_doctor_fecha_fin_label">La fecha de fin de la búsqueda</string>
+    <string name="episodios_doctor_buscarFechas_button">Buscar por fechas</string>
+    <string name="episodios_doctor_fechas_label">Si desea realizar una búsqueda por fechas del paciente con la cédula dada</string>
+    <string name="episodios_doctor_fecha_inicio_label">Ingresa la fecha de inicio de la búsqueda</string>
+    <string name="episodios_doctor_fecha_fin_label">Ingresa la fecha final de la búsqueda</string>
 
     <!--Dialogo Introducir ID-->
     <string name="dialogo_id_cedula_label">Introduzca la cedula del paciente del cual quiere ver los episodios</string>
@@ -189,7 +190,6 @@
 
     <!--Colores-->
     <color name="Black">#ffffff</color>
-    <color name="ExpandChildBackground">#ffafabab</color>
-    <color name="ExpandGroupBackground">#ff7c7c7c</color>
-    <string name="hello_world">Hello world!</string>
+    <color name="ExpandChildBackground">#ffabaab6</color>
+    <color name="ExpandGroupBackground">#ff3071a9</color>
 </resources>

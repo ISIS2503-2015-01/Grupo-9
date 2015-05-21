@@ -280,15 +280,19 @@ public class RegistrarEpisodioActivity extends ActionBarActivity {
         protected void onPostExecute(String response)
         {
             String res=response.split("\"")[3];
-            String resp=res.replaceAll("\\s+","");
+            res=res.replaceAll(",",", ");
+            res=res.replaceAll("\n",System.getProperty("line.separator"));
             dialogo.dismiss();
-            new AlertDialog.Builder(RegistrarEpisodioActivity.this).setTitle("Análisis").setMessage(resp).setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent=new Intent(RegistrarEpisodioActivity.this,MenuPacienteActivity.class);
-                    startActivity(intent);
-                }
-            }).show();
+            AlertDialog.Builder a=new AlertDialog.Builder(RegistrarEpisodioActivity.this).setTitle("Análisis").setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(RegistrarEpisodioActivity.this, MenuPacienteActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+            System.out.println(res);
+            a.setMessage(res);
+            a.show();
         }
     }
 
