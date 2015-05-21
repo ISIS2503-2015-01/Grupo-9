@@ -121,7 +121,7 @@ public class EpisodiosDoctorActivity extends ActionBarActivity {
         DateFormat format2 = new SimpleDateFormat("dd/mm/yyyy");
         try
         {
-            fecha2=format2.parse(fech);
+            fecha2=format2.parse(fech2);
         }
         catch(Exception e)
         {
