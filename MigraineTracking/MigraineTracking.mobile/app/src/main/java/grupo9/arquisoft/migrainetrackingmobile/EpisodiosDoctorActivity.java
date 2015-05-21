@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -89,9 +91,19 @@ public class EpisodiosDoctorActivity extends ActionBarActivity {
             new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Ha introducido una fecha infactible").setNeutralButton("Cerrar", null).show();
             return;
         }
-        fecha.setDate(dia);
-        fecha.setMonth(mes);
-        fecha.setYear(anio);
+        String fech = dia+"/"+mes+"/"+anio;
+        System.out.println(fech);
+        DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+        try
+        {
+            fecha=format.parse(fech);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Ha introducido una fecha infactible").setNeutralButton("Cerrar", null).show();
+            return;
+        }
         Spinner spinnerDias2 = (Spinner) findViewById(R.id.spinner);
         int dia2 = spinnerDias2.getSelectedItemPosition()+1;
         Spinner spinnerMeses2 = (Spinner) findViewById(R.id.spinner2);
@@ -104,17 +116,23 @@ public class EpisodiosDoctorActivity extends ActionBarActivity {
             new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Ha introducido una fecha infactible").setNeutralButton("Cerrar", null).show();
             return;
         }
-        fecha2.setDate(dia2);
-        fecha2.setMonth(mes2);
-        fecha2.setYear(anio2);
+        String fech2 = dia2+"/"+mes2+"/"+anio2;
+        System.out.println(fech2);
+        DateFormat format2 = new SimpleDateFormat("dd/mm/yyyy");
+        try
+        {
+            fecha2=format2.parse(fech);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Ha introducido una fecha infactible").setNeutralButton("Cerrar", null).show();
+            return;
+        }
         System.out.println("Esta es la fecha 1");
-        System.out.println(fecha.getDate());
-        System.out.println(fecha.getMonth());
-        System.out.println(fecha.getYear());
+        System.out.println(fecha.getTime());
         System.out.println("Esta es la fecha 2");
-        System.out.println(fecha2.getDate());
-        System.out.println(fecha2.getMonth());
-        System.out.println(fecha2.getYear());
+        System.out.println(fecha2.getTime());
         Intent intent = new Intent(this,VerEpisodiosActivity.class);
         intent.putExtra("identificacion",cedula);
         intent.putExtra("fechas",true);
