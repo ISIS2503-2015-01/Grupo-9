@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:text="@string/episodios_doctor_buscar_button"
             android:id="@+id/button2"
+            android:onClick="buscar"
             android:layout_below="@+id/paciente_edit"
             android:layout_centerHorizontal="true" />
 
@@ -162,6 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/episodios_doctor_buscarFechas_button"
+            android:onClick="buscarFechas"
             android:id="@+id/button3"
             android:layout_below="@+id/gridLayout"
             android:layout_centerHorizontal="true" />

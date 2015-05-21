@@ -3,18 +3,13 @@
 
     <!--Titulos de las Actividades-->
     <string name="title_activity_menu">Menú</string>
-    <string name="title_activity_registrar_episodio">Registra un episodio</string>
-    <string name="title_activity_grabar_episodio">Graba un episodio</string>
-    <string name="title_activity_escuchar_grabaciones">Escucha tus grabaciones</string>
-    <string name="title_activity_ver_analisis">Analisis de episodios</string>
-    <string name="title_activity_ver_episodios">Lista de episodios de dolor</string>
-    <string name="title_activity_registrar_usuario">Registra un usuario</string>
+    <string name="title_activity_registrar_episodio">Registra Un Episodio</string>
+    <string name="title_activity_ver_analisis">Analisis De Episodios</string>
+    <string name="title_activity_ver_episodios">Lista De Episodios</string>
+    <string name="title_activity_registrar_usuario">Registra Un Usuario</string>
     <string name="title_activity_menu_doctor">Menú</string>
-    <string name="title_activity_ver_doctores">VerDoctoresActivity</string>
-    <string name="title_activity_episodios_doctor">EpisodiosDoctorActivity</string>
-    <string name="title_activity_ver_pacientes">VerPacientesActivity</string>
-    <string name="title_activity_ver_episodios_doctor">EpisodiosDoctorActivity</string>
-    <string name="title_activity_episodios_paciente">EpisodiosPaciente</string>
+    <string name="title_activity_ver_doctores">Lista De Colegas</string>
+    <string name="title_activity_episodios_doctor">Seleccione Filtro</string>
 
     <!--Actividad Principal-->
     <string name="main_activity_usuario_label">Usuario</string>

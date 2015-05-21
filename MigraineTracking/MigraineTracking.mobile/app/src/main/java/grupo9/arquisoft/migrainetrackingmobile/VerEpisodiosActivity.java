@@ -29,10 +29,9 @@ import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListChild;
 import grupo9.arquisoft.migrainetrackingmobile.extras.ExpandListGroup;
 import grupo9.arquisoft.migrainetrackingmobile.extras.GetHttp;
 import grupo9.arquisoft.migrainetrackingmobile.extras.Pinning;
+import grupo9.arquisoft.migrainetrackingmobile.extras.Utils;
 
 public class VerEpisodiosActivity extends ActionBarActivity {
-
-    public final static String TAG="grupo9.migraintracking";
 
     private ExpandListAdapter ExpAdapter;
     private ArrayList<ExpandListGroup> ExpListItems;
@@ -42,15 +41,12 @@ public class VerEpisodiosActivity extends ActionBarActivity {
     private String token;
     private Gson gson;
     ProgressDialog dialogo;
-    private SSLSocketFactory ssl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_episodios);
         GetHttp.createInstance();
-        Pinning pin=new Pinning(VerEpisodiosActivity.this);
-        ssl=pin.getPinnedCertSslSocketFactory();
         gson = new Gson();
         SharedPreferences preferences=getSharedPreferences(MainActivity.TAG,MODE_PRIVATE);
         idUsuario=preferences.getLong("CEDULA",0);
@@ -66,7 +62,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
         }
         if(!fechas)
         {
-            new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/pacientes/episodios/" + idUsuario);
+            new pedirEpisodios().execute(Utils.getPath()+"/pacientes/episodios/" + idUsuario);
         }
         else if(fechas)
         {
@@ -76,7 +72,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
             System.out.print(fecha1+" ");
             System.out.print(fecha2+" ");
             System.out.print("-------------");
-            new pedirEpisodios().execute("https://migraine-services.herokuapp.com/webresources/episodios/" + idUsuario + "/" + fecha1 + "/" + fecha2);
+            new pedirEpisodios().execute(Utils.getPath()+"/episodios/" + idUsuario + "/" + fecha1 + "/" + fecha2);
         }
     }
 
@@ -172,7 +168,7 @@ public class VerEpisodiosActivity extends ActionBarActivity {
                 headers.put("Content-Type", "application/json");
                 headers.put("X_rest_user", token);
                 headers.put("Accept", "application/json");
-                Response response=GetHttp.run(urls[0],headers,null);
+                Response response=GetHttp.run(urls[0],headers,Utils.getSSL());
                 String respuesta=response.body().string();
                 System.out.println(respuesta);
                 System.out.println("-------------------");

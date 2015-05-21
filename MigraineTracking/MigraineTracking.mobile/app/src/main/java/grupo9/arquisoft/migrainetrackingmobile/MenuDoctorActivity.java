@@ -1,6 +1,5 @@
 package grupo9.arquisoft.migrainetrackingmobile;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -9,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 
 public class MenuDoctorActivity extends ActionBarActivity {
 
