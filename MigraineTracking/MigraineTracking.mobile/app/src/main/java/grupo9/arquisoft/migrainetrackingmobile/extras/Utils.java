@@ -7,11 +7,11 @@ import javax.net.ssl.SSLSocketFactory;
  */
 public class Utils
 {
-    private static final String PROTOCOLO="https";
-    private static final String URLENDPOINT="://migraine-services.herokuapp.com/webresources";
+    private static final String PROTOCOLO="https:";
+    private static final String URLENDPOINT="//172.24.99.178:80/webresources";
     private static SSLSocketFactory sslSocketFactory;
     private static Pinning pinning;
-    private static final boolean SSL=false;
+    private static final boolean SSL=true;
 
     public static String getPath()
     {
