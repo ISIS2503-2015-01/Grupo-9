@@ -6,7 +6,15 @@ and open the template in the editor.
 -->
 <h2>Lista de Pacientes</h2>
 <div class="panel panel-default">
+    <ol class="breadcrumb">
+      <li>Migraine Tracking</li>
+      <li>Pacientes</li>
+      <li class="active">Lista General</li>
+    </ol>
     <div class="panel-heading">Pacientes</div>
+    <form class="form-inline">
+      <input ng-model="query" type="text" placeholder="Buscar por nombre o id" autofocus>
+    </form>
     <table class="table">
         <thead>
             <tr>
@@ -16,7 +24,7 @@ and open the template in the editor.
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="paciente in this.getPacientes.pacientes | orderBy:'cedula'">
+            <tr ng-repeat="paciente in this.getPacientes.pacientes | filter:query |orderBy:'cedula'">
                 <th>{{paciente.cedula}}</th>
                 <th>{{paciente.name}}</th>
                 <th>{{paciente.birthdate | date}}</th>
