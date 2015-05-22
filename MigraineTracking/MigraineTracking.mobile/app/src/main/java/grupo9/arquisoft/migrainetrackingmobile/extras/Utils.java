@@ -10,10 +10,10 @@ public class Utils
     private static final String hostHeroku="migraine-services.herokuapp.com";
     private static final String hostLocal="172.24.99.178:80";
     private static final String PROTOCOLO="https://";
-    private static final String URLENDPOINT=hostLocal+"/webresources";
+    private static final String URLENDPOINT=hostHeroku+"/webresources";
     private static SSLSocketFactory sslSocketFactory;
     private static Pinning pinning;
-    private static final boolean SSL=true;
+    private static final boolean SSL=false;
 
     public static String getPath()
     {

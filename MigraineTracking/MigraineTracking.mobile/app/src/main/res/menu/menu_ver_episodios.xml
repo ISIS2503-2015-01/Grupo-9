@@ -4,4 +4,12 @@
     tools:context="grupo9.arquisoft.migrainetrackingmobile.VerEpisodiosActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_graficas" android:title="Gráficas">
+        <menu>
+            <item android:id="@+id/intensidad"
+                android:title="Intensidad de dolor" />
+            <item android:id="@+id/frecuencia"
+                android:title="Frecuencia Episodios" />
+        </menu>
+    </item>
 </menu>

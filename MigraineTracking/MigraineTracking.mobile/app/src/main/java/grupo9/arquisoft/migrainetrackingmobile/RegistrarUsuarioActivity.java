@@ -104,9 +104,11 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
         Date fecha= new Date();
         try
         {
-            cedula=Long.parseLong(txtCedula.getText().toString());
-            id=Long.parseLong(txtId.getText().toString());
-            fecha=new SimpleDateFormat("dd/mm/yyyy").parse(txtFecha.getText().toString());
+            if(tipo.equals("paciente")) {
+                cedula = Long.parseLong(txtCedula.getText().toString());
+                id = Long.parseLong(txtId.getText().toString());
+                fecha = new SimpleDateFormat("dd/mm/yyyy").parse(txtFecha.getText().toString());
+            }
             if(!usuario.contains("@")||!usuario.contains("."))
                 throw new Exception();
             if(contrasenia.length()<9)
@@ -114,7 +116,7 @@ public class RegistrarUsuarioActivity extends ActionBarActivity {
 
         } catch (Exception e)
         {
-            e.printStackTrace();
+
             new AlertDialog.Builder(this).setTitle("Error de creación").setMessage("Los campos no son correctos").setNeutralButton("Cerrar", null).show();
             return;
         }

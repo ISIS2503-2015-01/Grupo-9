@@ -187,4 +187,7 @@
     <color name="Black">#ffffff</color>
     <color name="ExpandChildBackground">#ffabaab6</color>
     <color name="ExpandGroupBackground">#ff3071a9</color>
+    <string name="title_activity_graficas">GraficasActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

@@ -5,6 +5,9 @@
  */
  package grupo9.arquisoft.migrainetrackingmobile.dtos;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
@@ -19,7 +22,8 @@ import java.util.List;
  *
  * @author estudiante
  */
-public class EpisodioDolorDTO {
+public class EpisodioDolorDTO
+{
 
     /**
      * El id del episodio. Este es autogenerado
